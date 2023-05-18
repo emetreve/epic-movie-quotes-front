@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import { LandingHeader } from '@/components';
+import { LandingHeader, Poster } from '@/components';
 
 const Landing: React.FC = () => {
   return (
@@ -15,19 +14,8 @@ const Landing: React.FC = () => {
             Get started
           </button>
         </div>
-        <div className='h-[30rem] relative lg:h-screen'>
-          <div className='image-container'>
-            <div className='absolute inset-0'>
-              <Image
-                src='/assets/landing-main-1.png'
-                alt='interstellar wallpaper'
-                width={819}
-                height={512}
-                className='w-full h-full object-cover object-center'
-              />
-            </div>
-          </div>
-        </div>
+
+        <Poster image='/assets/landing-main-1.png' />
       </div>
     </>
   );
