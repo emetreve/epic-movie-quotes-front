@@ -1,4 +1,4 @@
-import { LandingHeader, Poster } from '@/components';
+import { LandingHeader, Poster, Footer } from '@/components';
 
 const Landing: React.FC = () => {
   return (
@@ -39,6 +39,7 @@ const Landing: React.FC = () => {
           mobileTop='pt-[170px]'
           desktopTop='lg:pt-[38rem]'
         />
+        <Footer />
       </div>
     </>
   );
