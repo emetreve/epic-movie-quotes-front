@@ -14,6 +14,7 @@ module.exports = {
       },
       fontFamily: {
         'helvetica-medium-en': ['helvetica-medium-en'],
+        montserrat: ['Montserrat'],
       },
       colors: {
         cream: '#DDCCAA',
