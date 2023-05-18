@@ -1,1 +1,1 @@
-export * from './LandingHeader';
+export * from './landing/LandingHeader';
