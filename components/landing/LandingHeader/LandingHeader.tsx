@@ -10,9 +10,9 @@ const LandingHeader: React.FC = () => {
           <Image
             src='/assets/lang-switch.png'
             alt='language switcher'
-            width={12}
-            height={10}
-            className='inline ml-2'
+            width={768}
+            height={512}
+            className='inline ml-2 h-2 w-3'
           />
         </div>
         <button className='text-white bg-red py-2 lg:py-[0.5rem] px-4 lg:px-8 rounded-md lg:mr-5 lg:ml-10 order-2 lg:order-1'>

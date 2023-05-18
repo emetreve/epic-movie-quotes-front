@@ -5,4 +5,5 @@ export type PropsType = {
   signature: string;
   mobileTop: string;
   desktopTop: string;
+  priority?: boolean;
 };

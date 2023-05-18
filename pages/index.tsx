@@ -22,6 +22,7 @@ const Landing: React.FC = () => {
           signature='Interstellar, 2014'
           mobileTop='pt-36'
           desktopTop='lg:pt-72'
+          priority={true}
         />
         <Poster
           image='/assets/landing-main-2.png'

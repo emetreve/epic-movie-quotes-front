@@ -12,6 +12,7 @@ const Poster: React.FC<PropsType> = (props) => {
             width={1440}
             height={900}
             className='w-full h-full object-cover object-center'
+            priority={props.priority}
           />
         </div>
       </div>
