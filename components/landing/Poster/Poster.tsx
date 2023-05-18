@@ -22,7 +22,7 @@ const Poster: React.FC<PropsType> = (props) => {
       >
         <div className='flex flex-row'>
           <div>
-            <div className='w-[15px] lg:w-[34px] height-0 border border-white mr-3 mt-3 lg:mt-8 lg:mr-5'></div>
+            <div className='w-[0.9375rem] lg:w-[2.125rem] height-0 border border-white mr-3 mt-3 lg:mt-8 lg:mr-5'></div>
           </div>
           <div>
             <h1 className='text-[1.1rem] font-montserrat lg:text-5xl lg:leading-[1.4]'>
