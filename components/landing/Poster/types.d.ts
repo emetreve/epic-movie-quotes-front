@@ -3,4 +3,6 @@ export type PropsType = {
   alt: string;
   quote: string;
   signature: string;
+  mobileTop: string;
+  desktopTop: string;
 };

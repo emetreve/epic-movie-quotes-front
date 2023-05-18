@@ -15,16 +15,20 @@ const Poster: React.FC<PropsType> = (props) => {
           />
         </div>
       </div>
-      <div className='absolute top-10 text-white z-50 w-80 pl-6 pt-32'>
+      <div
+        className={`absolute text-white z-50 w-[21rem] lg:w-[64rem] pl-6 ${
+          props.mobileTop ? props.mobileTop : 'pt-36'
+        } lg:pl-40  ${props.desktopTop ? props.desktopTop : 'lg:pt-72'}`}
+      >
         <div className='flex flex-row'>
           <div>
-            <div className='w-[15px] height-0 border border-white mr-3 mt-3'></div>
+            <div className='w-[15px] lg:w-[34px] height-0 border border-white mr-3 mt-3 lg:mt-8 lg:mr-5'></div>
           </div>
           <div>
-            <h1 className=' text-[1.08rem] font-montserrat'>
+            <h1 className='text-[1.1rem] font-montserrat lg:text-5xl lg:leading-[1.4]'>
               &quot;{props.quote}&quot;
             </h1>
-            <p className='text-sm pt-4'>{props.signature}</p>
+            <p className='text-sm pt-4 lg:text-2xl'>{props.signature}</p>
           </div>
         </div>
       </div>

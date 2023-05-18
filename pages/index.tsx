@@ -20,12 +20,24 @@ const Landing: React.FC = () => {
           alt='Interstellar wallpaper'
           quote='You have to leave something behind to go forward'
           signature='Interstellar, 2014'
+          mobileTop='pt-36'
+          desktopTop='lg:pt-72'
         />
         <Poster
           image='/assets/landing-main-2.png'
-          alt='The Royal Tenenbaums wallpaper '
+          alt='The Royal Tenenbaums wallpaper'
           quote='I think we’re just gonna have to be secretly in love with earch other and leave it that'
-          signature='The Royal Tenenbaums,2001 '
+          signature='The Royal Tenenbaums, 2001'
+          mobileTop='pt-[140px]'
+          desktopTop='lg:pt-[28rem]'
+        />
+        <Poster
+          image='/assets/landing-main-3.png'
+          alt='The Royal Tenenbaums wallpaper'
+          quote='I see in your eyes the same fear that would take the heart of me....'
+          signature='The Lord of the Rings, 2003'
+          mobileTop='pt-[170px]'
+          desktopTop='lg:pt-[38rem]'
         />
       </div>
     </>
