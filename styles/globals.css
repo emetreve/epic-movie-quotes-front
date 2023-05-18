@@ -8,5 +8,7 @@
 }
 
 .background{
-  background: linear-gradient(180deg, #11101A 0%, #11101A 100%);
+  /* background: linear-gradient(180deg, #11101A 0%, #11101A 100%); */
+  background: linear-gradient(180deg, #11101A 0%, #08080D 100%);
+
 }
