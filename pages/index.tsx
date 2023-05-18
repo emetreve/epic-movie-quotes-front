@@ -26,7 +26,7 @@ const Landing: React.FC = () => {
         <Poster
           image='/assets/landing-main-2.png'
           alt='The Royal Tenenbaums wallpaper'
-          quote='I think we’re just gonna have to be secretly in love with earch other and leave it that'
+          quote="I think we're just gonna have to be secretly in love with earch other and leave it that"
           signature='The Royal Tenenbaums, 2001'
           mobileTop='pt-[140px]'
           desktopTop='lg:pt-[28rem]'
