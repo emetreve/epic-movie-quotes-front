@@ -15,7 +15,18 @@ const Landing: React.FC = () => {
           </button>
         </div>
 
-        <Poster image='/assets/landing-main-1.png' />
+        <Poster
+          image='/assets/landing-main-1.png'
+          alt='Interstellar wallpaper'
+          quote='You have to leave something behind to go forward'
+          signature='Interstellar, 2014'
+        />
+        <Poster
+          image='/assets/landing-main-2.png'
+          alt='The Royal Tenenbaums wallpaper '
+          quote='I think we’re just gonna have to be secretly in love with earch other and leave it that'
+          signature='The Royal Tenenbaums,2001 '
+        />
       </div>
     </>
   );
