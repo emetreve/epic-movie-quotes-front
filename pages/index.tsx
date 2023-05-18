@@ -2,7 +2,7 @@ import { LandingHeader } from '@/components';
 
 const Landing: React.FC = () => {
   return (
-    <div className='background h-screen pt-6 px-2 lg:px-16 '>
+    <div className='background h-screen pt-6'>
       <LandingHeader />
       {/* <div className='text-cream font-montserrat'>
         <h1>Find any quote in</h1>
