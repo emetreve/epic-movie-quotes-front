@@ -31,16 +31,6 @@ const CreateAccount: React.FC<PropsType> = ({ show }) => {
               Name <span className='text-red'>*</span>
             </label>
             <input
-              //   {...register('first_name', {
-              //     required: 'სახელის ველი სავალდებულოა',
-              //     minLength: {
-              //       value: 3,
-              //       message: 'სახელის ველი უნდა შედგებოდეს მინიმუმ 3 სიმბოლოსგან',
-              //     },
-              //     onChange: (e) => {
-              //       localStorage.setItem('first_name', e.target.value);
-              //     },
-              //   })}
               id='name'
               placeholder={
                 window.matchMedia('(max-width: 800px)').matches
@@ -49,14 +39,10 @@ const CreateAccount: React.FC<PropsType> = ({ show }) => {
               }
               className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
             />
-            <div className='h-4'>
-              {/* {errors?.first_name && (
-                <Error content={errors.first_name.message} />
-              )} */}
-            </div>
+            <div className='h-4'>{/* PLACEHOLDER_FOR_RENDERING_ERROR */}</div>
           </div>
 
-          <div className='flex flex-col mt-3'>
+          <div className='flex flex-col mt-1'>
             <label htmlFor='email' className='mb-2'>
               Email <span className='text-red'>*</span>
             </label>
@@ -65,10 +51,10 @@ const CreateAccount: React.FC<PropsType> = ({ show }) => {
               placeholder='Enter your email'
               className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
             />
-            {/* <div className='h-4'>ERROR HERE</div> */}
+            <div className='h-4'>{/* PLACEHOLDER_FOR_RENDERING_ERROR */}</div>
           </div>
 
-          <div className='flex flex-col mt-6'>
+          <div className='flex flex-col mt-1'>
             <label htmlFor='password' className='mb-2'>
               Password <span className='text-red'>*</span>
             </label>
@@ -81,10 +67,10 @@ const CreateAccount: React.FC<PropsType> = ({ show }) => {
               }
               className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
             />
-            {/* <div className='h-4'>ERROR HERE</div> */}
+            <div className='h-4'>{/* PLACEHOLDER_FOR_RENDERING_ERROR */}</div>
           </div>
 
-          <div className='flex flex-col mt-6'>
+          <div className='flex flex-col mt-1'>
             <label htmlFor='password_confirmation' className='mb-2'>
               Confirm password <span className='text-red'>*</span>
             </label>
@@ -93,7 +79,7 @@ const CreateAccount: React.FC<PropsType> = ({ show }) => {
               placeholder='Password'
               className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
             />
-            {/* <div className='h-4'>ERROR HERE</div> */}
+            <div className='h-4'>{/* PLACEHOLDER_FOR_RENDERING_ERROR */}</div>
           </div>
           <button className='mt-7 text-white bg-red py-[0.6rem] lg:py-[0.6rem] w-full lg:text-xl rounded-md'>
             Get started
