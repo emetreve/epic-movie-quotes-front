@@ -1,11 +1,21 @@
+import { useState } from 'react';
 import { LandingHeader, Poster, Footer, CreateAccount } from '@/components';
 
 const Landing: React.FC = () => {
+  const [showCreateAccount, setShowCreateAccount] = useState(false);
+
+  const showCreate = (show: boolean) => {
+    setShowCreateAccount(show);
+    show
+      ? document.body.classList.add('hide-scrollbar')
+      : document.body.classList.remove('hide-scrollbar');
+  };
+
   return (
     <>
-      <CreateAccount />
+      {showCreateAccount && <CreateAccount show={showCreate} />}
       <div className='background h-[40rem] pt-6 lg:h-[52rem]'>
-        <LandingHeader toggleAccount />
+        <LandingHeader showCreateAccount={showCreate} />
         <div className='flex flex-col items-center h-[25rem] lg:h-[43rem]'>
           <div className='text-cream lg:leading-[1.4] flex flex-col items-center text-2xl mt-36 font-montserrat lg:text-6xl lg:mt-60'>
             <h1>Find any quote in</h1>

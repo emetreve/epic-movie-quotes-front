@@ -34,4 +34,6 @@
   z-index: 1;
 }
 
-
+.hide-scrollbar {
+  overflow: hidden;
+}

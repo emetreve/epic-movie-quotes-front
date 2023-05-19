@@ -1,3 +1,3 @@
 export type PropsType = {
-  toggleAccount: MouseEventHandler<HTMLButtonElement>;
+  showCreateAccount: MouseEventHandler<HTMLButtonElement>;
 };
