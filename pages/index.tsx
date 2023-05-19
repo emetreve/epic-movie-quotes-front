@@ -1,8 +1,15 @@
 import { useState } from 'react';
-import { LandingHeader, Poster, Footer, CreateAccount } from '@/components';
+import {
+  LandingHeader,
+  Poster,
+  Footer,
+  CreateAccount,
+  LogIn,
+} from '@/components';
 
 const Landing: React.FC = () => {
   const [showCreateAccount, setShowCreateAccount] = useState(false);
+  const [showLogIn, setShowLogIg] = useState(false);
 
   const showCreate = (show: boolean) => {
     setShowCreateAccount(show);
@@ -11,11 +18,21 @@ const Landing: React.FC = () => {
       : document.body.classList.remove('hide-scrollbar');
   };
 
+  const showLog = (show: boolean) => {
+    setShowLogIg(show);
+    show
+      ? document.body.classList.add('hide-scrollbar')
+      : document.body.classList.remove('hide-scrollbar');
+  };
+
   return (
     <>
       {showCreateAccount && <CreateAccount show={showCreate} />}
+
+      {showLogIn && <LogIn show={showLog} />}
+
       <div className='bg-background h-[40rem] pt-6 lg:h-[52rem]'>
-        <LandingHeader showCreateAccount={showCreate} />
+        <LandingHeader showCreateAccount={showCreate} showLogIn={showLog} />
         <div className='flex flex-col items-center h-[25rem] lg:h-[43rem]'>
           <div className='text-cream lg:leading-[1.4] flex flex-col items-center text-2xl mt-36 font-montserrat lg:text-6xl lg:mt-60'>
             <h1>Find any quote in</h1>
