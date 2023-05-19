@@ -9,7 +9,7 @@ const CreateAccount: React.FC<PropsType> = ({ show }) => {
           window.matchMedia('(max-width: 800px)').matches
             ? 'bg-gradient-violet'
             : 'bg-violet'
-        } h-full w-full lg:h-[45rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem]`}
+        } h-full w-full lg:h-[45rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative`}
       >
         <Image
           onClick={() => show(false)}
@@ -17,7 +17,7 @@ const CreateAccount: React.FC<PropsType> = ({ show }) => {
           alt='close button'
           width={200}
           height={200}
-          className='h-5 w-5 right-0 absolute mt-7 mr-8 opacity-50 hover:cursor-pointer'
+          className='h-5 w-5 lg:h-7 lg:w-7 right-0 absolute mt-7 mr-8 opacity-50 hover:cursor-pointer'
         />
 
         <div className='flex flex-col items-center justify-center h-32 mt-6'>
@@ -87,7 +87,7 @@ const CreateAccount: React.FC<PropsType> = ({ show }) => {
             />
             {/* <div className='h-4'>ERROR HERE</div> */}
           </div>
-          <button className='mt-7 text-white bg-red py-[0.5rem] lg:py-3 w-full lg:text-xl rounded-md'>
+          <button className='mt-7 text-white bg-red py-[0.5rem] w-full lg:text-xl rounded-md'>
             Get started
           </button>
           <button className='text-white mt-3 py-2 lg:py-[0.5rem] w-full lg:px-8 rounded-md border border-white'>
