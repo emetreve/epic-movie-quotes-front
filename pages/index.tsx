@@ -1,10 +1,20 @@
-import { LandingHeader, Poster, Footer } from '@/components';
+import { useState } from 'react';
+import { LandingHeader, Poster, Footer, CreateAccount } from '@/components';
 
 const Landing: React.FC = () => {
+  const [showCreateAccount, setShowCreateAccount] = useState(false);
+
+  const toggleCreateAccount = () => {
+    setShowCreateAccount((prev) => !prev);
+    console.log('here');
+  };
+
   return (
     <>
       <div className='background h-[40rem] pt-6 lg:h-[52rem]'>
-        <LandingHeader />
+        {showCreateAccount && <CreateAccount />}
+
+        <LandingHeader toggleAccount={toggleCreateAccount} />
         <div className='flex flex-col items-center h-[25rem] lg:h-[43rem]'>
           <div className='text-cream lg:leading-[1.4] flex flex-col items-center text-2xl mt-36 font-montserrat lg:text-6xl lg:mt-60'>
             <h1>Find any quote in</h1>
