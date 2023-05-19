@@ -17,10 +17,10 @@ const CreateAccount: React.FC<PropsType> = ({ show }) => {
           alt='close button'
           width={200}
           height={200}
-          className='h-6 w-6 right-0 absolute mt-7 mr-8 opacity-50 hover:cursor-pointer'
+          className='h-5 w-5 right-0 absolute mt-7 mr-8 opacity-50 hover:cursor-pointer'
         />
 
-        <div className='flex flex-col items-center justify-center h-32 mt-12'>
+        <div className='flex flex-col items-center justify-center h-32 mt-6'>
           <h1 className='text-2xl pt-2'>Create an account</h1>
           <p className='text-gray-500 text-sm mt-3'>Start your journey!</p>
         </div>
@@ -43,7 +43,7 @@ const CreateAccount: React.FC<PropsType> = ({ show }) => {
               //   })}
               id='name'
               placeholder='Enter your name'
-              className='bg-input-gray text-txt-black py-[0.6rem] px-3 w-full placeholder-gray-500 rounded'
+              className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
             />
             <div className='h-4'>
               {/* {errors?.first_name && (
@@ -59,7 +59,7 @@ const CreateAccount: React.FC<PropsType> = ({ show }) => {
             <input
               id='email'
               placeholder='Enter your email'
-              className='bg-input-gray text-txt-black py-[0.6rem] px-3 w-full placeholder-gray-500 rounded'
+              className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
             />
             {/* <div className='h-4'>ERROR HERE</div> */}
           </div>
@@ -71,7 +71,7 @@ const CreateAccount: React.FC<PropsType> = ({ show }) => {
             <input
               id='password'
               placeholder='Password'
-              className='bg-input-gray text-txt-black py-[0.6rem] px-3 w-full placeholder-gray-500 rounded'
+              className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
             />
             {/* <div className='h-4'>ERROR HERE</div> */}
           </div>
@@ -83,11 +83,25 @@ const CreateAccount: React.FC<PropsType> = ({ show }) => {
             <input
               id='password_confirmation'
               placeholder='Password'
-              className='bg-input-gray text-txt-black py-[0.6rem] px-3 w-full placeholder-gray-500 rounded'
+              className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
             />
             {/* <div className='h-4'>ERROR HERE</div> */}
           </div>
+          <button className='mt-7 text-white bg-red py-[0.5rem] lg:py-3 w-full lg:text-xl rounded-md'>
+            Get started
+          </button>
+          <button className='text-white mt-3 py-2 lg:py-[0.5rem] w-full lg:px-8 rounded-md border border-white'>
+            Sign up with Google
+          </button>
         </form>
+        <div className='h-24 flex justify-center items-center'>
+          <p className='inline text-xs text-gray-500'>
+            Already have an account?
+          </p>
+          <p className='inline-block ml-2 text-sm text-blue-400 underline'>
+            Log in
+          </p>
+        </div>
       </div>
     </div>
   );
