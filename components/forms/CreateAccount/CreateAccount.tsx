@@ -1,11 +1,27 @@
 import { PropsType } from './types';
+import Image from 'next/image';
 
 const CreateAccount: React.FC<PropsType> = ({ show }) => {
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
-      <div className='modal-tint h-full w-full lg:h-80 lg:w-36'>
-        <div className='flex flex-col items-center justify-center h-36 mt-6'>
-          <h1 className='text-xl'>Create an account</h1>
+      <div
+        className={`${
+          window.matchMedia('(max-width: 800px)').matches
+            ? 'bg-gradient-violet'
+            : 'bg-violet'
+        } h-full w-full lg:h-[45rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem]`}
+      >
+        <Image
+          onClick={() => show(false)}
+          src='/assets/close-btn.png'
+          alt='close button'
+          width={200}
+          height={200}
+          className='h-6 w-6 right-0 absolute mt-7 mr-8 opacity-50 hover:cursor-pointer'
+        />
+
+        <div className='flex flex-col items-center justify-center h-32 mt-12'>
+          <h1 className='text-2xl pt-2'>Create an account</h1>
           <p className='text-gray-500 text-sm mt-3'>Start your journey!</p>
         </div>
 
@@ -72,8 +88,6 @@ const CreateAccount: React.FC<PropsType> = ({ show }) => {
             {/* <div className='h-4'>ERROR HERE</div> */}
           </div>
         </form>
-
-        <button onClick={() => show(false)}>Close</button>
       </div>
     </div>
   );

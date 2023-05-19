@@ -7,11 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // backgroundImage: {
-      //   'gradient-violet':
-      //     'linear-gradient(187.16deg, #181623 0.07%, #191725 51.65%, #0D0B14 98.75%)',
-      // },
       backgroundImage: {
+        'gradient-violet':
+          'linear-gradient(187.16deg, #181623 0.07%, #191725 51.65%, #0D0B14 98.75%)',
         background: 'linear-gradient(180deg, #11101A 0%, #08080D 100%)',
       },
 
