@@ -9,7 +9,7 @@ const LogIn: React.FC<PropsType> = ({ show }) => {
           window.matchMedia('(max-width: 800px)').matches
             ? 'bg-gradient-violet'
             : 'bg-violet'
-        } h-full w-full lg:h-[40rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative`}
+        } h-full w-full lg:h-[40rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative lg:scale-105`}
       >
         <Image
           onClick={() => show(false)}
@@ -58,7 +58,24 @@ const LogIn: React.FC<PropsType> = ({ show }) => {
             <div className='h-4'>{/* FOR_ERROR */}</div>
           </div>
 
-          <button className='mt-7 text-white bg-red py-[0.6rem] lg:py-[0.6rem] w-full lg:text-xl rounded-md'>
+          <div className='flex'>
+            <div className='flex justify-center items-center'>
+              <input
+                className='w-4 h-4 inline rounded border-none'
+                type='checkbox'
+                name='remember'
+                id='remember'
+              />
+              <label className='ml-2 pt-[0.1rem] relative' htmlFor='remember'>
+                Remember me
+              </label>
+            </div>
+            <p className='ml-auto underline text-blue-600 hover:cursor-pointer'>
+              <p>Forgot password</p>
+            </p>
+          </div>
+
+          <button className='mt-5 text-white bg-red py-[0.6rem] lg:py-[0.6rem] w-full lg:text-xl rounded-md'>
             Sign in
           </button>
           <button className='text-white mt-3 py-[0.5rem] lg:py-[0.7rem] w-full lg:px-8 rounded-md border lg:text-[1rem] border-white'>
