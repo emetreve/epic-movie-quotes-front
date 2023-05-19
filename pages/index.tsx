@@ -6,6 +6,7 @@ const Landing: React.FC = () => {
 
   const toggleCreateAccount = () => {
     setShowCreateAccount((prev) => !prev);
+    document.body.classList.toggle('hide-scrollbar');
     console.log('here');
   };
 
