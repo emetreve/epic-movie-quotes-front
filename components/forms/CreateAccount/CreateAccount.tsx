@@ -42,7 +42,11 @@ const CreateAccount: React.FC<PropsType> = ({ show }) => {
               //     },
               //   })}
               id='name'
-              placeholder='Enter your name'
+              placeholder={
+                window.matchMedia('(max-width: 800px)').matches
+                  ? 'Enter your name'
+                  : 'At least 3 & max.15 lower case characters'
+              }
               className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
             />
             <div className='h-4'>
@@ -70,7 +74,11 @@ const CreateAccount: React.FC<PropsType> = ({ show }) => {
             </label>
             <input
               id='password'
-              placeholder='Password'
+              placeholder={
+                window.matchMedia('(max-width: 800px)').matches
+                  ? 'Password'
+                  : 'At least 8 & max.15 lower case characters'
+              }
               className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
             />
             {/* <div className='h-4'>ERROR HERE</div> */}
