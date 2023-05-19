@@ -14,32 +14,33 @@ const Landing: React.FC = () => {
             Get started
           </button>
         </div>
-
-        <Poster
-          image='/assets/landing-main-1.png'
-          alt='Interstellar wallpaper'
-          quote='You have to leave something behind to go forward'
-          signature='Interstellar, 2014'
-          mobileTop='pt-36'
-          desktopTop='lg:pt-72'
-          priority={true}
-        />
-        <Poster
-          image='/assets/landing-main-2.png'
-          alt='The Royal Tenenbaums wallpaper'
-          quote="I think we're just gonna have to be secretly in love with earch other and leave it that"
-          signature='The Royal Tenenbaums, 2001'
-          mobileTop='pt-[8.75rem]'
-          desktopTop='lg:pt-[28rem]'
-        />
-        <Poster
-          image='/assets/landing-main-3.png'
-          alt='The Royal Tenenbaums wallpaper'
-          quote='I see in your eyes the same fear that would take the heart of me....'
-          signature='The Lord of the Rings, 2003'
-          mobileTop='pt-[10.625rem]'
-          desktopTop='lg:pt-[38rem]'
-        />
+        <main>
+          <Poster
+            image='/assets/landing-main-1.png'
+            alt='Interstellar wallpaper'
+            quote='You have to leave something behind to go forward'
+            signature='Interstellar, 2014'
+            mobileTop='pt-36'
+            desktopTop='lg:pt-72'
+            priority={true}
+          />
+          <Poster
+            image='/assets/landing-main-2.png'
+            alt='The Royal Tenenbaums wallpaper'
+            quote="I think we're just gonna have to be secretly in love with earch other and leave it that"
+            signature='The Royal Tenenbaums, 2001'
+            mobileTop='pt-[8.75rem]'
+            desktopTop='lg:pt-[28rem]'
+          />
+          <Poster
+            image='/assets/landing-main-3.png'
+            alt='The Royal Tenenbaums wallpaper'
+            quote='I see in your eyes the same fear that would take the heart of me....'
+            signature='The Lord of the Rings, 2003'
+            mobileTop='pt-[10.625rem]'
+            desktopTop='lg:pt-[38rem]'
+          />
+        </main>
         <Footer />
       </div>
     </>
