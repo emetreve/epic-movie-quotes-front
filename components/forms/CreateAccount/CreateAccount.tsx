@@ -95,10 +95,17 @@ const CreateAccount: React.FC<PropsType> = ({ show }) => {
             />
             {/* <div className='h-4'>ERROR HERE</div> */}
           </div>
-          <button className='mt-7 text-white bg-red py-[0.5rem] w-full lg:text-xl rounded-md'>
+          <button className='mt-7 text-white bg-red py-[0.6rem] lg:py-[0.6rem] w-full lg:text-xl rounded-md'>
             Get started
           </button>
-          <button className='text-white mt-3 py-2 lg:py-[0.5rem] w-full lg:px-8 rounded-md border border-white'>
+          <button className='text-white mt-3 py-[0.5rem] lg:py-[0.7rem] w-full lg:px-8 rounded-md border lg:text-[1rem] border-white'>
+            <Image
+              src='/assets/google.png'
+              alt='google logo'
+              height={16}
+              width={16}
+              className='inline mr-2'
+            />
             Sign up with Google
           </button>
         </form>
