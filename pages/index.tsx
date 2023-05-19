@@ -14,7 +14,7 @@ const Landing: React.FC = () => {
   return (
     <>
       {showCreateAccount && <CreateAccount show={showCreate} />}
-      <div className='background h-[40rem] pt-6 lg:h-[52rem]'>
+      <div className='bg-background h-[40rem] pt-6 lg:h-[52rem]'>
         <LandingHeader showCreateAccount={showCreate} />
         <div className='flex flex-col items-center h-[25rem] lg:h-[43rem]'>
           <div className='text-cream lg:leading-[1.4] flex flex-col items-center text-2xl mt-36 font-montserrat lg:text-6xl lg:mt-60'>
