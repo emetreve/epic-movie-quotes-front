@@ -6,11 +6,9 @@
   font-family: helvetica-medium-en;
   src: url("/fonts/Helvetica-Neue-W01-66-Medium-It.ttf") format('truetype');;
 }
-
 .background{
   background: linear-gradient(180deg, #11101A 0%, #08080D 100%);
 }
-
 .image-container::before {
   content: "";
   position: absolute;
@@ -21,7 +19,6 @@
   background: linear-gradient(to right, rgba(0, 0, 0, 0.7), transparent);
   z-index: 1;
 }
-
 .image-container::after {
   content: "";
   position: absolute;
@@ -33,7 +30,12 @@
   pointer-events: none;
   z-index: 1;
 }
-
 .hide-scrollbar {
   overflow: hidden;
+}
+.modal-tint{
+  background: linear-gradient(187.16deg, #181623 0.07%, #191725 51.65%, #0D0B14 98.75%);
+}
+input:focus {
+  outline: none;
 }
