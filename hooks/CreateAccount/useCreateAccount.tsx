@@ -24,15 +24,6 @@ const useCreateAccount = () => {
     mode: 'onChange',
   });
 
-  useEffect(() => {
-    if (localStorage.getItem('name')) {
-      trigger('name');
-    }
-    if (localStorage.getItem('email')) {
-      trigger('email');
-    }
-  }, [trigger]);
-
   const password = watch('password');
 
   const onSubmit = (data: FormData) => {
