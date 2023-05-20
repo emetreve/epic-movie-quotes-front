@@ -120,9 +120,6 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
                     value: /^[a-z0-9]+$/,
                     message: 'Only lowercase letters and numbers are allowed.',
                   },
-                  onChange: (e) => {
-                    localStorage.setItem('password', e.target.value);
-                  },
                 })}
                 type={hidePassword ? 'password' : 'text'}
                 id='password'
@@ -155,12 +152,6 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
                   required: 'This field is required.',
                   validate: (value) =>
                     value === password || 'Passwords do not match.',
-                  onChange: (e) => {
-                    localStorage.setItem(
-                      'password_confirmation',
-                      e.target.value
-                    );
-                  },
                 })}
                 type={hidePasswordConfirm ? 'password' : 'text'}
                 id='password_confirmation'
