@@ -182,7 +182,7 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
             Get started
           </button>
         </form>
-        <div className='w-full px-8'>
+        <div className='w-full px-8 text-sm'>
           <button className='w-full text-white mt-3 py-[0.5rem] lg:py-[0.7rem] lg:px-8 rounded-md border lg:text-[1rem] border-white'>
             <Image
               src='/assets/google.png'
