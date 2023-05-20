@@ -11,22 +11,26 @@ const LogIn = () => {
     reset,
   } = useForm({
     defaultValues: {
-      email: localStorage.getItem('email') || '',
+      user: localStorage.getItem('user') || '',
       password: '',
+      remember: false,
     },
     mode: 'onChange',
   });
 
   useEffect(() => {
-    if (localStorage.getItem('email')) {
-      trigger('email');
+    if (localStorage.getItem('user')) {
+      trigger('user');
     }
     if (localStorage.getItem('password')) {
       trigger('password');
     }
+    if (localStorage.getItem('remember')) {
+      trigger('remember');
+    }
   }, [trigger]);
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: FormData): void => {
     console.log(data);
   };
 

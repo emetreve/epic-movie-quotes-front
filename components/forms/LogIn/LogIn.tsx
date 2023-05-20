@@ -1,7 +1,11 @@
 import { PropsType } from './types';
 import Image from 'next/image';
+import { useLogIn } from '@/hooks';
+import { Error } from '@/components';
 
 const LogIn: React.FC<PropsType> = ({ show, swap }) => {
+  const { register, errors, handleSubmit, onSubmit } = useLogIn();
+
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
       <div className='bg-gradient-violet lg:bg-gradient-plain-violet h-full w-full lg:h-[40rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative lg:scale-105'>
@@ -23,17 +27,33 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
           </p>
         </div>
 
-        <form className='w-full px-8 text-sm'>
+        <form
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}
+          className='w-full px-8 text-sm'
+        >
           <div className='flex flex-col mt-1'>
-            <label htmlFor='email' className='mb-2'>
-              Email <span className='text-red'>*</span>
+            <label htmlFor='user' className='mb-2'>
+              User <span className='text-red'>*</span>
             </label>
             <input
-              id='email'
-              placeholder='Enter your email'
+              {...register('user', {
+                required: 'This field is required.',
+                minLength: {
+                  value: 3,
+                  message: 'This field must have at least 3 characters.',
+                },
+                onChange: (e) => {
+                  localStorage.setItem('user', e.target.value);
+                },
+              })}
+              id='user'
+              placeholder='Enter your username or email'
               className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
             />
-            <div className='h-4'>{/* FOR_ERROR */}</div>
+            <div className='h-4'>
+              {errors?.user && <Error content={errors.user.message} />}
+            </div>
           </div>
 
           <div className='flex flex-col mt-1'>
@@ -41,6 +61,9 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
               Password <span className='text-red'>*</span>
             </label>
             <input
+              {...register('password', {
+                required: 'This field is required.',
+              })}
               id='password'
               placeholder={
                 window.matchMedia('(max-width: 800px)').matches
@@ -49,12 +72,20 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
               }
               className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
             />
-            <div className='h-4'>{/* FOR_ERROR */}</div>
+            <div className='h-4'>
+              {errors?.password && <Error content={errors.password.message} />}
+            </div>
           </div>
 
-          <div className='flex'>
+          <div className='flex mt-1'>
             <div className='flex justify-center items-center'>
               <input
+                {...register('remember', {
+                  required: false,
+                  onChange: (e) => {
+                    localStorage.setItem('remember', e.target.checked);
+                  },
+                })}
                 className='w-4 h-4 inline rounded border-none'
                 type='checkbox'
                 name='remember'
@@ -69,9 +100,14 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
             </div>
           </div>
 
-          <button className='mt-5 text-white bg-red py-[0.6rem] lg:py-[0.6rem] w-full lg:text-xl rounded-md'>
+          <button
+            type='submit'
+            className='mt-5 text-white bg-red py-[0.6rem] lg:py-[0.6rem] w-full lg:text-xl rounded-md'
+          >
             Sign in
           </button>
+        </form>
+        <div className='w-full px-8 text-sm'>
           <button className='text-white mt-3 py-[0.5rem] lg:py-[0.7rem] w-full lg:px-8 rounded-md border lg:text-[1rem] border-white'>
             <Image
               src='/assets/google.png'
@@ -82,7 +118,7 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
             />
             Sign in with Google
           </button>
-        </form>
+        </div>
         <div className='h-24 flex justify-center items-center'>
           <p className='inline text-xs text-gray-500'>
             Don&apos;t have an account?

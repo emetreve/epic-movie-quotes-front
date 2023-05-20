@@ -34,7 +34,7 @@ const useCreateAccount = () => {
 
   const password = watch('password');
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: FormData): void => {
     console.log(data);
   };
 

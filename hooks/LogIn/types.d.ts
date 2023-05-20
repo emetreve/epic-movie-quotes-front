@@ -1,4 +1,5 @@
 export type FormData = {
-  email: string;
+  user: string;
   password: string;
+  remember?: boolean;
 };
