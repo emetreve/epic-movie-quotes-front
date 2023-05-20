@@ -1,8 +1,11 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormData } from './types';
 
 const useCreateAccount = () => {
+  const [hidePassword, setHidePassword] = useState(true);
+  const [hidePasswordConfirm, setHidePasswordConfirm] = useState(true);
+
   const {
     register,
     handleSubmit,
@@ -36,6 +39,18 @@ const useCreateAccount = () => {
     console.log(data);
   };
 
-  return { handleSubmit, register, errors, trigger, onSubmit, reset, password };
+  return {
+    handleSubmit,
+    register,
+    errors,
+    trigger,
+    onSubmit,
+    reset,
+    password,
+    hidePassword,
+    setHidePassword,
+    hidePasswordConfirm,
+    setHidePasswordConfirm,
+  };
 };
 export default useCreateAccount;

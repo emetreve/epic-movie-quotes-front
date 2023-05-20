@@ -4,8 +4,17 @@ import { useCreateAccount } from '@/hooks';
 import { Error } from '@/components';
 
 const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
-  const { handleSubmit, onSubmit, register, errors, password } =
-    useCreateAccount();
+  const {
+    handleSubmit,
+    onSubmit,
+    register,
+    errors,
+    password,
+    hidePassword,
+    setHidePassword,
+    hidePasswordConfirm,
+    setHidePasswordConfirm,
+  } = useCreateAccount();
 
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
@@ -95,29 +104,42 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
             <label htmlFor='password' className='mb-2'>
               Password <span className='text-red'>*</span>
             </label>
-            <input
-              {...register('password', {
-                required: 'This field is required.',
-                minLength: {
-                  value: 8,
-                  message: 'This field must have at least 8 characters.',
-                },
-                maxLength: {
-                  value: 15,
-                  message: "This field can't have more than 15 characters.",
-                },
-                pattern: {
-                  value: /^[a-z0-9]+$/,
-                  message: 'Only lowercase letters and numbers are allowed.',
-                },
-                onChange: (e) => {
-                  localStorage.setItem('password', e.target.value);
-                },
-              })}
-              id='password'
-              placeholder='Password'
-              className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
-            />
+            <div className='relative'>
+              <input
+                {...register('password', {
+                  required: 'This field is required.',
+                  minLength: {
+                    value: 8,
+                    message: 'This field must have at least 8 characters.',
+                  },
+                  maxLength: {
+                    value: 15,
+                    message: "This field can't have more than 15 characters.",
+                  },
+                  pattern: {
+                    value: /^[a-z0-9]+$/,
+                    message: 'Only lowercase letters and numbers are allowed.',
+                  },
+                  onChange: (e) => {
+                    localStorage.setItem('password', e.target.value);
+                  },
+                })}
+                type={hidePassword ? 'password' : 'text'}
+                id='password'
+                placeholder='Password'
+                className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
+              />
+              <Image
+                onClick={() => {
+                  setHidePassword((prev) => !prev);
+                }}
+                src='/assets/eye-password.png'
+                alt='show password'
+                width={200}
+                height={200}
+                className='absolute right-4 bottom-[0.7rem] w-4 h-4 hover:cursor-pointer'
+              />
+            </div>
             <div className='h-4'>
               {errors?.password && <Error content={errors.password.message} />}
             </div>
@@ -127,19 +149,35 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
             <label htmlFor='password_confirmation' className='mb-2'>
               Confirm password <span className='text-red'>*</span>
             </label>
-            <input
-              {...register('password_confirmation', {
-                required: 'This field is required.',
-                validate: (value) =>
-                  value === password || 'Passwords do not match.',
-                onChange: (e) => {
-                  localStorage.setItem('password_confirmation', e.target.value);
-                },
-              })}
-              id='password_confirmation'
-              placeholder='Password'
-              className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
-            />
+            <div className='relative'>
+              <input
+                {...register('password_confirmation', {
+                  required: 'This field is required.',
+                  validate: (value) =>
+                    value === password || 'Passwords do not match.',
+                  onChange: (e) => {
+                    localStorage.setItem(
+                      'password_confirmation',
+                      e.target.value
+                    );
+                  },
+                })}
+                type={hidePasswordConfirm ? 'password' : 'text'}
+                id='password_confirmation'
+                placeholder='Password'
+                className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
+              />
+              <Image
+                onClick={() => {
+                  setHidePasswordConfirm((prev) => !prev);
+                }}
+                src='/assets/eye-password.png'
+                alt='show password'
+                width={200}
+                height={200}
+                className='absolute right-4 bottom-[0.7rem] w-4 h-4 hover:cursor-pointer'
+              />
+            </div>
             <div className='h-4'>
               {errors?.password_confirmation && (
                 <Error content={errors.password_confirmation.message} />
