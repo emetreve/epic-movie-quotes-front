@@ -9,7 +9,7 @@ import {
 import { useLanding } from '@/hooks';
 
 const Landing: React.FC = () => {
-  const [showCreateAccount, showLogIn, showCreate, showLog] = useLanding();
+  const { showCreateAccount, showLogIn, showCreate, showLog } = useLanding();
 
   return (
     <>
