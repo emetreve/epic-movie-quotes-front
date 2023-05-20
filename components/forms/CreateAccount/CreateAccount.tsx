@@ -4,7 +4,8 @@ import { useCreateAccount } from '@/hooks';
 import { Error } from '@/components';
 
 const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
-  const { handleSubmit, onSubmit, register, errors } = useCreateAccount();
+  const { handleSubmit, onSubmit, register, errors, password } =
+    useCreateAccount();
 
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
@@ -43,8 +44,7 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
                 },
                 maxLength: {
                   value: 15,
-                  message:
-                    'This field can&apos;t have more than 15 characters.',
+                  message: "This field can't have more than 15 characters.",
                 },
                 pattern: {
                   value: /^[a-z0-9]+$/,
@@ -96,11 +96,31 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
               Password <span className='text-red'>*</span>
             </label>
             <input
+              {...register('password', {
+                required: 'This field is required.',
+                minLength: {
+                  value: 8,
+                  message: 'This field must have at least 8 characters.',
+                },
+                maxLength: {
+                  value: 15,
+                  message: "This field can't have more than 15 characters.",
+                },
+                pattern: {
+                  value: /^[a-z0-9]+$/,
+                  message: 'Only lowercase letters and numbers are allowed.',
+                },
+                onChange: (e) => {
+                  localStorage.setItem('password', e.target.value);
+                },
+              })}
               id='password'
               placeholder='Password'
               className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
             />
-            <div className='h-4'>{/* PLACEHOLDER_FOR_RENDERING_ERROR */}</div>
+            <div className='h-4'>
+              {errors?.password && <Error content={errors.password.message} />}
+            </div>
           </div>
 
           <div className='flex flex-col mt-1'>
@@ -108,11 +128,23 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
               Confirm password <span className='text-red'>*</span>
             </label>
             <input
+              {...register('password_confirmation', {
+                required: 'This field is required.',
+                validate: (value) =>
+                  value === password || 'Passwords do not match.',
+                onChange: (e) => {
+                  localStorage.setItem('password_confirmation', e.target.value);
+                },
+              })}
               id='password_confirmation'
               placeholder='Password'
               className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
             />
-            <div className='h-4'>{/* PLACEHOLDER_FOR_RENDERING_ERROR */}</div>
+            <div className='h-4'>
+              {errors?.password_confirmation && (
+                <Error content={errors.password_confirmation.message} />
+              )}
+            </div>
           </div>
           <button className='mt-7 text-white bg-red py-[0.6rem] lg:py-[0.6rem] w-full lg:text-xl rounded-md'>
             Get started

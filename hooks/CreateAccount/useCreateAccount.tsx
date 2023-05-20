@@ -9,6 +9,7 @@ const useCreateAccount = () => {
     formState: { errors },
     trigger,
     reset,
+    watch,
   } = useForm({
     defaultValues: {
       name: localStorage.getItem('name') || '',
@@ -29,10 +30,12 @@ const useCreateAccount = () => {
     }
   }, [trigger]);
 
+  const password = watch('password');
+
   const onSubmit = (data: FormData) => {
     console.log(data);
   };
 
-  return { handleSubmit, register, errors, trigger, onSubmit, reset };
+  return { handleSubmit, register, errors, trigger, onSubmit, reset, password };
 };
 export default useCreateAccount;
