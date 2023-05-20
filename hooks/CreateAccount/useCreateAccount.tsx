@@ -17,9 +17,8 @@ const useCreateAccount = () => {
     defaultValues: {
       name: localStorage.getItem('name') || '',
       email: localStorage.getItem('email') || '',
-      password: localStorage.getItem('password') || '',
-      password_confirmation:
-        localStorage.getItem('password_confirmation') || '',
+      password: '',
+      password_confirmation: '',
     },
     mode: 'onChange',
   });
