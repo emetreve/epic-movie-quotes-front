@@ -13,7 +13,7 @@ const LogIn = () => {
     defaultValues: {
       user: localStorage.getItem('user') || '',
       password: '',
-      remember: false,
+      remember: localStorage.getItem('remember') === 'true' ?? false,
     },
     mode: 'onChange',
   });
