@@ -1,0 +1,38 @@
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { FormData } from './types';
+
+const useCreateAccount = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    trigger,
+    reset,
+  } = useForm({
+    defaultValues: {
+      name: localStorage.getItem('name') || '',
+      email: localStorage.getItem('email') || '',
+      password: localStorage.getItem('password') || '',
+      password_confirmation:
+        localStorage.getItem('password_confirmation') || '',
+    },
+    mode: 'onChange',
+  });
+
+  useEffect(() => {
+    if (localStorage.getItem('name')) {
+      trigger('name');
+    }
+    if (localStorage.getItem('email')) {
+      trigger('email');
+    }
+  }, [trigger]);
+
+  const onSubmit = (data: FormData) => {
+    console.log(data);
+  };
+
+  return { handleSubmit, register, errors, trigger, onSubmit, reset };
+};
+export default useCreateAccount;
