@@ -4,13 +4,7 @@ import Image from 'next/image';
 const LogIn: React.FC<PropsType> = ({ show }) => {
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
-      <div
-        className={`${
-          window.matchMedia('(max-width: 800px)').matches
-            ? 'bg-gradient-violet'
-            : 'bg-violet'
-        } h-full w-full lg:h-[40rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative lg:scale-105`}
-      >
+      <div className='bg-gradient-violet lg:bg-gradient-plain-violet h-full w-full lg:h-[40rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative lg:scale-105'>
         <Image
           onClick={() => show(false)}
           src='/assets/close-btn.png'
