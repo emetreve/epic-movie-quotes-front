@@ -64,9 +64,9 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
                 Remember me
               </label>
             </div>
-            <p className='ml-auto underline text-blue-600 hover:cursor-pointer'>
+            <div className='ml-auto underline text-blue-600 hover:cursor-pointer'>
               <p>Forgot password</p>
-            </p>
+            </div>
           </div>
 
           <button className='mt-5 text-white bg-red py-[0.6rem] lg:py-[0.6rem] w-full lg:text-xl rounded-md'>
