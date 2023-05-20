@@ -25,9 +25,6 @@ const LogIn = () => {
     if (localStorage.getItem('password')) {
       trigger('password');
     }
-    if (localStorage.getItem('remember')) {
-      trigger('remember');
-    }
   }, [trigger]);
 
   const onSubmit = (data: FormData): void => {
