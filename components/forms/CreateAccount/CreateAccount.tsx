@@ -72,11 +72,23 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
               Email <span className='text-red'>*</span>
             </label>
             <input
+              {...register('email', {
+                required: 'This field is required.',
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: 'Invalid email address.',
+                },
+                onChange: (e) => {
+                  localStorage.setItem('email', e.target.value);
+                },
+              })}
               id='email'
               placeholder='Enter your email'
               className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
             />
-            <div className='h-4'>{/* PLACEHOLDER_FOR_RENDERING_ERROR */}</div>
+            <div className='h-4'>
+              {errors?.email && <Error content={errors.email.message} />}
+            </div>
           </div>
 
           <div className='flex flex-col mt-1'>
