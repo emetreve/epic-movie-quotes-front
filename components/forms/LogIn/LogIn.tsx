@@ -4,7 +4,14 @@ import { useLogIn } from '@/hooks';
 import { Error } from '@/components';
 
 const LogIn: React.FC<PropsType> = ({ show, swap }) => {
-  const { register, errors, handleSubmit, onSubmit } = useLogIn();
+  const {
+    register,
+    errors,
+    handleSubmit,
+    onSubmit,
+    hidePassword,
+    setHidePassword,
+  } = useLogIn();
 
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
@@ -60,18 +67,31 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
             <label htmlFor='password' className='mb-2'>
               Password <span className='text-red'>*</span>
             </label>
-            <input
-              {...register('password', {
-                required: 'This field is required.',
-              })}
-              id='password'
-              placeholder={
-                window.matchMedia('(max-width: 800px)').matches
-                  ? 'Password'
-                  : 'At least 8 & max.15 lower case characters'
-              }
-              className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
-            />
+            <div className='relative'>
+              <input
+                {...register('password', {
+                  required: 'This field is required.',
+                })}
+                id='password'
+                placeholder={
+                  window.matchMedia('(max-width: 800px)').matches
+                    ? 'Password'
+                    : 'At least 8 & max.15 lower case characters'
+                }
+                type={hidePassword ? 'password' : 'text'}
+                className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
+              />
+              <Image
+                onClick={() => {
+                  setHidePassword((prev) => !prev);
+                }}
+                src='/assets/eye-password.png'
+                alt='show password'
+                width={200}
+                height={200}
+                className='absolute right-4 bottom-[0.7rem] w-4 h-4 hover:cursor-pointer'
+              />
+            </div>
             <div className='h-4'>
               {errors?.password && <Error content={errors.password.message} />}
             </div>

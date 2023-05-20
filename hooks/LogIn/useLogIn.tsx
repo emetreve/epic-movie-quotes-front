@@ -1,8 +1,10 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormData } from './types';
 
 const LogIn = () => {
+  const [hidePassword, setHidePassword] = useState(true);
+
   const {
     register,
     handleSubmit,
@@ -38,6 +40,8 @@ const LogIn = () => {
     trigger,
     onSubmit,
     reset,
+    hidePassword,
+    setHidePassword,
   };
 };
 export default LogIn;
