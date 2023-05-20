@@ -1,7 +1,7 @@
 import { PropsType } from './types';
 import Image from 'next/image';
 
-const CreateAccount: React.FC<PropsType> = ({ show }) => {
+const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
       <div className='bg-gradient-violet lg:bg-gradient-plain-violet h-full w-full lg:h-[45rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative'>
@@ -91,7 +91,13 @@ const CreateAccount: React.FC<PropsType> = ({ show }) => {
           <p className='inline text-xs text-gray-500'>
             Already have an account?
           </p>
-          <p className='inline-block ml-2 text-sm text-blue-400 underline'>
+          <p
+            onClick={() => {
+              show(false);
+              swap(true);
+            }}
+            className='inline-block ml-2 text-sm text-blue-400 underline'
+          >
             Log in
           </p>
         </div>

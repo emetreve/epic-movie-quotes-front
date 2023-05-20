@@ -13,9 +13,9 @@ const Landing: React.FC = () => {
 
   return (
     <>
-      {showCreateAccount && <CreateAccount show={showCreate} />}
+      {showCreateAccount && <CreateAccount show={showCreate} swap={showLog} />}
 
-      {showLogIn && <LogIn show={showLog} />}
+      {showLogIn && <LogIn show={showLog} swap={showCreate} />}
 
       <div className='bg-background h-[40rem] pt-6 lg:h-[52rem]'>
         <LandingHeader showCreateAccount={showCreate} showLogIn={showLog} />
