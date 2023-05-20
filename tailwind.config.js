@@ -8,10 +8,12 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-violet':
+          'linear-gradient(187.16deg, #181623 0.07%, #191725 51.65%, #0D0B14 98.75%)',
+        'gradient-plain-violet': 'linear-gradient(to right, #222030, #222030)',
+        background: 'linear-gradient(180deg, #11101A 0%, #08080D 100%)',
       },
+
       fontFamily: {
         'helvetica-medium-en': ['helvetica-medium-en'],
         montserrat: ['Montserrat'],
@@ -19,6 +21,10 @@ module.exports = {
       colors: {
         cream: '#DDCCAA',
         red: '#E31221',
+        'partly-transparent-dark': 'rgba(0, 0, 0, 0.54)',
+        violet: '#222030',
+        'input-gray': '#CED4DA',
+        'txt-black': '#212529',
       },
     },
   },
