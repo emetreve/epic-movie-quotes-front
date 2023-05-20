@@ -175,10 +175,15 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
               )}
             </div>
           </div>
-          <button className='mt-7 text-white bg-red py-[0.6rem] lg:py-[0.6rem] w-full lg:text-xl rounded-md'>
+          <button
+            type='submit'
+            className='mt-7 text-white bg-red py-[0.6rem] lg:py-[0.6rem] w-full lg:text-xl rounded-md'
+          >
             Get started
           </button>
-          <button className='text-white mt-3 py-[0.5rem] lg:py-[0.7rem] w-full lg:px-8 rounded-md border lg:text-[1rem] border-white'>
+        </form>
+        <div className='w-full px-8'>
+          <button className='w-full text-white mt-3 py-[0.5rem] lg:py-[0.7rem] lg:px-8 rounded-md border lg:text-[1rem] border-white'>
             <Image
               src='/assets/google.png'
               alt='google logo'
@@ -188,7 +193,7 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
             />
             Sign up with Google
           </button>
-        </form>
+        </div>
         <div className='h-24 flex justify-center items-center'>
           <p className='inline text-xs text-gray-500'>
             Already have an account?
