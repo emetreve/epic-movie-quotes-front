@@ -25,12 +25,9 @@ const LogIn = () => {
 
   const applyInputStyle = (val: string): boolean => {
     const dirty = formState.dirtyFields[val as keyof FormData];
+    const errorMessage = errors[val as keyof FormData]?.message;
 
-    if (dirty && errors[val as keyof FormData]?.message) {
-      return true;
-    }
-    if (errors[val as keyof FormData]?.message) return true;
-    return false;
+    return (dirty && errorMessage) || errorMessage ? true : false;
   };
 
   const onSubmit = (data: FormData): void => {
