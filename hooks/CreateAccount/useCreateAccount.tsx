@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormData } from './types';
 
@@ -26,27 +26,13 @@ const useCreateAccount = () => {
     formState,
   } = methods;
 
-  useEffect(() => {
-    if (localStorage.getItem('name')) {
-      trigger('name');
-    }
-    if (localStorage.getItem('email')) {
-      trigger('email');
-    }
-  }, [trigger]);
-
   const password = watch('password');
 
   const applyInputStyle = (val: string): boolean => {
     const dirty = formState.dirtyFields[val as keyof FormData];
 
-    if (errors[val as keyof FormData]?.message) {
-      if (
-        dirty ||
-        (localStorage.getItem(val) && localStorage.getItem(val) !== '')
-      ) {
-        return true;
-      }
+    if (dirty && errors[val as keyof FormData]?.message) {
+      return true;
     }
     if (errors[val as keyof FormData]?.message) return true;
     return false;

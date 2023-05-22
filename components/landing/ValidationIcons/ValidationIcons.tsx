@@ -15,7 +15,7 @@ const ValidationIcons: React.FC<PropsType> = ({ name, password_related }) => {
           width={80}
           height={80}
           className={`absolute bottom-[0.6rem] w-5 h-5 hover:cursor-pointer ${
-            password_related ? ' right-10' : 'right-4'
+            password_related ? 'right-10' : 'right-4'
           }`}
         />
       ) : (
@@ -25,8 +25,8 @@ const ValidationIcons: React.FC<PropsType> = ({ name, password_related }) => {
             alt='valid input'
             width={80}
             height={80}
-            className={`absolute right-4 bottom-[0.7rem] w-4 h-4 hover:cursor-pointer ${
-              password_related ? ' right-10' : 'right-4'
+            className={`absolute bottom-[0.7rem] w-4 h-4 hover:cursor-pointer ${
+              password_related ? 'right-10' : 'right-4'
             }`}
           />
         )
