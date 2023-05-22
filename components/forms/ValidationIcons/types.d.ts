@@ -12,4 +12,5 @@ export type PropsType = {
     password: string;
     password_confirmation: string;
   }>;
+  password_related?: boolean;
 };
