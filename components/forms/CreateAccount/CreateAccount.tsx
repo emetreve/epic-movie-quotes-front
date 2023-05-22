@@ -1,7 +1,7 @@
 import { PropsType } from './types';
 import Image from 'next/image';
 import { useCreateAccount } from '@/hooks';
-import { Error } from '@/components';
+import { Error, ValidationIcons } from '@/components';
 
 const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
   const {
@@ -80,7 +80,7 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
                     : ''
                 } bg-input-gray border-2 text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded`}
               />
-              {errors?.name ? (
+              {/* {errors?.name ? (
                 <Image
                   src='/assets/invalid.png'
                   alt='valid input'
@@ -98,7 +98,12 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
                     className='absolute right-4 bottom-[0.8rem] w-4 h-4 hover:cursor-pointer'
                   />
                 )
-              )}
+              )} */}
+              <ValidationIcons
+                errors={errors}
+                name='name'
+                formState={formState}
+              />
             </div>
             <div className='h-4'>
               {errors?.name && <Error content={errors.name.message} />}
@@ -123,7 +128,11 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
               id='email'
               placeholder='Enter your email'
               className={`${
-                applyInputStyle('email') && 'border-red'
+                applyInputStyle('email')
+                  ? 'border-red'
+                  : formState.dirtyFields['name']
+                  ? 'border-green'
+                  : ''
               } bg-input-gray border text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded`}
             />
             <div className='h-4'>

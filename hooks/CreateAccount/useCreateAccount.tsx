@@ -46,6 +46,7 @@ const useCreateAccount = () => {
         return true;
       }
     }
+    if (errors[val as keyof FormData]?.message) return true;
     return false;
   };
 
