@@ -204,6 +204,12 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
                     : ''
                 } bg-input-gray border-2 text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded`}
               />
+              <ValidationIcons
+                errors={errors}
+                name='password_confirmation'
+                formState={formState}
+                password_related={true}
+              />
               <Image
                 onClick={() => {
                   setHidePasswordConfirm((prev) => !prev);

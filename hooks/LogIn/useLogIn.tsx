@@ -11,6 +11,7 @@ const LogIn = () => {
     formState: { errors },
     trigger,
     reset,
+    formState,
   } = useForm({
     defaultValues: {
       user: localStorage.getItem('user') || '',
@@ -29,6 +30,21 @@ const LogIn = () => {
     }
   }, [trigger]);
 
+  const applyInputStyle = (val: string): boolean => {
+    const dirty = formState.dirtyFields[val as keyof FormData];
+
+    if (errors[val as keyof FormData]?.message) {
+      if (
+        dirty ||
+        (localStorage.getItem(val) && localStorage.getItem(val) !== '')
+      ) {
+        return true;
+      }
+    }
+    if (errors[val as keyof FormData]?.message) return true;
+    return false;
+  };
+
   const onSubmit = (data: FormData): void => {
     console.log(data);
   };
@@ -42,6 +58,8 @@ const LogIn = () => {
     reset,
     hidePassword,
     setHidePassword,
+    applyInputStyle,
+    formState,
   };
 };
 export default LogIn;

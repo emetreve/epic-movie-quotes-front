@@ -1,7 +1,7 @@
 import { PropsType } from './types';
 import Image from 'next/image';
 import { useLogIn } from '@/hooks';
-import { Error } from '@/components';
+import { Error, ValidationIcons } from '@/components';
 
 const LogIn: React.FC<PropsType> = ({ show, swap }) => {
   const {
@@ -11,6 +11,8 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
     onSubmit,
     hidePassword,
     setHidePassword,
+    applyInputStyle,
+    formState,
   } = useLogIn();
 
   return (
@@ -43,21 +45,34 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
             <label htmlFor='user' className='mb-2'>
               User <span className='text-red'>*</span>
             </label>
-            <input
-              {...register('user', {
-                required: 'This field is required.',
-                minLength: {
-                  value: 3,
-                  message: 'This field must have at least 3 characters.',
-                },
-                onChange: (e) => {
-                  localStorage.setItem('user', e.target.value);
-                },
-              })}
-              id='user'
-              placeholder='Enter your username or email'
-              className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
-            />
+            <div className='relative'>
+              <input
+                {...register('user', {
+                  required: 'This field is required.',
+                  minLength: {
+                    value: 3,
+                    message: 'This field must have at least 3 characters.',
+                  },
+                  onChange: (e) => {
+                    localStorage.setItem('user', e.target.value);
+                  },
+                })}
+                id='user'
+                placeholder='Enter your username or email'
+                className={`${
+                  applyInputStyle('user')
+                    ? 'border-red'
+                    : formState.dirtyFields['user']
+                    ? 'border-green'
+                    : ''
+                } bg-input-gray border-2 text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded`}
+              />
+              <ValidationIcons
+                errors={errors}
+                name='user'
+                formState={formState}
+              />
+            </div>
             <div className='h-4'>
               {errors?.user && <Error content={errors.user.message} />}
             </div>
@@ -79,7 +94,19 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
                     : 'At least 8 & max.15 lower case characters'
                 }
                 type={hidePassword ? 'password' : 'text'}
-                className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
+                className={`${
+                  applyInputStyle('password')
+                    ? 'border-red'
+                    : formState.dirtyFields['password']
+                    ? 'border-green'
+                    : ''
+                } bg-input-gray border-2 text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded`}
+              />
+              <ValidationIcons
+                errors={errors}
+                name='password'
+                formState={formState}
+                password_related={true}
               />
               <Image
                 onClick={() => {
