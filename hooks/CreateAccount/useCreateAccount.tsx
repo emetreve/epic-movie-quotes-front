@@ -8,8 +8,8 @@ const useCreateAccount = () => {
 
   const methods = useForm({
     defaultValues: {
-      name: localStorage.getItem('name') || '',
-      email: localStorage.getItem('email') || '',
+      name: '',
+      email: '',
       password: '',
       password_confirmation: '',
     },

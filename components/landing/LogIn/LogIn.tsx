@@ -56,9 +56,6 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
                       value: 3,
                       message: 'This field must have at least 3 characters.',
                     },
-                    onChange: (e) => {
-                      localStorage.setItem('user', e.target.value);
-                    },
                   })}
                   id='user'
                   placeholder='Enter your username or email'
@@ -121,9 +118,6 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
                 <input
                   {...register('remember', {
                     required: false,
-                    onChange: (e) => {
-                      localStorage.setItem('remember', e.target.checked);
-                    },
                   })}
                   className='w-4 h-4 inline rounded border-none'
                   type='checkbox'
