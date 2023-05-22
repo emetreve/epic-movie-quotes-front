@@ -88,11 +88,7 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
                   required: 'This field is required.',
                 })}
                 id='password'
-                placeholder={
-                  window.matchMedia('(max-width: 800px)').matches
-                    ? 'Password'
-                    : 'At least 8 & max.15 lower case characters'
-                }
+                placeholder='Password'
                 type={hidePassword ? 'password' : 'text'}
                 className={`${
                   applyInputStyle('password')

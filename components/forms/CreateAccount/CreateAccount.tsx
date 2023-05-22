@@ -67,11 +67,7 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
                   },
                 })}
                 id='name'
-                placeholder={
-                  window.matchMedia('(max-width: 800px)').matches
-                    ? 'Enter your name'
-                    : 'At least 3 & max.15 lower case characters'
-                }
+                placeholder='Enter your name'
                 className={`${
                   applyInputStyle('name')
                     ? 'border-red'
