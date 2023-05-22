@@ -1,16 +1,8 @@
+import { FormErrors, CustomFormState } from '@/types/formTypes';
+
 export type PropsType = {
-  errors: FieldErrors<{
-    name: string;
-    email: string;
-    password: string;
-    password_confirmation: string;
-  }>;
+  errors: FormErrors;
   name: string;
-  formState: FormState<{
-    name: string;
-    email: string;
-    password: string;
-    password_confirmation: string;
-  }>;
+  formState: CustomFormState;
   password_related?: boolean;
 };
