@@ -25,7 +25,6 @@ const useCreateAccount = () => {
     watch,
     formState,
   } = methods;
-  console.log(methods);
 
   useEffect(() => {
     if (localStorage.getItem('name')) {
