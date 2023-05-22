@@ -14,6 +14,8 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
     setHidePassword,
     hidePasswordConfirm,
     setHidePasswordConfirm,
+    applyInputStyle,
+    formState,
   } = useCreateAccount();
 
   return (
@@ -44,33 +46,60 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
             <label htmlFor='name' className='mb-2'>
               Name <span className='text-red'>*</span>
             </label>
-            <input
-              {...register('name', {
-                required: 'This field is required.',
-                minLength: {
-                  value: 3,
-                  message: 'This field must have at least 3 characters.',
-                },
-                maxLength: {
-                  value: 15,
-                  message: "This field can't have more than 15 characters.",
-                },
-                pattern: {
-                  value: /^[a-z0-9]+$/,
-                  message: 'Only lowercase letters and numbers are allowed.',
-                },
-                onChange: (e) => {
-                  localStorage.setItem('name', e.target.value);
-                },
-              })}
-              id='name'
-              placeholder={
-                window.matchMedia('(max-width: 800px)').matches
-                  ? 'Enter your name'
-                  : 'At least 3 & max.15 lower case characters'
-              }
-              className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
-            />
+            <div className='relative'>
+              <input
+                {...register('name', {
+                  required: 'This field is required.',
+                  minLength: {
+                    value: 3,
+                    message: 'This field must have at least 3 characters.',
+                  },
+                  maxLength: {
+                    value: 15,
+                    message: "This field can't have more than 15 characters.",
+                  },
+                  pattern: {
+                    value: /^[a-z0-9]+$/,
+                    message: 'Only lowercase letters and numbers are allowed.',
+                  },
+                  onChange: (e) => {
+                    localStorage.setItem('name', e.target.value);
+                  },
+                })}
+                id='name'
+                placeholder={
+                  window.matchMedia('(max-width: 800px)').matches
+                    ? 'Enter your name'
+                    : 'At least 3 & max.15 lower case characters'
+                }
+                className={`${
+                  applyInputStyle('name')
+                    ? 'border-red'
+                    : formState.dirtyFields['name']
+                    ? 'border-green'
+                    : ''
+                } bg-input-gray border-2 text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded`}
+              />
+              {errors?.name ? (
+                <Image
+                  src='/assets/invalid.png'
+                  alt='valid input'
+                  width={80}
+                  height={80}
+                  className='absolute right-4 bottom-[0.6rem] w-5 h-5 hover:cursor-pointer'
+                />
+              ) : (
+                formState.dirtyFields['name'] && (
+                  <Image
+                    src='/assets/valid.png'
+                    alt='valid input'
+                    width={80}
+                    height={80}
+                    className='absolute right-4 bottom-[0.8rem] w-4 h-4 hover:cursor-pointer'
+                  />
+                )
+              )}
+            </div>
             <div className='h-4'>
               {errors?.name && <Error content={errors.name.message} />}
             </div>
@@ -93,7 +122,9 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
               })}
               id='email'
               placeholder='Enter your email'
-              className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
+              className={`${
+                applyInputStyle('email') && 'border-red'
+              } bg-input-gray border text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded`}
             />
             <div className='h-4'>
               {errors?.email && <Error content={errors.email.message} />}

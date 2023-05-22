@@ -13,6 +13,7 @@ const useCreateAccount = () => {
     trigger,
     reset,
     watch,
+    formState,
   } = useForm({
     defaultValues: {
       name: localStorage.getItem('name') || '',
@@ -34,6 +35,20 @@ const useCreateAccount = () => {
 
   const password = watch('password');
 
+  const applyInputStyle = (val: string): boolean => {
+    const dirty = formState.dirtyFields[val as keyof FormData];
+
+    if (errors[val as keyof FormData]?.message) {
+      if (
+        dirty ||
+        (localStorage.getItem(val) && localStorage.getItem(val) !== '')
+      ) {
+        return true;
+      }
+    }
+    return false;
+  };
+
   const onSubmit = (data: FormData): void => {
     console.log(data);
   };
@@ -50,6 +65,8 @@ const useCreateAccount = () => {
     setHidePassword,
     hidePasswordConfirm,
     setHidePasswordConfirm,
+    applyInputStyle,
+    formState,
   };
 };
 export default useCreateAccount;
