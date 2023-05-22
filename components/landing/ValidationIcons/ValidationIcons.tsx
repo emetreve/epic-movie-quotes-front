@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { PropsType } from './types';
+import { FormValues } from '@/types/formTypes';
 
 const ValidationIcons: React.FC<PropsType> = ({
   errors,
@@ -9,7 +10,7 @@ const ValidationIcons: React.FC<PropsType> = ({
 }) => {
   return (
     <>
-      {errors[name as keyof FormData]?.message ? (
+      {errors[name as keyof FormValues]?.message ? (
         <Image
           src='/assets/invalid.png'
           alt='valid input'
@@ -20,7 +21,7 @@ const ValidationIcons: React.FC<PropsType> = ({
           }`}
         />
       ) : (
-        formState.dirtyFields[name as keyof FormData] && (
+        formState.dirtyFields[name as keyof FormValues] && (
           <Image
             src='/assets/valid.png'
             alt='valid input'
