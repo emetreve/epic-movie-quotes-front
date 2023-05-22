@@ -5,13 +5,7 @@ import { FormData } from './types';
 const LogIn = () => {
   const [hidePassword, setHidePassword] = useState(true);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    trigger,
-    reset,
-  } = useForm({
+  const methods = useForm({
     defaultValues: {
       user: localStorage.getItem('user') || '',
       password: '',
@@ -19,6 +13,15 @@ const LogIn = () => {
     },
     mode: 'onChange',
   });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    trigger,
+    reset,
+    formState,
+  } = methods;
 
   useEffect(() => {
     if (localStorage.getItem('user')) {
@@ -28,6 +31,21 @@ const LogIn = () => {
       trigger('password');
     }
   }, [trigger]);
+
+  const applyInputStyle = (val: string): boolean => {
+    const dirty = formState.dirtyFields[val as keyof FormData];
+
+    if (errors[val as keyof FormData]?.message) {
+      if (
+        dirty ||
+        (localStorage.getItem(val) && localStorage.getItem(val) !== '')
+      ) {
+        return true;
+      }
+    }
+    if (errors[val as keyof FormData]?.message) return true;
+    return false;
+  };
 
   const onSubmit = (data: FormData): void => {
     console.log(data);
@@ -42,6 +60,9 @@ const LogIn = () => {
     reset,
     hidePassword,
     setHidePassword,
+    applyInputStyle,
+    formState,
+    methods,
   };
 };
 export default LogIn;
