@@ -80,25 +80,6 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
                     : ''
                 } bg-input-gray border-2 text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded`}
               />
-              {/* {errors?.name ? (
-                <Image
-                  src='/assets/invalid.png'
-                  alt='valid input'
-                  width={80}
-                  height={80}
-                  className='absolute right-4 bottom-[0.6rem] w-5 h-5 hover:cursor-pointer'
-                />
-              ) : (
-                formState.dirtyFields['name'] && (
-                  <Image
-                    src='/assets/valid.png'
-                    alt='valid input'
-                    width={80}
-                    height={80}
-                    className='absolute right-4 bottom-[0.8rem] w-4 h-4 hover:cursor-pointer'
-                  />
-                )
-              )} */}
               <ValidationIcons
                 errors={errors}
                 name='name'
@@ -114,27 +95,34 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
             <label htmlFor='email' className='mb-2'>
               Email <span className='text-red'>*</span>
             </label>
-            <input
-              {...register('email', {
-                required: 'This field is required.',
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Invalid email address.',
-                },
-                onChange: (e) => {
-                  localStorage.setItem('email', e.target.value);
-                },
-              })}
-              id='email'
-              placeholder='Enter your email'
-              className={`${
-                applyInputStyle('email')
-                  ? 'border-red'
-                  : formState.dirtyFields['name']
-                  ? 'border-green'
-                  : ''
-              } bg-input-gray border text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded`}
-            />
+            <div className='relative'>
+              <input
+                {...register('email', {
+                  required: 'This field is required.',
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: 'Invalid email address.',
+                  },
+                  onChange: (e) => {
+                    localStorage.setItem('email', e.target.value);
+                  },
+                })}
+                id='email'
+                placeholder='Enter your email'
+                className={`${
+                  applyInputStyle('email')
+                    ? 'border-red'
+                    : formState.dirtyFields['email']
+                    ? 'border-green'
+                    : ''
+                } bg-input-gray border text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded`}
+              />
+              <ValidationIcons
+                errors={errors}
+                name='email'
+                formState={formState}
+              />
+            </div>
             <div className='h-4'>
               {errors?.email && <Error content={errors.email.message} />}
             </div>
@@ -164,7 +152,13 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
                 type={hidePassword ? 'password' : 'text'}
                 id='password'
                 placeholder='Password'
-                className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
+                className={`${
+                  applyInputStyle('password')
+                    ? 'border-red'
+                    : formState.dirtyFields['password']
+                    ? 'border-green'
+                    : ''
+                } bg-input-gray border-2 text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded`}
               />
               <Image
                 onClick={() => {
@@ -196,7 +190,13 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
                 type={hidePasswordConfirm ? 'password' : 'text'}
                 id='password_confirmation'
                 placeholder='Password'
-                className='bg-input-gray text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded'
+                className={`${
+                  applyInputStyle('password_confirmation')
+                    ? 'border-red'
+                    : formState.dirtyFields['password_confirmation']
+                    ? 'border-green'
+                    : ''
+                } bg-input-gray border-2 text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded`}
               />
               <Image
                 onClick={() => {
