@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 const NotFound = () => {
   return (
@@ -23,9 +24,11 @@ const NotFound = () => {
       <p className='text-sm lg:text-2xl'>
         We can&apos;t see the page you are looking for
       </p>
-      <button className='mt-5 text-white bg-red py-[0.6rem] px-6 lg:px-0 lg:w-[10rem] lg:text-xl rounded-md lg:mt-12'>
-        Return home
-      </button>
+      <Link href='/' className='hover:cursor-pointer'>
+        <button className='mt-5 text-white bg-red py-[0.6rem] px-6 lg:px-0 lg:w-[10rem] lg:text-xl rounded-md lg:mt-12'>
+          Return home
+        </button>
+      </Link>
     </div>
   );
 };

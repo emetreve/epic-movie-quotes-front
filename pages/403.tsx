@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Forbidden = () => {
   return (
@@ -27,9 +28,11 @@ const Forbidden = () => {
           Sorry, but you don&apos;t have permission to access this page
         </p>
       </div>
-      <button className='mt-7 text-white bg-red py-[0.6rem] px-6 lg:px-0 lg:w-[10rem] lg:text-xl rounded-md lg:mt-12'>
-        Return home
-      </button>
+      <Link href='/' className='hover:cursor-pointer'>
+        <button className='mt-7 text-white bg-red py-[0.6rem] px-6 lg:px-0 lg:w-[10rem] lg:text-xl rounded-md lg:mt-12'>
+          Return home
+        </button>
+      </Link>
     </div>
   );
 };
