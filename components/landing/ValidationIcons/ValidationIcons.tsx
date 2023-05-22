@@ -1,16 +1,14 @@
+import { useFormContext } from 'react-hook-form';
 import Image from 'next/image';
 import { PropsType } from './types';
 import { FormValues } from '@/types/formTypes';
 
-const ValidationIcons: React.FC<PropsType> = ({
-  errors,
-  name,
-  formState,
-  password_related,
-}) => {
+const ValidationIcons: React.FC<PropsType> = ({ name, password_related }) => {
+  const { formState } = useFormContext();
+
   return (
     <>
-      {errors[name as keyof FormValues]?.message ? (
+      {formState.errors[name as keyof FormValues]?.message ? (
         <Image
           src='/assets/invalid.png'
           alt='valid input'

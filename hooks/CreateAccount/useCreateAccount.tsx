@@ -6,15 +6,7 @@ const useCreateAccount = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [hidePasswordConfirm, setHidePasswordConfirm] = useState(true);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    trigger,
-    reset,
-    watch,
-    formState,
-  } = useForm({
+  const methods = useForm({
     defaultValues: {
       name: localStorage.getItem('name') || '',
       email: localStorage.getItem('email') || '',
@@ -23,6 +15,17 @@ const useCreateAccount = () => {
     },
     mode: 'onChange',
   });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    trigger,
+    reset,
+    watch,
+    formState,
+  } = methods;
+  console.log(methods);
 
   useEffect(() => {
     if (localStorage.getItem('name')) {
@@ -68,6 +71,7 @@ const useCreateAccount = () => {
     setHidePasswordConfirm,
     applyInputStyle,
     formState,
+    methods,
   };
 };
 export default useCreateAccount;

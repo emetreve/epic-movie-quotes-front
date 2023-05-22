@@ -5,14 +5,7 @@ import { FormData } from './types';
 const LogIn = () => {
   const [hidePassword, setHidePassword] = useState(true);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    trigger,
-    reset,
-    formState,
-  } = useForm({
+  const methods = useForm({
     defaultValues: {
       user: localStorage.getItem('user') || '',
       password: '',
@@ -20,6 +13,15 @@ const LogIn = () => {
     },
     mode: 'onChange',
   });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    trigger,
+    reset,
+    formState,
+  } = methods;
 
   useEffect(() => {
     if (localStorage.getItem('user')) {
@@ -60,6 +62,7 @@ const LogIn = () => {
     setHidePassword,
     applyInputStyle,
     formState,
+    methods,
   };
 };
 export default LogIn;

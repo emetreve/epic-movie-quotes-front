@@ -1,3 +1,4 @@
+import { FormProvider } from 'react-hook-form';
 import { PropsType } from './types';
 import Image from 'next/image';
 import { useLogIn } from '@/hooks';
@@ -13,6 +14,7 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
     setHidePassword,
     applyInputStyle,
     formState,
+    methods,
   } = useLogIn();
 
   return (
@@ -36,120 +38,115 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
           </p>
         </div>
 
-        <form
-          noValidate
-          onSubmit={handleSubmit(onSubmit)}
-          className='w-full px-8 text-sm'
-        >
-          <div className='flex flex-col mt-1'>
-            <label htmlFor='user' className='mb-2'>
-              User <span className='text-red'>*</span>
-            </label>
-            <div className='relative'>
-              <input
-                {...register('user', {
-                  required: 'This field is required.',
-                  minLength: {
-                    value: 3,
-                    message: 'This field must have at least 3 characters.',
-                  },
-                  onChange: (e) => {
-                    localStorage.setItem('user', e.target.value);
-                  },
-                })}
-                id='user'
-                placeholder='Enter your username or email'
-                className={`${
-                  applyInputStyle('user')
-                    ? 'border-red'
-                    : formState.dirtyFields['user']
-                    ? 'border-green'
-                    : ''
-                } bg-input-gray border-2 text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded`}
-              />
-              <ValidationIcons
-                errors={errors}
-                name='user'
-                formState={formState}
-              />
-            </div>
-            <div className='h-4'>
-              {errors?.user && <Error content={errors.user.message} />}
-            </div>
-          </div>
-
-          <div className='flex flex-col mt-1'>
-            <label htmlFor='password' className='mb-2'>
-              Password <span className='text-red'>*</span>
-            </label>
-            <div className='relative'>
-              <input
-                {...register('password', {
-                  required: 'This field is required.',
-                })}
-                id='password'
-                placeholder='Password'
-                type={hidePassword ? 'password' : 'text'}
-                className={`${
-                  applyInputStyle('password')
-                    ? 'border-red'
-                    : formState.dirtyFields['password']
-                    ? 'border-green'
-                    : ''
-                } bg-input-gray border-2 text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded`}
-              />
-              <ValidationIcons
-                errors={errors}
-                name='password'
-                formState={formState}
-                password_related={true}
-              />
-              <Image
-                onClick={() => {
-                  setHidePassword((prev) => !prev);
-                }}
-                src='/assets/eye-password.png'
-                alt='show password'
-                width={200}
-                height={200}
-                className='absolute right-4 bottom-[0.7rem] w-4 h-4 hover:cursor-pointer'
-              />
-            </div>
-            <div className='h-4'>
-              {errors?.password && <Error content={errors.password.message} />}
-            </div>
-          </div>
-
-          <div className='flex mt-1'>
-            <div className='flex justify-center items-center'>
-              <input
-                {...register('remember', {
-                  required: false,
-                  onChange: (e) => {
-                    localStorage.setItem('remember', e.target.checked);
-                  },
-                })}
-                className='w-4 h-4 inline rounded border-none'
-                type='checkbox'
-                name='remember'
-                id='remember'
-              />
-              <label className='ml-2 pt-[0.1rem] relative' htmlFor='remember'>
-                Remember me
-              </label>
-            </div>
-            <div className='ml-auto underline text-blue-600 hover:cursor-pointer'>
-              <p>Forgot password</p>
-            </div>
-          </div>
-
-          <button
-            type='submit'
-            className='mt-5 text-white bg-red py-[0.6rem] lg:py-[0.6rem] w-full lg:text-xl rounded-md'
+        <FormProvider {...methods}>
+          <form
+            noValidate
+            onSubmit={handleSubmit(onSubmit)}
+            className='w-full px-8 text-sm'
           >
-            Sign in
-          </button>
-        </form>
+            <div className='flex flex-col mt-1'>
+              <label htmlFor='user' className='mb-2'>
+                User <span className='text-red'>*</span>
+              </label>
+              <div className='relative'>
+                <input
+                  {...register('user', {
+                    required: 'This field is required.',
+                    minLength: {
+                      value: 3,
+                      message: 'This field must have at least 3 characters.',
+                    },
+                    onChange: (e) => {
+                      localStorage.setItem('user', e.target.value);
+                    },
+                  })}
+                  id='user'
+                  placeholder='Enter your username or email'
+                  className={`${
+                    applyInputStyle('user')
+                      ? 'border-red'
+                      : formState.dirtyFields['user']
+                      ? 'border-green'
+                      : ''
+                  } bg-input-gray border-2 text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded`}
+                />
+                <ValidationIcons name='user' />
+              </div>
+              <div className='h-4'>
+                {errors?.user && <Error content={errors.user.message} />}
+              </div>
+            </div>
+
+            <div className='flex flex-col mt-1'>
+              <label htmlFor='password' className='mb-2'>
+                Password <span className='text-red'>*</span>
+              </label>
+              <div className='relative'>
+                <input
+                  {...register('password', {
+                    required: 'This field is required.',
+                  })}
+                  id='password'
+                  placeholder='Password'
+                  type={hidePassword ? 'password' : 'text'}
+                  className={`${
+                    applyInputStyle('password')
+                      ? 'border-red'
+                      : formState.dirtyFields['password']
+                      ? 'border-green'
+                      : ''
+                  } bg-input-gray border-2 text-txt-black py-[0.5rem] px-3 w-full placeholder-gray-500 rounded`}
+                />
+                <ValidationIcons name='password' password_related={true} />
+                <Image
+                  onClick={() => {
+                    setHidePassword((prev) => !prev);
+                  }}
+                  src='/assets/eye-password.png'
+                  alt='show password'
+                  width={200}
+                  height={200}
+                  className='absolute right-4 bottom-[0.7rem] w-4 h-4 hover:cursor-pointer'
+                />
+              </div>
+              <div className='h-4'>
+                {errors?.password && (
+                  <Error content={errors.password.message} />
+                )}
+              </div>
+            </div>
+
+            <div className='flex mt-1'>
+              <div className='flex justify-center items-center'>
+                <input
+                  {...register('remember', {
+                    required: false,
+                    onChange: (e) => {
+                      localStorage.setItem('remember', e.target.checked);
+                    },
+                  })}
+                  className='w-4 h-4 inline rounded border-none'
+                  type='checkbox'
+                  name='remember'
+                  id='remember'
+                />
+                <label className='ml-2 pt-[0.1rem] relative' htmlFor='remember'>
+                  Remember me
+                </label>
+              </div>
+              <div className='ml-auto underline text-blue-600 hover:cursor-pointer'>
+                <p>Forgot password</p>
+              </div>
+            </div>
+
+            <button
+              type='submit'
+              className='mt-5 text-white bg-red py-[0.6rem] lg:py-[0.6rem] w-full lg:text-xl rounded-md'
+            >
+              Sign in
+            </button>
+          </form>
+        </FormProvider>
         <div className='w-full px-8 text-sm'>
           <button className='text-white mt-3 py-[0.5rem] lg:py-[0.7rem] w-full lg:px-8 rounded-md border lg:text-[1rem] border-white'>
             <Image
