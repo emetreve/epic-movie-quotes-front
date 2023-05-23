@@ -10,30 +10,32 @@ const AuthContext = createContext<AuthContextType>({
 });
 
 export const ContextProvider: React.FC<PropsType> = ({ children }) => {
-  const [user, setterUser] = useState(null);
-  const [token, setterToken] = useState('');
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState('');
 
   useEffect(() => {
-    setterToken(localStorage.getItem('AUTH_TOKEN') || '');
+    setToken(localStorage.getItem('AUTH_TOKEN') || '');
   }, []);
 
-  const setToken = (token: string | null) => {
+  const updateToken = (token: string | null) => {
     if (token) {
-      setterToken(token);
+      setToken(token);
       localStorage.setItem('AUTH_TOKEN', token);
     } else {
       localStorage.removeItem('AUTH_TOKEN');
     }
   };
 
-  const setUser = (user: any) => {
+  const updateUser = (user: any) => {
     if (user) {
-      setterUser(user);
+      setUser(user);
     }
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, token, setToken }}>
+    <AuthContext.Provider
+      value={{ user, setUser: updateUser, token, setToken: updateToken }}
+    >
       {children}
     </AuthContext.Provider>
   );
