@@ -17,6 +17,7 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     const { response } = error;
+    console.log(response);
     if (response.status === 401) {
       localStorage.removeItem('AUTH_TOKEN');
     }

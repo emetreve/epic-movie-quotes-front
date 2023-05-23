@@ -39,7 +39,6 @@ const useCreateAccount = () => {
   };
 
   const onSubmit = (data: FormData): void => {
-    console.log(data);
     axiosInstance
       .post('/signup', data)
       .then(({ data }) => {
@@ -47,9 +46,8 @@ const useCreateAccount = () => {
         setUser(data.user);
       })
       .catch((error) => {
-        const response = error.response;
-        if (response && response.status === 422) {
-          console.log(response.data.errors);
+        if (error.response && error.response.status === 422) {
+          console.log(error.response.data.errors);
         }
       });
   };
