@@ -11,4 +11,17 @@ axiosInstance.interceptors.request.use((config) => {
   return config;
 });
 
+axiosInstance.interceptors.response.use(
+  (res) => {
+    return res;
+  },
+  (error) => {
+    const { response } = error;
+    if (response.status === 401) {
+      localStorage.removeItem('AUTH_TOKEN');
+    }
+    throw Error;
+  }
+);
+
 export default axiosInstance;
