@@ -12,10 +12,10 @@ axiosInstance.interceptors.request.use((config) => {
 });
 
 axiosInstance.interceptors.response.use(
-  (res) => {
+  async (res) => {
     return res;
   },
-  (error) => {
+  async (error) => {
     const { response } = error;
     console.log(response);
     if (response.status === 401) {

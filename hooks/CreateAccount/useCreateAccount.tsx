@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormData } from './types';
 import { axiosInstance } from '@/services';
 import { useAuthContext } from '@/store';
+import { useMutation } from 'react-query';
 
 const useCreateAccount = () => {
   const [hidePassword, setHidePassword] = useState(true);
@@ -38,18 +39,24 @@ const useCreateAccount = () => {
     return (dirty && errorMessage) || errorMessage ? true : false;
   };
 
-  const onSubmit = (data: FormData): void => {
-    axiosInstance
-      .post('/signup', data)
-      .then(({ data }) => {
-        setToken(data.token);
-        setUser(data.user);
-      })
-      .catch((error) => {
-        if (error.response && error.response.status === 422) {
-          console.log(error.response.data.errors);
-        }
-      });
+  const signUp = async (incomingData: any) => {
+    try {
+      const response = await axiosInstance.post('/signup', incomingData);
+      return response.data;
+    } catch (error) {
+      throw new Error('Failed to sign up');
+    }
+  };
+
+  const { mutate } = useMutation(signUp, {
+    onSuccess: (data) => {
+      setToken(data.token);
+      setUser(data.user);
+    },
+  });
+
+  const onSubmit = async (data: FormData) => {
+    mutate(data);
   };
 
   return {
