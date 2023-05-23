@@ -11,8 +11,6 @@ export const ContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [token, setterToken] = useState('');
 
-  console.log(process.env.NEXT_PUBLIC_API_BASE_URL);
-
   useEffect(() => {
     setterToken(localStorage.getItem('AUTH_TOKEN'));
   }, []);
