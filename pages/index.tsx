@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import {
   LandingHeader,
   Poster,
@@ -5,11 +7,23 @@ import {
   CreateAccount,
   LogIn,
 } from '@/components';
-
 import { useLanding } from '@/hooks';
+import { useAuthContext } from '@/store';
 
 const Landing: React.FC = () => {
   const { showCreateAccount, showLogIn, showCreate, showLog } = useLanding();
+  const { token } = useAuthContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (token) {
+      router.replace('/dashboard');
+    }
+  }, [token, router]);
+
+  if (token) {
+    return null;
+  }
 
   return (
     <>
