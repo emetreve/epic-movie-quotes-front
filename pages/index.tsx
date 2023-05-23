@@ -17,7 +17,7 @@ const Landing: React.FC = () => {
 
   useEffect(() => {
     if (token) {
-      router.replace('/dashboard');
+      router.replace('/admin');
     }
   }, [token, router]);
 
