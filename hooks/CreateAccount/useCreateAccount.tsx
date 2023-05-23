@@ -40,12 +40,8 @@ const useCreateAccount = () => {
   };
 
   const signUp = async (incomingData: any) => {
-    try {
-      const response = await axiosInstance.post('/signup', incomingData);
-      return response.data;
-    } catch (error) {
-      throw new Error('Failed to sign up');
-    }
+    const response = await axiosInstance.post('/signup', incomingData);
+    return response.data;
   };
 
   const { mutate } = useMutation(signUp, {
