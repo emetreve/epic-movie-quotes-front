@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormData } from './types';
+import { axiosInstance } from '@/services';
+import { useAuthContext } from '@/store';
 
 const useCreateAccount = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [hidePasswordConfirm, setHidePasswordConfirm] = useState(true);
+  const { setUser, setToken } = useAuthContext();
 
   const methods = useForm({
     defaultValues: {
@@ -37,6 +40,10 @@ const useCreateAccount = () => {
 
   const onSubmit = (data: FormData): void => {
     console.log(data);
+    axiosInstance.post('/signup', data).then(({ data }) => {
+      setToken(data.token);
+      setUser(data.user);
+    });
   };
 
   return {

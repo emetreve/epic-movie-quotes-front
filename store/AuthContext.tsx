@@ -1,26 +1,34 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import { PropsType } from './types';
+import { AuthContextType } from '@/types';
 
-const AuthContext = createContext({
+const AuthContext = createContext<AuthContextType>({
   user: null,
-  token: null,
+  token: '',
   setUser: () => {},
   setToken: () => {},
 });
 
-export const ContextProvider = ({ children }) => {
-  const [user, setUser] = useState({});
+export const ContextProvider: React.FC<PropsType> = ({ children }) => {
+  const [user, setterUser] = useState(null);
   const [token, setterToken] = useState('');
 
   useEffect(() => {
-    setterToken(localStorage.getItem('AUTH_TOKEN'));
+    setterToken(localStorage.getItem('AUTH_TOKEN') || '');
   }, []);
 
-  const setToken = (token) => {
-    setterToken(token);
+  const setToken = (token: string | null) => {
     if (token) {
+      setterToken(token);
       localStorage.setItem('AUTH_TOKEN', token);
     } else {
       localStorage.removeItem('AUTH_TOKEN');
+    }
+  };
+
+  const setUser = (user: any) => {
+    if (user) {
+      setterUser(user);
     }
   };
 
