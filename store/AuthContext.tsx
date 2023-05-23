@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { PropsType } from './types';
-import { AuthContextType } from '@/types';
+import { AuthContextType, User } from '@/types';
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
@@ -10,7 +10,7 @@ const AuthContext = createContext<AuthContextType>({
 });
 
 export const ContextProvider: React.FC<PropsType> = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState('');
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export const ContextProvider: React.FC<PropsType> = ({ children }) => {
     }
   };
 
-  const updateUser = (user: any) => {
+  const updateUser = (user: User | null) => {
     if (user) {
       setUser(user);
     }
