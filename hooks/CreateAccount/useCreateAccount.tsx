@@ -40,10 +40,18 @@ const useCreateAccount = () => {
 
   const onSubmit = (data: FormData): void => {
     console.log(data);
-    axiosInstance.post('/signup', data).then(({ data }) => {
-      setToken(data.token);
-      setUser(data.user);
-    });
+    axiosInstance
+      .post('/signup', data)
+      .then(({ data }) => {
+        setToken(data.token);
+        setUser(data.user);
+      })
+      .catch((error) => {
+        const response = error.response;
+        if (response && response.status === 422) {
+          console.log(response.data.errors);
+        }
+      });
   };
 
   return {
