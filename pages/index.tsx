@@ -8,11 +8,31 @@ import {
 } from '@/components';
 import { useLanding } from '@/hooks';
 import { useUiContext } from '@/store';
+import { axiosInstance } from '@/services';
+import { useRouter } from 'next/router';
 
 const Landing: React.FC = () => {
   const { showLogIn, showLog } = useLanding();
   const { showCheck, showCreate, showCheckEmail, showCreateAccount } =
     useUiContext();
+
+  const router = useRouter();
+  const { id, token, expires, signature } = router.query;
+
+  if (id && token && expires && signature) {
+    axiosInstance
+      .get(
+        `/email/verify/${id}/${token}?expires=${expires}&signature=${signature}`
+      )
+      .then((response) => {
+        if (response.status === 200) {
+          console.log('show modal');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   return (
     <>

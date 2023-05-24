@@ -48,7 +48,7 @@ const useCreateAccount = () => {
       }
     } catch (error) {
       console.log(error);
-      // TODO: show field errors to frontent under input.
+      // TODO: show field errors to frontent under relevant inputs.
     }
   };
 
