@@ -5,12 +5,14 @@ import {
   CreateAccount,
   LogIn,
   VerifyEmail,
+  VerifiedEmail,
 } from '@/components';
 import { useLanding } from '@/hooks';
 import { useUiContext } from '@/store';
 
 const Landing: React.FC = () => {
-  const { showLogIn, showLog } = useLanding();
+  const { showLogIn, showLog } = useUiContext();
+  const { verifyEmail } = useLanding();
   const {
     showCheck,
     showCreate,
@@ -18,6 +20,8 @@ const Landing: React.FC = () => {
     showCreateAccount,
     showVerifiedEmail,
   } = useUiContext();
+
+  verifyEmail();
 
   return (
     <>
@@ -29,7 +33,7 @@ const Landing: React.FC = () => {
         <VerifyEmail show={showCheck} showCreateAccount={showCreate} />
       )}
 
-      {showVerifiedEmail && <h1>YESSSS</h1>}
+      {showVerifiedEmail && <VerifiedEmail />}
 
       <div className='bg-background h-[40rem] pt-6 lg:h-[52rem]'>
         <LandingHeader showCreateAccount={showCreate} showLogIn={showLog} />

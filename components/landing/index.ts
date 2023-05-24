@@ -6,3 +6,4 @@ export * from './CreateAccount';
 export * from './Error';
 export * from './LogIn';
 export * from './VerifyEmail';
+export * from './VerifiedEmail';
