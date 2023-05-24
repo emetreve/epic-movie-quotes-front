@@ -5,3 +5,4 @@ export * from './ValidationIcons';
 export * from './CreateAccount';
 export * from './Error';
 export * from './LogIn';
+export * from './VerifyEmail';

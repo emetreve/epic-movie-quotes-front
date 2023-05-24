@@ -12,6 +12,8 @@ module.exports = {
           'linear-gradient(187.16deg, #181623 0.07%, #191725 51.65%, #0D0B14 98.75%)',
         'gradient-plain-violet': 'linear-gradient(to right, #222030, #222030)',
         background: 'linear-gradient(180deg, #11101A 0%, #08080D 100%)',
+        'gradient-gray':
+          'linear-gradient(-67.06deg, rgba(239, 239, 239, 0.1) -1.81%, rgba(239, 239, 239, 0.00514528) 102.5%, rgba(1, 1, 1, 0.00260417) 102.51%, rgba(239, 239, 239, 0.03) 102.52%)',
       },
 
       fontFamily: {

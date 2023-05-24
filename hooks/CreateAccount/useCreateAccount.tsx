@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormData } from './types';
 import { axiosInstance } from '@/services';
-import { useAuthContext } from '@/store';
 import { useMutation } from 'react-query';
+import { useUiContext } from '@/store';
 
 const useCreateAccount = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [hidePasswordConfirm, setHidePasswordConfirm] = useState(true);
-  const { setUser, setToken } = useAuthContext();
+  const { showCheck } = useUiContext();
 
   const methods = useForm({
     defaultValues: {
@@ -41,13 +41,12 @@ const useCreateAccount = () => {
 
   const signUp = async (incomingData: any) => {
     const response = await axiosInstance.post('/signup', incomingData);
-    return response.data;
+    return response;
   };
 
   const { mutate } = useMutation(signUp, {
-    onSuccess: (data) => {
-      setToken(data.token);
-      setUser(data.user);
+    onSuccess: () => {
+      showCheck(true);
     },
   });
 

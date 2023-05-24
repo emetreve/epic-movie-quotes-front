@@ -5,23 +5,16 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use((config) => {
-  const token = localStorage.getItem('AUTH_TOKEN');
-  config.headers.Authorization = `Bearer ${token}`;
-
   return config;
 });
 
 axiosInstance.interceptors.response.use(
   async (res) => {
+    console.log(res);
     return res;
   },
   async (error) => {
-    const { response } = error;
-    console.log(response);
-    if (response.status === 401) {
-      localStorage.removeItem('AUTH_TOKEN');
-    }
-    throw Error;
+    console.log('error', error);
   }
 );
 

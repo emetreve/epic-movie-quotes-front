@@ -1,35 +1,27 @@
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import {
   LandingHeader,
   Poster,
   Footer,
   CreateAccount,
   LogIn,
+  VerifyEmail,
 } from '@/components';
 import { useLanding } from '@/hooks';
-import { useAuthContext } from '@/store';
+import { useUiContext } from '@/store';
 
 const Landing: React.FC = () => {
   const { showCreateAccount, showLogIn, showCreate, showLog } = useLanding();
-  const { token } = useAuthContext();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (token) {
-      router.replace('/admin');
-    }
-  }, [token, router]);
-
-  if (token) {
-    return null;
-  }
+  const { showCheck, showCheckEmail } = useUiContext();
 
   return (
     <>
       {showCreateAccount && <CreateAccount show={showCreate} swap={showLog} />}
 
       {showLogIn && <LogIn show={showLog} swap={showCreate} />}
+
+      {showCheckEmail && (
+        <VerifyEmail show={showCheck} showCreateAccount={showCreate} />
+      )}
 
       <div className='bg-background h-[40rem] pt-6 lg:h-[52rem]'>
         <LandingHeader showCreateAccount={showCreate} showLogIn={showLog} />

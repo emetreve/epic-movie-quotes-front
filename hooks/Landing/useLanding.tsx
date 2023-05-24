@@ -17,6 +17,12 @@ const useLanding = () => {
       ? document.body.classList.add('hide-scrollbar')
       : document.body.classList.remove('hide-scrollbar');
   };
-  return { showCreateAccount, showLogIn, showCreate, showLog };
+
+  return {
+    showCreateAccount,
+    showLogIn,
+    showCreate,
+    showLog,
+  };
 };
 export default useLanding;
