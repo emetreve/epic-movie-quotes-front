@@ -10,8 +10,9 @@ import { useLanding } from '@/hooks';
 import { useUiContext } from '@/store';
 
 const Landing: React.FC = () => {
-  const { showCreateAccount, showLogIn, showCreate, showLog } = useLanding();
-  const { showCheck, showCheckEmail } = useUiContext();
+  const { showLogIn, showLog } = useLanding();
+  const { showCheck, showCreate, showCheckEmail, showCreateAccount } =
+    useUiContext();
 
   return (
     <>

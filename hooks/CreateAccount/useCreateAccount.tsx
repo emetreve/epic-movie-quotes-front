@@ -8,7 +8,7 @@ import { useUiContext } from '@/store';
 const useCreateAccount = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [hidePasswordConfirm, setHidePasswordConfirm] = useState(true);
-  const { showCheck } = useUiContext();
+  const { showCheck, showCreate } = useUiContext();
 
   const methods = useForm({
     defaultValues: {
@@ -46,6 +46,7 @@ const useCreateAccount = () => {
 
   const { mutate } = useMutation(signUp, {
     onSuccess: () => {
+      showCreate(false);
       showCheck(true);
     },
   });
