@@ -40,16 +40,19 @@ const useCreateAccount = () => {
   };
 
   const signUp = async (incomingData: any) => {
-    const response = await axiosInstance.post('/signup', incomingData);
-    return response;
+    try {
+      const response = await axiosInstance.post('/signup', incomingData);
+      if (response.status === 200) {
+        showCreate(false);
+        showCheck(true);
+      }
+    } catch (error) {
+      console.log(error);
+      // TODO: show field errors to frontent under input.
+    }
   };
 
-  const { mutate } = useMutation(signUp, {
-    onSuccess: () => {
-      showCreate(false);
-      showCheck(true);
-    },
-  });
+  const { mutate } = useMutation(signUp);
 
   const onSubmit = async (data: FormData) => {
     mutate(data);
