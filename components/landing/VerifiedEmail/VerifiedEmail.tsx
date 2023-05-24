@@ -14,7 +14,7 @@ const VerifiedEmail: React.FC = () => {
     setTimeout(() => {
       showVerified(false);
       showLog(true);
-    }, 2000);
+    }, 1000);
   };
 
   return (
