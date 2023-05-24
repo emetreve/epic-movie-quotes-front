@@ -39,7 +39,7 @@ const useCreateAccount = () => {
     return (dirty && errorMessage) || errorMessage ? true : false;
   };
 
-  const signUp = async (incomingData: any) => {
+  const signUp = async (incomingData: FormData) => {
     try {
       const response = await axiosInstance.post('/signup', incomingData);
       if (response.status === 200) {
