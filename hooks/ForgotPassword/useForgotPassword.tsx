@@ -5,7 +5,7 @@ import { useUiContext } from '@/store';
 import { forgotPassword } from '@/services';
 
 const useForgotPassword = () => {
-  const { showLog, showForgot } = useUiContext();
+  const { showLog, showForgot, showCheckEmailPassword } = useUiContext();
 
   const methods = useForm({
     defaultValues: {
@@ -32,8 +32,9 @@ const useForgotPassword = () => {
 
   const handleForgotPassword = async (incomingData: ForgotPasswordFormData) => {
     try {
-      const response = await forgotPassword(incomingData);
-      console.log(response);
+      await forgotPassword(incomingData);
+      showForgot(false);
+      showCheckEmailPassword(true);
     } catch (error) {
       console.log(error);
       // TODO: Show error under email input
