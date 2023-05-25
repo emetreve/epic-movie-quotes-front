@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useForgotPassword } from '@/hooks';
 import { Error, ValidationIcons } from '@/components';
 
-const ForgotPassword = () => {
+const ForgotPassword: React.FC = () => {
   const {
     register,
     errors,
@@ -12,11 +12,22 @@ const ForgotPassword = () => {
     applyInputStyle,
     formState,
     methods,
+    handleClick,
+    showForgot,
   } = useForgotPassword();
+
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
-      <div className='bg-gradient-violet lg:bg-gradient-plain-violet h-full w-full lg:h-[40rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative lg:scale-105'>
-        <div className='flex flex-col items-center justify-center h-32 mt-24 text-center'>
+      <div className='bg-gradient-violet lg:bg-gradient-plain-violet h-full w-full lg:h-[29rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative lg:scale-105'>
+        <Image
+          onClick={() => showForgot(false)}
+          src='/assets/close-btn.png'
+          alt='close button'
+          width={200}
+          height={200}
+          className='h-5 w-5 lg:h-7 lg:w-7 right-0 absolute mt-7 mr-8 opacity-50 hover:cursor-pointer'
+        />
+        <div className='flex flex-col items-center justify-center h-32 mt-24 lg:mt-[4.5rem] text-center'>
           <h1 className='text-3xl pt-2 lg:text-[2.1rem] lg:mb-1'>
             Forgot Password?
           </h1>
@@ -71,14 +82,16 @@ const ForgotPassword = () => {
           </form>
         </FormProvider>
 
-        <div className='w-full flex flex-row items-center justify-center mt-8'>
+        <div
+          onClick={handleClick}
+          className='w-full flex flex-row items-center justify-center mt-8 hover:cursor-pointer'
+        >
           <Image
-            //   onClick={() => show(false)}
             src='/assets/back.png'
             alt='back button'
             width={200}
             height={200}
-            className='h-auto w-3 lg:h-5 lg:w-5 hover:cursor-pointer'
+            className='h-auto w-3 lg:h-[0.76rem] lg:w-auto hover:cursor-pointer'
           />
           <p className='text-xs ml-2 text-gray-500'>Back to login</p>
         </div>

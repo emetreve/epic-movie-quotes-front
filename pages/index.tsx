@@ -20,6 +20,7 @@ const Landing: React.FC = () => {
     showCheckEmail,
     showCreateAccount,
     showVerifiedEmail,
+    showForgotPassword,
   } = useUiContext();
 
   verifyEmail();
@@ -36,7 +37,7 @@ const Landing: React.FC = () => {
 
       {showVerifiedEmail && <VerifiedEmail />}
 
-      {<ForgotPassword />}
+      {showForgotPassword && <ForgotPassword />}
 
       <div className='bg-background h-[40rem] pt-6 lg:h-[52rem]'>
         <LandingHeader showCreateAccount={showCreate} showLogIn={showLog} />

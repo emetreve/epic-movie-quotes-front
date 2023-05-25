@@ -10,6 +10,8 @@ const UiContext = createContext({
   showVerifiedEmail: false,
   showLog: (show: boolean) => {},
   showLogIn: false,
+  showForgot: (show: boolean) => {},
+  showForgotPassword: false,
 });
 
 export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
@@ -17,6 +19,7 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
   const [showLogIn, setShowLogIg] = useState(false);
   const [showCheckEmail, setShowCheckEmail] = useState(false);
   const [showVerifiedEmail, setShowVerifiedEmail] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
 
   const showCreate = (show: boolean) => {
     setShowCreateAccount(show);
@@ -46,6 +49,13 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
       : document.body.classList.remove('hide-scrollbar');
   };
 
+  const showForgot = (show: boolean) => {
+    setShowForgotPassword(show);
+    show
+      ? document.body.classList.add('hide-scrollbar')
+      : document.body.classList.remove('hide-scrollbar');
+  };
+
   return (
     <UiContext.Provider
       value={{
@@ -53,10 +63,12 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
         showCreate,
         showLog,
         showVerified,
+        showForgotPassword,
         showCheckEmail,
         showCreateAccount,
         showVerifiedEmail,
         showLogIn,
+        showForgot,
       }}
     >
       {children}

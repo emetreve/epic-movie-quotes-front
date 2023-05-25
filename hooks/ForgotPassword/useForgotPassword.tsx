@@ -1,7 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { FormData } from './types';
+import { useUiContext } from '@/store';
 
 const useForgotPassword = () => {
+  const { showLog, showForgot } = useUiContext();
+
   const methods = useForm({
     defaultValues: {
       email: '',
@@ -29,6 +32,11 @@ const useForgotPassword = () => {
     console.log(data);
   };
 
+  const handleClick = () => {
+    showForgot(false);
+    showLog(true);
+  };
+
   return {
     handleSubmit,
     register,
@@ -39,6 +47,8 @@ const useForgotPassword = () => {
     applyInputStyle,
     formState,
     methods,
+    handleClick,
+    showForgot,
   };
 };
 export default useForgotPassword;
