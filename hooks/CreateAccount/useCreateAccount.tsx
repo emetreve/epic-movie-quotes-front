@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormData } from './types';
-import { axiosInstance } from '@/services';
 import { useMutation } from 'react-query';
 import { useUiContext } from '@/store';
+import { signUp } from '@/services';
 
 const useCreateAccount = () => {
   const [hidePassword, setHidePassword] = useState(true);
@@ -39,20 +39,18 @@ const useCreateAccount = () => {
     return (dirty && errorMessage) || errorMessage ? true : false;
   };
 
-  const signUp = async (incomingData: FormData) => {
-    try {
-      const response = await axiosInstance.post('/signup', incomingData);
-      if (response.status === 200) {
-        showCreate(false);
-        showCheck(true);
-      }
-    } catch (error) {
-      console.log(error);
+  const handleSignUp = async (incomingData: FormData) => {
+    const response = await signUp(incomingData);
+    if (response === 200) {
+      showCreate(false);
+      showCheck(true);
+    } else {
+      console.log(response);
       // TODO: show field errors to frontent under relevant inputs.
     }
   };
 
-  const { mutate } = useMutation(signUp);
+  const { mutate } = useMutation(handleSignUp);
 
   const onSubmit = async (data: FormData) => {
     mutate(data);
