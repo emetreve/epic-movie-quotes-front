@@ -51,9 +51,9 @@ const ForgotPassword: React.FC = () => {
                 <input
                   {...register('email', {
                     required: 'This field is required.',
-                    minLength: {
-                      value: 3,
-                      message: 'This field must have at least 3 characters.',
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: 'Invalid email address.',
                     },
                   })}
                   id='user'
