@@ -8,6 +8,7 @@ import {
   VerifiedEmail,
   ForgotPassword,
   CheckYourEmailPassword,
+  CreateNewPassword,
 } from '@/components';
 import { useLanding } from '@/hooks';
 import { useUiContext } from '@/store';
@@ -23,6 +24,7 @@ const Landing: React.FC = () => {
     showVerifiedEmail,
     showForgotPassword,
     showCheckYourEmailPassword,
+    showCreateNewPassword,
   } = useUiContext();
 
   showNotice();
@@ -42,6 +44,8 @@ const Landing: React.FC = () => {
       {showForgotPassword && <ForgotPassword />}
 
       {showCheckYourEmailPassword && <CheckYourEmailPassword />}
+
+      {showCreateNewPassword && <CreateNewPassword />}
 
       <div className='bg-background h-[40rem] pt-6 lg:h-[52rem]'>
         <LandingHeader showCreateAccount={showCreate} showLogIn={showLog} />
