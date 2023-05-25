@@ -34,7 +34,10 @@ const CheckYourEmailPassword = () => {
           >
             Back to homepage
           </button>
-          <p className='text-xs ml-2 text-gray-600 nlock pt-4 lg:text-sm'>
+          <p
+            onClick={handleClose}
+            className='text-xs ml-2 text-gray-600 nlock pt-4 lg:text-sm hover:cursor-pointer'
+          >
             Skip, I&apos;ll confirm later
           </p>
         </div>
