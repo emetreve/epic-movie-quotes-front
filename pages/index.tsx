@@ -14,7 +14,7 @@ import { useUiContext } from '@/store';
 
 const Landing: React.FC = () => {
   const { showLogIn, showLog } = useUiContext();
-  const { verifyEmail, checkEmailPassword } = useLanding();
+  const { showNotice } = useLanding();
   const {
     showCheck,
     showCreate,
@@ -25,9 +25,7 @@ const Landing: React.FC = () => {
     showCheckYourEmailPassword,
   } = useUiContext();
 
-  verifyEmail();
-
-  checkEmailPassword();
+  showNotice();
 
   return (
     <>

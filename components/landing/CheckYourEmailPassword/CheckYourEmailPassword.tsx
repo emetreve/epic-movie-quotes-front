@@ -34,7 +34,7 @@ const CheckYourEmailPassword = () => {
             onClick={() => {
               showCheckEmailPassword(false);
             }}
-            className='mt-10 text-white bg-red py-2 lg:py-3 lg:text-xl px-6 lg:px-24 rounded-md'
+            className='mt-10 text-white bg-red py-2 lg:py-3 lg:text-xl px-10 lg:px-24 rounded-md'
           >
             Back to homepage
           </button>

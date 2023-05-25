@@ -8,7 +8,7 @@ const useLanding = () => {
 
   const { showVerified, showCheckEmailPassword } = useUiContext();
 
-  const verifyEmail = async () => {
+  const showNotice = async () => {
     if (id && token && expires && signature) {
       const path = `/email/verify/${id}/${token}?expires=${expires}&signature=${signature}`;
 
@@ -18,18 +18,15 @@ const useLanding = () => {
       } catch (error) {
         console.log(error);
       }
-    }
-  };
-
-  const checkEmailPassword = () => {
-    if (token && email) {
-      showCheckEmailPassword(true);
+    } else if (token && email) {
+      setTimeout(() => {
+        showCheckEmailPassword(true);
+      }, 500);
     }
   };
 
   return {
-    verifyEmail,
-    checkEmailPassword,
+    showNotice,
   };
 };
 export default useLanding;
