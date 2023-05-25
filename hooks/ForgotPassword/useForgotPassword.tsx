@@ -1,6 +1,8 @@
 import { useForm } from 'react-hook-form';
-import { FormData } from './types';
+import { useMutation } from 'react-query';
+import { ForgotPasswordFormData } from '@/types';
 import { useUiContext } from '@/store';
+import { forgotPassword } from '@/services';
 
 const useForgotPassword = () => {
   const { showLog, showForgot } = useUiContext();
@@ -28,8 +30,20 @@ const useForgotPassword = () => {
     return (dirty && errorMessage) || errorMessage ? true : false;
   };
 
-  const onSubmit = (data: FormData): void => {
-    console.log(data);
+  const handleForgotPassword = async (incomingData: ForgotPasswordFormData) => {
+    try {
+      const response = await forgotPassword(incomingData);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+      // TODO: Show error under email input
+    }
+  };
+
+  const { mutate } = useMutation(handleForgotPassword);
+
+  const onSubmit = async (data: ForgotPasswordFormData) => {
+    mutate(data);
   };
 
   const handleClick = () => {

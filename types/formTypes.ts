@@ -11,3 +11,7 @@ export type FormData = {
   password: string;
   password_confirmation: string;
 };
+
+export type ForgotPasswordFormData = {
+  email: string;
+};
