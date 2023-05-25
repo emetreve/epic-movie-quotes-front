@@ -4,9 +4,9 @@ import { verifyEmail as verify } from '@/services';
 
 const useLanding = () => {
   const router = useRouter();
-  const { id, token, expires, signature, email } = router.query;
+  const { id, token, expires, signature } = router.query;
 
-  const { showVerified, showCheckEmailPassword } = useUiContext();
+  const { showVerified } = useUiContext();
 
   const showNotice = async () => {
     if (id && token && expires && signature) {
@@ -18,10 +18,6 @@ const useLanding = () => {
       } catch (error) {
         console.log(error);
       }
-    } else if (token && email) {
-      setTimeout(() => {
-        showCheckEmailPassword(true);
-      }, 500);
     }
   };
 
