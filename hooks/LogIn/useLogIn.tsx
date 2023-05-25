@@ -37,7 +37,6 @@ const LogIn = () => {
   };
 
   const handleForgot = () => {
-    console.log('clicked');
     showLog(false);
     showForgot(true);
   };
