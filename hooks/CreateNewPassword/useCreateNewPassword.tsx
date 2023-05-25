@@ -9,7 +9,7 @@ import { resetPassword } from '@/services';
 const useCreateNewPassword = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [hidePasswordConfirm, setHidePasswordConfirm] = useState(true);
-  const { showSetNewPassword, showLog } = useUiContext();
+  const { showSetNewPassword, showLog, showPasswordSuccess } = useUiContext();
   const router = useRouter();
 
   const methods = useForm({
@@ -48,8 +48,14 @@ const useCreateNewPassword = () => {
     };
 
     try {
-      const response = await resetPassword(fullData);
-      console.log(response);
+      await resetPassword(fullData);
+      router.push({
+        pathname: router.pathname,
+        query: {},
+      });
+      setTimeout(() => {
+        showPasswordSuccess(true);
+      }, 500);
     } catch (error) {
       console.log(error);
       // TODO: Show field errors to frontend under relevant inputs.

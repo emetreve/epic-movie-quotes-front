@@ -27,6 +27,7 @@ const Landing: React.FC = () => {
     showForgotPassword,
     showCheckYourEmailPassword,
     showCreateNewPassword,
+    showPasswordChangeSuccess,
   } = useUiContext();
 
   showNotice();
@@ -49,7 +50,7 @@ const Landing: React.FC = () => {
 
       {showCreateNewPassword && <CreateNewPassword />}
 
-      {<PasswordChangeSuccess />}
+      {showPasswordChangeSuccess && <PasswordChangeSuccess />}
 
       <div className='bg-background h-[40rem] pt-6 lg:h-[52rem]'>
         <LandingHeader showCreateAccount={showCreate} showLogIn={showLog} />

@@ -1,14 +1,14 @@
 import Image from 'next/image';
-// import { useVerifiedEmail } from '@/hooks';
+import { usePasswordChangeSuccess } from '@/hooks';
 
 const PasswordChangeSuccess: React.FC = () => {
-  //   const { handleClick, handleClose } = useVerifiedEmail();
+  const { handleClick, handleClose } = usePasswordChangeSuccess();
 
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
       <div className='bg-gradient-violet lg:bg-gradient-plain-violet h-full w-full lg:h-[26rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative lg:scale-105'>
         <Image
-          //   onClick={handleClose}
+          onClick={handleClose}
           src='/assets/close-btn.png'
           alt='close button'
           width={200}
@@ -28,7 +28,7 @@ const PasswordChangeSuccess: React.FC = () => {
             Your Password changed successfully
           </p>
           <button
-            // onClick={handleClick}
+            onClick={handleClick}
             className='mt-10 text-white bg-red py-2 lg:py-3 lg:text-xl px-24 lg:px-32 rounded-md'
           >
             Log in
