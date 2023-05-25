@@ -66,9 +66,6 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
                       message:
                         'Only lowercase letters and numbers are allowed.',
                     },
-                    onChange: (e) => {
-                      localStorage.setItem('name', e.target.value);
-                    },
                   })}
                   id='name'
                   placeholder='Enter your name'
@@ -98,9 +95,6 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                       message: 'Invalid email address.',
-                    },
-                    onChange: (e) => {
-                      localStorage.setItem('email', e.target.value);
                     },
                   })}
                   id='email'

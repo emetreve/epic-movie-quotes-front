@@ -1,15 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormData } from './types';
+import { useMutation } from 'react-query';
+import { useUiContext } from '@/store';
+import { signUp } from '@/services';
 
 const useCreateAccount = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [hidePasswordConfirm, setHidePasswordConfirm] = useState(true);
+  const { showCheck, showCreate } = useUiContext();
 
   const methods = useForm({
     defaultValues: {
-      name: localStorage.getItem('name') || '',
-      email: localStorage.getItem('email') || '',
+      name: '',
+      email: '',
       password: '',
       password_confirmation: '',
     },
@@ -26,34 +30,30 @@ const useCreateAccount = () => {
     formState,
   } = methods;
 
-  useEffect(() => {
-    if (localStorage.getItem('name')) {
-      trigger('name');
-    }
-    if (localStorage.getItem('email')) {
-      trigger('email');
-    }
-  }, [trigger]);
-
   const password = watch('password');
 
   const applyInputStyle = (val: string): boolean => {
     const dirty = formState.dirtyFields[val as keyof FormData];
+    const errorMessage = errors[val as keyof FormData]?.message;
 
-    if (errors[val as keyof FormData]?.message) {
-      if (
-        dirty ||
-        (localStorage.getItem(val) && localStorage.getItem(val) !== '')
-      ) {
-        return true;
-      }
-    }
-    if (errors[val as keyof FormData]?.message) return true;
-    return false;
+    return (dirty && errorMessage) || errorMessage ? true : false;
   };
 
-  const onSubmit = (data: FormData): void => {
-    console.log(data);
+  const handleSignUp = async (incomingData: FormData) => {
+    try {
+      await signUp(incomingData);
+      showCreate(false);
+      showCheck(true);
+    } catch (error) {
+      console.log(error);
+      // TODO: Show field errors to frontend under relevant inputs.
+    }
+  };
+
+  const { mutate } = useMutation(handleSignUp);
+
+  const onSubmit = async (data: FormData) => {
+    mutate(data);
   };
 
   return {

@@ -1,22 +1,28 @@
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useUiContext } from '@/store';
+import { verifyEmail as verify } from '@/services';
 
 const useLanding = () => {
-  const [showCreateAccount, setShowCreateAccount] = useState(false);
-  const [showLogIn, setShowLogIg] = useState(false);
+  const router = useRouter();
+  const { id, token, expires, signature } = router.query;
 
-  const showCreate = (show: boolean) => {
-    setShowCreateAccount(show);
-    show
-      ? document.body.classList.add('hide-scrollbar')
-      : document.body.classList.remove('hide-scrollbar');
+  const { showVerified } = useUiContext();
+
+  const verifyEmail = async () => {
+    if (id && token && expires && signature) {
+      const path = `/email/verify/${id}/${token}?expires=${expires}&signature=${signature}`;
+
+      try {
+        await verify(path);
+        showVerified(true);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
-  const showLog = (show: boolean) => {
-    setShowLogIg(show);
-    show
-      ? document.body.classList.add('hide-scrollbar')
-      : document.body.classList.remove('hide-scrollbar');
+  return {
+    verifyEmail,
   };
-  return { showCreateAccount, showLogIn, showCreate, showLog };
 };
 export default useLanding;

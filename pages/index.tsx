@@ -4,18 +4,36 @@ import {
   Footer,
   CreateAccount,
   LogIn,
+  VerifyEmail,
+  VerifiedEmail,
 } from '@/components';
-
 import { useLanding } from '@/hooks';
+import { useUiContext } from '@/store';
 
 const Landing: React.FC = () => {
-  const { showCreateAccount, showLogIn, showCreate, showLog } = useLanding();
+  const { showLogIn, showLog } = useUiContext();
+  const { verifyEmail } = useLanding();
+  const {
+    showCheck,
+    showCreate,
+    showCheckEmail,
+    showCreateAccount,
+    showVerifiedEmail,
+  } = useUiContext();
+
+  verifyEmail();
 
   return (
     <>
       {showCreateAccount && <CreateAccount show={showCreate} swap={showLog} />}
 
       {showLogIn && <LogIn show={showLog} swap={showCreate} />}
+
+      {showCheckEmail && (
+        <VerifyEmail show={showCheck} showCreateAccount={showCreate} />
+      )}
+
+      {showVerifiedEmail && <VerifiedEmail />}
 
       <div className='bg-background h-[40rem] pt-6 lg:h-[52rem]'>
         <LandingHeader showCreateAccount={showCreate} showLogIn={showLog} />
