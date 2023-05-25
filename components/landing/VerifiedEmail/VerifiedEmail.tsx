@@ -1,21 +1,8 @@
 import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { useUiContext } from '@/store';
+import { useVerifiedEmail } from '@/hooks';
 
 const VerifiedEmail: React.FC = () => {
-  const { showVerified, showLog } = useUiContext();
-  const router = useRouter();
-
-  const handleClick = () => {
-    router.push({
-      pathname: router.pathname,
-      query: {},
-    });
-    setTimeout(() => {
-      showVerified(false);
-      showLog(true);
-    }, 1000);
-  };
+  const { handleClick } = useVerifiedEmail();
 
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
