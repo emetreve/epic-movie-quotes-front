@@ -8,3 +8,4 @@ export * from './LogIn';
 export * from './VerifyEmail';
 export * from './VerifiedEmail';
 export * from './ForgotPassword';
+export * from './CheckYourEmailPassword';

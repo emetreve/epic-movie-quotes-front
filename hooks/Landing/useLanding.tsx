@@ -4,9 +4,9 @@ import { verifyEmail as verify } from '@/services';
 
 const useLanding = () => {
   const router = useRouter();
-  const { id, token, expires, signature } = router.query;
+  const { id, token, expires, signature, email } = router.query;
 
-  const { showVerified } = useUiContext();
+  const { showVerified, showCheckEmailPassword } = useUiContext();
 
   const verifyEmail = async () => {
     if (id && token && expires && signature) {
@@ -21,8 +21,15 @@ const useLanding = () => {
     }
   };
 
+  const checkEmailPassword = () => {
+    if (token && email) {
+      showCheckEmailPassword(true);
+    }
+  };
+
   return {
     verifyEmail,
+    checkEmailPassword,
   };
 };
 export default useLanding;
