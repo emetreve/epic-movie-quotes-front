@@ -1,15 +1,13 @@
 import Image from 'next/image';
-import { useUiContext } from '@/store';
+import { useCheckYourEmailPassword } from '@/hooks';
 
 const CheckYourEmailPassword = () => {
-  const { showCheckEmailPassword } = useUiContext();
+  const { handleClose } = useCheckYourEmailPassword();
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
       <div className='bg-gradient-violet lg:bg-gradient-plain-violet h-full w-full lg:h-[30rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative lg:scale-105'>
         <Image
-          onClick={() => {
-            showCheckEmailPassword(false);
-          }}
+          onClick={handleClose}
           src='/assets/close-btn.png'
           alt='close button'
           width={200}
@@ -31,9 +29,7 @@ const CheckYourEmailPassword = () => {
             We have sent a password recover instructions to your email
           </p>
           <button
-            onClick={() => {
-              showCheckEmailPassword(false);
-            }}
+            onClick={handleClose}
             className='mt-10 text-white bg-red py-2 lg:py-3 lg:text-xl px-10 lg:px-24 rounded-md'
           >
             Back to homepage
