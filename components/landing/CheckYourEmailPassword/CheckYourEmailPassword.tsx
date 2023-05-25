@@ -5,7 +5,7 @@ const CheckYourEmailPassword = () => {
   const { handleClose } = useCheckYourEmailPassword();
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
-      <div className='bg-gradient-violet lg:bg-gradient-plain-violet h-full w-full lg:h-[30rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative lg:scale-105'>
+      <div className='bg-gradient-violet lg:bg-gradient-plain-violet h-full w-full lg:h-[28rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative lg:scale-105'>
         <Image
           onClick={handleClose}
           src='/assets/close-btn.png'
@@ -34,6 +34,9 @@ const CheckYourEmailPassword = () => {
           >
             Back to homepage
           </button>
+          <p className='text-xs ml-2 text-gray-600 nlock pt-4 lg:text-sm'>
+            Skip, I&apos;ll confirm later
+          </p>
         </div>
       </div>
     </div>
