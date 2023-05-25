@@ -8,20 +8,18 @@ const useLanding = () => {
 
   const { showVerified } = useUiContext();
 
-  const verifyEmail = () => {
+  const verifyEmail = async () => {
     if (id && token && expires && signature) {
-      axiosInstance
-        .get(
+      try {
+        const response = await axiosInstance.get(
           `/email/verify/${id}/${token}?expires=${expires}&signature=${signature}`
-        )
-        .then((response) => {
-          if (response.status === 200) {
-            showVerified(true);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+        );
+        if (response.status === 200) {
+          showVerified(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
