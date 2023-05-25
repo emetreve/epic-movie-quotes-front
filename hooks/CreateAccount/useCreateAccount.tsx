@@ -40,13 +40,13 @@ const useCreateAccount = () => {
   };
 
   const handleSignUp = async (incomingData: FormData) => {
-    const response = await signUp(incomingData);
-    if (response === 200) {
+    try {
+      await signUp(incomingData);
       showCreate(false);
       showCheck(true);
-    } else {
-      console.log(response);
-      // TODO: show field errors to frontent under relevant inputs.
+    } catch (error) {
+      console.log(error);
+      // TODO: Show field errors to frontend under relevant inputs.
     }
   };
 
