@@ -6,6 +6,16 @@ const useVerifiedEmail = () => {
 
   const router = useRouter();
 
+  const handleClose = () => {
+    router.push({
+      pathname: router.pathname,
+      query: {},
+    });
+    setTimeout(() => {
+      showVerified(false);
+    }, 500);
+  };
+
   const handleClick = () => {
     router.push({
       pathname: router.pathname,
@@ -18,6 +28,7 @@ const useVerifiedEmail = () => {
   };
 
   return {
+    handleClose,
     handleClick,
   };
 };
