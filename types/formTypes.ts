@@ -15,3 +15,10 @@ export type FormData = {
 export type ForgotPasswordFormData = {
   email: string;
 };
+
+export type ResetPasswordFormData = {
+  email: string;
+  token: string;
+  password: string;
+  password_confirmation: string;
+};

@@ -37,7 +37,8 @@ const useForgotPassword = () => {
       showCheckEmailPassword(true);
     } catch (error) {
       console.log(error);
-      // TODO: Show error under email input
+      // TODO: Show error under email input;
+      // also maybe handle "Please wait before retrying."
     }
   };
 

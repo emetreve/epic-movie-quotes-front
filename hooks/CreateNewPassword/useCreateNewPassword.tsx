@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { FormData } from './types';
 import { useMutation } from 'react-query';
 import { useUiContext } from '@/store';
+import { resetPassword } from '@/services';
 
 const useCreateNewPassword = () => {
   const [hidePassword, setHidePassword] = useState(true);
@@ -39,14 +40,21 @@ const useCreateNewPassword = () => {
   };
 
   const handleResetPassword = async (incomingData: FormData) => {
-    // try {
-    //   await signUp(incomingData);
-    //   showCreate(false);
-    //   showCheck(true);
-    // } catch (error) {
-    //   console.log(error);
-    //   // TODO: Show field errors to frontend under relevant inputs.
-    // }
+    const { email, token } = router.query;
+    const fullData = {
+      ...incomingData,
+      email: email as string,
+      token: token as string,
+    };
+
+    try {
+      const response = await resetPassword(fullData);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+      // TODO: Show field errors to frontend under relevant inputs.
+      // TODO: also handle "This password reset token is invalid." response (SHOW EXPIRED MODAL)
+    }
   };
 
   const { mutate } = useMutation(handleResetPassword);
