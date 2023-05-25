@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
-import { axiosInstance } from '@/services';
 import { useUiContext } from '@/store';
+import { verifyEmail as verify } from '@/services';
 
 const useLanding = () => {
   const router = useRouter();
@@ -10,13 +10,11 @@ const useLanding = () => {
 
   const verifyEmail = async () => {
     if (id && token && expires && signature) {
+      const path = `/email/verify/${id}/${token}?expires=${expires}&signature=${signature}`;
+
       try {
-        const response = await axiosInstance.get(
-          `/email/verify/${id}/${token}?expires=${expires}&signature=${signature}`
-        );
-        if (response.status === 200) {
-          showVerified(true);
-        }
+        await verify(path);
+        showVerified(true);
       } catch (error) {
         console.log(error);
       }
