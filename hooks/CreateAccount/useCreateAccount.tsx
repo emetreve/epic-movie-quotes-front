@@ -28,6 +28,7 @@ const useCreateAccount = () => {
     reset,
     watch,
     formState,
+    setError,
   } = methods;
 
   const password = watch('password');
@@ -44,9 +45,19 @@ const useCreateAccount = () => {
       await signUp(incomingData);
       showCreate(false);
       showCheck(true);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
-      // TODO: Show field errors to frontend under relevant inputs.
+      if (error.response.data.errors.email) {
+        setError('email', {
+          type: 'manual',
+          message: error.response.data.errors.email[0],
+        });
+      } else if (error.response.data.errors.name) {
+        setError('name', {
+          type: 'manual',
+          message: error.response.data.errors.name[0],
+        });
+      }
     }
   };
 
