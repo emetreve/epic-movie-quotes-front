@@ -17,6 +17,7 @@ const useLanding = () => {
         showVerified(true);
       } catch (error) {
         console.log(error);
+        //TODO: handle expired_token case
       }
     }
 
