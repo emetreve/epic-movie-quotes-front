@@ -18,6 +18,8 @@ const UiContext = createContext({
   showCreateNewPassword: false,
   showPasswordSuccess: (show: boolean) => {},
   showPasswordChangeSuccess: false,
+  showExpired: (show: boolean) => {},
+  showExpiredWarning: false,
 });
 
 export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
@@ -31,6 +33,7 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
   const [showCreateNewPassword, setCreateNewPassword] = useState(false);
   const [showPasswordChangeSuccess, setShowPasswordChangeSuccess] =
     useState(false);
+  const [showExpiredWarning, setShowExpiredWarning] = useState(false);
 
   const showCreate = (show: boolean) => {
     setShowCreateAccount(show);
@@ -89,6 +92,13 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
       : document.body.classList.remove('hide-scrollbar');
   };
 
+  const showExpired = (show: boolean) => {
+    setShowExpiredWarning(show);
+    show
+      ? document.body.classList.add('hide-scrollbar')
+      : document.body.classList.remove('hide-scrollbar');
+  };
+
   return (
     <UiContext.Provider
       value={{
@@ -108,6 +118,8 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
         showCreateNewPassword,
         showPasswordSuccess,
         showPasswordChangeSuccess,
+        showExpiredWarning,
+        showExpired,
       }}
     >
       {children}
