@@ -1,42 +1,14 @@
-import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { useUiContext } from '@/store';
-import { axiosInstance } from '@/services';
+import { useExpiredWarningEmailVerification } from '@/hooks';
 
 const ExpiredWarningEmailVerification = () => {
-  const router = useRouter();
-  const { showExpiredEmailVerification, showCheck } = useUiContext();
-  const { id } = router.query;
-
-  const handleButton = async () => {
-    const response = await axiosInstance.get(
-      `/resend-email-verification-link/?id=${id}`
-    );
-    if (response.status === 200) {
-      router.push({
-        pathname: router.pathname,
-        query: {},
-      });
-      setTimeout(() => {
-        showExpiredEmailVerification(false);
-        showCheck(true);
-      }, 500);
-    }
-  };
+  const { handleClose, handleButton } = useExpiredWarningEmailVerification();
 
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
       <div className='bg-gradient-violet lg:bg-gradient-plain-violet h-full w-full lg:h-[26rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative lg:scale-105'>
         <Image
-          onClick={() => {
-            router.push({
-              pathname: router.pathname,
-              query: {},
-            });
-            setTimeout(() => {
-              showExpiredEmailVerification(false);
-            }, 500);
-          }}
+          onClick={handleClose}
           src='/assets/close-btn.png'
           alt='close button'
           width={200}
