@@ -1,15 +1,41 @@
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useUiContext } from '@/store';
+import { axiosInstance } from '@/services';
 
-const ExpiredWarning = () => {
-  const { showExpired, showForgot } = useUiContext();
+const ExpiredWarningEmailVerification = () => {
+  const router = useRouter();
+  const { showExpiredEmailVerification, showCheck } = useUiContext();
+  const { id } = router.query;
+
+  const handleButton = async () => {
+    const response = await axiosInstance.get(
+      `/resend-email-verification-link/?id=${id}`
+    );
+    if (response.status === 200) {
+      router.push({
+        pathname: router.pathname,
+        query: {},
+      });
+      setTimeout(() => {
+        showExpiredEmailVerification(false);
+        showCheck(true);
+      }, 500);
+    }
+  };
 
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
       <div className='bg-gradient-violet lg:bg-gradient-plain-violet h-full w-full lg:h-[26rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative lg:scale-105'>
         <Image
           onClick={() => {
-            showExpired(false);
+            router.push({
+              pathname: router.pathname,
+              query: {},
+            });
+            setTimeout(() => {
+              showExpiredEmailVerification(false);
+            }, 500);
           }}
           src='/assets/close-btn.png'
           alt='close button'
@@ -29,13 +55,11 @@ const ExpiredWarning = () => {
             Link expired!
           </h1>
           <p className='mt-3 text-center text-sm lg:text-lg px-6 lg:px-0'>
-            Password reset link has expired, because you haven&apos;t used it
+            Email verification link has expired, because you haven&apos;t used
+            it
           </p>
           <button
-            onClick={() => {
-              showExpired(false);
-              showForgot(true);
-            }}
+            onClick={handleButton}
             className='mt-10 text-white bg-red py-2 lg:py-3 lg:text-xl px-16 lg:px-[7.4rem] rounded-md'
           >
             Request another link
@@ -45,4 +69,4 @@ const ExpiredWarning = () => {
     </div>
   );
 };
-export default ExpiredWarning;
+export default ExpiredWarningEmailVerification;

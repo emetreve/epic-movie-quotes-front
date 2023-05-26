@@ -6,7 +6,12 @@ const useLanding = () => {
   const router = useRouter();
   const { id, token, expires, signature, email } = router.query;
 
-  const { showVerified, showSetNewPassword, showLog } = useUiContext();
+  const {
+    showVerified,
+    showSetNewPassword,
+    showLog,
+    showExpiredEmailVerification,
+  } = useUiContext();
 
   const showNotice = async () => {
     if (id && token && expires && signature) {
@@ -15,9 +20,13 @@ const useLanding = () => {
       try {
         await verify(path);
         showVerified(true);
-      } catch (error) {
+      } catch (error: any) {
         console.log(error);
-        //TODO: handle expired_token case
+        if (error.response.data?.token_expired) {
+          // TODO: show token expired notice
+          showExpiredEmailVerification(true);
+          console.log('expired');
+        }
       }
     }
 

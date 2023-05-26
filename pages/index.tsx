@@ -11,6 +11,7 @@ import {
   CreateNewPassword,
   PasswordChangeSuccess,
   ExpiredWarning,
+  ExpiredWarningEmailVerification,
 } from '@/components';
 import { useLanding } from '@/hooks';
 import { useUiContext } from '@/store';
@@ -30,6 +31,7 @@ const Landing: React.FC = () => {
     showCreateNewPassword,
     showPasswordChangeSuccess,
     showExpiredWarning,
+    showExpiredWarningEmailVerification,
   } = useUiContext();
 
   showNotice();
@@ -55,6 +57,10 @@ const Landing: React.FC = () => {
       {showPasswordChangeSuccess && <PasswordChangeSuccess />}
 
       {showExpiredWarning && <ExpiredWarning />}
+
+      {showExpiredWarningEmailVerification && (
+        <ExpiredWarningEmailVerification />
+      )}
 
       <div className='bg-background h-[40rem] pt-6 lg:h-[52rem]'>
         <LandingHeader showCreateAccount={showCreate} showLogIn={showLog} />
