@@ -58,7 +58,6 @@ const useCreateNewPassword = () => {
         showPasswordSuccess(true);
       }, 500);
     } catch (error: any) {
-      console.log(error);
       if (
         error.response.data.errors.password[0] ===
         'This password reset token is invalid.'
@@ -70,7 +69,6 @@ const useCreateNewPassword = () => {
         setTimeout(() => {
           showSetNewPassword(false);
           showExpired(true);
-          console.log('show expired modal');
         }, 500);
       }
     }
@@ -79,7 +77,6 @@ const useCreateNewPassword = () => {
   const { mutate } = useMutation(handleResetPassword);
 
   const onSubmit = async (data: FormData) => {
-    console.log(data);
     mutate(data);
   };
 
