@@ -58,19 +58,14 @@ const useCreateNewPassword = () => {
         showPasswordSuccess(true);
       }, 500);
     } catch (error: any) {
-      if (
-        error.response.data.errors.password[0] ===
-        'This password reset token is invalid.'
-      ) {
-        router.push({
-          pathname: router.pathname,
-          query: {},
-        });
-        setTimeout(() => {
-          showSetNewPassword(false);
-          showExpired(true);
-        }, 500);
-      }
+      router.push({
+        pathname: router.pathname,
+        query: {},
+      });
+      setTimeout(() => {
+        showSetNewPassword(false);
+        showExpired(true);
+      }, 500);
     }
   };
 
