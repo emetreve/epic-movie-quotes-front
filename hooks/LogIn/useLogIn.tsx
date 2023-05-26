@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormData } from './types';
+import { useUiContext } from '@/store';
 
 const LogIn = () => {
   const [hidePassword, setHidePassword] = useState(true);
+  const { showLog, showForgot } = useUiContext();
 
   const methods = useForm({
     defaultValues: {
@@ -34,6 +36,11 @@ const LogIn = () => {
     console.log(data);
   };
 
+  const handleForgot = () => {
+    showLog(false);
+    showForgot(true);
+  };
+
   return {
     handleSubmit,
     register,
@@ -46,6 +53,7 @@ const LogIn = () => {
     applyInputStyle,
     formState,
     methods,
+    handleForgot,
   };
 };
 export default LogIn;

@@ -10,6 +10,14 @@ const UiContext = createContext({
   showVerifiedEmail: false,
   showLog: (show: boolean) => {},
   showLogIn: false,
+  showForgot: (show: boolean) => {},
+  showForgotPassword: false,
+  showCheckEmailPassword: (show: boolean) => {},
+  showCheckYourEmailPassword: false,
+  showSetNewPassword: (show: boolean) => {},
+  showCreateNewPassword: false,
+  showPasswordSuccess: (show: boolean) => {},
+  showPasswordChangeSuccess: false,
 });
 
 export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
@@ -17,6 +25,12 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
   const [showLogIn, setShowLogIg] = useState(false);
   const [showCheckEmail, setShowCheckEmail] = useState(false);
   const [showVerifiedEmail, setShowVerifiedEmail] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [showCheckYourEmailPassword, setShowCheckYourEmailPassword] =
+    useState(false);
+  const [showCreateNewPassword, setCreateNewPassword] = useState(false);
+  const [showPasswordChangeSuccess, setShowPasswordChangeSuccess] =
+    useState(false);
 
   const showCreate = (show: boolean) => {
     setShowCreateAccount(show);
@@ -46,6 +60,35 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
       : document.body.classList.remove('hide-scrollbar');
   };
 
+  const showForgot = (show: boolean) => {
+    setShowForgotPassword(show);
+    show
+      ? document.body.classList.add('hide-scrollbar')
+      : document.body.classList.remove('hide-scrollbar');
+  };
+
+  const showCheckEmailPassword = (show: boolean) => {
+    setShowCheckYourEmailPassword(show);
+    show
+      ? document.body.classList.add('hide-scrollbar')
+      : document.body.classList.remove('hide-scrollbar');
+  };
+
+  const showSetNewPassword = (show: boolean) => {
+    setCreateNewPassword(show);
+    show
+      ? document.body.classList.add('hide-scrollbar')
+      : document.body.classList.remove('hide-scrollbar');
+  };
+
+  const showPasswordSuccess = (show: boolean) => {
+    showSetNewPassword(false);
+    setShowPasswordChangeSuccess(show);
+    show
+      ? document.body.classList.add('hide-scrollbar')
+      : document.body.classList.remove('hide-scrollbar');
+  };
+
   return (
     <UiContext.Provider
       value={{
@@ -53,10 +96,18 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
         showCreate,
         showLog,
         showVerified,
+        showForgotPassword,
         showCheckEmail,
         showCreateAccount,
         showVerifiedEmail,
         showLogIn,
+        showForgot,
+        showCheckEmailPassword,
+        showCheckYourEmailPassword,
+        showSetNewPassword,
+        showCreateNewPassword,
+        showPasswordSuccess,
+        showPasswordChangeSuccess,
       }}
     >
       {children}

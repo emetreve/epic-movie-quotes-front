@@ -11,3 +11,14 @@ export type FormData = {
   password: string;
   password_confirmation: string;
 };
+
+export type ForgotPasswordFormData = {
+  email: string;
+};
+
+export type ResetPasswordFormData = {
+  email: string;
+  token: string;
+  password: string;
+  password_confirmation: string;
+};

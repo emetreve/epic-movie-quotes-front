@@ -4,11 +4,11 @@ import { verifyEmail as verify } from '@/services';
 
 const useLanding = () => {
   const router = useRouter();
-  const { id, token, expires, signature } = router.query;
+  const { id, token, expires, signature, email } = router.query;
 
-  const { showVerified } = useUiContext();
+  const { showVerified, showSetNewPassword, showLog } = useUiContext();
 
-  const verifyEmail = async () => {
+  const showNotice = async () => {
     if (id && token && expires && signature) {
       const path = `/email/verify/${id}/${token}?expires=${expires}&signature=${signature}`;
 
@@ -19,10 +19,17 @@ const useLanding = () => {
         console.log(error);
       }
     }
+
+    if (token && email) {
+      setTimeout(() => {
+        showLog(false);
+        showSetNewPassword(true);
+      }, 500);
+    }
   };
 
   return {
-    verifyEmail,
+    showNotice,
   };
 };
 export default useLanding;

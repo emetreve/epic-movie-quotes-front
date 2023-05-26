@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
 
 const useVerifiedEmail = () => {
-  const { showVerified, showLog } = useUiContext();
+  const { showPasswordSuccess, showLog, showSetNewPassword } = useUiContext();
 
   const router = useRouter();
 
@@ -12,7 +12,8 @@ const useVerifiedEmail = () => {
       query: {},
     });
     setTimeout(() => {
-      showVerified(false);
+      showSetNewPassword(false);
+      showPasswordSuccess(false);
     }, 500);
   };
 
@@ -22,9 +23,10 @@ const useVerifiedEmail = () => {
       query: {},
     });
     setTimeout(() => {
-      showVerified(false);
+      showPasswordSuccess(false);
+      showSetNewPassword(false);
       showLog(true);
-    }, 1000);
+    }, 500);
   };
 
   return {

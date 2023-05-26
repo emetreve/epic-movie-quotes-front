@@ -15,6 +15,7 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
     applyInputStyle,
     formState,
     methods,
+    handleForgot,
   } = useLogIn();
 
   return (
@@ -129,7 +130,7 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
                 </label>
               </div>
               <div className='ml-auto underline text-blue-600 hover:cursor-pointer'>
-                <p>Forgot password</p>
+                <p onClick={handleForgot}>Forgot password</p>
               </div>
             </div>
 
