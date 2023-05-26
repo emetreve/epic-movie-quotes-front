@@ -46,7 +46,6 @@ const useCreateAccount = () => {
       showCreate(false);
       showCheck(true);
     } catch (error: any) {
-      console.log(error);
       if (error.response.data.errors.email) {
         setError('email', {
           type: 'manual',
