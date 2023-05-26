@@ -21,6 +21,7 @@ const useForgotPassword = () => {
     trigger,
     reset,
     formState,
+    setError,
   } = methods;
 
   const applyInputStyle = () => {
@@ -35,10 +36,13 @@ const useForgotPassword = () => {
       await forgotPassword(incomingData);
       showForgot(false);
       showCheckEmailPassword(true);
-    } catch (error) {
-      console.log(error);
-      // TODO: Show error under email input;
-      // also maybe handle "Please wait before retrying."
+    } catch (error: any) {
+      if (error.response.data.errors.email) {
+        setError('email', {
+          type: 'manual',
+          message: error.response.data.errors.email[0],
+        });
+      }
     }
   };
 
