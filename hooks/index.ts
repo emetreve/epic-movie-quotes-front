@@ -7,3 +7,5 @@ export * from './CheckYourEmailPassword';
 export * from './CreateNewPassword';
 export * from './PasswordChangeSuccess';
 export * from './ExpiredWarningEmailVerification';
+export * from './CheckIfLoggedIn';
+export * from './NewsFeed';

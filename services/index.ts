@@ -5,3 +5,4 @@ export { default as forgotPassword } from './forgotpassword';
 export { default as resetPassword } from './resetpassword';
 export { default as resendVerifyEmail } from './resendverifyemail';
 export { default as authenticateAppInstance } from './authenticateapp';
+export { default as checkIfLoggedIn } from './checkifloggedin';

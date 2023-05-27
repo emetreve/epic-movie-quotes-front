@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
 import { verifyEmail as verify, authenticateAppInstance } from '@/services';
+import { useCheckIfLoggedIn } from '@/hooks';
 
 const useLanding = () => {
   const router = useRouter();
@@ -13,6 +14,8 @@ const useLanding = () => {
     showLog,
     showExpiredEmailVerification,
   } = useUiContext();
+
+  const { logged } = useCheckIfLoggedIn();
 
   useEffect(() => {
     const authenticateApp = async () => {
@@ -55,6 +58,7 @@ const useLanding = () => {
 
   return {
     showNotice,
+    logged,
   };
 };
 export default useLanding;
