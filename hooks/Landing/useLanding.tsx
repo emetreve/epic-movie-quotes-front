@@ -1,6 +1,7 @@
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
-import { verifyEmail as verify } from '@/services';
+import { verifyEmail as verify, authenticateAppInstance } from '@/services';
 
 const useLanding = () => {
   const router = useRouter();
@@ -12,6 +13,20 @@ const useLanding = () => {
     showLog,
     showExpiredEmailVerification,
   } = useUiContext();
+
+  useEffect(() => {
+    const authenticateApp = async () => {
+      try {
+        const response = await authenticateAppInstance.get(
+          '/sanctum/csrf-cookie'
+        );
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    authenticateApp();
+  }, []);
 
   const showNotice = async () => {
     if (id && token && expires && signature) {
