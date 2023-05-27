@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useMutation } from 'react-query';
+import { axiosInstance } from '@/services';
 import { FormData } from './types';
 import { useUiContext } from '@/store';
 
@@ -32,8 +34,22 @@ const LogIn = () => {
     return (dirty && errorMessage) || errorMessage ? true : false;
   };
 
+  const handleLogIn = async (incomingData: FormData) => {
+    try {
+      const response = await axiosInstance.post('/login', incomingData);
+      console.log(response);
+      console.log('REDIRECT TO NEWSFEED');
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
+
+  const { mutate } = useMutation(handleLogIn);
+
   const onSubmit = (data: FormData): void => {
     console.log(data);
+
+    mutate(data);
   };
 
   const handleForgot = () => {
