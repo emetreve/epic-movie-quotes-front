@@ -9,7 +9,8 @@ import { resetPassword } from '@/services';
 const useCreateNewPassword = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [hidePasswordConfirm, setHidePasswordConfirm] = useState(true);
-  const { showSetNewPassword, showLog, showPasswordSuccess } = useUiContext();
+  const { showSetNewPassword, showLog, showPasswordSuccess, showExpired } =
+    useUiContext();
   const router = useRouter();
 
   const methods = useForm({
@@ -56,17 +57,21 @@ const useCreateNewPassword = () => {
       setTimeout(() => {
         showPasswordSuccess(true);
       }, 500);
-    } catch (error) {
-      console.log(error);
-      // TODO: Show field errors to frontend under relevant inputs.
-      // TODO: also handle "This password reset token is invalid." response (SHOW EXPIRED MODAL)
+    } catch (error: any) {
+      router.push({
+        pathname: router.pathname,
+        query: {},
+      });
+      setTimeout(() => {
+        showSetNewPassword(false);
+        showExpired(true);
+      }, 500);
     }
   };
 
   const { mutate } = useMutation(handleResetPassword);
 
   const onSubmit = async (data: FormData) => {
-    console.log(data);
     mutate(data);
   };
 

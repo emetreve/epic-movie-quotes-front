@@ -11,3 +11,5 @@ export * from './ForgotPassword';
 export * from './CheckYourEmailPassword';
 export * from './CreateNewPassword';
 export * from './PasswordChangeSuccess';
+export * from './ExpiredWarning';
+export * from './ExpiredWarningEmailVerification';
