@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
+import { useMutation } from 'react-query';
+import { axiosInstance } from '@/services';
 import { FormData } from './types';
 import { useUiContext } from '@/store';
 
 const LogIn = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const { showLog, showForgot } = useUiContext();
+  const router = useRouter();
 
   const methods = useForm({
     defaultValues: {
@@ -32,8 +36,21 @@ const LogIn = () => {
     return (dirty && errorMessage) || errorMessage ? true : false;
   };
 
+  const handleLogIn = async (incomingData: FormData) => {
+    try {
+      await axiosInstance.post('/login', incomingData);
+      router.push('/dashboard/newsfeed');
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
+
+  const { mutate } = useMutation(handleLogIn);
+
   const onSubmit = (data: FormData): void => {
     console.log(data);
+
+    mutate(data);
   };
 
   const handleForgot = () => {

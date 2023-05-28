@@ -15,9 +15,10 @@ import {
 } from '@/components';
 import { useLanding } from '@/hooks';
 import { useUiContext } from '@/store';
+import { useRouter } from 'next/router';
 
 const Landing: React.FC = () => {
-  const { showNotice } = useLanding();
+  const { showNotice, logged } = useLanding();
   const {
     showLogIn,
     showLog,
@@ -34,8 +35,13 @@ const Landing: React.FC = () => {
     showExpiredWarningEmailVerification,
   } = useUiContext();
 
+  const router = useRouter();
+
   showNotice();
 
+  if (logged) {
+    router.push('/dashboard/newsfeed');
+  }
   return (
     <>
       {showCreateAccount && <CreateAccount show={showCreate} swap={showLog} />}
