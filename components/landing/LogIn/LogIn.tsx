@@ -16,6 +16,7 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
     formState,
     methods,
     handleForgot,
+    handleGoogle,
   } = useLogIn();
 
   return (
@@ -143,7 +144,10 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
           </form>
         </FormProvider>
         <div className='w-full px-8 text-sm'>
-          <button className='text-white mt-3 py-[0.5rem] lg:py-[0.7rem] w-full lg:px-8 rounded-md border lg:text-[1rem] border-white'>
+          <button
+            onClick={handleGoogle}
+            className='text-white mt-3 py-[0.5rem] lg:py-[0.7rem] w-full lg:px-8 rounded-md border lg:text-[1rem] border-white'
+          >
             <Image
               src='/assets/google.png'
               alt='google logo'

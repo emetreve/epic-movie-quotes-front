@@ -58,6 +58,10 @@ const LogIn = () => {
     showForgot(true);
   };
 
+  const handleGoogle = () => {
+    router.push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/redirect`);
+  };
+
   return {
     handleSubmit,
     register,
@@ -71,6 +75,7 @@ const LogIn = () => {
     formState,
     methods,
     handleForgot,
+    handleGoogle,
   };
 };
 export default LogIn;
