@@ -23,6 +23,7 @@ module.exports = {
       colors: {
         cream: '#DDCCAA',
         red: '#E31221',
+        'red-hover': '#CC0E10',
         green: '#198754',
         'partly-transparent-dark': 'rgba(0, 0, 0, 0.54)',
         violet: '#222030',

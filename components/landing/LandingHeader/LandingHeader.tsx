@@ -21,7 +21,7 @@ const LandingHeader: React.FC<PropsType> = ({
         </div>
         <button
           onClick={() => showCreateAccount(true)}
-          className='text-white bg-red py-2 lg:py-[0.5rem] px-4 lg:px-8 rounded-md lg:mr-5 lg:ml-10 order-2 lg:order-1'
+          className='text-white bg-red py-2 lg:py-[0.5rem] px-4 lg:px-8 rounded-md lg:mr-5 lg:ml-10 order-2 lg:order-1 hover:bg-red-hover'
         >
           Sign Up
         </button>

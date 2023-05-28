@@ -75,7 +75,10 @@ const Landing: React.FC = () => {
             <h1>Find any quote in</h1>
             <h1>millions of movie lines</h1>
           </div>
-          <button className='mt-10 text-white bg-red py-2 lg:py-3 lg:text-xl px-4 lg:px-5 rounded-md'>
+          <button
+            onClick={() => showCreate(true)}
+            className='mt-10 text-white bg-red py-2 lg:py-3 lg:text-xl px-4 lg:px-5 rounded-md hover:cursor-pointer hover:bg-red-hover'
+          >
             Get started
           </button>
         </div>
