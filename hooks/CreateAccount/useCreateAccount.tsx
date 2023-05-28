@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { FormData } from './types';
 import { useMutation } from 'react-query';
@@ -9,6 +10,7 @@ const useCreateAccount = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [hidePasswordConfirm, setHidePasswordConfirm] = useState(true);
   const { showCheck, showCreate } = useUiContext();
+  const router = useRouter();
 
   const methods = useForm({
     defaultValues: {
@@ -66,6 +68,10 @@ const useCreateAccount = () => {
     mutate(data);
   };
 
+  const handleGoogle = () => {
+    router.push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/redirect`);
+  };
+
   return {
     handleSubmit,
     register,
@@ -81,6 +87,7 @@ const useCreateAccount = () => {
     applyInputStyle,
     formState,
     methods,
+    handleGoogle,
   };
 };
 export default useCreateAccount;
