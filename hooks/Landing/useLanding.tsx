@@ -28,7 +28,7 @@ const useLanding = () => {
     showExpiredEmailVerification,
   } = useUiContext();
 
-  const { logged } = useCheckIfLoggedIn();
+  const { logged, setLogged } = useCheckIfLoggedIn();
 
   useEffect(() => {
     if (scope) {
@@ -37,7 +37,7 @@ const useLanding = () => {
           `/auth/callback/?state=${state}&code=${code}&scope=${scope}&authuser=${authuser}&hd=${hd}&prompt=${prompt}`
         )
         .then((res) => {
-          window.location.reload();
+          setLogged(true);
           console.log(res);
         })
         .catch((err) => {
