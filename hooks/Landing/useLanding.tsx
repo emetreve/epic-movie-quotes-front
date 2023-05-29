@@ -3,10 +3,23 @@ import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
 import { verifyEmail as verify, authenticateAppInstance } from '@/services';
 import { useCheckIfLoggedIn } from '@/hooks';
+import { axiosInstance } from '@/services';
 
 const useLanding = () => {
   const router = useRouter();
-  const { id, token, expires, signature, email } = router.query;
+  const {
+    id,
+    token,
+    expires,
+    signature,
+    email,
+    state,
+    code,
+    scope,
+    authuser,
+    hd,
+    prompt,
+  } = router.query;
 
   const {
     showVerified,
@@ -16,6 +29,22 @@ const useLanding = () => {
   } = useUiContext();
 
   const { logged } = useCheckIfLoggedIn();
+
+  useEffect(() => {
+    if (scope) {
+      axiosInstance
+        .get(
+          `/auth/callback/?state=${state}&code=${code}&scope=${scope}&authuser=${authuser}&hd=${hd}&prompt=${prompt}`
+        )
+        .then((res) => {
+          window.location.reload();
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [scope]);
 
   useEffect(() => {
     const authenticateApp = async () => {
