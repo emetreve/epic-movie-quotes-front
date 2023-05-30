@@ -23,13 +23,11 @@ const useLanding = () => {
       if (scope) {
         const googleAuthPath = router.asPath;
 
-        const response = await googleAuth(googleAuthPath);
-
-        if (response.data.message === 'User is not a Google user') {
-          router.push('/403');
-          return;
-        } else {
+        try {
+          await googleAuth(googleAuthPath);
           setLogged(true);
+        } catch (error) {
+          router.push('/403');
         }
       }
     };
