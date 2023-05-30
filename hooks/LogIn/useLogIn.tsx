@@ -2,10 +2,9 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useMutation } from 'react-query';
-import { axiosInstance } from '@/services';
+import { axiosInstance, googleInstance } from '@/services';
 import { FormData } from './types';
 import { useUiContext } from '@/store';
-import axios from 'axios';
 
 const LogIn = () => {
   const [hidePassword, setHidePassword] = useState(true);
@@ -59,14 +58,14 @@ const LogIn = () => {
     showForgot(true);
   };
 
-  const handleGoogle = () => {
-    // router.push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/redirect`);
-    axios
-      .get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/redirect`)
-      .then((res) => {
-        console.log(res.data.url);
-        router.push(res.data.url);
-      });
+  const handleGoogle = async () => {
+    try {
+      const response = await googleInstance.get('');
+      const url = response.data.url;
+      router.push(url);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return {

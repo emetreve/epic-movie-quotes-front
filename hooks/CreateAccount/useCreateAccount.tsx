@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { FormData } from './types';
 import { useMutation } from 'react-query';
 import { useUiContext } from '@/store';
-import { signUp } from '@/services';
+import { signUp, googleInstance } from '@/services';
 
 const useCreateAccount = () => {
   const [hidePassword, setHidePassword] = useState(true);
@@ -68,8 +68,14 @@ const useCreateAccount = () => {
     mutate(data);
   };
 
-  const handleGoogle = () => {
-    router.push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/redirect`);
+  const handleGoogle = async () => {
+    try {
+      const response = await googleInstance.get('');
+      const url = response.data.url;
+      router.push(url);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return {
