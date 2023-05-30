@@ -7,19 +7,7 @@ import { axiosInstance } from '@/services';
 
 const useLanding = () => {
   const router = useRouter();
-  const {
-    id,
-    token,
-    expires,
-    signature,
-    email,
-    state,
-    code,
-    scope,
-    authuser,
-    hd,
-    prompt,
-  } = router.query;
+  const { id, token, expires, signature, email, scope } = router.query;
 
   const {
     showVerified,
@@ -32,10 +20,9 @@ const useLanding = () => {
 
   useEffect(() => {
     if (scope) {
+      const googleAuthPath = router.asPath;
       axiosInstance
-        .get(
-          `/auth/callback/?state=${state}&code=${code}&scope=${scope}&authuser=${authuser}&hd=${hd}&prompt=${prompt}`
-        )
+        .get(`/auth/callback${googleAuthPath}`)
         .then((res) => {
           setLogged(true);
           console.log(res);
