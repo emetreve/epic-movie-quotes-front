@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
 import { verifyEmail as verify, authenticateAppInstance } from '@/services';
 import { useCheckIfLoggedIn } from '@/hooks';
-import { axiosInstance } from '@/services';
+import { googleAuth } from '@/services';
 
 const useLanding = () => {
   const router = useRouter();
@@ -19,18 +19,21 @@ const useLanding = () => {
   const { logged, setLogged } = useCheckIfLoggedIn();
 
   useEffect(() => {
-    if (scope) {
-      const googleAuthPath = router.asPath;
-      axiosInstance
-        .get(`/auth/callback${googleAuthPath}`)
-        .then((res) => {
+    const authenticate = async () => {
+      if (scope) {
+        const googleAuthPath = router.asPath;
+
+        const response = await googleAuth(googleAuthPath);
+
+        if (response.data.message === 'User is not a Google user') {
+          router.push('/403');
+          return;
+        } else {
           setLogged(true);
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+        }
+      }
+    };
+    authenticate();
   }, [scope]);
 
   useEffect(() => {
