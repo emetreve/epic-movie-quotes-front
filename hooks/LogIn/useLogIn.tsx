@@ -27,6 +27,7 @@ const LogIn = () => {
     trigger,
     reset,
     formState,
+    setError,
   } = methods;
 
   const applyInputStyle = (val: string): boolean => {
@@ -41,7 +42,12 @@ const LogIn = () => {
       await axiosInstance.post('/login', incomingData);
       router.push('/dashboard/newsfeed');
     } catch (error: any) {
-      console.log(error);
+      if (error.response.data.message) {
+        setError('user', {
+          type: 'manual',
+          message: error.response.data.message,
+        });
+      }
     }
   };
 
