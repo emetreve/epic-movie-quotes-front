@@ -1,14 +1,16 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { FormData } from './types';
 import { useMutation } from 'react-query';
 import { useUiContext } from '@/store';
-import { signUp } from '@/services';
+import { signUp, googleInstance } from '@/services';
 
 const useCreateAccount = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [hidePasswordConfirm, setHidePasswordConfirm] = useState(true);
   const { showCheck, showCreate } = useUiContext();
+  const router = useRouter();
 
   const methods = useForm({
     defaultValues: {
@@ -66,6 +68,16 @@ const useCreateAccount = () => {
     mutate(data);
   };
 
+  const handleGoogle = async () => {
+    try {
+      const response = await googleInstance.get('');
+      const url = response.data.url;
+      router.push(url);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     handleSubmit,
     register,
@@ -81,6 +93,7 @@ const useCreateAccount = () => {
     applyInputStyle,
     formState,
     methods,
+    handleGoogle,
   };
 };
 export default useCreateAccount;

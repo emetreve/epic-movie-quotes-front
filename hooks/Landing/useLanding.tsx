@@ -3,10 +3,11 @@ import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
 import { verifyEmail as verify, authenticateAppInstance } from '@/services';
 import { useCheckIfLoggedIn } from '@/hooks';
+import { googleAuth } from '@/services';
 
 const useLanding = () => {
   const router = useRouter();
-  const { id, token, expires, signature, email } = router.query;
+  const { id, token, expires, signature, email, scope } = router.query;
 
   const {
     showVerified,
@@ -15,7 +16,23 @@ const useLanding = () => {
     showExpiredEmailVerification,
   } = useUiContext();
 
-  const { logged } = useCheckIfLoggedIn();
+  const { logged, setLogged } = useCheckIfLoggedIn();
+
+  useEffect(() => {
+    const authenticate = async () => {
+      if (scope) {
+        const googleAuthPath = router.asPath;
+
+        try {
+          await googleAuth(googleAuthPath);
+          setLogged(true);
+        } catch (error) {
+          router.push('/403');
+        }
+      }
+    };
+    authenticate();
+  }, [scope]);
 
   useEffect(() => {
     const authenticateApp = async () => {

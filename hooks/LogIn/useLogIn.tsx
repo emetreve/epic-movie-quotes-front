@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useMutation } from 'react-query';
-import { axiosInstance } from '@/services';
+import { axiosInstance, googleInstance } from '@/services';
 import { FormData } from './types';
 import { useUiContext } from '@/store';
 
@@ -27,6 +27,7 @@ const LogIn = () => {
     trigger,
     reset,
     formState,
+    setError,
   } = methods;
 
   const applyInputStyle = (val: string): boolean => {
@@ -41,7 +42,12 @@ const LogIn = () => {
       await axiosInstance.post('/login', incomingData);
       router.push('/dashboard/newsfeed');
     } catch (error: any) {
-      console.log(error);
+      if (error.response.data.message) {
+        setError('user', {
+          type: 'manual',
+          message: error.response.data.message,
+        });
+      }
     }
   };
 
@@ -58,6 +64,16 @@ const LogIn = () => {
     showForgot(true);
   };
 
+  const handleGoogle = async () => {
+    try {
+      const response = await googleInstance.get('');
+      const url = response.data.url;
+      router.push(url);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     handleSubmit,
     register,
@@ -71,6 +87,7 @@ const LogIn = () => {
     formState,
     methods,
     handleForgot,
+    handleGoogle,
   };
 };
 export default LogIn;
