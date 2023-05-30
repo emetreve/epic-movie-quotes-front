@@ -54,10 +54,7 @@ const Newsfeed = () => {
               />
             </div>
 
-            <button
-              // onClick={() => showLogIn(true)}
-              className='ml-9 text-white py-[0.5rem] px-6 rounded-md border mr-0 border-white hover:cursor-pointer'
-            >
+            <button className='ml-9 text-white py-[0.5rem] px-6 rounded-md border mr-0 border-white hover:cursor-pointer'>
               Log out
             </button>
           </div>
