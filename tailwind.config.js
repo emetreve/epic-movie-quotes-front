@@ -29,6 +29,8 @@ module.exports = {
         violet: '#222030',
         'input-gray': '#CED4DA',
         'txt-black': '#212529',
+        'news-bg': '#000000',
+        'comment-input-bg': 'rgba(36, 34, 47, 0.6)',
       },
     },
   },
