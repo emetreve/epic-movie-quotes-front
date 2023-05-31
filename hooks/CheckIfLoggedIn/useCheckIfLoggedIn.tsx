@@ -28,7 +28,7 @@ const useCheckIfLoggedIn = () => {
     fetch();
   }, []);
 
-  return { logged, setLogged };
+  return { logged, setLogged, fetch };
 };
 
 export default useCheckIfLoggedIn;

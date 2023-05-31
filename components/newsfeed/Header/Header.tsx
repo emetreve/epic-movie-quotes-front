@@ -1,6 +1,9 @@
 import Image from 'next/image';
+import useHeader from './useHeader';
 
 const Header = () => {
+  const { handleLogout } = useHeader();
+
   return (
     <>
       <div className='flex lg:hidden justify-between items-center py-6 text-xs lg:text-base px-7 lg:px-16 bg-violet bg-opacity-80'>
@@ -50,7 +53,10 @@ const Header = () => {
             />
           </div>
 
-          <button className='ml-9 text-white py-[0.5rem] px-6 rounded-md border mr-0 border-white hover:cursor-pointer'>
+          <button
+            onClick={handleLogout}
+            className='ml-9 text-white py-[0.5rem] px-6 rounded-md border mr-0 border-white hover:cursor-pointer'
+          >
             Log out
           </button>
         </div>
