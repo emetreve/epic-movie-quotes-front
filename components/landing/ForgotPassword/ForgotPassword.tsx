@@ -1,6 +1,6 @@
 import { FormProvider } from 'react-hook-form';
 import Image from 'next/image';
-import { useForgotPassword } from '@/hooks';
+import useForgotPassword from './useForgotPassword';
 import { Error, ValidationIcons } from '@/components';
 
 const ForgotPassword: React.FC = () => {

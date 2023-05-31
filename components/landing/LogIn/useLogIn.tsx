@@ -6,7 +6,7 @@ import { axiosInstance, googleInstance } from '@/services';
 import { FormData } from './types';
 import { useUiContext } from '@/store';
 
-const LogIn = () => {
+const useLogIn = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const { showLog, showForgot } = useUiContext();
   const router = useRouter();
@@ -40,6 +40,7 @@ const LogIn = () => {
   const handleLogIn = async (incomingData: FormData) => {
     try {
       await axiosInstance.post('/login', incomingData);
+      showLog(false);
       router.push('/dashboard/newsfeed');
     } catch (error: any) {
       if (error.response.data.message) {
@@ -90,4 +91,4 @@ const LogIn = () => {
     handleGoogle,
   };
 };
-export default LogIn;
+export default useLogIn;

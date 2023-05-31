@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
 
-const useVerifiedEmail = () => {
+const usePasswordChangeSuccess = () => {
   const { showPasswordSuccess, showLog, showSetNewPassword } = useUiContext();
 
   const router = useRouter();
@@ -34,4 +34,4 @@ const useVerifiedEmail = () => {
     handleClick,
   };
 };
-export default useVerifiedEmail;
+export default usePasswordChangeSuccess;

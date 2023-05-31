@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useExpiredWarningEmailVerification } from '@/hooks';
+import useExpiredWarningEmailVerification from './useExpiredWarningEmailVerification';
 
 const ExpiredWarningEmailVerification = () => {
   const { handleClose, handleButton } = useExpiredWarningEmailVerification();
