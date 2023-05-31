@@ -14,9 +14,12 @@ const useCheckIfLoggedIn = () => {
       console.log(error);
       setLogged(false);
 
+      const query = router.asPath.includes('?')
+        ? `?${router.asPath.split('?')[1]}`
+        : '';
       router.push({
         pathname: '/',
-        search: `?${router.asPath.split('?')[1]}`,
+        search: query,
       });
     }
   };
