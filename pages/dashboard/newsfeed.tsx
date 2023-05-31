@@ -48,7 +48,7 @@ const Newsfeed = () => {
               <div className='flex flex-row mt-10 ml-3'>
                 <Image
                   src='/assets/movie-camera.png'
-                  alt='home'
+                  alt='camera for shooting movies'
                   width={512}
                   height={462}
                   className='h-7 w-auto mr-3'
@@ -62,7 +62,7 @@ const Newsfeed = () => {
                 <div className='h-12 flex flex-row items-center bg-violet bg-opacity-80 w-[82%] rounded-lg text-lg'>
                   <Image
                     src='/assets/write-new-quote.png'
-                    alt='home'
+                    alt='write new quote'
                     width={96}
                     height={96}
                     className='h-6 w-auto ml-3 mr-4'
@@ -72,7 +72,7 @@ const Newsfeed = () => {
                 <div className='h-12 flex flex-row items-center mr-3 text-lg'>
                   <Image
                     src='/assets/search-magnifying-glass.png'
-                    alt='home'
+                    alt='search magnifying glass'
                     width={96}
                     height={96}
                     className='h-[1.2rem] w-auto mr-5'
@@ -83,8 +83,14 @@ const Newsfeed = () => {
             </div>
           </div>
 
-          <div className='lg:ml-[27%] lg:w-[46%] w-full border border-red absolute top-[10rem] lg:top-[12rem]'>
-            <NewsItem />
+          <div className='lg:ml-[27%] lg:w-[46%] w-full absolute top-[10rem] lg:top-[12rem]'>
+            <NewsItem
+              userName='Maia Nakashidze'
+              quote='Follow you dream'
+              movie='Casablanca'
+              year='2001'
+              quoteImage='/assets/quote-sample.png'
+            />
           </div>
         </div>
       </div>
