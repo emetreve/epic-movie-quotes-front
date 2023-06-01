@@ -1,13 +1,13 @@
+import { useRouter } from 'next/router';
 import { logOut } from '@/services';
-import { useCheckIfLoggedIn } from '@/hooks';
 
 const useHeader = () => {
-  const { fetch } = useCheckIfLoggedIn();
+  const router = useRouter();
 
   const handleLogout = async () => {
     try {
       await logOut();
-      fetch();
+      router.reload();
     } catch (error) {
       console.log(error);
     }
