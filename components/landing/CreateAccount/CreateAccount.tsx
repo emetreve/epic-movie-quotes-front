@@ -1,7 +1,7 @@
 import { FormProvider } from 'react-hook-form';
 import { PropsType } from './types';
 import Image from 'next/image';
-import { useCreateAccount } from '@/hooks';
+import useCreateAccount from './useCreateAccount';
 import { Error, ValidationIcons } from '@/components';
 
 const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {

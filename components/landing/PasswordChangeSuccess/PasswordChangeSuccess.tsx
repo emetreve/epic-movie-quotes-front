@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { usePasswordChangeSuccess } from '@/hooks';
+import usePasswordChangeSuccess from './usePasswordChangeSuccess';
 
 const PasswordChangeSuccess: React.FC = () => {
   const { handleClick, handleClose } = usePasswordChangeSuccess();

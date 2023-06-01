@@ -13,7 +13,14 @@ const useCheckIfLoggedIn = () => {
     } catch (error) {
       console.log(error);
       setLogged(false);
-      router.push('/');
+
+      const query = router.asPath.includes('?')
+        ? `?${router.asPath.split('?')[1]}`
+        : '';
+      router.push({
+        pathname: '/',
+        search: query,
+      });
     }
   };
 
@@ -21,7 +28,7 @@ const useCheckIfLoggedIn = () => {
     fetch();
   }, []);
 
-  return { logged, setLogged };
+  return { logged, setLogged, fetch };
 };
 
 export default useCheckIfLoggedIn;

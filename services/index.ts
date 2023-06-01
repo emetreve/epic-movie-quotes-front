@@ -1,10 +1,7 @@
 export { default as axiosInstance } from './axios';
-export { default as signUp } from './signup';
-export { default as verifyEmail } from './verifyemail';
-export { default as forgotPassword } from './forgotpassword';
-export { default as resetPassword } from './resetpassword';
 export { default as resendVerifyEmail } from './resendverifyemail';
 export { default as authenticateAppInstance } from './authenticateapp';
 export { default as checkIfLoggedIn } from './checkifloggedin';
 export { default as googleInstance } from './googleInstance';
-export { default as googleAuth } from './googleauth';
+export { signUp, logOut, googleAuth, verifyEmail } from './userauth';
+export { forgotPassword, resetPassword } from './password';

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useVerifiedEmail } from '@/hooks';
+import useVerifiedEmail from './useVerifiedEmail';
 
 const VerifiedEmail: React.FC = () => {
   const { handleClick, handleClose } = useVerifiedEmail();

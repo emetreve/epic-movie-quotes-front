@@ -9,7 +9,7 @@ const LandingHeader: React.FC<PropsType> = ({
     <div className='flex justify-between items-center text-xs lg:text-base px-5 lg:px-16 '>
       <p className='uppercase text-cream text-md lg:text-base'>Movie quotes</p>
       <div className='flex items-center'>
-        <div className='hidden lg:text-white lg:flex lg:items-center lg:static'>
+        <div className='hidden lg:text-white lg:flex lg:items-center lg:static hover:cursor-pointer'>
           <span>Eng</span>
           <Image
             src='/assets/lang-switch.png'

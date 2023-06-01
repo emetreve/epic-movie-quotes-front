@@ -1,7 +1,7 @@
 import { FormProvider } from 'react-hook-form';
 import Image from 'next/image';
 import { Error, ValidationIcons } from '@/components';
-import { useCreateNewPassword } from '@/hooks';
+import useCreateNewPassword from './useCreateNewPassword';
 
 const CreateNewPassword = () => {
   const {
