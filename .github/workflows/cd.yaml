@@ -1,0 +1,40 @@
+name: 'move updated code to server'
+on:
+  push:
+    branches:
+      - main
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Run linting
+        run: npm run lint
+  cd:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'set ssh keys'
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+      - name: 'deploy to server'
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << EOF
+              cd apps
+              cd elene-metreveli-epic-movie-quotes-front
+              git pull
+              npm ci
+              npm run build
+              pm2 restart nextjs-example-process
+          EOF
