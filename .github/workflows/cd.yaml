@@ -1,4 +1,4 @@
-name: 'move updated code to server'
+name: 'lint and move updated code to server'
 on:
   push:
     branches:
