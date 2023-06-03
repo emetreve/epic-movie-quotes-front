@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { useNewsFeed } from '@/hooks';
 import { Header, NewsItem } from '@/components';
 
@@ -32,7 +33,9 @@ const Newsfeed = () => {
                 />
                 <div className='ml-3 pt-1'>
                   <p className='text-xl'>Nino Tabagari</p>
-                  <p className='text-gray-400'>Edit your profile</p>
+                  <Link href='/dashboard/profile'>
+                    <p className='text-gray-400'>Edit your profile</p>
+                  </Link>
                 </div>
               </div>
               <div className='flex flex-row mt-9 ml-3'>
