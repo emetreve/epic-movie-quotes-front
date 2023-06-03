@@ -159,7 +159,7 @@ const Profile = () => {
                         className='bg-input-gray mt-1 w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
                       />
                     </div>
-                    <p className=' text-input-gray hover:cursor-pointer ml-8 pt-5'>
+                    <p className=' text-input-gray hover:cursor-pointer ml-8 pt-6'>
                       Edit
                     </p>
                   </div>
@@ -201,7 +201,7 @@ const Profile = () => {
                           />
                         </div>
                       </div>
-                      <p className='text-input-gray hover:cursor-pointer ml-8 pt-5'>
+                      <p className='text-input-gray hover:cursor-pointer ml-8 pt-6'>
                         Edit
                       </p>
                     </div>
