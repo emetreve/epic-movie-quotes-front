@@ -37,7 +37,11 @@ const Profile = () => {
                   height={462}
                   className='h-7 w-auto mr-3'
                 />
-                <p className='text-xl inline-block ml-5'>News feed</p>
+                <Link href='/dashboard/newsfeed'>
+                  <p className='text-xl inline-block ml-5 hover:cursor-pointer'>
+                    News feed
+                  </p>
+                </Link>
               </div>
               <div className='flex flex-row mt-10 ml-3'>
                 <Image
