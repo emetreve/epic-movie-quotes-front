@@ -31,6 +31,7 @@ module.exports = {
         'txt-black': '#212529',
         'news-bg': '#000000',
         'comment-input-bg': 'rgba(36, 34, 47, 0.6)',
+        'profile-dark-blue': '#11101A',
       },
     },
   },
