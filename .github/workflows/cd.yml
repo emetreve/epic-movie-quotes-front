@@ -1,0 +1,24 @@
+name: 'move updated code to server'
+on:
+  push:
+    branches:
+      - main
+jobs:
+  cd:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'set ssh keys'
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+      - name: 'deploy to server'
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << EOF
+              cd apps
+              cd elene-metreveli-epic-movie-quotes-front
+              git pull
+              npm ci
+              npm run build
+              pm2 restart nextjs-example
+          EOF
