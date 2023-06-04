@@ -37,7 +37,7 @@ const useChangeName = () => {
 
   const handleConfirm = () => {
     console.log(username);
-    //TODO: make request to server to change username
+    //TODO: make request to server to change username and if successsful show success banner
     setShowConfirmModal(false);
     showUpdateName(false);
   };
