@@ -4,12 +4,14 @@ import { useProfile } from '@/hooks';
 import { Header, ChangeName } from '@/components';
 
 const Profile = () => {
-  const { logged, user, showEditName, showUpdateName } = useProfile();
+  const { logged, user, showEditName, showUpdateName, showSuccess } =
+    useProfile();
 
   if (logged) {
     return (
       <>
         {showEditName && <ChangeName />}
+        {showSuccess && <h1 className='text-red'>SUCCESS</h1>}
         <div className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'>
           <Header hideSearch={true} />
 

@@ -42,13 +42,15 @@ const useChangeName = () => {
 
   const handleConfirm = async () => {
     console.log(username);
-    //TODO: make request to server to change username and if successsful show success banner
     try {
       const response = await updateUser({ username: username });
       console.log(response);
       setShowConfirmModal(false);
       showUpdateName(false);
-      router.reload();
+      router.push({
+        pathname: router.pathname,
+        query: { status: 'success' },
+      });
     } catch (error: any) {
       console.log(error);
     }
