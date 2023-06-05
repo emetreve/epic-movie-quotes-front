@@ -10,7 +10,8 @@ const useProfile = () => {
 
   const { logged, user } = useCheckIfLoggedIn();
 
-  const { showEditName, showUpdateName } = useUiContext();
+  const { showEditName, showUpdateName, showUpdatePassword, showEditPassword } =
+    useUiContext();
 
   useEffect(() => {
     if (status === 'success') {
@@ -32,6 +33,8 @@ const useProfile = () => {
     showUpdateName,
     showSuccess,
     setShowSuccess,
+    showUpdatePassword,
+    showEditPassword,
   };
 };
 

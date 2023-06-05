@@ -1,7 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useProfile } from '@/hooks';
-import { Header, ChangeName, SuccessNotification } from '@/components';
+import {
+  Header,
+  ChangeName,
+  SuccessNotification,
+  ChangePassword,
+} from '@/components';
 
 const Profile = () => {
   const {
@@ -11,12 +16,16 @@ const Profile = () => {
     showUpdateName,
     showSuccess,
     setShowSuccess,
+    showUpdatePassword,
+    showEditPassword,
   } = useProfile();
 
   if (logged) {
     return (
       <>
         {showEditName && <ChangeName />}
+
+        {showEditPassword && <ChangePassword />}
 
         <div className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'>
           <Header hideSearch={true} />
@@ -142,7 +151,12 @@ const Profile = () => {
                         height={7552}
                         className='h-2 w-auto absolute bottom-[1.2rem]'
                       />
-                      <p className='absolute bottom-[1.2rem] text-sm text-input-gray w-5 h-5 hover:cursor-pointer block right-4'>
+                      <p
+                        onClick={() => {
+                          showUpdatePassword(true);
+                        }}
+                        className='absolute bottom-[1.2rem] text-sm text-input-gray w-5 h-5 hover:cursor-pointer block right-4'
+                      >
                         Edit
                       </p>
                     </div>
