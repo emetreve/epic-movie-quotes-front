@@ -102,12 +102,12 @@ const Profile = () => {
               </div>
               <div className='mt-9 w-full px-6'>
                 <div className='flex flex-col mt-1'>
-                  <label htmlFor='username' className='mb-1 text-xs'>
+                  <label htmlFor='username_read' className='mb-1 text-xs'>
                     Username
                   </label>
                   <div className='relative'>
                     <input
-                      id='username'
+                      id='username_read'
                       placeholder={user.name}
                       readOnly
                       className={`bg-transparent w-full text-sm border-b pb-[1rem]  border-input-gray placeholder-white`}
@@ -123,11 +123,11 @@ const Profile = () => {
                   </div>
                 </div>
                 <div className='flex flex-col mt-8'>
-                  <label htmlFor='email' className='mb-1 text-xs'>
+                  <label htmlFor='email_read' className='mb-1 text-xs'>
                     Email
                   </label>
                   <input
-                    id='email'
+                    id='email_read'
                     readOnly
                     placeholder={user.email}
                     className={`bg-transparent w-full text-sm border-b pb-[1rem]  border-input-gray placeholder-white`}
@@ -135,12 +135,12 @@ const Profile = () => {
                 </div>
                 {!user.is_google_user && (
                   <div className='flex flex-col mt-8'>
-                    <label htmlFor='password' className='mb-1 text-xs'>
+                    <label htmlFor='password_read' className='mb-1 text-xs'>
                       Password
                     </label>
                     <div className='relative'>
                       <input
-                        id='password'
+                        id='password_read'
                         readOnly
                         className={`bg-transparent w-full text-sm border-b pb-[1rem]  border-input-gray placeholder-white`}
                       />
@@ -184,11 +184,14 @@ const Profile = () => {
                   <div className='flex flex-col mt-1 w-[100%]'>
                     <div className='flex justify-center items-center'>
                       <div className='flex-grow'>
-                        <label htmlFor='username' className='mb-1 text-xs'>
+                        <label
+                          htmlFor='username_read_lg'
+                          className='mb-1 text-xs'
+                        >
                           Username
                         </label>
                         <input
-                          id='username'
+                          id='username_read_lg'
                           placeholder={user.name}
                           readOnly
                           className='bg-input-gray mt-1 w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
@@ -202,11 +205,11 @@ const Profile = () => {
                   <div className='flex flex-col mt-9 w-[87%]'>
                     <div className='flex justify-center items-center'>
                       <div className='flex-grow'>
-                        <label htmlFor='email' className='mb-1 text-xs'>
+                        <label htmlFor='email_read_lg' className='mb-1 text-xs'>
                           Email
                         </label>
                         <input
-                          id='email'
+                          id='email_read_lg'
                           placeholder={user.email}
                           readOnly
                           className='bg-input-gray mt-1 w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
@@ -218,12 +221,15 @@ const Profile = () => {
                     <div className='flex flex-col mt-9 w-[100%]'>
                       <div className='flex justify-center items-center'>
                         <div className='flex-grow'>
-                          <label htmlFor='password' className='mb-1 text-xs'>
+                          <label
+                            htmlFor='password_read_lg'
+                            className='mb-1 text-xs'
+                          >
                             Password
                           </label>
                           <div className='relative'>
                             <input
-                              id='password'
+                              id='password_read_lg'
                               readOnly
                               className='bg-input-gray mt-1  w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
                             />

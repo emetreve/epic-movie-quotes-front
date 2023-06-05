@@ -8,6 +8,8 @@ import { ChangeUserData } from '@/types';
 const useChangePassword = () => {
   const [showNameForm, setShowNameForm] = useState(true);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [hidePassword, setHidePassword] = useState(true);
+  const [hidePasswordConfirm, setHidePasswordConfirm] = useState(true);
   const router = useRouter();
   const { showUpdatePassword } = useUiContext();
 
@@ -90,6 +92,10 @@ const useChangePassword = () => {
     handleConfirm,
     pass,
     pass_confirmation,
+    hidePassword,
+    setHidePassword,
+    hidePasswordConfirm,
+    setHidePasswordConfirm,
   };
 };
 export default useChangePassword;

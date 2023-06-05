@@ -22,6 +22,10 @@ const ChangePassword = () => {
     setShowConfirmModal,
     setShowNameForm,
     handleConfirm,
+    hidePassword,
+    setHidePassword,
+    hidePasswordConfirm,
+    setHidePasswordConfirm,
   } = useChangePassword();
 
   return (
@@ -51,6 +55,7 @@ const ChangePassword = () => {
                 </label>
                 <div className='relative'>
                   <input
+                    type={hidePassword ? 'password' : 'text'}
                     id='password'
                     {...register('password', {
                       required: 'This field is required.',
@@ -78,8 +83,18 @@ const ChangePassword = () => {
                     } bg-input-gray mt-1 w-full py-2 border-2 rounded-md px-4 placeholder-txt-black`}
                   />
                   <div className='-mt-[0.15rem]'>
-                    <ValidationIcons name='password' />
+                    <ValidationIcons name='password' password_related={true} />
                   </div>
+                  <Image
+                    onClick={() => {
+                      setHidePassword((prev) => !prev);
+                    }}
+                    src='/assets/eye-password.png'
+                    alt='show password'
+                    width={200}
+                    height={200}
+                    className='absolute right-4 bottom-[0.7rem] w-4 h-4 hover:cursor-pointer'
+                  />
                 </div>
                 <div className='h-2 pt-[0.3rem]'>
                   <p className='text-red text-xs'>
@@ -94,6 +109,7 @@ const ChangePassword = () => {
                 </label>
                 <div className='relative'>
                   <input
+                    type={hidePasswordConfirm ? 'password' : 'text'}
                     id='password_confirmation'
                     {...register('password_confirmation', {
                       required: 'This field is required.',
@@ -109,8 +125,21 @@ const ChangePassword = () => {
                     } bg-input-gray mt-1 w-full py-2 border-2 rounded-md px-4 placeholder-txt-black`}
                   />
                   <div className='-mt-[0.15rem]'>
-                    <ValidationIcons name='password_confirmation' />
+                    <ValidationIcons
+                      name='password_confirmation'
+                      password_related={true}
+                    />
                   </div>
+                  <Image
+                    onClick={() => {
+                      setHidePasswordConfirm((prev) => !prev);
+                    }}
+                    src='/assets/eye-password.png'
+                    alt='show password'
+                    width={200}
+                    height={200}
+                    className='absolute right-4 bottom-[0.7rem] w-4 h-4 hover:cursor-pointer'
+                  />
                 </div>
                 <div className='h-2 pt-[0.3rem]'>
                   <p className='text-red text-xs'>
