@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { FormProvider } from 'react-hook-form';
 import { Header } from '@/components';
 import useChangeName from './useChangeName';
+import { ValidationIcons } from '@/components';
 
 const ChangeName = () => {
   const {
@@ -46,33 +47,39 @@ const ChangeName = () => {
                 <label htmlFor='username' className='mb-1 text-xs text-white'>
                   Enter your username
                 </label>
-                <input
-                  id='username'
-                  {...register('username', {
-                    required: 'This field is required.',
-                    minLength: {
-                      value: 3,
-                      message: 'This field must have at least 3 characters.',
-                    },
-                    maxLength: {
-                      value: 15,
-                      message: "This field can't have more than 15 characters.",
-                    },
-                    pattern: {
-                      value: /^[a-z0-9]+$/,
-                      message:
-                        'Only lowercase letters and numbers are allowed.',
-                    },
-                  })}
-                  className={`${
-                    applyInputStyle()
-                      ? 'border-red'
-                      : formState.dirtyFields['username']
-                      ? 'border-green'
-                      : ''
-                  } bg-input-gray mt-1 w-full py-2 border-2 rounded-md px-4 placeholder-txt-black`}
-                />
-                <div className='h-2 pt-[0.15rem]'>
+                <div className='relative'>
+                  <input
+                    id='username'
+                    {...register('username', {
+                      required: 'This field is required.',
+                      minLength: {
+                        value: 3,
+                        message: 'This field must have at least 3 characters.',
+                      },
+                      maxLength: {
+                        value: 15,
+                        message:
+                          "This field can't have more than 15 characters.",
+                      },
+                      pattern: {
+                        value: /^[a-z0-9]+$/,
+                        message:
+                          'Only lowercase letters and numbers are allowed.',
+                      },
+                    })}
+                    className={`${
+                      applyInputStyle()
+                        ? 'border-red'
+                        : formState.dirtyFields['username']
+                        ? 'border-green'
+                        : ''
+                    } bg-input-gray mt-1 w-full py-2 border-2 rounded-md px-4 placeholder-txt-black`}
+                  />
+                  <div className='-mt-[0.15rem]'>
+                    <ValidationIcons name='username' />
+                  </div>
+                </div>
+                <div className='h-2 pt-[0.4rem]'>
                   <p className='text-red text-xs'>
                     {errors['username']?.message}
                   </p>
