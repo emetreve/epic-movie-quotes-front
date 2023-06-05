@@ -54,6 +54,15 @@ const ChangeName = () => {
                       value: 3,
                       message: 'This field must have at least 3 characters.',
                     },
+                    maxLength: {
+                      value: 15,
+                      message: "This field can't have more than 15 characters.",
+                    },
+                    pattern: {
+                      value: /^[a-z0-9]+$/,
+                      message:
+                        'Only lowercase letters and numbers are allowed.',
+                    },
                   })}
                   className={`${
                     applyInputStyle()

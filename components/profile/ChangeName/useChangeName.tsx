@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
+import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
+import { updateUser } from '@/services';
 
 const useChangeName = () => {
   const [showNameForm, setShowNameForm] = useState(true);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const router = useRouter();
   const { showUpdateName } = useUiContext();
 
   const methods = useForm({
@@ -37,11 +40,18 @@ const useChangeName = () => {
     setShowConfirmModal(true);
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     console.log(username);
     //TODO: make request to server to change username and if successsful show success banner
-    setShowConfirmModal(false);
-    showUpdateName(false);
+    try {
+      const response = await updateUser({ username: username });
+      console.log(response);
+      setShowConfirmModal(false);
+      showUpdateName(false);
+      router.reload();
+    } catch (error: any) {
+      console.log(error);
+    }
   };
 
   return {
