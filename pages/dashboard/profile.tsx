@@ -18,6 +18,8 @@ const Profile = () => {
     setShowSuccess,
     showUpdatePassword,
     showEditPassword,
+    showUsernameInput,
+    setShowUsernameInput,
   } = useProfile();
 
   if (logged) {
@@ -197,11 +199,32 @@ const Profile = () => {
                           className='bg-input-gray mt-1 w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
                         />
                       </div>
-                      <p className=' text-input-gray hover:cursor-pointer ml-8 pt-6'>
+                      <button
+                        onClick={() => setShowUsernameInput(true)}
+                        className='text-input-gray hover:cursor-pointer ml-8 pt-6'
+                      >
                         Edit
-                      </p>
+                      </button>
                     </div>
                   </div>
+
+                  {showUsernameInput && (
+                    <div className='flex flex-col mt-9 w-[87%]'>
+                      <div className='flex justify-center items-center'>
+                        <div className='flex-grow'>
+                          <label htmlFor='username' className='mb-1 text-xs'>
+                            New username
+                          </label>
+                          <input
+                            placeholder='Enter new username'
+                            id='username'
+                            className='bg-input-gray text-txt-black mt-1 w-full py-2 rounded-md px-4 border-input-gray placeholder-gray'
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   <div className='flex flex-col mt-9 w-[87%]'>
                     <div className='flex justify-center items-center'>
                       <div className='flex-grow'>

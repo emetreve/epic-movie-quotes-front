@@ -5,6 +5,8 @@ import { useUiContext } from '@/store';
 
 const useProfile = () => {
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showUsernameInput, setShowUsernameInput] = useState(false);
+
   const router = useRouter();
   const { status } = router.query;
 
@@ -35,6 +37,8 @@ const useProfile = () => {
     setShowSuccess,
     showUpdatePassword,
     showEditPassword,
+    showUsernameInput,
+    setShowUsernameInput,
   };
 };
 
