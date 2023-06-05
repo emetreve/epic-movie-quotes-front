@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { FormProvider } from 'react-hook-form';
 import { useProfile } from '@/hooks';
 import {
   Header,
@@ -20,6 +21,9 @@ const Profile = () => {
     showEditPassword,
     showUsernameInput,
     setShowUsernameInput,
+    methods,
+    handleSubmit,
+    onSubmit,
   } = useProfile();
 
   if (logged) {
@@ -169,111 +173,129 @@ const Profile = () => {
           </div>
 
           <div className='lg:block hidden'>
-            <div className='text-white ml-[30%] w-[42%] top-[8rem] -mt-[12rem]'>
-              <h1 className='text-2xl mb-5 block'>My profile</h1>
-              <div className='flex flex-col items-center justify-center'>
-                <Image
-                  src='/assets/avatar-default.png'
-                  alt='user headshot'
-                  width={512}
-                  height={512}
-                  className='h-36 w-auto mb-2'
-                />
-                <p className='text-base'>Upload new photo</p>
-              </div>
-              <div className='-mt-[7.6rem] bg-profile-dark-blue backdrop-blur-25 rounded-xl pt-6 pb-36 flex flex-col items-center'>
-                <div className='mt-32 w-full px-44 scale-110'>
-                  <div className='flex flex-col mt-1 w-[100%]'>
-                    <div className='flex justify-center items-center'>
-                      <div className='flex-grow'>
-                        <label
-                          htmlFor='username_read_lg'
-                          className='mb-1 text-xs'
-                        >
-                          Username
-                        </label>
-                        <input
-                          id='username_read_lg'
-                          placeholder={user.name}
-                          readOnly
-                          className='bg-input-gray mt-1 w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
-                        />
-                      </div>
-                      <button
-                        onClick={() => setShowUsernameInput(true)}
-                        className='text-input-gray hover:cursor-pointer ml-8 pt-6'
-                      >
-                        Edit
-                      </button>
-                    </div>
+            <FormProvider {...methods}>
+              <form noValidate onSubmit={handleSubmit(onSubmit)}>
+                <div className='text-white ml-[30%] w-[42%] top-[8rem] -mt-[12rem]'>
+                  <h1 className='text-2xl mb-5 block'>My profile</h1>
+                  <div className='flex flex-col items-center justify-center'>
+                    <Image
+                      src='/assets/avatar-default.png'
+                      alt='user headshot'
+                      width={512}
+                      height={512}
+                      className='h-36 w-auto mb-2'
+                    />
+                    <p className='text-base'>Upload new photo</p>
                   </div>
-
-                  {showUsernameInput && (
-                    <div className='flex flex-col mt-9 w-[87%]'>
-                      <div className='flex justify-center items-center'>
-                        <div className='flex-grow'>
-                          <label htmlFor='username' className='mb-1 text-xs'>
-                            New username
-                          </label>
-                          <input
-                            placeholder='Enter new username'
-                            id='username'
-                            className='bg-input-gray text-txt-black mt-1 w-full py-2 rounded-md px-4 border-input-gray placeholder-gray'
-                          />
+                  <div className='-mt-[7.6rem] bg-profile-dark-blue backdrop-blur-25 rounded-xl pt-6 pb-36 flex flex-col items-center'>
+                    <div className='mt-32 w-full px-44 scale-110'>
+                      <div className='flex flex-col mt-1 w-[100%]'>
+                        <div className='flex justify-center items-center'>
+                          <div className='flex-grow'>
+                            <label
+                              htmlFor='username_read_lg'
+                              className='mb-1 text-xs'
+                            >
+                              Username
+                            </label>
+                            <input
+                              id='username_read_lg'
+                              placeholder={user.name}
+                              readOnly
+                              className='bg-input-gray mt-1 w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
+                            />
+                          </div>
+                          <button
+                            onClick={() => setShowUsernameInput(true)}
+                            className='text-input-gray hover:cursor-pointer ml-8 pt-6'
+                          >
+                            Edit
+                          </button>
                         </div>
                       </div>
-                    </div>
-                  )}
 
-                  <div className='flex flex-col mt-9 w-[87%]'>
-                    <div className='flex justify-center items-center'>
-                      <div className='flex-grow'>
-                        <label htmlFor='email_read_lg' className='mb-1 text-xs'>
-                          Email
-                        </label>
-                        <input
-                          id='email_read_lg'
-                          placeholder={user.email}
-                          readOnly
-                          className='bg-input-gray mt-1 w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  {!user.is_google_user && (
-                    <div className='flex flex-col mt-9 w-[100%]'>
-                      <div className='flex justify-center items-center'>
-                        <div className='flex-grow'>
-                          <label
-                            htmlFor='password_read_lg'
-                            className='mb-1 text-xs'
-                          >
-                            Password
-                          </label>
-                          <div className='relative'>
+                      {showUsernameInput && (
+                        <div className='flex flex-col mt-9 w-[87%]'>
+                          <div className='flex justify-center items-center'>
+                            <div className='flex-grow'>
+                              <label
+                                htmlFor='username'
+                                className='mb-1 text-xs'
+                              >
+                                New username
+                              </label>
+                              <input
+                                placeholder='Enter new username'
+                                id='username'
+                                className='bg-input-gray text-txt-black mt-1 w-full py-2 rounded-md px-4 border-input-gray placeholder-gray'
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      <div className='flex flex-col mt-9 w-[87%]'>
+                        <div className='flex justify-center items-center'>
+                          <div className='flex-grow'>
+                            <label
+                              htmlFor='email_read_lg'
+                              className='mb-1 text-xs'
+                            >
+                              Email
+                            </label>
                             <input
-                              id='password_read_lg'
+                              id='email_read_lg'
+                              placeholder={user.email}
                               readOnly
-                              className='bg-input-gray mt-1  w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
-                            />
-                            <Image
-                              src='/assets/password-dark.png'
-                              alt='password'
-                              width={512}
-                              height={7552}
-                              className='h-2 ml-4 top-5 w-auto absolute bottom-[1.2rem]'
+                              className='bg-input-gray mt-1 w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
                             />
                           </div>
                         </div>
-                        <p className='text-input-gray hover:cursor-pointer ml-8 pt-6'>
-                          Edit
-                        </p>
                       </div>
+                      {!user.is_google_user && (
+                        <div className='flex flex-col mt-9 w-[100%]'>
+                          <div className='flex justify-center items-center'>
+                            <div className='flex-grow'>
+                              <label
+                                htmlFor='password_read_lg'
+                                className='mb-1 text-xs'
+                              >
+                                Password
+                              </label>
+                              <div className='relative'>
+                                <input
+                                  id='password_read_lg'
+                                  readOnly
+                                  className='bg-input-gray mt-1  w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
+                                />
+                                <Image
+                                  src='/assets/password-dark.png'
+                                  alt='password'
+                                  width={512}
+                                  height={7552}
+                                  className='h-2 ml-4 top-5 w-auto absolute bottom-[1.2rem]'
+                                />
+                              </div>
+                            </div>
+                            <p className='text-input-gray hover:cursor-pointer ml-8 pt-6'>
+                              Edit
+                            </p>
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  )}
+                  </div>
+                  <div className='flex flex-row'>
+                    <p className='relative left-[35.5rem] mt-14 py-[0.6rem] text-input-gray'>
+                      Cancell
+                    </p>
+                    <button className='text-white relative left-[37.7rem] mt-14 bg-red py-[0.6rem] px-4 text-lg rounded-md mr-5 hover:bg-red-hover'>
+                      Save changes
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </form>
+            </FormProvider>
           </div>
         </div>
       </>
