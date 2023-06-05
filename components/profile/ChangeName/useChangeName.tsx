@@ -23,6 +23,7 @@ const useChangeName = () => {
     formState: { errors },
     formState,
     control,
+    setError,
   } = methods;
 
   const username = useWatch({
@@ -53,6 +54,14 @@ const useChangeName = () => {
       });
     } catch (error: any) {
       console.log(error);
+      if (error?.response?.data?.message) {
+        setError('username', {
+          type: 'manual',
+          message: error.response.data.message,
+        });
+        setShowConfirmModal(false);
+        setShowNameForm(true);
+      }
     }
   };
 
