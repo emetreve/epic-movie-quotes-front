@@ -1,7 +1,8 @@
 import Image from 'next/image';
+import { PropsType } from './types';
 import useHeader from './useHeader';
 
-const Header = () => {
+const Header: React.FC<PropsType> = ({ hideSearch }) => {
   const { handleLogout } = useHeader();
 
   return (
@@ -15,13 +16,15 @@ const Header = () => {
           className='lg:hidden inline h-5 w-auto hover:cursor-pointer'
         />
         <div className='flex items-center'>
-          <Image
-            src='/assets/search-magnifying-glass.png'
-            alt='search magnifying glass'
-            width={96}
-            height={96}
-            className='lg:hidden inline ml-2 h-5 w-auto hover:cursor-pointer'
-          />
+          {!hideSearch && (
+            <Image
+              src='/assets/search-magnifying-glass.png'
+              alt='search magnifying glass'
+              width={96}
+              height={96}
+              className='lg:hidden inline ml-2 h-5 w-auto hover:cursor-pointer'
+            />
+          )}
           <Image
             src='/assets/notifications-bell.png'
             alt='notifications bell'
