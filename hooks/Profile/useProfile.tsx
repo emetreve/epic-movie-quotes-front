@@ -31,7 +31,9 @@ const useProfile = () => {
 
   const methods = useForm({
     defaultValues: {
-      username: '',
+      username_lg: '',
+      password: '',
+      password_confirmation: '',
     },
     mode: 'onChange',
   });
@@ -48,6 +50,7 @@ const useProfile = () => {
   const onSubmit = (): void => {
     // setShowNameForm(false);
     // setShowConfirmModal(true);
+    console.log('here');
   };
 
   return {
@@ -64,6 +67,7 @@ const useProfile = () => {
     methods,
     handleSubmit,
     onSubmit,
+    register,
   };
 };
 

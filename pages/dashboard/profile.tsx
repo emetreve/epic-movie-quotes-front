@@ -7,6 +7,7 @@ import {
   ChangeName,
   SuccessNotification,
   ChangePassword,
+  ValidationIcons,
 } from '@/components';
 
 const Profile = () => {
@@ -24,6 +25,7 @@ const Profile = () => {
     methods,
     handleSubmit,
     onSubmit,
+    register,
   } = useProfile();
 
   if (logged) {
@@ -214,25 +216,49 @@ const Profile = () => {
                         </div>
                       </div>
 
-                      {showUsernameInput && (
-                        <div className='flex flex-col mt-9 w-[87%]'>
-                          <div className='flex justify-center items-center'>
-                            <div className='flex-grow'>
-                              <label
-                                htmlFor='username'
-                                className='mb-1 text-xs'
-                              >
-                                New username
-                              </label>
+                      <div
+                        className={` ${
+                          !showUsernameInput && 'hidden'
+                        } flex flex-col mt-9 w-[87%]`}
+                      >
+                        <div className='flex justify-center items-center'>
+                          <div className='flex-grow'>
+                            <label
+                              htmlFor='username_lg'
+                              className='mb-1 text-xs'
+                            >
+                              New username
+                            </label>
+                            <div className='relative'>
                               <input
+                                {...register('username_lg', {
+                                  minLength: {
+                                    value: 3,
+                                    message:
+                                      'This field must have at least 3 characters.',
+                                  },
+                                  maxLength: {
+                                    value: 15,
+                                    message:
+                                      "This field can't have more than 15 characters.",
+                                  },
+                                  pattern: {
+                                    value: /^[a-z0-9]+$/,
+                                    message:
+                                      'Only lowercase letters and numbers are allowed.',
+                                  },
+                                })}
                                 placeholder='Enter new username'
-                                id='username'
+                                id='username_lg'
                                 className='bg-input-gray text-txt-black mt-1 w-full py-2 rounded-md px-4 border-input-gray placeholder-gray'
                               />
+                              <div className='-mt-[0.15rem]'>
+                                <ValidationIcons name='username_lg' />
+                              </div>
                             </div>
                           </div>
                         </div>
-                      )}
+                      </div>
 
                       <div className='flex flex-col mt-9 w-[87%]'>
                         <div className='flex justify-center items-center'>
