@@ -1,19 +1,27 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useProfile } from '@/hooks';
-import { Header, ChangeName } from '@/components';
+import { Header, ChangeName, SuccessNotification } from '@/components';
 
 const Profile = () => {
-  const { logged, user, showEditName, showUpdateName, showSuccess } =
-    useProfile();
+  const {
+    logged,
+    user,
+    showEditName,
+    showUpdateName,
+    showSuccess,
+    setShowSuccess,
+  } = useProfile();
 
   if (logged) {
     return (
       <>
         {showEditName && <ChangeName />}
-        {showSuccess && <h1 className='text-red'>SUCCESS</h1>}
+
         <div className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'>
           <Header hideSearch={true} />
+
+          {showSuccess && <SuccessNotification show={setShowSuccess} />}
 
           <div>
             <div className='hidden lg:flex text-white px-16 pt-10'>
