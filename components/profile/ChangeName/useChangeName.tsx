@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { useUiContext } from '@/store';
 
 const useChangeName = () => {
@@ -18,12 +18,14 @@ const useChangeName = () => {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
     formState,
+    control,
   } = methods;
 
-  const username = watch('username');
-
+  const username = useWatch({
+    control,
+    name: 'username',
+  });
   const applyInputStyle = (): boolean => {
     const dirty = formState.dirtyFields['username'];
     const errorMessage = errors['username']?.message;

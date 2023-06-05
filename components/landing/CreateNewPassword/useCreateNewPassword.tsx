@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormData } from './types';
 import { useMutation } from 'react-query';
 import { useUiContext } from '@/store';
@@ -27,12 +27,14 @@ const useCreateNewPassword = () => {
     formState: { errors },
     trigger,
     reset,
-    watch,
+    control,
     formState,
   } = methods;
 
-  const password = watch('password');
-
+  const password = useWatch({
+    control,
+    name: 'password',
+  });
   const applyInputStyle = (val: string): boolean => {
     const dirty = formState.dirtyFields[val as keyof FormData];
     const errorMessage = errors[val as keyof FormData]?.message;
