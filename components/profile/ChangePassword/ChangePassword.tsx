@@ -17,15 +17,15 @@ const ChangePassword = () => {
     methods,
     handleSubmit,
     onSubmit,
-    showNameForm,
     showConfirmModal,
     setShowConfirmModal,
-    setShowNameForm,
-    handleConfirm,
     hidePassword,
     setHidePassword,
     hidePasswordConfirm,
     setHidePasswordConfirm,
+    showPassForm,
+    setShowPassForm,
+    handleConfirm,
   } = useChangePassword();
 
   return (
@@ -45,7 +45,7 @@ const ChangePassword = () => {
           />
         </Link>
       </div>
-      {showNameForm && (
+      {showPassForm && (
         <FormProvider {...methods}>
           <form noValidate onSubmit={handleSubmit(onSubmit)}>
             <div className='bg-violet bg-opacity-80 py-16 px-8 rounded-lg'>
@@ -168,6 +168,7 @@ const ChangePassword = () => {
           </form>
         </FormProvider>
       )}
+
       {showConfirmModal && (
         <div className='rounded-lg flex flex-col items-center justify-center h-[11rem] mt-20 bg-gradient-gray mx-8'>
           <p className='text-white pb-8 text-sm pt-10'>
@@ -178,7 +179,7 @@ const ChangePassword = () => {
             <p
               onClick={() => {
                 setShowConfirmModal(false);
-                setShowNameForm(true);
+                setShowPassForm(true);
               }}
               className='text-input-gray hover:cursor-pointer mt-5 ml-5 py-[0.4rem]'
             >

@@ -3,10 +3,10 @@ import { useForm, useWatch } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
 import { updateUser } from '@/services';
-import { ChangeUserData } from '@/types';
 
 const useChangePassword = () => {
-  const [showNameForm, setShowNameForm] = useState(true);
+  const [showPassForm, setShowPassForm] = useState(true);
+
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [hidePassword, setHidePassword] = useState(true);
   const [hidePasswordConfirm, setHidePasswordConfirm] = useState(true);
@@ -27,7 +27,6 @@ const useChangePassword = () => {
     formState: { errors },
     formState,
     control,
-    setError,
   } = methods;
 
   const [pass, pass_confirmation] = useWatch({
@@ -47,32 +46,27 @@ const useChangePassword = () => {
   };
 
   const onSubmit = (): void => {
-    // setShowNameForm(false);
-    // setShowConfirmModal(true);
+    setShowPassForm(false);
+    setShowConfirmModal(true);
   };
 
   const handleConfirm = async () => {
     console.log(pass, pass_confirmation);
-    // try {
-    //   const response = await updateUser({ username: username });
-    //   console.log(response);
-    //   setShowConfirmModal(false);
-    //   showUpdateName(false);
-    //   router.push({
-    //     pathname: router.pathname,
-    //     query: { status: 'success' },
-    //   });
-    // } catch (error: any) {
-    //   console.log(error);
-    //   if (error?.response?.data?.message) {
-    //     setError('username', {
-    //       type: 'manual',
-    //       message: error.response.data.message,
-    //     });
-    //     setShowConfirmModal(false);
-    //     setShowNameForm(true);
-    //   }
-    // }
+    try {
+      const response = await updateUser({
+        password: pass,
+        password_confirmation: pass_confirmation,
+      });
+      console.log(response);
+      setShowConfirmModal(false);
+      showUpdatePassword(false);
+      router.push({
+        pathname: router.pathname,
+        query: { status: 'success' },
+      });
+    } catch (error: any) {
+      console.log(error);
+    }
   };
 
   return {
@@ -85,17 +79,16 @@ const useChangePassword = () => {
     errors,
     onSubmit,
     handleSubmit,
-    showNameForm,
     showConfirmModal,
     setShowConfirmModal,
-    setShowNameForm,
     handleConfirm,
     pass,
-    pass_confirmation,
     hidePassword,
     setHidePassword,
     hidePasswordConfirm,
     setHidePasswordConfirm,
+    showPassForm,
+    setShowPassForm,
   };
 };
 export default useChangePassword;
