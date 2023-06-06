@@ -8,6 +8,7 @@ import {
   SuccessNotification,
   ChangePassword,
   ValidationIcons,
+  PasswordConditionsBox,
 } from '@/components';
 
 const Profile = () => {
@@ -26,6 +27,10 @@ const Profile = () => {
     handleSubmit,
     onSubmit,
     register,
+    showPasswordInputs,
+    setShowPasswordInputs,
+    applyInputStyle,
+    formState,
   } = useProfile();
 
   if (logged) {
@@ -223,15 +228,12 @@ const Profile = () => {
                       >
                         <div className='flex justify-center items-center'>
                           <div className='flex-grow'>
-                            <label
-                              htmlFor='username_lg'
-                              className='mb-1 text-xs'
-                            >
+                            <label htmlFor='username' className='mb-1 text-xs'>
                               New username
                             </label>
                             <div className='relative'>
                               <input
-                                {...register('username_lg', {
+                                {...register('username', {
                                   minLength: {
                                     value: 3,
                                     message:
@@ -249,11 +251,17 @@ const Profile = () => {
                                   },
                                 })}
                                 placeholder='Enter new username'
-                                id='username_lg'
-                                className='bg-input-gray text-txt-black mt-1 w-full py-2 rounded-md px-4 border-input-gray placeholder-gray'
+                                id='username'
+                                className={`${
+                                  applyInputStyle('username')
+                                    ? 'border-red'
+                                    : formState.dirtyFields['username']
+                                    ? 'border-green'
+                                    : ''
+                                } bg-input-gray border-2 text-txt-black mt-1 w-full py-2 rounded-md px-4 placeholder-gray`}
                               />
                               <div className='-mt-[0.15rem]'>
-                                <ValidationIcons name='username_lg' />
+                                <ValidationIcons name='username' />
                               </div>
                             </div>
                           </div>
@@ -279,35 +287,47 @@ const Profile = () => {
                         </div>
                       </div>
                       {!user.is_google_user && (
-                        <div className='flex flex-col mt-9 w-[100%]'>
-                          <div className='flex justify-center items-center'>
-                            <div className='flex-grow'>
-                              <label
-                                htmlFor='password_read_lg'
-                                className='mb-1 text-xs'
+                        <>
+                          <div className='flex flex-col mt-9 w-[100%]'>
+                            <div className='flex justify-center items-center'>
+                              <div className='flex-grow'>
+                                <label
+                                  htmlFor='password_read_lg'
+                                  className='mb-1 text-xs'
+                                >
+                                  Password
+                                </label>
+                                <div className='relative'>
+                                  <input
+                                    id='password_read_lg'
+                                    readOnly
+                                    className='bg-input-gray mt-1  w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
+                                  />
+                                  <Image
+                                    src='/assets/password-dark.png'
+                                    alt='password'
+                                    width={512}
+                                    height={7552}
+                                    className='h-2 ml-4 top-5 w-auto absolute bottom-[1.2rem]'
+                                  />
+                                </div>
+                              </div>
+                              <p
+                                onClick={() => setShowPasswordInputs(true)}
+                                className='text-input-gray hover:cursor-pointer ml-8 pt-6'
                               >
-                                Password
-                              </label>
-                              <div className='relative'>
-                                <input
-                                  id='password_read_lg'
-                                  readOnly
-                                  className='bg-input-gray mt-1  w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
-                                />
-                                <Image
-                                  src='/assets/password-dark.png'
-                                  alt='password'
-                                  width={512}
-                                  height={7552}
-                                  className='h-2 ml-4 top-5 w-auto absolute bottom-[1.2rem]'
-                                />
+                                Edit
+                              </p>
+                            </div>
+                          </div>
+                          {showPasswordInputs && (
+                            <div>
+                              <div>
+                                <PasswordConditionsBox />
                               </div>
                             </div>
-                            <p className='text-input-gray hover:cursor-pointer ml-8 pt-6'>
-                              Edit
-                            </p>
-                          </div>
-                        </div>
+                          )}
+                        </>
                       )}
                     </div>
                   </div>

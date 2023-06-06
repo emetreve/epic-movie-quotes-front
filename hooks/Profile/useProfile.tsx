@@ -3,10 +3,12 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useCheckIfLoggedIn } from '@/hooks';
 import { useUiContext } from '@/store';
+import { ChangeUserData } from '@/types';
 
 const useProfile = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showUsernameInput, setShowUsernameInput] = useState(false);
+  const [showPasswordInputs, setShowPasswordInputs] = useState(false);
 
   const router = useRouter();
   const { status } = router.query;
@@ -31,7 +33,7 @@ const useProfile = () => {
 
   const methods = useForm({
     defaultValues: {
-      username_lg: '',
+      username: '',
       password: '',
       password_confirmation: '',
     },
@@ -47,10 +49,17 @@ const useProfile = () => {
     setError,
   } = methods;
 
-  const onSubmit = (): void => {
+  const applyInputStyle = (val: string): boolean => {
+    const dirty = formState.dirtyFields[val as keyof ChangeUserData];
+    const errorMessage = errors[val as keyof ChangeUserData]?.message;
+
+    return (dirty && errorMessage) || errorMessage ? true : false;
+  };
+
+  const onSubmit = (data): void => {
     // setShowNameForm(false);
     // setShowConfirmModal(true);
-    console.log('here');
+    console.log(data);
   };
 
   return {
@@ -68,6 +77,10 @@ const useProfile = () => {
     handleSubmit,
     onSubmit,
     register,
+    showPasswordInputs,
+    setShowPasswordInputs,
+    applyInputStyle,
+    formState,
   };
 };
 
