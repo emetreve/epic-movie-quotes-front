@@ -4,7 +4,7 @@ import { useNewsFeed } from '@/hooks';
 import { Header, NewsItem } from '@/components';
 
 const Newsfeed = () => {
-  const { logged } = useNewsFeed();
+  const { logged, user } = useNewsFeed();
 
   if (logged) {
     return (
@@ -25,11 +25,15 @@ const Newsfeed = () => {
             <div className='w-[25%]'>
               <div className='flex flex-row'>
                 <Image
-                  src='/assets/avatar-default.png'
+                  src={
+                    user.avatar
+                      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${user.avatar}`
+                      : '/assets/avatar-default.png'
+                  }
                   alt='user headshot'
                   width={512}
                   height={512}
-                  className=' h-16 w-auto mr-3'
+                  className='h-16 w-16 rounded-[50%] mr-3'
                 />
                 <div className='ml-3 pt-1'>
                   <p className='text-xl'>Nino Tabagari</p>

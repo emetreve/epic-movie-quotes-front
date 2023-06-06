@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { FormProvider } from 'react-hook-form';
 import { useProfile } from '@/hooks';
@@ -40,6 +41,7 @@ const Profile = () => {
     pass,
   } = useProfile();
 
+  const router = useRouter();
   const handleUpload = (event) => {
     console.log('upload is happening');
     const selectedFile = event.target.files[0];
@@ -57,6 +59,10 @@ const Profile = () => {
         })
         .then((res) => {
           console.log(res);
+          router.push({
+            pathname: router.pathname,
+            query: { status: 'successful' },
+          });
         })
         .catch((err) => console.log(err));
     }
@@ -79,11 +85,15 @@ const Profile = () => {
               <div className='w-[25%]'>
                 <div className='flex flex-row'>
                   <Image
-                    src='/assets/avatar-default.png'
+                    src={
+                      user.avatar
+                        ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${user.avatar}`
+                        : '/assets/avatar-default.png'
+                    }
                     alt='user headshot'
                     width={512}
                     height={512}
-                    className=' h-16 w-auto mr-3 border-2 border-red rounded-[50%]'
+                    className='h-16 w-16 mr-3 border-2 border-red rounded-[50%]'
                   />
                   <div className='ml-3 pt-1'>
                     <p className='text-xl'>Nino Tabagari</p>
@@ -134,11 +144,15 @@ const Profile = () => {
             <div className='bg-violet bg-opacity-80 rounded-xl pt-6 pb-24 flex flex-col items-center'>
               <div className='flex flex-col items-center justify-center'>
                 <Image
-                  src='/assets/avatar-default.png'
+                  src={
+                    user.avatar
+                      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${user.avatar}`
+                      : '/assets/avatar-default.png'
+                  }
                   alt='user headshot'
                   width={512}
                   height={512}
-                  className='h-36 w-auto mb-2'
+                  className='h-36 w-36 rounded-[50%] mb-2'
                 />
                 <p className='text-base'>Upload new photo</p>
               </div>
@@ -215,11 +229,15 @@ const Profile = () => {
                   <h1 className='text-2xl mb-5 block'>My profile</h1>
                   <div className='flex flex-col items-center justify-center'>
                     <Image
-                      src='/assets/avatar-default.png'
+                      src={
+                        user.avatar
+                          ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${user.avatar}`
+                          : '/assets/avatar-default.png'
+                      }
                       alt='user headshot'
                       width={512}
                       height={512}
-                      className='h-36 w-auto mb-2'
+                      className='h-36 w-36 rounded-[50%] mb-2'
                     />
                     {/* <p className='text-base'>Upload new photo</p> */}
                     <label
