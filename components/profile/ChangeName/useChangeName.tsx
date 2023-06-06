@@ -43,8 +43,7 @@ const useChangeName = () => {
 
   const handleConfirm = async () => {
     try {
-      const response = await updateUser({ username: username });
-      console.log(response);
+      await updateUser({ username: username });
       setShowConfirmModal(false);
       showUpdateName(false);
       router.push({

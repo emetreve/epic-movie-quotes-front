@@ -51,13 +51,11 @@ const useChangePassword = () => {
   };
 
   const handleConfirm = async () => {
-    console.log(pass, pass_confirmation);
     try {
-      const response = await updateUser({
+      await updateUser({
         password: pass,
         password_confirmation: pass_confirmation,
       });
-      console.log(response);
       setShowConfirmModal(false);
       showUpdatePassword(false);
       router.push({
