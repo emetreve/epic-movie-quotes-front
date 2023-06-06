@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
+import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
+import { updateUser } from '@/services';
 
 const useChangeName = () => {
   const [showNameForm, setShowNameForm] = useState(true);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const router = useRouter();
   const { showUpdateName } = useUiContext();
 
   const methods = useForm({
@@ -20,6 +23,7 @@ const useChangeName = () => {
     formState: { errors },
     formState,
     control,
+    setError,
   } = methods;
 
   const username = useWatch({
@@ -37,11 +41,26 @@ const useChangeName = () => {
     setShowConfirmModal(true);
   };
 
-  const handleConfirm = () => {
-    console.log(username);
-    //TODO: make request to server to change username and if successsful show success banner
-    setShowConfirmModal(false);
-    showUpdateName(false);
+  const handleConfirm = async () => {
+    try {
+      await updateUser({ username: username });
+      setShowConfirmModal(false);
+      showUpdateName(false);
+      router.push({
+        pathname: router.pathname,
+        query: { status: 'success' },
+      });
+    } catch (error: any) {
+      console.log(error);
+      if (error?.response?.data?.message) {
+        setError('username', {
+          type: 'manual',
+          message: error.response.data.message,
+        });
+        setShowConfirmModal(false);
+        setShowNameForm(true);
+      }
+    }
   };
 
   return {

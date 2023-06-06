@@ -17,6 +17,7 @@ const useCheckIfLoggedIn = () => {
   };
   const [user, setUser] = useState<User>(initialState);
   const router = useRouter();
+  const { status } = router.query;
 
   const fetch = async () => {
     try {
@@ -39,7 +40,7 @@ const useCheckIfLoggedIn = () => {
 
   useEffect(() => {
     fetch();
-  }, []);
+  }, [status]);
 
   return { logged, setLogged, fetch, user };
 };

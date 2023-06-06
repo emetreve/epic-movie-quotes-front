@@ -22,3 +22,9 @@ export type ResetPasswordFormData = {
   password: string;
   password_confirmation: string;
 };
+
+export type ChangeUserData = {
+  username?: string;
+  password?: string;
+  password_confirmation?: string;
+};

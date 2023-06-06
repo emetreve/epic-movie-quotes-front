@@ -1,17 +1,55 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { FormProvider } from 'react-hook-form';
 import { useProfile } from '@/hooks';
-import { Header, ChangeName } from '@/components';
+import {
+  Header,
+  ChangeName,
+  SuccessNotification,
+  ChangePassword,
+  ValidationIcons,
+  PasswordConditionsBox,
+} from '@/components';
 
 const Profile = () => {
-  const { logged, user, showEditName, showUpdateName } = useProfile();
+  const {
+    logged,
+    user,
+    showEditName,
+    showUpdateName,
+    showSuccess,
+    setShowSuccess,
+    showUpdatePassword,
+    showEditPassword,
+    showUsernameInput,
+    setShowUsernameInput,
+    methods,
+    handleSubmit,
+    onSubmit,
+    register,
+    showPasswordInputs,
+    setShowPasswordInputs,
+    applyInputStyle,
+    formState,
+    hidePassword,
+    setHidePassword,
+    hidePasswordConfirmation,
+    setHidePasswordConfirmation,
+    errors,
+    pass,
+  } = useProfile();
 
   if (logged) {
     return (
       <>
         {showEditName && <ChangeName />}
+
+        {showEditPassword && <ChangePassword />}
+
         <div className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'>
           <Header hideSearch={true} />
+
+          {showSuccess && <SuccessNotification show={setShowSuccess} />}
 
           <div>
             <div className='hidden lg:flex text-white px-16 pt-10'>
@@ -83,12 +121,12 @@ const Profile = () => {
               </div>
               <div className='mt-9 w-full px-6'>
                 <div className='flex flex-col mt-1'>
-                  <label htmlFor='username' className='mb-1 text-xs'>
+                  <label htmlFor='username_read' className='mb-1 text-xs'>
                     Username
                   </label>
                   <div className='relative'>
                     <input
-                      id='username'
+                      id='username_read'
                       placeholder={user.name}
                       readOnly
                       className={`bg-transparent w-full text-sm border-b pb-[1rem]  border-input-gray placeholder-white`}
@@ -104,11 +142,11 @@ const Profile = () => {
                   </div>
                 </div>
                 <div className='flex flex-col mt-8'>
-                  <label htmlFor='email' className='mb-1 text-xs'>
+                  <label htmlFor='email_read' className='mb-1 text-xs'>
                     Email
                   </label>
                   <input
-                    id='email'
+                    id='email_read'
                     readOnly
                     placeholder={user.email}
                     className={`bg-transparent w-full text-sm border-b pb-[1rem]  border-input-gray placeholder-white`}
@@ -116,12 +154,12 @@ const Profile = () => {
                 </div>
                 {!user.is_google_user && (
                   <div className='flex flex-col mt-8'>
-                    <label htmlFor='password' className='mb-1 text-xs'>
+                    <label htmlFor='password_read' className='mb-1 text-xs'>
                       Password
                     </label>
                     <div className='relative'>
                       <input
-                        id='password'
+                        id='password_read'
                         readOnly
                         className={`bg-transparent w-full text-sm border-b pb-[1rem]  border-input-gray placeholder-white`}
                       />
@@ -132,7 +170,12 @@ const Profile = () => {
                         height={7552}
                         className='h-2 w-auto absolute bottom-[1.2rem]'
                       />
-                      <p className='absolute bottom-[1.2rem] text-sm text-input-gray w-5 h-5 hover:cursor-pointer block right-4'>
+                      <p
+                        onClick={() => {
+                          showUpdatePassword(true);
+                        }}
+                        className='absolute bottom-[1.2rem] text-sm text-input-gray w-5 h-5 hover:cursor-pointer block right-4'
+                      >
                         Edit
                       </p>
                     </div>
@@ -143,84 +186,306 @@ const Profile = () => {
           </div>
 
           <div className='lg:block hidden'>
-            <div className='text-white ml-[30%] w-[42%] top-[8rem] -mt-[12rem]'>
-              <h1 className='text-2xl mb-5 block'>My profile</h1>
-              <div className='flex flex-col items-center justify-center'>
-                <Image
-                  src='/assets/avatar-default.png'
-                  alt='user headshot'
-                  width={512}
-                  height={512}
-                  className='h-36 w-auto mb-2'
-                />
-                <p className='text-base'>Upload new photo</p>
-              </div>
-              <div className='-mt-[7.6rem] bg-profile-dark-blue backdrop-blur-25 rounded-xl pt-6 pb-36 flex flex-col items-center'>
-                <div className='mt-32 w-full px-44 scale-110'>
-                  <div className='flex flex-col mt-1 w-[100%]'>
-                    <div className='flex justify-center items-center'>
-                      <div className='flex-grow'>
-                        <label htmlFor='username' className='mb-1 text-xs'>
-                          Username
-                        </label>
-                        <input
-                          id='username'
-                          placeholder={user.name}
-                          readOnly
-                          className='bg-input-gray mt-1 w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
-                        />
-                      </div>
-                      <p className=' text-input-gray hover:cursor-pointer ml-8 pt-6'>
-                        Edit
-                      </p>
-                    </div>
+            <FormProvider {...methods}>
+              <form noValidate onSubmit={handleSubmit(onSubmit)}>
+                <div className='text-white ml-[30%] w-[40%] top-[8rem] -mt-[12rem]'>
+                  <h1 className='text-2xl mb-5 block'>My profile</h1>
+                  <div className='flex flex-col items-center justify-center'>
+                    <Image
+                      src='/assets/avatar-default.png'
+                      alt='user headshot'
+                      width={512}
+                      height={512}
+                      className='h-36 w-auto mb-2'
+                    />
+                    <p className='text-base'>Upload new photo</p>
                   </div>
-                  <div className='flex flex-col mt-9 w-[87%]'>
-                    <div className='flex justify-center items-center'>
-                      <div className='flex-grow'>
-                        <label htmlFor='email' className='mb-1 text-xs'>
-                          Email
-                        </label>
-                        <input
-                          id='email'
-                          placeholder={user.email}
-                          readOnly
-                          className='bg-input-gray mt-1 w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  {!user.is_google_user && (
-                    <div className='flex flex-col mt-9 w-[100%]'>
-                      <div className='flex justify-center items-center'>
-                        <div className='flex-grow'>
-                          <label htmlFor='password' className='mb-1 text-xs'>
-                            Password
-                          </label>
-                          <div className='relative'>
+                  <div className='-mt-[7.6rem] bg-profile-dark-blue backdrop-blur-25 rounded-xl pt-6 pb-36 flex flex-col items-center'>
+                    <div className='mt-32 w-full px-44'>
+                      <div className='flex flex-col mt-1 w-[100%]'>
+                        <div className='flex justify-center items-center'>
+                          <div className='flex-grow'>
+                            <label
+                              htmlFor='username_read_lg'
+                              className='mb-1 text-xs'
+                            >
+                              Username
+                            </label>
                             <input
-                              id='password'
+                              id='username_read_lg'
+                              placeholder={user.name}
                               readOnly
-                              className='bg-input-gray mt-1  w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
+                              className='bg-input-gray mt-1 w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
                             />
-                            <Image
-                              src='/assets/password-dark.png'
-                              alt='password'
-                              width={512}
-                              height={7552}
-                              className='h-2 ml-4 top-5 w-auto absolute bottom-[1.2rem]'
+                          </div>
+                          <button
+                            onClick={() => setShowUsernameInput(true)}
+                            className='text-input-gray hover:cursor-pointer ml-8 pt-6'
+                          >
+                            Edit
+                          </button>
+                        </div>
+                      </div>
+
+                      <div
+                        className={` ${
+                          !showUsernameInput && 'hidden'
+                        } flex flex-col mt-9 w-[87%]`}
+                      >
+                        <div className='flex justify-center items-center'>
+                          <div className='flex-grow'>
+                            <label htmlFor='username' className='mb-1 text-xs'>
+                              New username
+                            </label>
+                            <div className='relative'>
+                              <input
+                                {...register('username', {
+                                  minLength: {
+                                    value: 3,
+                                    message:
+                                      'This field must have at least 3 characters.',
+                                  },
+                                  maxLength: {
+                                    value: 15,
+                                    message:
+                                      "This field can't have more than 15 characters.",
+                                  },
+                                  pattern: {
+                                    value: /^[a-z0-9]+$/,
+                                    message:
+                                      'Only lowercase letters and numbers are allowed.',
+                                  },
+                                })}
+                                placeholder='Enter new username'
+                                id='username'
+                                className={`${
+                                  applyInputStyle('username')
+                                    ? 'border-red'
+                                    : formState.dirtyFields['username']
+                                    ? 'border-green'
+                                    : ''
+                                } bg-input-gray border-2 text-txt-black mt-1 w-full py-2 rounded-md px-4 placeholder-gray`}
+                              />
+                              <div className='-mt-[0.15rem]'>
+                                <ValidationIcons name='username' />
+                              </div>
+                            </div>
+                            <div className='h-2 pt-[0.3rem]'>
+                              <p className='text-red text-xs'>
+                                {errors['username']?.message}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className='flex flex-col mt-9 w-[87%]'>
+                        <div className='flex justify-center items-center'>
+                          <div className='flex-grow'>
+                            <label
+                              htmlFor='email_read_lg'
+                              className='mb-1 text-xs'
+                            >
+                              Email
+                            </label>
+                            <input
+                              id='email_read_lg'
+                              placeholder={user.email}
+                              readOnly
+                              className='bg-input-gray mt-1 w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
                             />
                           </div>
                         </div>
-                        <p className='text-input-gray hover:cursor-pointer ml-8 pt-6'>
-                          Edit
-                        </p>
                       </div>
+                      {!user.is_google_user && (
+                        <>
+                          <div className='flex flex-col mt-9 w-[100%]'>
+                            <div className='flex justify-center items-center'>
+                              <div className='flex-grow'>
+                                <label
+                                  htmlFor='password_read_lg'
+                                  className='mb-1 text-xs'
+                                >
+                                  Password
+                                </label>
+                                <div className='relative'>
+                                  <input
+                                    id='password_read_lg'
+                                    readOnly
+                                    className='bg-input-gray mt-1  w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
+                                  />
+                                  <Image
+                                    src='/assets/password-dark.png'
+                                    alt='password'
+                                    width={512}
+                                    height={7552}
+                                    className='h-2 ml-4 top-5 w-auto absolute bottom-[1.2rem]'
+                                  />
+                                </div>
+                              </div>
+                              <p
+                                onClick={() => setShowPasswordInputs(true)}
+                                className='text-input-gray hover:cursor-pointer ml-8 pt-6'
+                              >
+                                Edit
+                              </p>
+                            </div>
+                          </div>
+                          {showPasswordInputs && (
+                            <div>
+                              <div>
+                                <PasswordConditionsBox />
+                              </div>
+
+                              <div className='flex flex-col mt-9 w-[87%]'>
+                                <div className='flex justify-center items-center'>
+                                  <div className='flex-grow'>
+                                    <label
+                                      htmlFor='password'
+                                      className='mb-1 text-xs'
+                                    >
+                                      Password
+                                    </label>
+                                    <div className='relative'>
+                                      <input
+                                        type={
+                                          hidePassword ? 'password' : 'text'
+                                        }
+                                        id='password'
+                                        {...register('password', {
+                                          minLength: {
+                                            value: 8,
+                                            message:
+                                              'This field must have at least 8 characters.',
+                                          },
+                                          maxLength: {
+                                            value: 15,
+                                            message:
+                                              "This field can't have more than 15 characters.",
+                                          },
+                                          pattern: {
+                                            value: /^[a-z0-9]+$/,
+                                            message:
+                                              'Only lowercase letters and numbers are allowed.',
+                                          },
+                                        })}
+                                        className={`${
+                                          applyInputStyle('password')
+                                            ? 'border-red'
+                                            : formState.dirtyFields['password']
+                                            ? 'border-green'
+                                            : ''
+                                        } bg-input-gray border-2 mt-1 w-full py-2 rounded-md px-4 text-txt-black`}
+                                      />
+                                      <div>
+                                        <ValidationIcons
+                                          name='password'
+                                          password_related={true}
+                                        />
+                                      </div>
+                                      <Image
+                                        onClick={() => {
+                                          setHidePassword((prev) => !prev);
+                                        }}
+                                        src='/assets/eye-password.png'
+                                        alt='show password'
+                                        width={200}
+                                        height={200}
+                                        className='absolute right-4 bottom-[0.7rem] w-4 h-4 hover:cursor-pointer'
+                                      />
+                                    </div>
+                                    <div className='h-2 pt-[0.3rem]'>
+                                      <p className='text-red text-xs'>
+                                        {errors['password']?.message}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div className='flex flex-col mt-9 w-[87%]'>
+                                <div className='flex justify-center items-center'>
+                                  <div className='flex-grow'>
+                                    <label
+                                      htmlFor='password_confirmation'
+                                      className='mb-1 text-xs'
+                                    >
+                                      Confirm new password
+                                    </label>
+                                    <div className='relative'>
+                                      <input
+                                        type={
+                                          hidePasswordConfirmation
+                                            ? 'password'
+                                            : 'text'
+                                        }
+                                        id='password_confirmation'
+                                        {...register('password_confirmation', {
+                                          validate: (value) =>
+                                            value === pass ||
+                                            'Passwords do not match.',
+                                        })}
+                                        className={`${
+                                          applyInputStyle(
+                                            'password_confirmation'
+                                          )
+                                            ? 'border-red'
+                                            : formState.dirtyFields[
+                                                'password_confirmation'
+                                              ]
+                                            ? 'border-green'
+                                            : ''
+                                        } bg-input-gray border-2 mt-1 w-full py-2 rounded-md px-4 text-txt-black`}
+                                      />
+                                      <div>
+                                        <ValidationIcons
+                                          name='password_confirmation'
+                                          password_related={true}
+                                        />
+                                      </div>
+                                      <Image
+                                        onClick={() => {
+                                          setHidePasswordConfirmation(
+                                            (prev) => !prev
+                                          );
+                                        }}
+                                        src='/assets/eye-password.png'
+                                        alt='show password'
+                                        width={200}
+                                        height={200}
+                                        className='absolute right-4 bottom-[0.7rem] w-4 h-4 hover:cursor-pointer'
+                                      />
+                                    </div>
+                                    <div className='h-2 pt-[0.3rem]'>
+                                      <p className='text-red text-xs'>
+                                        {
+                                          errors['password_confirmation']
+                                            ?.message
+                                        }
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </>
+                      )}
+                    </div>
+                  </div>
+                  {(showUsernameInput || showPasswordInputs) && (
+                    <div className='flex flex-row'>
+                      <p className='relative left-[32.5rem] mt-14 py-[0.6rem] text-input-gray'>
+                        Cancell
+                      </p>
+                      <button className='text-white relative left-[35rem] mt-14 bg-red py-[0.6rem] px-4 text-lg rounded-md mr-5 hover:bg-red-hover'>
+                        Save changes
+                      </button>
                     </div>
                   )}
                 </div>
-              </div>
-            </div>
+              </form>
+            </FormProvider>
           </div>
         </div>
       </>

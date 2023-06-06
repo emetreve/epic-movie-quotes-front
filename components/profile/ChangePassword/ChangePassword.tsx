@@ -2,25 +2,31 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FormProvider } from 'react-hook-form';
 import { Header } from '@/components';
-import useChangeName from './useChangeName';
+import useChangePassword from './useChangePassword';
 import { ValidationIcons } from '@/components';
 
-const ChangeName = () => {
+const ChangePassword = () => {
   const {
-    showUpdateName,
-    applyInputStyle,
+    showUpdatePassword,
+    applyStylePass,
+    applyStyleConfirm,
+    pass,
     register,
     formState,
     errors,
     methods,
     handleSubmit,
     onSubmit,
-    showNameForm,
     showConfirmModal,
     setShowConfirmModal,
-    setShowNameForm,
+    hidePassword,
+    setHidePassword,
+    hidePasswordConfirm,
+    setHidePasswordConfirm,
+    showPassForm,
+    setShowPassForm,
     handleConfirm,
-  } = useChangeName();
+  } = useChangePassword();
 
   return (
     <div className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'>
@@ -34,27 +40,28 @@ const ChangeName = () => {
             height={512}
             className='w-[0.9rem] h-auto ml-[2rem] my-5'
             onClick={() => {
-              showUpdateName(false);
+              showUpdatePassword(false);
             }}
           />
         </Link>
       </div>
-      {showNameForm && (
+      {showPassForm && (
         <FormProvider {...methods}>
           <form noValidate onSubmit={handleSubmit(onSubmit)}>
             <div className='bg-violet bg-opacity-80 py-16 px-8 rounded-lg'>
               <div className='flex flex-col mt-1 w-[100%]'>
                 <label htmlFor='username' className='mb-1 text-xs text-white'>
-                  Enter your username
+                  Enter your password
                 </label>
                 <div className='relative'>
                   <input
-                    id='username'
-                    {...register('username', {
+                    type={hidePassword ? 'password' : 'text'}
+                    id='password'
+                    {...register('password', {
                       required: 'This field is required.',
                       minLength: {
-                        value: 3,
-                        message: 'This field must have at least 3 characters.',
+                        value: 8,
+                        message: 'This field must have at least 8 characters.',
                       },
                       maxLength: {
                         value: 15,
@@ -68,20 +75,75 @@ const ChangeName = () => {
                       },
                     })}
                     className={`${
-                      applyInputStyle()
+                      applyStylePass()
                         ? 'border-red'
-                        : formState.dirtyFields['username']
+                        : formState.dirtyFields['password']
                         ? 'border-green'
                         : ''
                     } bg-input-gray mt-1 w-full py-2 border-2 rounded-md px-4 placeholder-txt-black`}
                   />
                   <div className='-mt-[0.15rem]'>
-                    <ValidationIcons name='username' />
+                    <ValidationIcons name='password' password_related={true} />
                   </div>
+                  <Image
+                    onClick={() => {
+                      setHidePassword((prev) => !prev);
+                    }}
+                    src='/assets/eye-password.png'
+                    alt='show password'
+                    width={200}
+                    height={200}
+                    className='absolute right-4 bottom-[0.7rem] w-4 h-4 hover:cursor-pointer'
+                  />
                 </div>
-                <div className='h-2 pt-[0.4rem]'>
+                <div className='h-2 pt-[0.3rem]'>
                   <p className='text-red text-xs'>
-                    {errors['username']?.message}
+                    {errors['password']?.message}
+                  </p>
+                </div>
+              </div>
+
+              <div className='flex flex-col mt-5 w-[100%]'>
+                <label htmlFor='username' className='mb-1 text-xs text-white'>
+                  Confirm password
+                </label>
+                <div className='relative'>
+                  <input
+                    type={hidePasswordConfirm ? 'password' : 'text'}
+                    id='password_confirmation'
+                    {...register('password_confirmation', {
+                      required: 'This field is required.',
+                      validate: (value) =>
+                        value === pass || 'Passwords do not match.',
+                    })}
+                    className={`${
+                      applyStyleConfirm()
+                        ? 'border-red'
+                        : formState.dirtyFields['password_confirmation']
+                        ? 'border-green'
+                        : ''
+                    } bg-input-gray mt-1 w-full py-2 border-2 rounded-md px-4 placeholder-txt-black`}
+                  />
+                  <div className='-mt-[0.15rem]'>
+                    <ValidationIcons
+                      name='password_confirmation'
+                      password_related={true}
+                    />
+                  </div>
+                  <Image
+                    onClick={() => {
+                      setHidePasswordConfirm((prev) => !prev);
+                    }}
+                    src='/assets/eye-password.png'
+                    alt='show password'
+                    width={200}
+                    height={200}
+                    className='absolute right-4 bottom-[0.7rem] w-4 h-4 hover:cursor-pointer'
+                  />
+                </div>
+                <div className='h-2 pt-[0.3rem]'>
+                  <p className='text-red text-xs'>
+                    {errors['password_confirmation']?.message}
                   </p>
                 </div>
               </div>
@@ -90,7 +152,7 @@ const ChangeName = () => {
             <div className='flex justify-between mt-9'>
               <p
                 onClick={() => {
-                  showUpdateName(false);
+                  showUpdatePassword(false);
                 }}
                 className='ml-10 py-[0.4rem] text-input-gray hover:cursor-pointer'
               >
@@ -106,6 +168,7 @@ const ChangeName = () => {
           </form>
         </FormProvider>
       )}
+
       {showConfirmModal && (
         <div className='rounded-lg flex flex-col items-center justify-center h-[11rem] mt-20 bg-gradient-gray mx-8'>
           <p className='text-white pb-8 text-sm pt-10'>
@@ -116,7 +179,7 @@ const ChangeName = () => {
             <p
               onClick={() => {
                 setShowConfirmModal(false);
-                setShowNameForm(true);
+                setShowPassForm(true);
               }}
               className='text-input-gray hover:cursor-pointer mt-5 ml-5 py-[0.4rem]'
             >
@@ -135,4 +198,4 @@ const ChangeName = () => {
   );
 };
 
-export default ChangeName;
+export default ChangePassword;
