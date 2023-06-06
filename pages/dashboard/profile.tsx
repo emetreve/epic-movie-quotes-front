@@ -31,6 +31,12 @@ const Profile = () => {
     setShowPasswordInputs,
     applyInputStyle,
     formState,
+    hidePassword,
+    setHidePassword,
+    hidePasswordConfirmation,
+    setHidePasswordConfirmation,
+    errors,
+    pass,
   } = useProfile();
 
   if (logged) {
@@ -264,6 +270,11 @@ const Profile = () => {
                                 <ValidationIcons name='username' />
                               </div>
                             </div>
+                            <div className='h-2 pt-[0.3rem]'>
+                              <p className='text-red text-xs'>
+                                {errors['username']?.message}
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -324,6 +335,137 @@ const Profile = () => {
                             <div>
                               <div>
                                 <PasswordConditionsBox />
+                              </div>
+
+                              <div className='flex flex-col mt-9 w-[87%]'>
+                                <div className='flex justify-center items-center'>
+                                  <div className='flex-grow'>
+                                    <label
+                                      htmlFor='password'
+                                      className='mb-1 text-xs'
+                                    >
+                                      Password
+                                    </label>
+                                    <div className='relative'>
+                                      <input
+                                        type={
+                                          hidePassword ? 'password' : 'text'
+                                        }
+                                        id='password'
+                                        {...register('password', {
+                                          minLength: {
+                                            value: 8,
+                                            message:
+                                              'This field must have at least 8 characters.',
+                                          },
+                                          maxLength: {
+                                            value: 15,
+                                            message:
+                                              "This field can't have more than 15 characters.",
+                                          },
+                                          pattern: {
+                                            value: /^[a-z0-9]+$/,
+                                            message:
+                                              'Only lowercase letters and numbers are allowed.',
+                                          },
+                                        })}
+                                        className={`${
+                                          applyInputStyle('password')
+                                            ? 'border-red'
+                                            : formState.dirtyFields['password']
+                                            ? 'border-green'
+                                            : ''
+                                        } bg-input-gray border-2 mt-1 w-full py-2 rounded-md px-4 text-txt-black`}
+                                      />
+                                      <div>
+                                        <ValidationIcons
+                                          name='password'
+                                          password_related={true}
+                                        />
+                                      </div>
+                                      <Image
+                                        onClick={() => {
+                                          setHidePassword((prev) => !prev);
+                                        }}
+                                        src='/assets/eye-password.png'
+                                        alt='show password'
+                                        width={200}
+                                        height={200}
+                                        className='absolute right-4 bottom-[0.7rem] w-4 h-4 hover:cursor-pointer'
+                                      />
+                                    </div>
+                                    <div className='h-2 pt-[0.3rem]'>
+                                      <p className='text-red text-xs'>
+                                        {errors['password']?.message}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div className='flex flex-col mt-9 w-[87%]'>
+                                <div className='flex justify-center items-center'>
+                                  <div className='flex-grow'>
+                                    <label
+                                      htmlFor='password_confirmation'
+                                      className='mb-1 text-xs'
+                                    >
+                                      Confirm new password
+                                    </label>
+                                    <div className='relative'>
+                                      <input
+                                        type={
+                                          hidePasswordConfirmation
+                                            ? 'password'
+                                            : 'text'
+                                        }
+                                        id='password_confirmation'
+                                        {...register('password_confirmation', {
+                                          validate: (value) =>
+                                            value === pass ||
+                                            'Passwords do not match.',
+                                        })}
+                                        className={`${
+                                          applyInputStyle(
+                                            'password_confirmation'
+                                          )
+                                            ? 'border-red'
+                                            : formState.dirtyFields[
+                                                'password_confirmation'
+                                              ]
+                                            ? 'border-green'
+                                            : ''
+                                        } bg-input-gray border-2 mt-1 w-full py-2 rounded-md px-4 text-txt-black`}
+                                      />
+                                      <div>
+                                        <ValidationIcons
+                                          name='password_confirmation'
+                                          password_related={true}
+                                        />
+                                      </div>
+                                      <Image
+                                        onClick={() => {
+                                          setHidePasswordConfirmation(
+                                            (prev) => !prev
+                                          );
+                                        }}
+                                        src='/assets/eye-password.png'
+                                        alt='show password'
+                                        width={200}
+                                        height={200}
+                                        className='absolute right-4 bottom-[0.7rem] w-4 h-4 hover:cursor-pointer'
+                                      />
+                                    </div>
+                                    <div className='h-2 pt-[0.3rem]'>
+                                      <p className='text-red text-xs'>
+                                        {
+                                          errors['password_confirmation']
+                                            ?.message
+                                        }
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           )}

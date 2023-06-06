@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useCheckIfLoggedIn } from '@/hooks';
 import { useUiContext } from '@/store';
@@ -9,6 +9,9 @@ const useProfile = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showUsernameInput, setShowUsernameInput] = useState(false);
   const [showPasswordInputs, setShowPasswordInputs] = useState(false);
+  const [hidePassword, setHidePassword] = useState(true);
+  const [hidePasswordConfirmation, setHidePasswordConfirmation] =
+    useState(true);
 
   const router = useRouter();
   const { status } = router.query;
@@ -56,6 +59,11 @@ const useProfile = () => {
     return (dirty && errorMessage) || errorMessage ? true : false;
   };
 
+  const [pass, pass_confirmation] = useWatch({
+    control,
+    name: ['password', 'password_confirmation'],
+  });
+
   const onSubmit = (data): void => {
     // setShowNameForm(false);
     // setShowConfirmModal(true);
@@ -79,8 +87,14 @@ const useProfile = () => {
     register,
     showPasswordInputs,
     setShowPasswordInputs,
-    applyInputStyle,
     formState,
+    applyInputStyle,
+    hidePassword,
+    setHidePassword,
+    hidePasswordConfirmation,
+    setHidePasswordConfirmation,
+    errors,
+    pass,
   };
 };
 
