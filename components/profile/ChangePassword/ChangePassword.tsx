@@ -119,7 +119,7 @@ const ChangePassword = () => {
                     className={`${
                       applyStyleConfirm()
                         ? 'border-red'
-                        : formState.dirtyFields['password']
+                        : formState.dirtyFields['password_confirmation']
                         ? 'border-green'
                         : ''
                     } bg-input-gray mt-1 w-full py-2 border-2 rounded-md px-4 placeholder-txt-black`}
