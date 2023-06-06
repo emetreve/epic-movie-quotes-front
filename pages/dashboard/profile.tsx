@@ -188,7 +188,7 @@ const Profile = () => {
           <div className='lg:block hidden'>
             <FormProvider {...methods}>
               <form noValidate onSubmit={handleSubmit(onSubmit)}>
-                <div className='text-white ml-[30%] w-[42%] top-[8rem] -mt-[12rem]'>
+                <div className='text-white ml-[30%] w-[40%] top-[8rem] -mt-[12rem]'>
                   <h1 className='text-2xl mb-5 block'>My profile</h1>
                   <div className='flex flex-col items-center justify-center'>
                     <Image
@@ -201,7 +201,7 @@ const Profile = () => {
                     <p className='text-base'>Upload new photo</p>
                   </div>
                   <div className='-mt-[7.6rem] bg-profile-dark-blue backdrop-blur-25 rounded-xl pt-6 pb-36 flex flex-col items-center'>
-                    <div className='mt-32 w-full px-44 scale-110'>
+                    <div className='mt-32 w-full px-44'>
                       <div className='flex flex-col mt-1 w-[100%]'>
                         <div className='flex justify-center items-center'>
                           <div className='flex-grow'>
@@ -473,14 +473,16 @@ const Profile = () => {
                       )}
                     </div>
                   </div>
-                  <div className='flex flex-row'>
-                    <p className='relative left-[35.5rem] mt-14 py-[0.6rem] text-input-gray'>
-                      Cancell
-                    </p>
-                    <button className='text-white relative left-[37.7rem] mt-14 bg-red py-[0.6rem] px-4 text-lg rounded-md mr-5 hover:bg-red-hover'>
-                      Save changes
-                    </button>
-                  </div>
+                  {(showUsernameInput || showPasswordInputs) && (
+                    <div className='flex flex-row'>
+                      <p className='relative left-[32.5rem] mt-14 py-[0.6rem] text-input-gray'>
+                        Cancell
+                      </p>
+                      <button className='text-white relative left-[35rem] mt-14 bg-red py-[0.6rem] px-4 text-lg rounded-md mr-5 hover:bg-red-hover'>
+                        Save changes
+                      </button>
+                    </div>
+                  )}
                 </div>
               </form>
             </FormProvider>

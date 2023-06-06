@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useCheckIfLoggedIn } from '@/hooks';
 import { useUiContext } from '@/store';
 import { ChangeUserData } from '@/types';
+import { updateUser } from '@/services';
 
 const useProfile = () => {
   const [showSuccess, setShowSuccess] = useState(false);
@@ -59,15 +60,36 @@ const useProfile = () => {
     return (dirty && errorMessage) || errorMessage ? true : false;
   };
 
-  const [pass, pass_confirmation] = useWatch({
+  const pass = useWatch({
     control,
-    name: ['password', 'password_confirmation'],
+    name: 'password',
   });
 
-  const onSubmit = (data): void => {
-    // setShowNameForm(false);
-    // setShowConfirmModal(true);
-    console.log(data);
+  const onSubmit = async (data: ChangeUserData) => {
+    for (const key in data) {
+      if (data[key as keyof ChangeUserData] === '') {
+        delete data[key as keyof ChangeUserData];
+      }
+    }
+
+    const keys = Object.keys(data);
+    if (keys.length === 0) {
+      return;
+    }
+
+    try {
+      const response = await updateUser(data);
+      console.log(response);
+      router.reload();
+    } catch (error: any) {
+      console.log(error);
+      if (error?.response?.data?.message) {
+        setError('username', {
+          type: 'manual',
+          message: error.response.data.message,
+        });
+      }
+    }
   };
 
   return {
