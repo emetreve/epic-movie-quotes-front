@@ -10,6 +10,7 @@ import {
   ValidationIcons,
   PasswordConditionsBox,
 } from '@/components';
+import axios from 'axios';
 
 const Profile = () => {
   const {
@@ -38,6 +39,28 @@ const Profile = () => {
     errors,
     pass,
   } = useProfile();
+
+  const handleUpload = (event) => {
+    console.log('upload is happening');
+    const selectedFile = event.target.files[0];
+
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append('avatar', selectedFile);
+
+      axios
+        .post('http://localhost:8000/api/edit-user-data', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+          withCredentials: true,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => console.log(err));
+    }
+  };
 
   if (logged) {
     return (
@@ -198,7 +221,20 @@ const Profile = () => {
                       height={512}
                       className='h-36 w-auto mb-2'
                     />
-                    <p className='text-base'>Upload new photo</p>
+                    {/* <p className='text-base'>Upload new photo</p> */}
+                    <label
+                      htmlFor='fileInput'
+                      className='cursor-pointer text-blue-500 text-base'
+                    >
+                      Change your avatar
+                      <input
+                        id='fileInput'
+                        type='file'
+                        accept='image/*'
+                        className='hidden'
+                        onChange={handleUpload}
+                      />
+                    </label>
                   </div>
                   <div className='-mt-[7.6rem] bg-profile-dark-blue backdrop-blur-25 rounded-xl pt-6 pb-36 flex flex-col items-center'>
                     <div className='mt-32 w-full px-44'>
