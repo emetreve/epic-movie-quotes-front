@@ -80,7 +80,12 @@ const useProfile = () => {
     try {
       const response = await updateUser(data);
       console.log(response);
-      router.reload();
+      router.push({
+        pathname: router.pathname,
+        query: { status: 'successful' },
+      });
+      setShowPasswordInputs(false);
+      setShowUsernameInput(false);
     } catch (error: any) {
       console.log(error);
       if (error?.response?.data?.message) {
