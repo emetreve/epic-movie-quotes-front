@@ -42,8 +42,11 @@ const Profile = () => {
   } = useProfile();
 
   const router = useRouter();
-  const handleUpload = (event) => {
-    console.log('upload is happening');
+  const handleUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) {
+      return;
+    }
+
     const selectedFile = event.target.files[0];
 
     if (selectedFile) {
