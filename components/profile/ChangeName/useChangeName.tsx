@@ -42,7 +42,6 @@ const useChangeName = () => {
   };
 
   const handleConfirm = async () => {
-    console.log(username);
     try {
       const response = await updateUser({ username: username });
       console.log(response);
