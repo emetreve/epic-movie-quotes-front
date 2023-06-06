@@ -6,4 +6,13 @@ const updateUser = async (data: ChangeUserData) => {
   return response;
 };
 
-export default updateUser;
+const updateAvatar = async (data: FormData) => {
+  const response = await axiosInstance.post('/edit-user-data', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response;
+};
+
+export { updateUser, updateAvatar };

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useCheckIfLoggedIn } from '@/hooks';
 import { useUiContext } from '@/store';
 import { ChangeUserData } from '@/types';
-import { updateUser } from '@/services';
+import { updateAvatar, updateUser } from '@/services';
 
 const useProfile = () => {
   const [showSuccess, setShowSuccess] = useState(false);
@@ -92,6 +92,30 @@ const useProfile = () => {
     }
   };
 
+  const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) {
+      return;
+    }
+
+    const selectedFile = event.target.files[0];
+
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append('avatar', selectedFile);
+
+      try {
+        const response = await updateAvatar(formData);
+        console.log(response);
+        router.push({
+          pathname: router.pathname,
+          query: { status: 'successful' },
+        });
+      } catch (error: any) {
+        console.log(error);
+      }
+    }
+  };
+
   return {
     logged,
     user,
@@ -117,6 +141,7 @@ const useProfile = () => {
     setHidePasswordConfirmation,
     errors,
     pass,
+    handleUpload,
   };
 };
 

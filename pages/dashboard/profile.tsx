@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { FormProvider } from 'react-hook-form';
 import { useProfile } from '@/hooks';
@@ -11,7 +10,6 @@ import {
   ValidationIcons,
   PasswordConditionsBox,
 } from '@/components';
-import axios from 'axios';
 
 const Profile = () => {
   const {
@@ -39,37 +37,8 @@ const Profile = () => {
     setHidePasswordConfirmation,
     errors,
     pass,
+    handleUpload,
   } = useProfile();
-
-  const router = useRouter();
-  const handleUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files) {
-      return;
-    }
-
-    const selectedFile = event.target.files[0];
-
-    if (selectedFile) {
-      const formData = new FormData();
-      formData.append('avatar', selectedFile);
-
-      axios
-        .post('http://localhost:8000/api/edit-user-data', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-          withCredentials: true,
-        })
-        .then((res) => {
-          console.log(res);
-          router.push({
-            pathname: router.pathname,
-            query: { status: 'successful' },
-          });
-        })
-        .catch((err) => console.log(err));
-    }
-  };
 
   if (logged) {
     return (
@@ -157,7 +126,16 @@ const Profile = () => {
                   height={512}
                   className='h-36 w-36 rounded-[50%] mb-2'
                 />
-                <p className='text-base'>Upload new photo</p>
+                <label htmlFor='fileInput' className='cursor-pointer'>
+                  Upload new photo
+                  <input
+                    id='fileInput'
+                    type='file'
+                    accept='image/*'
+                    className='hidden'
+                    onChange={handleUpload}
+                  />
+                </label>
               </div>
               <div className='mt-9 w-full px-6'>
                 <div className='flex flex-col mt-1'>
@@ -242,12 +220,8 @@ const Profile = () => {
                       height={512}
                       className='h-36 w-36 rounded-[50%] mb-2'
                     />
-                    {/* <p className='text-base'>Upload new photo</p> */}
-                    <label
-                      htmlFor='fileInput'
-                      className='cursor-pointer text-blue-500 text-base'
-                    >
-                      Change your avatar
+                    <label htmlFor='fileInput' className='cursor-pointer'>
+                      Upload new photo
                       <input
                         id='fileInput'
                         type='file'

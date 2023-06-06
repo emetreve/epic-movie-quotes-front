@@ -5,4 +5,4 @@ export { default as checkIfLoggedIn } from './checkifloggedin';
 export { default as googleInstance } from './googleInstance';
 export { signUp, logOut, googleAuth, verifyEmail } from './userauth';
 export { forgotPassword, resetPassword } from './password';
-export { default as updateUser } from './updateuser';
+export { updateUser, updateAvatar } from './updateuser';
