@@ -80,10 +80,6 @@ const useProfile = () => {
     try {
       const response = await updateUser(data);
       console.log(response);
-      router.push({
-        pathname: router.pathname,
-        query: {},
-      });
       router.reload();
     } catch (error: any) {
       console.log(error);
