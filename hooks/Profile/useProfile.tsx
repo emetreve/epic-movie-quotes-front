@@ -78,8 +78,7 @@ const useProfile = () => {
     }
 
     try {
-      const response = await updateUser(data);
-      console.log(response);
+      await updateUser(data);
       router.push({
         pathname: router.pathname,
         query: { status: 'successful' },
@@ -109,8 +108,7 @@ const useProfile = () => {
       formData.append('avatar', selectedFile);
 
       try {
-        const response = await updateAvatar(formData);
-        console.log(response);
+        await updateAvatar(formData);
         router.push({
           pathname: router.pathname,
           query: { status: 'successful' },
