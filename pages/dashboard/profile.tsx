@@ -137,7 +137,7 @@ const Profile = () => {
                   <label htmlFor='fileInput' className='cursor-pointer'>
                     Upload new photo
                     <input
-                      id='fileInput'
+                      id='fileInputMobileMobile'
                       type='file'
                       accept='image/*'
                       className='hidden'
