@@ -13,6 +13,9 @@ const useProfile = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [hidePasswordConfirmation, setHidePasswordConfirmation] =
     useState(true);
+  const [selectedAvatar, setSelectedAvatar] = useState('');
+  const [avatarButtonTrigger, setAvatarButtonTrigger] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const router = useRouter();
   const { status } = router.query;
@@ -66,6 +69,22 @@ const useProfile = () => {
   });
 
   const onSubmit = async (data: ChangeUserData) => {
+    console.log(data);
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append('avatar', selectedFile, selectedFile.name);
+      try {
+        await updateAvatar(formData);
+        router.push({
+          pathname: router.pathname,
+          query: { status: 'successful' },
+        });
+        setAvatarButtonTrigger(false);
+      } catch (error: any) {
+        console.log(error);
+      }
+    }
+
     for (const key in data) {
       if (data[key as keyof ChangeUserData] === '') {
         delete data[key as keyof ChangeUserData];
@@ -100,22 +119,11 @@ const useProfile = () => {
     if (!event.target.files) {
       return;
     }
-
     const selectedFile = event.target.files[0];
-
+    setSelectedFile(selectedFile);
     if (selectedFile) {
-      const formData = new FormData();
-      formData.append('avatar', selectedFile);
-
-      try {
-        await updateAvatar(formData);
-        router.push({
-          pathname: router.pathname,
-          query: { status: 'successful' },
-        });
-      } catch (error: any) {
-        console.log(error);
-      }
+      setSelectedAvatar(URL.createObjectURL(selectedFile));
+      setAvatarButtonTrigger(true);
     }
   };
 
@@ -145,6 +153,8 @@ const useProfile = () => {
     errors,
     pass,
     handleUpload,
+    selectedAvatar,
+    avatarButtonTrigger,
   };
 };
 

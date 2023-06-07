@@ -38,6 +38,8 @@ const Profile = () => {
     errors,
     pass,
     handleUpload,
+    selectedAvatar,
+    avatarButtonTrigger,
   } = useProfile();
 
   if (logged) {
@@ -210,8 +212,15 @@ const Profile = () => {
                   <h1 className='text-2xl mb-5 block'>My profile</h1>
                   <div className='flex flex-col items-center justify-center'>
                     <Image
+                      // src={
+                      //   user.avatar
+                      //     ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${user.avatar}`
+                      //     : '/assets/avatar-default.png'
+                      // }
                       src={
-                        user.avatar
+                        selectedAvatar
+                          ? selectedAvatar
+                          : user.avatar
                           ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${user.avatar}`
                           : '/assets/avatar-default.png'
                       }
@@ -249,66 +258,69 @@ const Profile = () => {
                               className='bg-input-gray mt-1 w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
                             />
                           </div>
-                          <button
-                            onClick={() => setShowUsernameInput(true)}
+                          <div
+                            onClick={() => {
+                              setShowUsernameInput(true);
+                            }}
                             className='text-input-gray hover:cursor-pointer ml-8 pt-6'
                           >
                             Edit
-                          </button>
-                        </div>
-                      </div>
-
-                      <div
-                        className={` ${
-                          !showUsernameInput && 'hidden'
-                        } flex flex-col mt-9 w-[87%]`}
-                      >
-                        <div className='flex justify-center items-center'>
-                          <div className='flex-grow'>
-                            <label htmlFor='username' className='mb-1 text-xs'>
-                              New username
-                            </label>
-                            <div className='relative'>
-                              <input
-                                {...register('username', {
-                                  minLength: {
-                                    value: 3,
-                                    message:
-                                      'This field must have at least 3 characters.',
-                                  },
-                                  maxLength: {
-                                    value: 15,
-                                    message:
-                                      "This field can't have more than 15 characters.",
-                                  },
-                                  pattern: {
-                                    value: /^[a-z0-9]+$/,
-                                    message:
-                                      'Only lowercase letters and numbers are allowed.',
-                                  },
-                                })}
-                                placeholder='Enter new username'
-                                id='username'
-                                className={`${
-                                  applyInputStyle('username')
-                                    ? 'border-red'
-                                    : formState.dirtyFields['username']
-                                    ? 'border-green'
-                                    : ''
-                                } bg-input-gray border-2 text-txt-black mt-1 w-full py-2 rounded-md px-4 placeholder-gray`}
-                              />
-                              <div className='-mt-[0.15rem]'>
-                                <ValidationIcons name='username' />
-                              </div>
-                            </div>
-                            <div className='h-2 pt-[0.3rem]'>
-                              <p className='text-red text-xs'>
-                                {errors['username']?.message}
-                              </p>
-                            </div>
                           </div>
                         </div>
                       </div>
+
+                      {showUsernameInput && (
+                        <div className=' flex flex-col mt-9 w-[87%]'>
+                          <div className='flex justify-center items-center'>
+                            <div className='flex-grow'>
+                              <label
+                                htmlFor='username'
+                                className='mb-1 text-xs'
+                              >
+                                New username
+                              </label>
+                              <div className='relative'>
+                                <input
+                                  {...register('username', {
+                                    minLength: {
+                                      value: 3,
+                                      message:
+                                        'This field must have at least 3 characters.',
+                                    },
+                                    maxLength: {
+                                      value: 15,
+                                      message:
+                                        "This field can't have more than 15 characters.",
+                                    },
+                                    pattern: {
+                                      value: /^[a-z0-9]+$/,
+                                      message:
+                                        'Only lowercase letters and numbers are allowed.',
+                                    },
+                                  })}
+                                  placeholder='Enter new username'
+                                  id='username'
+                                  className={`${
+                                    applyInputStyle('username')
+                                      ? 'border-red'
+                                      : formState.dirtyFields['username']
+                                      ? 'border-green'
+                                      : ''
+                                  } bg-input-gray border-2 text-txt-black mt-1 w-full py-2 rounded-md px-4 placeholder-gray`}
+                                />
+                                <div className='-mt-[0.15rem]'>
+                                  <ValidationIcons name='username' />
+                                </div>
+                              </div>
+                              <div className='h-2 pt-[0.3rem]'>
+                                <p className='text-red text-xs'>
+                                  {errors['username']?.message}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
 
                       <div className='flex flex-col mt-9 w-[87%]'>
                         <div className='flex justify-center items-center'>
@@ -504,7 +516,9 @@ const Profile = () => {
                       )}
                     </div>
                   </div>
-                  {(showUsernameInput || showPasswordInputs) && (
+                  {(showUsernameInput ||
+                    showPasswordInputs ||
+                    avatarButtonTrigger) && (
                     <div className='flex flex-row'>
                       <p className='relative left-[32.5rem] mt-14 py-[0.6rem] text-input-gray'>
                         Cancell
