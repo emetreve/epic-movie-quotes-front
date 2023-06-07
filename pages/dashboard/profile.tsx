@@ -212,11 +212,6 @@ const Profile = () => {
                   <h1 className='text-2xl mb-5 block'>My profile</h1>
                   <div className='flex flex-col items-center justify-center'>
                     <Image
-                      // src={
-                      //   user.avatar
-                      //     ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${user.avatar}`
-                      //     : '/assets/avatar-default.png'
-                      // }
                       src={
                         selectedAvatar
                           ? selectedAvatar
