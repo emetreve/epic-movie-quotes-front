@@ -134,16 +134,17 @@ const Profile = () => {
                     height={512}
                     className='h-36 w-36 rounded-[50%] mb-2'
                   />
-                  <label htmlFor='fileInput' className='cursor-pointer'>
+                  <label htmlFor='fileInputMobile' className='cursor-pointer'>
                     Upload new photo
                     <input
-                      id='fileInputMobileMobile'
+                      id='fileInputMobile'
                       type='file'
                       accept='image/*'
                       className='hidden'
                       onChange={(e) => {
                         handleUpload(e);
                         setShowMobileAvatarModal(true);
+                        console.log('mee');
                       }}
                     />
                   </label>
