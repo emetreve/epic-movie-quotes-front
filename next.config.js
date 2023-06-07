@@ -2,14 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '8000',
-        pathname: '/storage/avatars/**',
-      },
-    ],
+    domains: [process.env.NEXT_PUBLIC_IMAGES_DOMAIN],
   },
 };
 
