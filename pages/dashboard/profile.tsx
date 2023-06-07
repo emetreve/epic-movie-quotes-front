@@ -40,6 +40,9 @@ const Profile = () => {
     handleUpload,
     selectedAvatar,
     avatarButtonTrigger,
+    showMobileAvatarModal,
+    setShowMobileAvatarModal,
+    submitMobileAvatarChange,
   } = useProfile();
 
   if (logged) {
@@ -103,96 +106,64 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          <div className='lg:hidden text-white lg:ml-[26.7%] lg:w-[46.2%] w-full static top-[9.5rem] lg:top-[8rem] lg:-mt-[12rem]'>
-            <div>
-              <Link href='/dashboard/newsfeed'>
-                <Image
-                  src='/assets/back-hd.png'
-                  alt='go back'
-                  width={520}
-                  height={512}
-                  className='w-[0.9rem] h-auto ml-[2rem] my-5'
-                />
-              </Link>
-            </div>
-            <div className='bg-violet bg-opacity-80 rounded-xl pt-6 pb-24 flex flex-col items-center'>
-              <div className='flex flex-col items-center justify-center'>
-                <Image
-                  src={
-                    user.avatar
-                      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${user.avatar}`
-                      : '/assets/avatar-default.png'
-                  }
-                  alt='user headshot'
-                  width={512}
-                  height={512}
-                  className='h-36 w-36 rounded-[50%] mb-2'
-                />
-                <label htmlFor='fileInput' className='cursor-pointer'>
-                  Upload new photo
-                  <input
-                    id='fileInput'
-                    type='file'
-                    accept='image/*'
-                    className='hidden'
-                    onChange={handleUpload}
+          {!showMobileAvatarModal && (
+            <div className='lg:hidden text-white lg:ml-[26.7%] lg:w-[46.2%] w-full static top-[9.5rem] lg:top-[8rem] lg:-mt-[12rem]'>
+              <div>
+                <Link href='/dashboard/newsfeed'>
+                  <Image
+                    src='/assets/back-hd.png'
+                    alt='go back'
+                    width={520}
+                    height={512}
+                    className='w-[0.9rem] h-auto ml-[2rem] my-5'
                   />
-                </label>
+                </Link>
               </div>
-              <div className='mt-9 w-full px-6'>
-                <div className='flex flex-col mt-1'>
-                  <label htmlFor='username_read' className='mb-1 text-xs'>
-                    Username
-                  </label>
-                  <div className='relative'>
-                    <input
-                      id='username_read'
-                      placeholder={user.name}
-                      readOnly
-                      className={`bg-transparent w-full text-sm border-b pb-[1rem]  border-input-gray placeholder-white`}
-                    />
-                    <p
-                      onClick={() => {
-                        showUpdateName(true);
-                      }}
-                      className='absolute bottom-[1.2rem] text-sm text-input-gray w-5 h-5 hover:cursor-pointer block right-4'
-                    >
-                      Edit
-                    </p>
-                  </div>
-                </div>
-                <div className='flex flex-col mt-8'>
-                  <label htmlFor='email_read' className='mb-1 text-xs'>
-                    Email
-                  </label>
-                  <input
-                    id='email_read'
-                    readOnly
-                    placeholder={user.email}
-                    className={`bg-transparent w-full text-sm border-b pb-[1rem]  border-input-gray placeholder-white`}
+              <div className='bg-violet bg-opacity-80 rounded-xl pt-6 pb-24 flex flex-col items-center'>
+                <div className='flex flex-col items-center justify-center'>
+                  <Image
+                    src={
+                      selectedAvatar
+                        ? selectedAvatar
+                        : user.avatar
+                        ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${user.avatar}`
+                        : '/assets/avatar-default.png'
+                    }
+                    alt='user headshot'
+                    width={512}
+                    height={512}
+                    className='h-36 w-36 rounded-[50%] mb-2'
                   />
+                  <label htmlFor='fileInput' className='cursor-pointer'>
+                    Upload new photo
+                    <input
+                      id='fileInput'
+                      type='file'
+                      accept='image/*'
+                      className='hidden'
+                      onChange={(e) => {
+                        handleUpload(e);
+                        setShowMobileAvatarModal(true);
+                      }}
+                    />
+                  </label>
                 </div>
-                {!user.is_google_user && (
-                  <div className='flex flex-col mt-8'>
-                    <label htmlFor='password_read' className='mb-1 text-xs'>
-                      Password
+
+                <div className='mt-9 w-full px-6'>
+                  <div className='flex flex-col mt-1'>
+                    <label htmlFor='username_read' className='mb-1 text-xs'>
+                      Username
                     </label>
                     <div className='relative'>
                       <input
-                        id='password_read'
+                        id='username_read'
+                        placeholder={user.name}
                         readOnly
                         className={`bg-transparent w-full text-sm border-b pb-[1rem]  border-input-gray placeholder-white`}
                       />
-                      <Image
-                        src='/assets/password.png'
-                        alt='password'
-                        width={512}
-                        height={7552}
-                        className='h-2 w-auto absolute bottom-[1.2rem]'
-                      />
                       <p
                         onClick={() => {
-                          showUpdatePassword(true);
+                          showUpdateName(true);
                         }}
                         className='absolute bottom-[1.2rem] text-sm text-input-gray w-5 h-5 hover:cursor-pointer block right-4'
                       >
@@ -200,10 +171,78 @@ const Profile = () => {
                       </p>
                     </div>
                   </div>
-                )}
+                  <div className='flex flex-col mt-8'>
+                    <label htmlFor='email_read' className='mb-1 text-xs'>
+                      Email
+                    </label>
+                    <input
+                      id='email_read'
+                      readOnly
+                      placeholder={user.email}
+                      className={`bg-transparent w-full text-sm border-b pb-[1rem]  border-input-gray placeholder-white`}
+                    />
+                  </div>
+                  {!user.is_google_user && (
+                    <div className='flex flex-col mt-8'>
+                      <label htmlFor='password_read' className='mb-1 text-xs'>
+                        Password
+                      </label>
+                      <div className='relative'>
+                        <input
+                          id='password_read'
+                          readOnly
+                          className={`bg-transparent w-full text-sm border-b pb-[1rem]  border-input-gray placeholder-white`}
+                        />
+                        <Image
+                          src='/assets/password.png'
+                          alt='password'
+                          width={512}
+                          height={7552}
+                          className='h-2 w-auto absolute bottom-[1.2rem]'
+                        />
+                        <p
+                          onClick={() => {
+                            showUpdatePassword(true);
+                          }}
+                          className='absolute bottom-[1.2rem] text-sm text-input-gray w-5 h-5 hover:cursor-pointer block right-4'
+                        >
+                          Edit
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
+          )}
+
+          {showMobileAvatarModal && (
+            <div className='rounded-lg flex flex-col items-center justify-center h-[11rem] mt-20 bg-gradient-gray mx-8'>
+              <p className='text-white pb-8 text-sm pt-10'>
+                Are you sure to make changes ?
+              </p>
+              <div className='border-b border-b-gray-600 w-full'></div>
+              <div className='flex justify-between w-full'>
+                <p
+                  onClick={() => {
+                    setShowMobileAvatarModal(false);
+                  }}
+                  className='text-input-gray hover:cursor-pointer mt-5 ml-5 py-[0.4rem]'
+                >
+                  Cancel
+                </p>
+                <button
+                  onClick={() => {
+                    submitMobileAvatarChange();
+                    setShowMobileAvatarModal(false);
+                  }}
+                  className='font-light text-xs text-white mt-5 mr-5 bg-red py-[0.4rem] px-2 rounded-md hover:bg-red-hover'
+                >
+                  Confirm
+                </button>
+              </div>
+            </div>
+          )}
 
           <div className='lg:block hidden'>
             <FormProvider {...methods}>

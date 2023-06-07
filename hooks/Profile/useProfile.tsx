@@ -16,6 +16,7 @@ const useProfile = () => {
   const [selectedAvatar, setSelectedAvatar] = useState('');
   const [avatarButtonTrigger, setAvatarButtonTrigger] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [showMobileAvatarModal, setShowMobileAvatarModal] = useState(false);
 
   const router = useRouter();
   const { status } = router.query;
@@ -69,7 +70,6 @@ const useProfile = () => {
   });
 
   const onSubmit = async (data: ChangeUserData) => {
-    console.log(data);
     if (selectedFile) {
       const formData = new FormData();
       formData.append('avatar', selectedFile, selectedFile.name);
@@ -127,6 +127,23 @@ const useProfile = () => {
     }
   };
 
+  const submitMobileAvatarChange = async () => {
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append('avatar', selectedFile, selectedFile.name);
+      try {
+        await updateAvatar(formData);
+        router.push({
+          pathname: router.pathname,
+          query: { status: 'success' },
+        });
+        setAvatarButtonTrigger(false);
+      } catch (error: any) {
+        console.log(error);
+      }
+    }
+  };
+
   return {
     logged,
     user,
@@ -155,6 +172,9 @@ const useProfile = () => {
     handleUpload,
     selectedAvatar,
     avatarButtonTrigger,
+    showMobileAvatarModal,
+    setShowMobileAvatarModal,
+    submitMobileAvatarChange,
   };
 };
 
