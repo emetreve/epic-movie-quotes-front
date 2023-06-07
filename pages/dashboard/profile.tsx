@@ -144,7 +144,6 @@ const Profile = () => {
                       onChange={(e) => {
                         handleUpload(e);
                         setShowMobileAvatarModal(true);
-                        console.log('mee');
                       }}
                     />
                   </label>
