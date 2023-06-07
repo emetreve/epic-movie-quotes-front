@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useCheckIfLoggedIn } from '@/hooks';
 import { useUiContext } from '@/store';
 import { ChangeUserData } from '@/types';
-import { updateUser } from '@/services';
+import { updateAvatar, updateUser } from '@/services';
 
 const useProfile = () => {
   const [showSuccess, setShowSuccess] = useState(false);
@@ -13,6 +13,10 @@ const useProfile = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [hidePasswordConfirmation, setHidePasswordConfirmation] =
     useState(true);
+  const [selectedAvatar, setSelectedAvatar] = useState('');
+  const [avatarButtonTrigger, setAvatarButtonTrigger] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [showMobileAvatarModal, setShowMobileAvatarModal] = useState(false);
 
   const router = useRouter();
   const { status } = router.query;
@@ -66,6 +70,21 @@ const useProfile = () => {
   });
 
   const onSubmit = async (data: ChangeUserData) => {
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append('avatar', selectedFile, selectedFile.name);
+      try {
+        await updateAvatar(formData);
+        router.push({
+          pathname: router.pathname,
+          query: { status: 'successful' },
+        });
+        setAvatarButtonTrigger(false);
+      } catch (error: any) {
+        console.log(error);
+      }
+    }
+
     for (const key in data) {
       if (data[key as keyof ChangeUserData] === '') {
         delete data[key as keyof ChangeUserData];
@@ -78,9 +97,13 @@ const useProfile = () => {
     }
 
     try {
-      const response = await updateUser(data);
-      console.log(response);
-      router.reload();
+      await updateUser(data);
+      router.push({
+        pathname: router.pathname,
+        query: { status: 'successful' },
+      });
+      setShowPasswordInputs(false);
+      setShowUsernameInput(false);
     } catch (error: any) {
       console.log(error);
       if (error?.response?.data?.message) {
@@ -88,6 +111,35 @@ const useProfile = () => {
           type: 'manual',
           message: error.response.data.message,
         });
+      }
+    }
+  };
+
+  const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) {
+      return;
+    }
+    const selectedFile = event.target.files[0];
+    setSelectedFile(selectedFile);
+    if (selectedFile) {
+      setSelectedAvatar(URL.createObjectURL(selectedFile));
+      setAvatarButtonTrigger(true);
+    }
+  };
+
+  const submitMobileAvatarChange = async () => {
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append('avatar', selectedFile, selectedFile.name);
+      try {
+        await updateAvatar(formData);
+        router.push({
+          pathname: router.pathname,
+          query: { status: 'success' },
+        });
+        setAvatarButtonTrigger(false);
+      } catch (error: any) {
+        console.log(error);
       }
     }
   };
@@ -117,6 +169,12 @@ const useProfile = () => {
     setHidePasswordConfirmation,
     errors,
     pass,
+    handleUpload,
+    selectedAvatar,
+    avatarButtonTrigger,
+    showMobileAvatarModal,
+    setShowMobileAvatarModal,
+    submitMobileAvatarChange,
   };
 };
 

@@ -1,9 +1,9 @@
 import { useCheckIfLoggedIn } from '@/hooks';
 
 const useNewsFeed = () => {
-  const { logged } = useCheckIfLoggedIn();
+  const { logged, user } = useCheckIfLoggedIn();
 
-  return { logged };
+  return { logged, user };
 };
 
 export default useNewsFeed;
