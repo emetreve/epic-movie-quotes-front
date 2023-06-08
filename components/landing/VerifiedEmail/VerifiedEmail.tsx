@@ -1,8 +1,12 @@
 import Image from 'next/image';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import useVerifiedEmail from './useVerifiedEmail';
 
 const VerifiedEmail: React.FC = () => {
   const { handleClick, handleClose } = useVerifiedEmail();
+  const { t } = useTranslation('landing');
+  const { locale } = useRouter();
 
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
@@ -23,15 +27,19 @@ const VerifiedEmail: React.FC = () => {
             width={500}
             className='inline mr-2 h-14 w-auto'
           />
-          <h1 className='text-2xl pt-2 lg:text-[2.1rem] lg:mb-1'>Thank you!</h1>
+          <h1 className='text-2xl pt-2 lg:text-[2.1rem] lg:mb-1'>
+            {t('Thank you')}
+          </h1>
           <p className='mt-3 text-center text-sm lg:text-lg'>
-            Your account has been activated.
+            {t('Your account has been activated')}
           </p>
           <button
             onClick={handleClick}
-            className='mt-10 text-white bg-red py-2 lg:py-3 lg:text-xl px-6 lg:px-20 rounded-md'
+            className={`mt-10 ${
+              locale === 'en' ? 'lg:px-20' : 'lg:px-7'
+            } text-white bg-red py-2 lg:py-3 lg:text-xl px-6 rounded-md`}
           >
-            Log in to your account
+            {t('Log in to your account')}
           </button>
         </div>
       </div>

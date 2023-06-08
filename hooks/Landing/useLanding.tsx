@@ -50,12 +50,14 @@ const useLanding = () => {
 
   useEffect(() => {
     if (token) {
-      const persistedLocaleFromEmails = localStorage.getItem('locale');
-      if (persistedLocaleFromEmails) {
-        router.push('/', '/', {
-          locale: persistedLocaleFromEmails,
-        });
-      }
+      setTimeout(() => {
+        const persistedLocaleFromEmails = localStorage.getItem('locale');
+        if (persistedLocaleFromEmails) {
+          router.push('/', '/', {
+            locale: persistedLocaleFromEmails,
+          });
+        }
+      }, 600);
     }
   }, [token]);
 
