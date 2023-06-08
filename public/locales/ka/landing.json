@@ -51,5 +51,8 @@
     "Skip I'll confirm later": "გამოტოვე, მოგვიანებით დავადასტურებ",
     "Create New Password": "შეცვალეთ პაროლი",
     "Your new password must be different from previous used passwords": "თქვენი ახალი პაროლი უნდა განსხვავდებოდეს წინა გამოყენებული პაროლებისგან",
-    "Reset password": "პაროლის შეცვლა"
+    "Reset password": "პაროლის შეცვლა",
+    "Link expired": "ბმულს ვადა გაუვიდა!",
+    "Password reset link has expired, because you havent used it": "პაროლის შეცვლის ლინკს ვადა გაუვიდა",
+    "Request another link": "მოითხოვე ახალი ბმული"
 }

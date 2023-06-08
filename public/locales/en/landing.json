@@ -51,5 +51,8 @@
     "Skip I'll confirm later": "Skip, I&apos;ll confirm later",
     "Create New Password": "Create New Password",
     "Your new password must be different from previous used passwords": "Your new password must be different from previous used passwords",
-    "Reset password": "Reset password"
+    "Reset password": "Reset password",
+    "Link expired!": "Link expired!",
+   "Password reset link has expired, because you havent used it": "Password reset link has expired, because you haven&apos;t used it",
+   "Request another link": "Request another link"
 }
