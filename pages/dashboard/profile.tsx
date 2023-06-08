@@ -10,6 +10,8 @@ import {
   ValidationIcons,
   PasswordConditionsBox,
 } from '@/components';
+import { GetStaticProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const Profile = () => {
   const {
@@ -43,6 +45,7 @@ const Profile = () => {
     showMobileAvatarModal,
     setShowMobileAvatarModal,
     submitMobileAvatarChange,
+    t,
   } = useProfile();
 
   if (logged) {
@@ -73,9 +76,9 @@ const Profile = () => {
                     className='h-16 w-16 mr-3 border-2 border-red rounded-[50%]'
                   />
                   <div className='ml-3 pt-1'>
-                    <p className='text-xl'>Nino Tabagari</p>
+                    <p className='text-xl'>{user.name}</p>
                     <Link href='/dashboard/profile'>
-                      <p className='text-gray-400'>Edit your profile</p>
+                      <p className='text-gray-400'>{t('Edit your profile')}</p>
                     </Link>
                   </div>
                 </div>
@@ -89,7 +92,7 @@ const Profile = () => {
                   />
                   <Link href='/dashboard/newsfeed'>
                     <p className='text-xl inline-block ml-5 hover:cursor-pointer'>
-                      News feed
+                      {t('News feed')}
                     </p>
                   </Link>
                 </div>
@@ -101,7 +104,9 @@ const Profile = () => {
                     height={462}
                     className='h-7 w-auto mr-3'
                   />
-                  <p className='text-xl inline-block ml-5'>List of movies</p>
+                  <p className='text-xl inline-block ml-5'>
+                    {t('List of movies')}
+                  </p>
                 </div>
               </div>
             </div>
@@ -135,7 +140,7 @@ const Profile = () => {
                     className='h-36 w-36 rounded-[50%] mb-2'
                   />
                   <label htmlFor='fileInputMobile' className='cursor-pointer'>
-                    Upload new photo
+                    {t('Upload new photo')}
                     <input
                       id='fileInputMobile'
                       type='file'
@@ -152,7 +157,7 @@ const Profile = () => {
                 <div className='mt-9 w-full px-6'>
                   <div className='flex flex-col mt-1'>
                     <label htmlFor='username_read' className='mb-1 text-xs'>
-                      Username
+                      {t('Username')}
                     </label>
                     <div className='relative'>
                       <input
@@ -167,13 +172,13 @@ const Profile = () => {
                         }}
                         className='absolute bottom-[1.2rem] text-sm text-input-gray w-5 h-5 hover:cursor-pointer block right-4'
                       >
-                        Edit
+                        {t('Edit')}
                       </p>
                     </div>
                   </div>
                   <div className='flex flex-col mt-8'>
                     <label htmlFor='email_read' className='mb-1 text-xs'>
-                      Email
+                      {t('Email')}
                     </label>
                     <input
                       id='email_read'
@@ -185,7 +190,7 @@ const Profile = () => {
                   {!user.is_google_user && (
                     <div className='flex flex-col mt-8'>
                       <label htmlFor='password_read' className='mb-1 text-xs'>
-                        Password
+                        {t('Password')}
                       </label>
                       <div className='relative'>
                         <input
@@ -206,7 +211,7 @@ const Profile = () => {
                           }}
                           className='absolute bottom-[1.2rem] text-sm text-input-gray w-5 h-5 hover:cursor-pointer block right-4'
                         >
-                          Edit
+                          {t('Edit')}
                         </p>
                       </div>
                     </div>
@@ -219,7 +224,7 @@ const Profile = () => {
           {showMobileAvatarModal && (
             <div className='rounded-lg flex flex-col items-center justify-center h-[11rem] mt-20 bg-gradient-gray mx-8'>
               <p className='text-white pb-8 text-sm pt-10'>
-                Are you sure to make changes ?
+                {t('Are you sure to make changes')}
               </p>
               <div className='border-b border-b-gray-600 w-full'></div>
               <div className='flex justify-between w-full'>
@@ -229,7 +234,7 @@ const Profile = () => {
                   }}
                   className='text-input-gray hover:cursor-pointer mt-5 ml-5 py-[0.4rem]'
                 >
-                  Cancel
+                  {t('Cancel')}
                 </p>
                 <button
                   onClick={() => {
@@ -238,7 +243,7 @@ const Profile = () => {
                   }}
                   className='font-light text-xs text-white mt-5 mr-5 bg-red py-[0.4rem] px-2 rounded-md hover:bg-red-hover'
                 >
-                  Confirm
+                  {t('Confirm')}
                 </button>
               </div>
             </div>
@@ -248,7 +253,7 @@ const Profile = () => {
             <FormProvider {...methods}>
               <form noValidate onSubmit={handleSubmit(onSubmit)}>
                 <div className='text-white ml-[30%] w-[40%] top-[8rem] -mt-[12rem]'>
-                  <h1 className='text-2xl mb-5 block'>My profile</h1>
+                  <h1 className='text-2xl mb-5 block'>{t('My profile')}</h1>
                   <div className='flex flex-col items-center justify-center'>
                     <Image
                       src={
@@ -264,7 +269,7 @@ const Profile = () => {
                       className='h-36 w-36 rounded-[50%] mb-2'
                     />
                     <label htmlFor='fileInput' className='cursor-pointer'>
-                      Upload new photo
+                      {t('Upload new photo')}
                       <input
                         id='fileInput'
                         type='file'
@@ -283,7 +288,7 @@ const Profile = () => {
                               htmlFor='username_read_lg'
                               className='mb-1 text-xs'
                             >
-                              Username
+                              {t('Username')}
                             </label>
                             <input
                               id='username_read_lg'
@@ -298,7 +303,7 @@ const Profile = () => {
                             }}
                             className='text-input-gray hover:cursor-pointer ml-8 pt-6'
                           >
-                            Edit
+                            {t('Edit')}
                           </div>
                         </div>
                       </div>
@@ -311,28 +316,31 @@ const Profile = () => {
                                 htmlFor='username'
                                 className='mb-1 text-xs'
                               >
-                                New username
+                                {t('New username')}
                               </label>
                               <div className='relative'>
                                 <input
                                   {...register('username', {
                                     minLength: {
                                       value: 3,
-                                      message:
-                                        'This field must have at least 3 characters.',
+                                      message: `${t(
+                                        'This field must have at least 3 characters'
+                                      )}`,
                                     },
                                     maxLength: {
                                       value: 15,
-                                      message:
-                                        "This field can't have more than 15 characters.",
+                                      message: `${t(
+                                        "This field can't have more than 15 characters"
+                                      )}`,
                                     },
                                     pattern: {
                                       value: /^[a-z0-9]+$/,
-                                      message:
-                                        'Only lowercase letters and numbers are allowed.',
+                                      message: `${t(
+                                        'Only lowercase letters and numbers are allowed'
+                                      )}`,
                                     },
                                   })}
-                                  placeholder='Enter new username'
+                                  placeholder={`${t('Enter new username')}`}
                                   id='username'
                                   className={`${
                                     applyInputStyle('username')
@@ -363,7 +371,7 @@ const Profile = () => {
                               htmlFor='email_read_lg'
                               className='mb-1 text-xs'
                             >
-                              Email
+                              {t('Email')}
                             </label>
                             <input
                               id='email_read_lg'
@@ -383,7 +391,7 @@ const Profile = () => {
                                   htmlFor='password_read_lg'
                                   className='mb-1 text-xs'
                                 >
-                                  Password
+                                  {t('Password')}
                                 </label>
                                 <div className='relative'>
                                   <input
@@ -404,7 +412,7 @@ const Profile = () => {
                                 onClick={() => setShowPasswordInputs(true)}
                                 className='text-input-gray hover:cursor-pointer ml-8 pt-6'
                               >
-                                Edit
+                                {t('Edit')}
                               </p>
                             </div>
                           </div>
@@ -421,7 +429,7 @@ const Profile = () => {
                                       htmlFor='password'
                                       className='mb-1 text-xs'
                                     >
-                                      Password
+                                      {t('Password')}
                                     </label>
                                     <div className='relative'>
                                       <input
@@ -432,18 +440,21 @@ const Profile = () => {
                                         {...register('password', {
                                           minLength: {
                                             value: 8,
-                                            message:
-                                              'This field must have at least 8 characters.',
+                                            message: `${t(
+                                              'This field must have at least 8 characters'
+                                            )}`,
                                           },
                                           maxLength: {
                                             value: 15,
-                                            message:
-                                              "This field can't have more than 15 characters.",
+                                            message: `${t(
+                                              "This field can't have more than 15 characters"
+                                            )}`,
                                           },
                                           pattern: {
                                             value: /^[a-z0-9]+$/,
-                                            message:
-                                              'Only lowercase letters and numbers are allowed.',
+                                            message: `${t(
+                                              'Only lowercase letters and numbers are allowed'
+                                            )}`,
                                           },
                                         })}
                                         className={`${
@@ -487,7 +498,7 @@ const Profile = () => {
                                       htmlFor='password_confirmation'
                                       className='mb-1 text-xs'
                                     >
-                                      Confirm new password
+                                      {t('Confirm new password')}
                                     </label>
                                     <div className='relative'>
                                       <input
@@ -500,7 +511,7 @@ const Profile = () => {
                                         {...register('password_confirmation', {
                                           validate: (value) =>
                                             value === pass ||
-                                            'Passwords do not match.',
+                                            `${t('Passwords do not match')}`,
                                         })}
                                         className={`${
                                           applyInputStyle(
@@ -555,10 +566,10 @@ const Profile = () => {
                     avatarButtonTrigger) && (
                     <div className='flex flex-row'>
                       <p className='relative left-[32.5rem] mt-14 py-[0.6rem] text-input-gray'>
-                        Cancell
+                        {t('Cancel')}
                       </p>
                       <button className='text-white relative left-[35rem] mt-14 bg-red py-[0.6rem] px-4 text-lg rounded-md mr-5 hover:bg-red-hover'>
-                        Save changes
+                        {t('Save changes')}
                       </button>
                     </div>
                   )}
@@ -573,3 +584,11 @@ const Profile = () => {
 };
 
 export default Profile;
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale as string, ['profile'])),
+    },
+  };
+};

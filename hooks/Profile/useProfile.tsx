@@ -5,6 +5,7 @@ import { useCheckIfLoggedIn } from '@/hooks';
 import { useUiContext } from '@/store';
 import { ChangeUserData } from '@/types';
 import { updateAvatar, updateUser } from '@/services';
+import { useTranslation } from 'next-i18next';
 
 const useProfile = () => {
   const [showSuccess, setShowSuccess] = useState(false);
@@ -17,6 +18,8 @@ const useProfile = () => {
   const [avatarButtonTrigger, setAvatarButtonTrigger] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [showMobileAvatarModal, setShowMobileAvatarModal] = useState(false);
+
+  const { t } = useTranslation('profile');
 
   const router = useRouter();
   const { status } = router.query;
@@ -175,6 +178,7 @@ const useProfile = () => {
     showMobileAvatarModal,
     setShowMobileAvatarModal,
     submitMobileAvatarChange,
+    t,
   };
 };
 
