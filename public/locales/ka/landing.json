@@ -41,5 +41,9 @@
     "Thank you": "გმადლობთ!",
     "Please check your email and follow the instructions to activate your account." : "გთხოვთ, შეამოწმოთ თქვენი ელფოსტა და მიჰყევით ინსტრუქციას თქვენი ანგარიშის გასააქტიურებლად.",
     "Back to homepage": "დაბრუნება მთავარ გვერდზე",
-    "Your account has been activated": "თქვენი ანგარიში გააქტიურდა."
+    "Your account has been activated": "თქვენი ანგარიში გააქტიურდა.",
+    "Forgot Password": "დაგავიწყდა პაროლი?",
+    "Enter the email and well send an email with instructions to reset your password": "შეიყვანეთ ელფოსტა და ჩვენ გამოგიგზავნით იმეილს თქვენი პაროლის აღდგენის ინსტრუქციებით",
+    "Send instructions": "მიიღეთ ინსტრუქციები",
+    "Back to login": "დაბრუნდი შესვლის ფორმაზე"
 }

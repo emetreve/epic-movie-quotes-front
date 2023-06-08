@@ -41,5 +41,9 @@
     "Thank you": "Thank you!",
     "Please check your email and follow the instructions to activate your account.": "Please check your email and follow the instructions to activate your account.",
     "Back to homepage": "Back to homepage",
-    "Your account has been activated": "Your account has been activated."
+    "Your account has been activated": "Your account has been activated.",
+    "Forgot Password": "Forgot Password?",
+    "Enter the email and well send an email with instructions to reset your password": "Enter the email and we&apos;ll send an email with instructions to resetyour password",
+    "Send instructions": "Send instructions",
+    "Back to login": "Back to login"
 }
