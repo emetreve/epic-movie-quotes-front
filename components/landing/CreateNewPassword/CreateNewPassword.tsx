@@ -19,6 +19,7 @@ const CreateNewPassword = () => {
     methods,
     handleClose,
     handleGoToLogIn,
+    t,
   } = useCreateNewPassword();
 
   return (
@@ -34,10 +35,12 @@ const CreateNewPassword = () => {
         />
         <div className='flex flex-col items-center justify-center h-32 mt-24 lg:mt-[4.5rem] text-center'>
           <h1 className='text-3xl pt-2 lg:text-[2.1rem] lg:mb-1'>
-            Create New Password
+            {t('Create New Password')}
           </h1>
           <p className='text-gray-500 text-sm mt-3 block w-[20rem]'>
-            Your new password must be different from previous used passwords
+            {t(
+              'Your new password must be different from previous used passwords'
+            )}
           </p>
         </div>
 
@@ -49,29 +52,32 @@ const CreateNewPassword = () => {
           >
             <div className='flex flex-col mt-1'>
               <label htmlFor='password' className='mb-2'>
-                Password <span className='text-red'>*</span>
+                {t('Password')} <span className='text-red'>*</span>
               </label>
               <div className='relative'>
                 <input
                   {...register('password', {
-                    required: 'This field is required.',
+                    required: `${t('This field is required')}`,
                     minLength: {
                       value: 8,
-                      message: 'This field must have at least 8 characters.',
+                      message: `${'This field must have at least 8 characters'}`,
                     },
                     maxLength: {
                       value: 15,
-                      message: "This field can't have more than 15 characters.",
+                      message: `${t(
+                        "This field can't have more than 15 characters"
+                      )}`,
                     },
                     pattern: {
                       value: /^[a-z0-9]+$/,
-                      message:
-                        'Only lowercase letters and numbers are allowed.',
+                      message: `${t(
+                        'Only lowercase letters and numbers are allowed'
+                      )}`,
                     },
                   })}
                   type={hidePassword ? 'password' : 'text'}
                   id='password'
-                  placeholder='Password'
+                  placeholder={`${t('Password')}`}
                   className={`${
                     applyInputStyle('password')
                       ? 'border-red'
@@ -101,18 +107,18 @@ const CreateNewPassword = () => {
 
             <div className='flex flex-col mt-1'>
               <label htmlFor='password_confirmation' className='mb-2'>
-                Confirm password <span className='text-red'>*</span>
+                {t('Confirm password')} <span className='text-red'>*</span>
               </label>
               <div className='relative'>
                 <input
                   {...register('password_confirmation', {
-                    required: 'This field is required.',
+                    required: `${t('This field is required')}`,
                     validate: (value) =>
-                      value === password || 'Passwords do not match.',
+                      value === password || `${t('Passwords do not match')}`,
                   })}
                   type={hidePasswordConfirm ? 'password' : 'text'}
                   id='password_confirmation'
-                  placeholder='Password'
+                  placeholder={`${t('Confirm password')}`}
                   className={`${
                     applyInputStyle('password_confirmation')
                       ? 'border-red'
@@ -147,7 +153,7 @@ const CreateNewPassword = () => {
               type='submit'
               className='mt-5 text-white bg-red py-[0.6rem] lg:py-[0.6rem] w-full lg:text-xl rounded-md'
             >
-              Reset password
+              {t('Reset password')}
             </button>
           </form>
         </FormProvider>
@@ -163,7 +169,7 @@ const CreateNewPassword = () => {
             height={200}
             className='h-auto w-3 lg:h-[0.76rem] lg:w-auto hover:cursor-pointer'
           />
-          <p className='text-xs ml-2 text-gray-500'>Back to login</p>
+          <p className='text-xs ml-2 text-gray-500'>{t('Back to login')}</p>
         </div>
       </div>
     </div>

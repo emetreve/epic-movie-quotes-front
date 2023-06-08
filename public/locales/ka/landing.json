@@ -48,5 +48,8 @@
     "Back to login": "დაბრუნდი შესვლის ფორმაზე",
     "Check your email": "შეამოწმეთ თქვენი იმეილი",
     "We have sent a password recovery instructions to your email": "პაროლის აღდგენის ინსტრუქციები თქვენს ელფოსტაზე გამოიგზავნა",
-    "Skip I'll confirm later": "გამოტოვე, მოგვიანებით დავადასტურებ"
+    "Skip I'll confirm later": "გამოტოვე, მოგვიანებით დავადასტურებ",
+    "Create New Password": "შეცვალეთ პაროლი",
+    "Your new password must be different from previous used passwords": "თქვენი ახალი პაროლი უნდა განსხვავდებოდეს წინა გამოყენებული პაროლებისგან",
+    "Reset password": "პაროლის შეცვლა"
 }
