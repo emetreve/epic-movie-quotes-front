@@ -37,5 +37,8 @@
     "Forgot password": "დაგავიწყდა პაროლი?",
     "Sign in": "შესვლა",
     "Sign in with Google": "შედით Google ანგარიშით",
-    "Don't have an account": "არ გაქვთ ანგარიში?"
+    "Don't have an account": "არ გაქვთ ანგარიში?",
+    "Thank you": "გმადლობთ!",
+    "Please check your email and follow the instructions to activate your account." : "გთხოვთ, შეამოწმოთ თქვენი ელფოსტა და მიჰყევით ინსტრუქციას თქვენი ანგარიშის გასააქტიურებლად.",
+    "Back to homepage": "დაბრუნება მთავარ გვერდზე"
 }
