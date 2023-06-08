@@ -1,7 +1,10 @@
 import { useRouter } from 'next/router';
 import { logOut } from '@/services';
+import { useTranslation } from 'next-i18next';
 
 const useHeader = () => {
+  const { t } = useTranslation('newsfeed');
+
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -13,6 +16,6 @@ const useHeader = () => {
     }
   };
 
-  return { handleLogout };
+  return { handleLogout, t };
 };
 export default useHeader;

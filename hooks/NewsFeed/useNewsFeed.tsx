@@ -2,9 +2,9 @@ import { useCheckIfLoggedIn } from '@/hooks';
 import { useTranslation } from 'next-i18next';
 
 const useNewsFeed = () => {
-  const { logged, user } = useCheckIfLoggedIn();
-
   const { t } = useTranslation('newsfeed');
+
+  const { logged, user } = useCheckIfLoggedIn();
 
   return { logged, user, t };
 };

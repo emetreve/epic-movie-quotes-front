@@ -33,7 +33,6 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
           height={200}
           className='h-5 w-5 lg:h-7 lg:w-7 right-0 absolute mt-7 mr-8 opacity-50 hover:cursor-pointer'
         />
-
         <div className='flex flex-col items-center justify-center h-32 mt-8'>
           <h1 className='text-2xl pt-2 lg:text-[2.1rem] lg:mb-1'>
             {t('Create an account')}

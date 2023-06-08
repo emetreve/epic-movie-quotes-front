@@ -4,7 +4,7 @@ import useHeader from './useHeader';
 import { LangSwitch } from '@/components';
 
 const Header: React.FC<PropsType> = ({ hideSearch }) => {
-  const { handleLogout } = useHeader();
+  const { handleLogout, t } = useHeader();
 
   return (
     <>
@@ -51,7 +51,7 @@ const Header: React.FC<PropsType> = ({ hideSearch }) => {
             onClick={handleLogout}
             className='ml-9 text-white py-[0.5rem] px-6 rounded-md border mr-0 border-white hover:cursor-pointer'
           >
-            Log out
+            {t('Log out')}
           </button>
         </div>
       </div>

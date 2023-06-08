@@ -38,9 +38,9 @@ const Newsfeed = () => {
                   className='h-16 w-16 rounded-[50%] mr-3'
                 />
                 <div className='ml-3 pt-1'>
-                  <p className='text-xl'>Nino Tabagari</p>
+                  <p className='text-xl'>{user.name}</p>
                   <Link href='/dashboard/profile'>
-                    <p className='text-gray-400'>Edit your profile</p>
+                    <p className='text-gray-400'>{t('Edit your profile')}</p>
                   </Link>
                 </div>
               </div>
@@ -52,7 +52,7 @@ const Newsfeed = () => {
                   height={462}
                   className='h-7 w-auto mr-3'
                 />
-                <p className='text-xl inline-block ml-5'>News feed</p>
+                <p className='text-xl inline-block ml-5'>{t('News feed')}</p>
               </div>
               <div className='flex flex-row mt-10 ml-3'>
                 <Image
@@ -62,7 +62,9 @@ const Newsfeed = () => {
                   height={462}
                   className='h-7 w-auto mr-3'
                 />
-                <p className='text-xl inline-block ml-5'>List of movies</p>
+                <p className='text-xl inline-block ml-5'>
+                  {t('List of movies')}
+                </p>
               </div>
             </div>
 
@@ -76,7 +78,7 @@ const Newsfeed = () => {
                     height={96}
                     className='h-6 w-auto ml-3 mr-4'
                   />
-                  <p>Write new quote</p>
+                  <p>{t('Write new quote')}</p>
                 </div>
                 <div className='h-12 flex flex-row items-center mr-3 text-lg'>
                   <Image
@@ -86,7 +88,7 @@ const Newsfeed = () => {
                     height={96}
                     className='h-[1.2rem] w-auto mr-5'
                   />
-                  <p className='text-gray-400'>Search by</p>
+                  <p className='text-gray-400'>{t('Search by')}</p>
                 </div>
               </div>
             </div>
