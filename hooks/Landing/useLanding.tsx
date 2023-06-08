@@ -53,9 +53,16 @@ const useLanding = () => {
       setTimeout(() => {
         const persistedLocaleFromEmails = localStorage.getItem('locale');
         if (persistedLocaleFromEmails) {
-          const { pathname, query } = router;
-          const updatedQuery = { ...query, locale: persistedLocaleFromEmails };
-          router.push({ pathname, query: updatedQuery });
+          router.push(
+            {
+              pathname: '/',
+              query: { ...router.query },
+            },
+            '',
+            {
+              locale: persistedLocaleFromEmails,
+            }
+          );
         }
       }, 600);
     }
