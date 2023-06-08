@@ -5,12 +5,14 @@ import { FormData } from './types';
 import { useMutation } from 'react-query';
 import { useUiContext } from '@/store';
 import { signUp, googleInstance } from '@/services';
+import { useTranslation } from 'next-i18next';
 
 const useCreateAccount = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [hidePasswordConfirm, setHidePasswordConfirm] = useState(true);
   const { showCheck, showCreate } = useUiContext();
   const router = useRouter();
+  const { t } = useTranslation('landing');
 
   const methods = useForm({
     defaultValues: {
@@ -97,6 +99,7 @@ const useCreateAccount = () => {
     formState,
     methods,
     handleGoogle,
+    t,
   };
 };
 export default useCreateAccount;

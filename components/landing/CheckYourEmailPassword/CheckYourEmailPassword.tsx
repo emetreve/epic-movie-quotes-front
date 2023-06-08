@@ -1,12 +1,8 @@
 import Image from 'next/image';
 import useCheckYourEmailPassword from './useCheckYourEmailPassword';
-import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
 
 const CheckYourEmailPassword = () => {
-  const { handleClose } = useCheckYourEmailPassword();
-  const { t } = useTranslation('landing');
-  const { locale } = useRouter();
+  const { handleClose, t, locale } = useCheckYourEmailPassword();
 
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>

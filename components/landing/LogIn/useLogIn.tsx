@@ -5,11 +5,13 @@ import { useMutation } from 'react-query';
 import { axiosInstance, googleInstance } from '@/services';
 import { FormData } from './types';
 import { useUiContext } from '@/store';
+import { useTranslation } from 'next-i18next';
 
 const useLogIn = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const { showLog, showForgot } = useUiContext();
   const router = useRouter();
+  const { t } = useTranslation('landing');
 
   const methods = useForm({
     defaultValues: {
@@ -89,6 +91,7 @@ const useLogIn = () => {
     methods,
     handleForgot,
     handleGoogle,
+    t,
   };
 };
 export default useLogIn;

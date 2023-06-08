@@ -1,9 +1,15 @@
 import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
+import { useTranslation } from 'next-i18next';
 
 const useCheckYourEmailPassword = () => {
   const router = useRouter();
+
   const { showCheckEmailPassword } = useUiContext();
+
+  const { t } = useTranslation('landing');
+
+  const locale = router.locale;
 
   const handleClose = () => {
     router.push({
@@ -14,6 +20,6 @@ const useCheckYourEmailPassword = () => {
       showCheckEmailPassword(false);
     }, 500);
   };
-  return { handleClose };
+  return { handleClose, t, locale };
 };
 export default useCheckYourEmailPassword;

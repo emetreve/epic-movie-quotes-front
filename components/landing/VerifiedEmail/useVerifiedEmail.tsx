@@ -1,10 +1,14 @@
 import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
+import { useTranslation } from 'next-i18next';
 
 const useVerifiedEmail = () => {
   const { showVerified, showLog } = useUiContext();
 
   const router = useRouter();
+
+  const { t } = useTranslation('landing');
+  const { locale } = router;
 
   const handleClose = () => {
     router.push({
@@ -30,6 +34,8 @@ const useVerifiedEmail = () => {
   return {
     handleClose,
     handleClick,
+    t,
+    locale,
   };
 };
 export default useVerifiedEmail;

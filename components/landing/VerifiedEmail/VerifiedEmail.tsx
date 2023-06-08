@@ -1,12 +1,8 @@
 import Image from 'next/image';
-import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
 import useVerifiedEmail from './useVerifiedEmail';
 
 const VerifiedEmail: React.FC = () => {
-  const { handleClick, handleClose } = useVerifiedEmail();
-  const { t } = useTranslation('landing');
-  const { locale } = useRouter();
+  const { handleClick, handleClose, t, locale } = useVerifiedEmail();
 
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>

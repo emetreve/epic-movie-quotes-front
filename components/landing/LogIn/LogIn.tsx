@@ -3,7 +3,6 @@ import { PropsType } from './types';
 import Image from 'next/image';
 import useLogIn from './useLogIn';
 import { Error, ValidationIcons } from '@/components';
-import { useTranslation } from 'next-i18next';
 
 const LogIn: React.FC<PropsType> = ({ show, swap }) => {
   const {
@@ -18,9 +17,8 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
     methods,
     handleForgot,
     handleGoogle,
+    t,
   } = useLogIn();
-
-  const { t } = useTranslation('landing');
 
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>

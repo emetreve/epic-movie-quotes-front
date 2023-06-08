@@ -2,7 +2,6 @@ import { FormProvider } from 'react-hook-form';
 import Image from 'next/image';
 import useForgotPassword from './useForgotPassword';
 import { Error, ValidationIcons } from '@/components';
-import { useTranslation } from 'next-i18next';
 
 const ForgotPassword: React.FC = () => {
   const {
@@ -15,9 +14,8 @@ const ForgotPassword: React.FC = () => {
     methods,
     handleClick,
     showForgot,
+    t,
   } = useForgotPassword();
-
-  const { t } = useTranslation('landing');
 
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>

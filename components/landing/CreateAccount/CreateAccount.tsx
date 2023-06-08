@@ -3,7 +3,6 @@ import { PropsType } from './types';
 import Image from 'next/image';
 import useCreateAccount from './useCreateAccount';
 import { Error, ValidationIcons } from '@/components';
-import { useTranslation } from 'next-i18next';
 
 const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
   const {
@@ -20,9 +19,8 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
     formState,
     methods,
     handleGoogle,
+    t,
   } = useCreateAccount();
-
-  const { t } = useTranslation('landing');
 
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
