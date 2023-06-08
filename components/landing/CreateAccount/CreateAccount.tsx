@@ -3,6 +3,7 @@ import { PropsType } from './types';
 import Image from 'next/image';
 import useCreateAccount from './useCreateAccount';
 import { Error, ValidationIcons } from '@/components';
+import { useTranslation } from 'next-i18next';
 
 const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
   const {
@@ -21,6 +22,8 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
     handleGoogle,
   } = useCreateAccount();
 
+  const { t } = useTranslation('landing');
+
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
       <div className='bg-gradient-violet lg:bg-gradient-plain-violet h-full w-full lg:h-[45rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative'>
@@ -35,9 +38,11 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
 
         <div className='flex flex-col items-center justify-center h-32 mt-8'>
           <h1 className='text-2xl pt-2 lg:text-[2.1rem] lg:mb-1'>
-            Create an account
+            {t('Create an account')}
           </h1>
-          <p className='text-gray-500 text-sm mt-3'>Start your journey!</p>
+          <p className='text-gray-500 text-sm mt-3'>
+            {t('Start your journey')}
+          </p>
         </div>
 
         <FormProvider {...methods}>
@@ -48,28 +53,33 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
           >
             <div className='flex flex-col'>
               <label htmlFor='name' className='mb-2'>
-                Name <span className='text-red'>*</span>
+                {t('Name')} <span className='text-red'>*</span>
               </label>
               <div className='relative'>
                 <input
                   {...register('name', {
-                    required: 'This field is required.',
+                    required: `${t('This field is required')}`,
                     minLength: {
                       value: 3,
-                      message: 'This field must have at least 3 characters.',
+                      message: `${t(
+                        'This field must have at least 3 characters'
+                      )}`,
                     },
                     maxLength: {
                       value: 15,
-                      message: "This field can't have more than 15 characters.",
+                      message: `${t(
+                        "This field can't have more than 15 characters"
+                      )}`,
                     },
                     pattern: {
                       value: /^[a-z0-9]+$/,
-                      message:
-                        'Only lowercase letters and numbers are allowed.',
+                      message: `${t(
+                        'Only lowercase letters and numbers are allowed'
+                      )}`,
                     },
                   })}
                   id='name'
-                  placeholder='Enter your name'
+                  placeholder={`${t('Enter your name')}`}
                   className={`${
                     applyInputStyle('name')
                       ? 'border-red'
@@ -87,19 +97,19 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
 
             <div className='flex flex-col mt-1'>
               <label htmlFor='email' className='mb-2'>
-                Email <span className='text-red'>*</span>
+                {t('Email')} <span className='text-red'>*</span>
               </label>
               <div className='relative'>
                 <input
                   {...register('email', {
-                    required: 'This field is required.',
+                    required: `${t('This field is required')}`,
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: 'Invalid email address.',
+                      message: `${t('Invalid email address')}`,
                     },
                   })}
                   id='email'
-                  placeholder='Enter your email'
+                  placeholder={`${t('Enter your email')}`}
                   className={`${
                     applyInputStyle('email')
                       ? 'border-red'
