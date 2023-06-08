@@ -28,5 +28,14 @@
     "Passwords do not match": "პაროლები არ ემთხვევა",
     "get_started_button": "დარეგისტრირდი",
     "Sign up with Google": "დარეგისტრირდი Google ანგარიშით",
-    "Already have an account": "უკვე გაქვთ ანგარიში?"
+    "Already have an account": "უკვე გაქვთ ანგარიში?",
+    "Log in to your account": "შედით თქვენს ანგარიშში",
+    "Welcome back! Please enter your details": "Კეთილი იყოს თქვენი დაბრუნება! გთხოვთ შეავსოთ ველები.",
+    "User": "მომხმარებელი",
+    "Enter your username or email": "შეიყვანეთ სახელი ან ელფოსტა",
+    "Remember me": "დამიმახსოვრე",
+    "Forgot password": "დაგავიწყდა პაროლი?",
+    "Sign in": "შესვლა",
+    "Sign in with Google": "შედით Google ანგარიშით",
+    "Don't have an account": "არ გაქვთ ანგარიში?"
 }

@@ -28,5 +28,14 @@
     "Passwords do not match": "Passwords do not match",
     "get_started_button": "Get started",
     "Sign up with Google": "Sign up with Google",
-    "Already have an account": "Already have an account?"
+    "Already have an account": "Already have an account?",
+    "Log in to your account": "Log in to your account",
+    "Welcome back! Please enter your details": "Welcome back! Please enter your details.",
+    "User": "User",
+    "Enter your username or email": "Enter your username or email",
+    "Remember me": "Remember me",
+    "Forgot password": "Forgot password",
+    "Sign in": "Sign in",
+    "Sign in with Google": "Sign in with Google",
+    "Don't have an account": "Don&apos;t have an account?"
 }

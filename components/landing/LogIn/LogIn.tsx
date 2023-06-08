@@ -3,6 +3,7 @@ import { PropsType } from './types';
 import Image from 'next/image';
 import useLogIn from './useLogIn';
 import { Error, ValidationIcons } from '@/components';
+import { useTranslation } from 'next-i18next';
 
 const LogIn: React.FC<PropsType> = ({ show, swap }) => {
   const {
@@ -19,6 +20,8 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
     handleGoogle,
   } = useLogIn();
 
+  const { t } = useTranslation('landing');
+
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
       <div className='bg-gradient-violet lg:bg-gradient-plain-violet h-full w-full lg:h-[40rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative lg:scale-105'>
@@ -33,11 +36,13 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
 
         <div className='flex flex-col items-center justify-center h-32 mt-14'>
           <h1 className='text-2xl pt-2 lg:text-[2.1rem] lg:mb-1'>
-            Log in to your account
+            {t('Log in to your account')}
           </h1>
-          <p className='text-gray-500 text-sm mt-3'>
-            Welcome back! Please enter your details.
-          </p>
+          <div className='px-5'>
+            <p className='text-gray-500 text-sm mt-3 text-center'>
+              {t('Welcome back! Please enter your details')}
+            </p>
+          </div>
         </div>
 
         <FormProvider {...methods}>
@@ -48,19 +53,21 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
           >
             <div className='flex flex-col mt-1'>
               <label htmlFor='user' className='mb-2'>
-                User <span className='text-red'>*</span>
+                {t('User')} <span className='text-red'>*</span>
               </label>
               <div className='relative'>
                 <input
                   {...register('user', {
-                    required: 'This field is required.',
+                    required: `${t('This field is required')}`,
                     minLength: {
                       value: 3,
-                      message: 'This field must have at least 3 characters.',
+                      message: `${t(
+                        'This field must have at least 3 characters'
+                      )}`,
                     },
                   })}
                   id='user'
-                  placeholder='Enter your username or email'
+                  placeholder={`${t('Enter your username or email')}`}
                   className={`${
                     applyInputStyle('user')
                       ? 'border-red'
@@ -78,15 +85,15 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
 
             <div className='flex flex-col mt-1'>
               <label htmlFor='password' className='mb-2'>
-                Password <span className='text-red'>*</span>
+                {t('Password')} <span className='text-red'>*</span>
               </label>
               <div className='relative'>
                 <input
                   {...register('password', {
-                    required: 'This field is required.',
+                    required: `${t('This field is required')}`,
                   })}
                   id='password'
-                  placeholder='Password'
+                  placeholder={`${t('Password')}`}
                   type={hidePassword ? 'password' : 'text'}
                   className={`${
                     applyInputStyle('password')
@@ -127,11 +134,11 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
                   id='remember'
                 />
                 <label className='ml-2 pt-[0.1rem] relative' htmlFor='remember'>
-                  Remember me
+                  {t('Remember me')}
                 </label>
               </div>
               <div className='ml-auto underline text-blue-600 hover:cursor-pointer'>
-                <p onClick={handleForgot}>Forgot password</p>
+                <p onClick={handleForgot}>{t('Forgot password')}</p>
               </div>
             </div>
 
@@ -139,7 +146,7 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
               type='submit'
               className='mt-5 text-white bg-red py-[0.6rem] lg:py-[0.6rem] w-full lg:text-xl rounded-md'
             >
-              Sign in
+              {t('Sign in')}
             </button>
           </form>
         </FormProvider>
@@ -155,21 +162,21 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
               width={16}
               className='inline mr-2'
             />
-            Sign in with Google
+            {t('Sign in with Google')}
           </button>
         </div>
         <div className='h-24 flex justify-center items-center'>
           <p className='inline text-xs text-gray-500'>
-            Don&apos;t have an account?
+            {t("Don't have an account")}
           </p>
           <p
             onClick={() => {
               show(false);
               swap(true);
             }}
-            className='inline-block ml-2 text-sm text-blue-400 underline'
+            className='inline-block ml-2 text-sm text-blue-400 underline hover:cursor-pointer'
           >
-            Sign up
+            {t('Sign Up')}
           </p>
         </div>
       </div>
