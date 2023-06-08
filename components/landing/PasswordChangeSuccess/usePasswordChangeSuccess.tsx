@@ -1,10 +1,12 @@
 import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
+import { useTranslation } from 'next-i18next';
 
 const usePasswordChangeSuccess = () => {
   const { showPasswordSuccess, showLog, showSetNewPassword } = useUiContext();
 
   const router = useRouter();
+  const { t } = useTranslation('landing');
 
   const handleClose = () => {
     router.push({
@@ -32,6 +34,7 @@ const usePasswordChangeSuccess = () => {
   return {
     handleClose,
     handleClick,
+    t,
   };
 };
 export default usePasswordChangeSuccess;

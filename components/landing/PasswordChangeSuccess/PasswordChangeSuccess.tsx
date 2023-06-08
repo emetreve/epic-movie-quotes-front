@@ -2,7 +2,7 @@ import Image from 'next/image';
 import usePasswordChangeSuccess from './usePasswordChangeSuccess';
 
 const PasswordChangeSuccess: React.FC = () => {
-  const { handleClick, handleClose } = usePasswordChangeSuccess();
+  const { handleClick, handleClose, t } = usePasswordChangeSuccess();
 
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
@@ -23,15 +23,17 @@ const PasswordChangeSuccess: React.FC = () => {
             width={500}
             className='inline mr-2 h-14 w-auto'
           />
-          <h1 className='text-2xl pt-2 lg:text-[2.1rem] lg:mb-1'>Thank you!</h1>
+          <h1 className='text-2xl pt-2 lg:text-[2.1rem] lg:mb-1'>
+            {t('Thank you')}
+          </h1>
           <p className='mt-3 text-center text-sm lg:text-lg'>
-            Your Password changed successfully
+            {t('Your Password changed successfully')}
           </p>
           <button
             onClick={handleClick}
             className='mt-10 text-white bg-red py-2 lg:py-3 lg:text-xl px-24 lg:px-32 rounded-md'
           >
-            Log in
+            {t('Log in')}
           </button>
         </div>
       </div>
