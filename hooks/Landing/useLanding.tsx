@@ -48,6 +48,17 @@ const useLanding = () => {
     authenticateApp();
   }, []);
 
+  useEffect(() => {
+    if (token) {
+      const persistedLocaleFromEmails = localStorage.getItem('locale');
+      if (persistedLocaleFromEmails) {
+        router.push('/', '/', {
+          locale: persistedLocaleFromEmails,
+        });
+      }
+    }
+  }, [token]);
+
   const showNotice = async () => {
     if (id && token && expires && signature) {
       const path = `/email/verify/${id}/${token}?expires=${expires}&signature=${signature}`;
@@ -58,7 +69,6 @@ const useLanding = () => {
       } catch (error: any) {
         console.log(error);
         if (error.response.data?.token_expired) {
-          // TODO: show token expired notice
           showExpiredEmailVerification(true);
           console.log('expired');
         }

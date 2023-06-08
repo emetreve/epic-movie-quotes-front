@@ -5,10 +5,9 @@ const LangSwitch = () => {
   const {
     locales,
     locale,
-    push,
-    pathname,
     showLangDropdown,
     setShowLangDropdown,
+    handleLocaleChange,
   } = useLangSwitch();
 
   return (
@@ -37,7 +36,7 @@ const LangSwitch = () => {
                 >
                   <p
                     onClick={() => {
-                      push(pathname, pathname, { locale: locale });
+                      handleLocaleChange(locale);
                     }}
                   >
                     {locale === 'en' ? 'English' : 'ქართული'}
