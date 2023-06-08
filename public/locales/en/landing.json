@@ -21,5 +21,12 @@
     "This field can't have more than 15 characters": "This field can't have more than 15 characters",
     "Only lowercase letters and numbers are allowed": "Only lowercase letters and numbers are allowed",
     "Invalid email address": "Invalid email address",
-    "Enter your email": "Enter your email"
+    "Enter your email": "Enter your email",
+    "Password": "Password",
+    "This field must have at least 8 characters": "This field must have at least 8 characters",
+    "Confirm password": "Confirm password",
+    "Passwords do not match": "Passwords do not match",
+    "get_started_button": "Get started",
+    "Sign up with Google": "Sign up with Google",
+    "Already have an account": "Already have an account?"
 }

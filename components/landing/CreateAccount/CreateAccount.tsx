@@ -127,29 +127,32 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
 
             <div className='flex flex-col mt-1'>
               <label htmlFor='password' className='mb-2'>
-                Password <span className='text-red'>*</span>
+                {t('Password')} <span className='text-red'>*</span>
               </label>
               <div className='relative'>
                 <input
                   {...register('password', {
-                    required: 'This field is required.',
+                    required: `${t('This field is required')}`,
                     minLength: {
                       value: 8,
-                      message: 'This field must have at least 8 characters.',
+                      message: `${'This field must have at least 8 characters'}`,
                     },
                     maxLength: {
                       value: 15,
-                      message: "This field can't have more than 15 characters.",
+                      message: `${t(
+                        "This field can't have more than 15 characters"
+                      )}`,
                     },
                     pattern: {
                       value: /^[a-z0-9]+$/,
-                      message:
-                        'Only lowercase letters and numbers are allowed.',
+                      message: `${t(
+                        'Only lowercase letters and numbers are allowed'
+                      )}`,
                     },
                   })}
                   type={hidePassword ? 'password' : 'text'}
                   id='password'
-                  placeholder='Password'
+                  placeholder={`${t('Password')}`}
                   className={`${
                     applyInputStyle('password')
                       ? 'border-red'
@@ -179,18 +182,18 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
 
             <div className='flex flex-col mt-1'>
               <label htmlFor='password_confirmation' className='mb-2'>
-                Confirm password <span className='text-red'>*</span>
+                {t('Confirm password')} <span className='text-red'>*</span>
               </label>
               <div className='relative'>
                 <input
                   {...register('password_confirmation', {
-                    required: 'This field is required.',
+                    required: `${t('This field is required')}`,
                     validate: (value) =>
-                      value === password || 'Passwords do not match.',
+                      value === password || `${t('Passwords do not match')}`,
                   })}
                   type={hidePasswordConfirm ? 'password' : 'text'}
                   id='password_confirmation'
-                  placeholder='Password'
+                  placeholder={`${t('Confirm password')}`}
                   className={`${
                     applyInputStyle('password_confirmation')
                       ? 'border-red'
@@ -224,7 +227,7 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
               type='submit'
               className='mt-7 text-white bg-red py-[0.6rem] lg:py-[0.6rem] w-full lg:text-xl rounded-md'
             >
-              Get started
+              {t('get_started_button')}
             </button>
           </form>
         </FormProvider>
@@ -240,21 +243,21 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
               width={16}
               className='inline mr-2'
             />
-            Sign up with Google
+            {t('Sign up with Google')}
           </button>
         </div>
         <div className='h-24 flex justify-center items-center'>
           <p className='inline text-xs text-gray-500'>
-            Already have an account?
+            {t('Already have an account')}
           </p>
           <p
             onClick={() => {
               show(false);
               swap(true);
             }}
-            className='inline-block ml-2 text-sm text-blue-400 underline'
+            className='inline-block ml-2 text-sm text-blue-400 underline hover:cursor-pointer'
           >
-            Log in
+            {t('Log in')}
           </p>
         </div>
       </div>

@@ -21,6 +21,12 @@
     "This field can't have more than 15 characters": "ეს ველი მაქსიმუმ 15 სიმბოლო უნდა იყოს",
     "Only lowercase letters and numbers are allowed": "დასაშვებია დაბალი რეგისტრის ასოები და რიცხვები",
     "Invalid email address": "იმეილი არავალიდურია",
-    "Enter your email": "შეიყვანეთ თქვენი იმეილი"
-
+    "Enter your email": "შეიყვანეთ თქვენი იმეილი",
+    "Password": "პაროლი",
+    "This field must have at least 8 characters": "ეს ველი მინიმუმ 8 სიმბოლო უნდა იყოს",
+    "Confirm password": "გაიმეორე პაროლი",
+    "Passwords do not match": "პაროლები არ ემთხვევა",
+    "get_started_button": "დარეგისტრირდი",
+    "Sign up with Google": "დარეგისტრირდი Google ანგარიშით",
+    "Already have an account": "უკვე გაქვთ ანგარიში?"
 }
