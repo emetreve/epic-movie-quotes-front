@@ -18,6 +18,8 @@ module.exports = {
 
       fontFamily: {
         'helvetica-medium-en': ['helvetica-medium-en'],
+        'helvetica-medium-ka': ['helvetica-medium-ka'],
+        'helvetica-caps-ka': ['helvetica-caps-ka'],
         montserrat: ['Montserrat'],
       },
       colors: {
