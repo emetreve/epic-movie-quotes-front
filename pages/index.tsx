@@ -17,12 +17,10 @@ import { useLanding } from '@/hooks';
 import { useUiContext } from '@/store';
 import { useRouter } from 'next/router';
 import { GetStaticProps } from 'next';
-import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const Landing: React.FC = () => {
-  const { showNotice, logged } = useLanding();
-  const { t } = useTranslation('landing');
+  const { showNotice, logged, t } = useLanding();
   const {
     showLogIn,
     showLog,

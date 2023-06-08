@@ -4,6 +4,7 @@ import { useUiContext } from '@/store';
 import { verifyEmail as verify, authenticateAppInstance } from '@/services';
 import { useCheckIfLoggedIn } from '@/hooks';
 import { googleAuth } from '@/services';
+import { useTranslation } from 'next-i18next';
 
 const useLanding = () => {
   const router = useRouter();
@@ -17,6 +18,8 @@ const useLanding = () => {
   } = useUiContext();
 
   const { logged, setLogged } = useCheckIfLoggedIn();
+
+  const { t } = useTranslation('landing');
 
   useEffect(() => {
     const authenticate = async () => {
@@ -95,6 +98,7 @@ const useLanding = () => {
   return {
     showNotice,
     logged,
+    t,
   };
 };
 export default useLanding;
