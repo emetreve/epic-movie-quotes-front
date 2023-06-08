@@ -19,7 +19,7 @@ const LangSwitch = () => {
       id='dropdown-toggle'
       className='cursor-pointer flex items-center w-14 text-white'
     >
-      <p className='inline lg:text-lg'>{locale === 'en' ? 'Eng' : 'Geo'}</p>
+      <p className='inline lg:text-lg'>{locale === 'en' ? 'Eng' : 'ქარ'}</p>
 
       <div className='relative'>
         <div
@@ -40,7 +40,7 @@ const LangSwitch = () => {
                       push(pathname, pathname, { locale: locale });
                     }}
                   >
-                    {locale === 'en' ? 'Eng' : 'Geo'}
+                    {locale === 'en' ? 'English' : 'ქართული'}
                   </p>
                 </li>
               ))}
