@@ -1,11 +1,14 @@
 import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
 import { resendVerifyEmail } from '@/services';
+import { useTranslation } from 'next-i18next';
 
 const useExpiredWarningEmailVerification = () => {
   const router = useRouter();
   const { showExpiredEmailVerification, showCheck } = useUiContext();
   const { id } = router.query;
+  const { t } = useTranslation('landing');
+  const { locale } = router;
 
   const handleClose = () => {
     router.push({
@@ -30,7 +33,7 @@ const useExpiredWarningEmailVerification = () => {
       }, 500);
     }
   };
-  return { handleClose, handleButton };
+  return { handleClose, handleButton, locale, t };
 };
 
 export default useExpiredWarningEmailVerification;

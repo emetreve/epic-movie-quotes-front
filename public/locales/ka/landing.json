@@ -54,5 +54,6 @@
     "Reset password": "პაროლის შეცვლა",
     "Link expired": "ბმულს ვადა გაუვიდა!",
     "Password reset link has expired, because you havent used it": "პაროლის შეცვლის ლინკს ვადა გაუვიდა",
-    "Request another link": "მოითხოვე ახალი ბმული"
+    "Request another link": "მოითხოვე ახალი ბმული",
+    "Email verification link has expired, because you havent used it": "იმეილის ვერიფიკაციის ბმულს ვადა გაუვიდა"
 }

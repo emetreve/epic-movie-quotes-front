@@ -2,7 +2,8 @@ import Image from 'next/image';
 import useExpiredWarningEmailVerification from './useExpiredWarningEmailVerification';
 
 const ExpiredWarningEmailVerification = () => {
-  const { handleClose, handleButton } = useExpiredWarningEmailVerification();
+  const { handleClose, handleButton, locale, t } =
+    useExpiredWarningEmailVerification();
 
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
@@ -24,17 +25,20 @@ const ExpiredWarningEmailVerification = () => {
             className='inline mr-2 h-16 w-auto'
           />
           <h1 className='text-2xl pt-2 lg:text-[2.1rem] lg:mb-1'>
-            Link expired!
+            {t('Link expired')}
           </h1>
           <p className='mt-3 text-center text-sm lg:text-lg px-6 lg:px-0'>
-            Email verification link has expired, because you haven&apos;t used
-            it
+            {t(
+              'Email verification link has expired, because you havent used it'
+            )}
           </p>
           <button
             onClick={handleButton}
-            className='mt-10 text-white bg-red py-2 lg:py-3 lg:text-xl px-16 lg:px-[7.4rem] rounded-md'
+            className={`${
+              locale === 'en' ? 'px-16 lg:px-[7.4rem]' : 'px-7 lg:px-[5rem]'
+            } mt-10 text-white bg-red py-2 lg:py-3 lg:text-xl rounded-md`}
           >
-            Request another link
+            {t('Request another link')}
           </button>
         </div>
       </div>

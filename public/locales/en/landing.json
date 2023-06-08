@@ -54,5 +54,6 @@
     "Reset password": "Reset password",
     "Link expired!": "Link expired!",
    "Password reset link has expired, because you havent used it": "Password reset link has expired, because you haven&apos;t used it",
-   "Request another link": "Request another link"
+   "Request another link": "Request another link",
+   "Email verification link has expired, because you havent used it": "Email verification link has expired, because you haven&apos;t used it"
 }
