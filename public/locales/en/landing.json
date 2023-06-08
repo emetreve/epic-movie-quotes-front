@@ -45,5 +45,8 @@
     "Forgot Password": "Forgot Password?",
     "Enter the email and well send an email with instructions to reset your password": "Enter the email and we&apos;ll send an email with instructions to resetyour password",
     "Send instructions": "Send instructions",
-    "Back to login": "Back to login"
+    "Back to login": "Back to login",
+    "Check your email": "Check your email",
+    "We have sent a password recovery instructions to your email": "We have sent password recovery instructions to your email",
+    "Skip I'll confirm later": "Skip, I&apos;ll confirm later"
 }

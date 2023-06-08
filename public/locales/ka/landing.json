@@ -45,5 +45,8 @@
     "Forgot Password": "დაგავიწყდა პაროლი?",
     "Enter the email and well send an email with instructions to reset your password": "შეიყვანეთ ელფოსტა და ჩვენ გამოგიგზავნით იმეილს თქვენი პაროლის აღდგენის ინსტრუქციებით",
     "Send instructions": "მიიღეთ ინსტრუქციები",
-    "Back to login": "დაბრუნდი შესვლის ფორმაზე"
+    "Back to login": "დაბრუნდი შესვლის ფორმაზე",
+    "Check your email": "შეამოწმეთ თქვენი იმეილი",
+    "We have sent a password recovery instructions to your email": "პაროლის აღდგენის ინსტრუქციები თქვენს ელფოსტაზე გამოიგზავნა",
+    "Skip I'll confirm later": "გამოტოვე, მოგვიანებით დავადასტურებ"
 }
