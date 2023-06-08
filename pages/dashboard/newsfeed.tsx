@@ -2,9 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useNewsFeed } from '@/hooks';
 import { Header, NewsItem } from '@/components';
+import { GetStaticProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const Newsfeed = () => {
-  const { logged, user } = useNewsFeed();
+  const { logged, user, t } = useNewsFeed();
 
   if (logged) {
     return (
@@ -18,7 +20,7 @@ const Newsfeed = () => {
             height={96}
             className='h-5 w-auto mr-3'
           />
-          <p className='text-white text-sm'>Write new quote</p>
+          <p className='text-white text-sm'>{t('Write new quote')}</p>
         </div>
         <div>
           <div className='hidden lg:flex text-white px-16 pt-10'>
@@ -144,3 +146,11 @@ const Newsfeed = () => {
   }
 };
 export default Newsfeed;
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale as string, ['newsfeed'])),
+    },
+  };
+};
