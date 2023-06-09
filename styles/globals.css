@@ -6,6 +6,17 @@
   font-family: helvetica-medium-en;
   src: url("/fonts/Helvetica-Neue-W01-66-Medium-It.ttf") format('truetype');;
 }
+
+@font-face {
+  font-family: helvetica-medium-ka;
+  src: url("/fonts/Helvetica-Neue-LT-GEO-65-Medium.ttf") format('truetype');;
+}
+
+@font-face {
+  font-family: helvetica-caps-ka;
+  src: url("/fonts/HelveticaNeueLTGEOCaps-45Light.ttf") format('truetype');;
+}
+
 .image-container::before {
   content: "";
   position: absolute;

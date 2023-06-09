@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import { useUiContext } from '@/store';
+import useExpiredWarning from './useExpiredWarning';
 
 const ExpiredWarning = () => {
-  const { showExpired, showForgot } = useUiContext();
+  const { showExpired, showForgot, locale, t } = useExpiredWarning();
 
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
@@ -26,19 +26,21 @@ const ExpiredWarning = () => {
             className='inline mr-2 h-16 w-auto'
           />
           <h1 className='text-2xl pt-2 lg:text-[2.1rem] lg:mb-1'>
-            Link expired!
+            {t('Link expired')}
           </h1>
           <p className='mt-3 text-center text-sm lg:text-lg px-6 lg:px-0'>
-            Password reset link has expired, because you haven&apos;t used it
+            {t('Password reset link has expired, because you havent used it')}
           </p>
           <button
             onClick={() => {
               showExpired(false);
               showForgot(true);
             }}
-            className='mt-10 text-white bg-red py-2 lg:py-3 lg:text-xl px-16 lg:px-[7.4rem] rounded-md'
+            className={`${
+              locale === 'en' ? 'px-16 lg:px-[7.4rem] ' : 'px-7 lg:px-[3.5rem] '
+            } mt-10 text-white bg-red py-2 lg:py-3 lg:text-xl rounded-md`}
           >
-            Request another link
+            {t('Request another link')}
           </button>
         </div>
       </div>

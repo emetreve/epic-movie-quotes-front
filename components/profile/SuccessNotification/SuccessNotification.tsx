@@ -1,7 +1,10 @@
 import Image from 'next/image';
 import { PropsType } from './types';
+import { useTranslation } from 'next-i18next';
 
 const SuccessNotification: React.FC<PropsType> = ({ show }) => {
+  const { t } = useTranslation('profile');
+
   return (
     <div className='h-screen w-screen fixed pt-5 bg-violet z-20 bg-opacity-70 backdrop-blur-2 text-success-green'>
       <div className='bg-success-bg py-[0.9rem] flex items-center mx-3 rounded'>
@@ -12,7 +15,7 @@ const SuccessNotification: React.FC<PropsType> = ({ show }) => {
           height={96}
           className='w-[1.2rem] h-auto inline mr-2 ml-5'
         />
-        <p className='inline text-sm'>Changes updated succsessfully</p>
+        <p className='inline text-sm'>{t('Changes updated succsessfully')}</p>
         <Image
           src='/assets/success-close.png'
           alt='success green'

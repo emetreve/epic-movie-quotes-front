@@ -3,6 +3,7 @@ import { useForm, useWatch } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
 import { updateUser } from '@/services';
+import { useTranslation } from 'next-i18next';
 
 const useChangePassword = () => {
   const [showPassForm, setShowPassForm] = useState(true);
@@ -12,6 +13,8 @@ const useChangePassword = () => {
   const [hidePasswordConfirm, setHidePasswordConfirm] = useState(true);
   const router = useRouter();
   const { showUpdatePassword } = useUiContext();
+
+  const { t } = useTranslation('profile');
 
   const methods = useForm({
     defaultValues: {
@@ -87,6 +90,7 @@ const useChangePassword = () => {
     setHidePasswordConfirm,
     showPassForm,
     setShowPassForm,
+    t,
   };
 };
 export default useChangePassword;

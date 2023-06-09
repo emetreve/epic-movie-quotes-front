@@ -4,10 +4,11 @@ import { useUiContext } from '@/store';
 import { verifyEmail as verify, authenticateAppInstance } from '@/services';
 import { useCheckIfLoggedIn } from '@/hooks';
 import { googleAuth } from '@/services';
+import { useTranslation } from 'next-i18next';
 
 const useLanding = () => {
   const router = useRouter();
-  const { id, token, expires, signature, email, scope } = router.query;
+  const { id, token, expires, signature, email, scope, code } = router.query;
 
   const {
     showVerified,
@@ -17,6 +18,8 @@ const useLanding = () => {
   } = useUiContext();
 
   const { logged, setLogged } = useCheckIfLoggedIn();
+
+  const { t } = useTranslation('landing');
 
   useEffect(() => {
     const authenticate = async () => {
@@ -48,6 +51,26 @@ const useLanding = () => {
     authenticateApp();
   }, []);
 
+  useEffect(() => {
+    if (token || code) {
+      setTimeout(() => {
+        const persistedLocaleFromEmails = localStorage.getItem('locale');
+        if (persistedLocaleFromEmails) {
+          router.push(
+            {
+              pathname: '/',
+              query: { ...router.query },
+            },
+            '',
+            {
+              locale: persistedLocaleFromEmails,
+            }
+          );
+        }
+      }, 600);
+    }
+  }, [token, code]);
+
   const showNotice = async () => {
     if (id && token && expires && signature) {
       const path = `/email/verify/${id}/${token}?expires=${expires}&signature=${signature}`;
@@ -58,7 +81,6 @@ const useLanding = () => {
       } catch (error: any) {
         console.log(error);
         if (error.response.data?.token_expired) {
-          // TODO: show token expired notice
           showExpiredEmailVerification(true);
           console.log('expired');
         }
@@ -76,6 +98,7 @@ const useLanding = () => {
   return {
     showNotice,
     logged,
+    t,
   };
 };
 export default useLanding;

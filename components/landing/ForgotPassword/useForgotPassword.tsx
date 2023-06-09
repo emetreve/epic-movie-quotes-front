@@ -3,9 +3,11 @@ import { useMutation } from 'react-query';
 import { ForgotPasswordFormData } from '@/types';
 import { useUiContext } from '@/store';
 import { forgotPassword } from '@/services';
+import { useTranslation } from 'next-i18next';
 
 const useForgotPassword = () => {
   const { showLog, showForgot, showCheckEmailPassword } = useUiContext();
+  const { t } = useTranslation('landing');
 
   const methods = useForm({
     defaultValues: {
@@ -69,6 +71,7 @@ const useForgotPassword = () => {
     methods,
     handleClick,
     showForgot,
+    t,
   };
 };
 export default useForgotPassword;

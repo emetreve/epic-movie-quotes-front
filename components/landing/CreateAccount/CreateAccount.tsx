@@ -19,6 +19,7 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
     formState,
     methods,
     handleGoogle,
+    t,
   } = useCreateAccount();
 
   return (
@@ -32,12 +33,13 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
           height={200}
           className='h-5 w-5 lg:h-7 lg:w-7 right-0 absolute mt-7 mr-8 opacity-50 hover:cursor-pointer'
         />
-
         <div className='flex flex-col items-center justify-center h-32 mt-8'>
           <h1 className='text-2xl pt-2 lg:text-[2.1rem] lg:mb-1'>
-            Create an account
+            {t('Create an account')}
           </h1>
-          <p className='text-gray-500 text-sm mt-3'>Start your journey!</p>
+          <p className='text-gray-500 text-sm mt-3'>
+            {t('Start your journey')}
+          </p>
         </div>
 
         <FormProvider {...methods}>
@@ -48,28 +50,33 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
           >
             <div className='flex flex-col'>
               <label htmlFor='name' className='mb-2'>
-                Name <span className='text-red'>*</span>
+                {t('Name')} <span className='text-red'>*</span>
               </label>
               <div className='relative'>
                 <input
                   {...register('name', {
-                    required: 'This field is required.',
+                    required: `${t('This field is required')}`,
                     minLength: {
                       value: 3,
-                      message: 'This field must have at least 3 characters.',
+                      message: `${t(
+                        'This field must have at least 3 characters'
+                      )}`,
                     },
                     maxLength: {
                       value: 15,
-                      message: "This field can't have more than 15 characters.",
+                      message: `${t(
+                        "This field can't have more than 15 characters"
+                      )}`,
                     },
                     pattern: {
                       value: /^[a-z0-9]+$/,
-                      message:
-                        'Only lowercase letters and numbers are allowed.',
+                      message: `${t(
+                        'Only lowercase letters and numbers are allowed'
+                      )}`,
                     },
                   })}
                   id='name'
-                  placeholder='Enter your name'
+                  placeholder={`${t('Enter your name')}`}
                   className={`${
                     applyInputStyle('name')
                       ? 'border-red'
@@ -87,19 +94,19 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
 
             <div className='flex flex-col mt-1'>
               <label htmlFor='email' className='mb-2'>
-                Email <span className='text-red'>*</span>
+                {t('Email')} <span className='text-red'>*</span>
               </label>
               <div className='relative'>
                 <input
                   {...register('email', {
-                    required: 'This field is required.',
+                    required: `${t('This field is required')}`,
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: 'Invalid email address.',
+                      message: `${t('Invalid email address')}`,
                     },
                   })}
                   id='email'
-                  placeholder='Enter your email'
+                  placeholder={`${t('Enter your email')}`}
                   className={`${
                     applyInputStyle('email')
                       ? 'border-red'
@@ -117,29 +124,32 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
 
             <div className='flex flex-col mt-1'>
               <label htmlFor='password' className='mb-2'>
-                Password <span className='text-red'>*</span>
+                {t('Password')} <span className='text-red'>*</span>
               </label>
               <div className='relative'>
                 <input
                   {...register('password', {
-                    required: 'This field is required.',
+                    required: `${t('This field is required')}`,
                     minLength: {
                       value: 8,
-                      message: 'This field must have at least 8 characters.',
+                      message: `${'This field must have at least 8 characters'}`,
                     },
                     maxLength: {
                       value: 15,
-                      message: "This field can't have more than 15 characters.",
+                      message: `${t(
+                        "This field can't have more than 15 characters"
+                      )}`,
                     },
                     pattern: {
                       value: /^[a-z0-9]+$/,
-                      message:
-                        'Only lowercase letters and numbers are allowed.',
+                      message: `${t(
+                        'Only lowercase letters and numbers are allowed'
+                      )}`,
                     },
                   })}
                   type={hidePassword ? 'password' : 'text'}
                   id='password'
-                  placeholder='Password'
+                  placeholder={`${t('Password')}`}
                   className={`${
                     applyInputStyle('password')
                       ? 'border-red'
@@ -169,18 +179,18 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
 
             <div className='flex flex-col mt-1'>
               <label htmlFor='password_confirmation' className='mb-2'>
-                Confirm password <span className='text-red'>*</span>
+                {t('Confirm password')} <span className='text-red'>*</span>
               </label>
               <div className='relative'>
                 <input
                   {...register('password_confirmation', {
-                    required: 'This field is required.',
+                    required: `${t('This field is required')}`,
                     validate: (value) =>
-                      value === password || 'Passwords do not match.',
+                      value === password || `${t('Passwords do not match')}`,
                   })}
                   type={hidePasswordConfirm ? 'password' : 'text'}
                   id='password_confirmation'
-                  placeholder='Password'
+                  placeholder={`${t('Confirm password')}`}
                   className={`${
                     applyInputStyle('password_confirmation')
                       ? 'border-red'
@@ -214,7 +224,7 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
               type='submit'
               className='mt-7 text-white bg-red py-[0.6rem] lg:py-[0.6rem] w-full lg:text-xl rounded-md'
             >
-              Get started
+              {t('get_started_button')}
             </button>
           </form>
         </FormProvider>
@@ -230,21 +240,21 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
               width={16}
               className='inline mr-2'
             />
-            Sign up with Google
+            {t('Sign up with Google')}
           </button>
         </div>
         <div className='h-24 flex justify-center items-center'>
           <p className='inline text-xs text-gray-500'>
-            Already have an account?
+            {t('Already have an account')}
           </p>
           <p
             onClick={() => {
               show(false);
               swap(true);
             }}
-            className='inline-block ml-2 text-sm text-blue-400 underline'
+            className='inline-block ml-2 text-sm text-blue-400 underline hover:cursor-pointer'
           >
-            Log in
+            {t('Log in')}
           </p>
         </div>
       </div>

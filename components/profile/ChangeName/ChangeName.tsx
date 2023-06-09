@@ -20,6 +20,7 @@ const ChangeName = () => {
     setShowConfirmModal,
     setShowNameForm,
     handleConfirm,
+    t,
   } = useChangeName();
 
   return (
@@ -45,26 +46,30 @@ const ChangeName = () => {
             <div className='bg-violet bg-opacity-80 py-16 px-8 rounded-lg'>
               <div className='flex flex-col mt-1 w-[100%]'>
                 <label htmlFor='username' className='mb-1 text-xs text-white'>
-                  Enter your username
+                  {t('Enter your username')}
                 </label>
                 <div className='relative'>
                   <input
                     id='username'
                     {...register('username', {
-                      required: 'This field is required.',
+                      required: `${t('This field is required')}`,
                       minLength: {
                         value: 3,
-                        message: 'This field must have at least 3 characters.',
+                        message: `${t(
+                          'This field must have at least 3 characters'
+                        )}`,
                       },
                       maxLength: {
                         value: 15,
-                        message:
-                          "This field can't have more than 15 characters.",
+                        message: `${t(
+                          "This field can't have more than 15 characters"
+                        )}`,
                       },
                       pattern: {
                         value: /^[a-z0-9]+$/,
-                        message:
-                          'Only lowercase letters and numbers are allowed.',
+                        message: `${t(
+                          'Only lowercase letters and numbers are allowed'
+                        )}`,
                       },
                     })}
                     className={`${
@@ -94,22 +99,22 @@ const ChangeName = () => {
                 }}
                 className='ml-10 py-[0.4rem] text-input-gray hover:cursor-pointer'
               >
-                Cancel
+                {t('Cancel')}
               </p>
               <button
                 type='submit'
                 className='mr-10 font-light text-white bg-red py-[0.4rem] px-4 rounded-md hover:bg-red-hover'
               >
-                Edit
+                {t('Edit')}
               </button>
             </div>
           </form>
         </FormProvider>
       )}
       {showConfirmModal && (
-        <div className='rounded-lg flex flex-col items-center justify-center h-[11rem] mt-20 bg-gradient-gray mx-8'>
-          <p className='text-white pb-8 text-sm pt-10'>
-            Are you sure to make changes ?
+        <div className='rounded-lg flex flex-col pb-3 items-center justify-center h-[11rem] mt-20 bg-gradient-gray mx-8'>
+          <p className='text-white pb-8 text-sm pt-10 text-center'>
+            {t('Are you sure to make changes')}
           </p>
           <div className='border-b border-b-gray-600 w-full'></div>
           <div className='flex justify-between w-full'>
@@ -120,13 +125,13 @@ const ChangeName = () => {
               }}
               className='text-input-gray hover:cursor-pointer mt-5 ml-5 py-[0.4rem]'
             >
-              Cancel
+              {t('Cancel')}
             </p>
             <button
               onClick={handleConfirm}
-              className='font-light text-xs text-white mt-5 mr-5 bg-red py-[0.4rem] px-2 rounded-md hover:bg-red-hover'
+              className='font-light text-white mt-5 mr-5 bg-red py-[0.4rem] px-2 rounded-md hover:bg-red-hover'
             >
-              Confirm
+              {t('Confirm')}
             </button>
           </div>
         </div>

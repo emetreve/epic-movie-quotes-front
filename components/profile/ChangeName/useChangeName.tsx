@@ -3,12 +3,14 @@ import { useForm, useWatch } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
 import { updateUser } from '@/services';
+import { useTranslation } from 'next-i18next';
 
 const useChangeName = () => {
   const [showNameForm, setShowNameForm] = useState(true);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const router = useRouter();
   const { showUpdateName } = useUiContext();
+  const { t } = useTranslation('profile');
 
   const methods = useForm({
     defaultValues: {
@@ -77,6 +79,7 @@ const useChangeName = () => {
     setShowConfirmModal,
     setShowNameForm,
     handleConfirm,
+    t,
   };
 };
 export default useChangeName;

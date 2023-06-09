@@ -5,6 +5,7 @@ import { FormData } from './types';
 import { useMutation } from 'react-query';
 import { useUiContext } from '@/store';
 import { resetPassword } from '@/services';
+import { useTranslation } from 'next-i18next';
 
 const useCreateNewPassword = () => {
   const [hidePassword, setHidePassword] = useState(true);
@@ -12,6 +13,7 @@ const useCreateNewPassword = () => {
   const { showSetNewPassword, showLog, showPasswordSuccess, showExpired } =
     useUiContext();
   const router = useRouter();
+  const { t } = useTranslation('landing');
 
   const methods = useForm({
     defaultValues: {
@@ -115,6 +117,7 @@ const useCreateNewPassword = () => {
     methods,
     handleClose,
     handleGoToLogIn,
+    t,
   };
 };
 export default useCreateNewPassword;

@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import { PropsType } from './types';
 import useHeader from './useHeader';
+import { LangSwitch } from '@/components';
 
 const Header: React.FC<PropsType> = ({ hideSearch }) => {
-  const { handleLogout } = useHeader();
+  const { handleLogout, t } = useHeader();
 
   return (
     <>
@@ -45,22 +46,12 @@ const Header: React.FC<PropsType> = ({ hideSearch }) => {
             height={96}
             className='h-7 w-auto mr-7 hover:cursor-pointer'
           />
-          <div className='text-white flex items-center text-lg hover:cursor-pointer'>
-            <span>Eng</span>
-            <Image
-              src='/assets/lang-switch.png'
-              alt='language switcher'
-              width={768}
-              height={512}
-              className='inline ml-2 h-2 w-3'
-            />
-          </div>
-
+          <LangSwitch />
           <button
             onClick={handleLogout}
             className='ml-9 text-white py-[0.5rem] px-6 rounded-md border mr-0 border-white hover:cursor-pointer'
           >
-            Log out
+            {t('Log out')}
           </button>
         </div>
       </div>

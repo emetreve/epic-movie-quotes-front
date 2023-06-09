@@ -14,6 +14,7 @@ const ForgotPassword: React.FC = () => {
     methods,
     handleClick,
     showForgot,
+    t,
   } = useForgotPassword();
 
   return (
@@ -29,11 +30,12 @@ const ForgotPassword: React.FC = () => {
         />
         <div className='flex flex-col items-center justify-center h-32 mt-24 lg:mt-[4.5rem] text-center'>
           <h1 className='text-3xl pt-2 lg:text-[2.1rem] lg:mb-1'>
-            Forgot Password?
+            {t('Forgot Password')}
           </h1>
           <p className='text-gray-500 text-sm mt-3 block w-[20rem]'>
-            Enter the email and we’ll send an email with instructions to reset
-            your password
+            {t(
+              'Enter the email and well send an email with instructions to reset your password'
+            )}
           </p>
         </div>
 
@@ -45,19 +47,19 @@ const ForgotPassword: React.FC = () => {
           >
             <div className='flex flex-col mt-1'>
               <label htmlFor='user' className='mb-2'>
-                Email <span className='text-red'>*</span>
+                {t('Email')} <span className='text-red'>*</span>
               </label>
               <div className='relative'>
                 <input
                   {...register('email', {
-                    required: 'This field is required.',
+                    required: `${t('This field is required')}`,
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: 'Invalid email address.',
+                      message: `${t('Invalid email address')}`,
                     },
                   })}
                   id='user'
-                  placeholder='Enter your email'
+                  placeholder={`${t('Enter your email')}`}
                   className={`${
                     applyInputStyle()
                       ? 'border-red'
@@ -77,7 +79,7 @@ const ForgotPassword: React.FC = () => {
               type='submit'
               className='mt-5 text-white bg-red py-[0.6rem] lg:py-[0.6rem] w-full lg:text-xl rounded-md'
             >
-              Send instructions
+              {t('Send instructions')}
             </button>
           </form>
         </FormProvider>
@@ -93,7 +95,7 @@ const ForgotPassword: React.FC = () => {
             height={200}
             className='h-auto w-3 lg:h-[0.76rem] lg:w-auto hover:cursor-pointer'
           />
-          <p className='text-xs ml-2 text-gray-500'>Back to login</p>
+          <p className='text-xs ml-2 text-gray-500'>{t('Back to login')}</p>
         </div>
       </div>
     </div>
