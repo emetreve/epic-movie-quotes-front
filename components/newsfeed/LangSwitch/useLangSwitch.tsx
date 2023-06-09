@@ -7,7 +7,6 @@ const useLangSwitch = () => {
 
   const handleLocaleChange = (locale: string) => {
     push(pathname, pathname, { locale });
-    localStorage.setItem('locale', locale);
   };
 
   return {

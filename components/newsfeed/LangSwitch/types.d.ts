@@ -1,3 +1,3 @@
 export type PropsType = {
-  hideSearch?: boolean;
+  fromBurgerMenu?: boolean;
 };

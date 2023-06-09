@@ -11,7 +11,7 @@ const Newsfeed = () => {
   if (logged) {
     return (
       <div className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'>
-        <Header />
+        <Header userName={user.name} avatar={user.avatar} />
         <div className='lg:hidden hover:cursor-pointer flex px-7 py-8 items-center'>
           <Image
             src='/assets/write-new-quote.png'
@@ -52,7 +52,9 @@ const Newsfeed = () => {
                   height={462}
                   className='h-7 w-auto mr-3'
                 />
-                <p className='text-xl inline-block ml-5'>{t('News feed')}</p>
+                <Link href='/dashboard/newsfeed'>
+                  <p className='text-xl inline-block ml-5'>{t('News feed')}</p>
+                </Link>
               </div>
               <div className='flex flex-row mt-10 ml-3'>
                 <Image
@@ -152,7 +154,10 @@ export default Newsfeed;
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale as string, ['newsfeed'])),
+      ...(await serverSideTranslations(locale as string, [
+        'newsfeed',
+        'profile',
+      ])),
     },
   };
 };

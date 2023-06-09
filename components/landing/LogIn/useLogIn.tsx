@@ -45,10 +45,10 @@ const useLogIn = () => {
       showLog(false);
       router.push('/dashboard/newsfeed');
     } catch (error: any) {
-      if (error.response.data.message) {
+      if (error.response.data.errors.user) {
         setError('user', {
           type: 'manual',
-          message: error.response.data.message,
+          message: error.response.data.errors.user[0][router.locale as string],
         });
       }
     }

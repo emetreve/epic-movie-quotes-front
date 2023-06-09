@@ -49,19 +49,25 @@ const useCreateAccount = () => {
 
   const handleSignUp = async (incomingData: FormData) => {
     try {
-      await signUp(incomingData);
+      if (router.locale === 'ka') {
+        await signUp(incomingData, 'ka');
+      } else {
+        await signUp(incomingData);
+      }
       showCreate(false);
       showCheck(true);
     } catch (error: any) {
-      if (error.response.data.errors.email) {
-        setError('email', {
-          type: 'manual',
-          message: error.response.data.errors.email[0],
-        });
-      } else if (error.response.data.errors.name) {
+      console.log(error);
+
+      if (error.response.data.errors.name) {
         setError('name', {
           type: 'manual',
-          message: error.response.data.errors.name[0],
+          message: error.response.data.errors.name[0][router.locale as string],
+        });
+      } else if (error.response.data.errors.email) {
+        setError('email', {
+          type: 'manual',
+          message: error.response.data.errors.email[0][router.locale as string],
         });
       }
     }
