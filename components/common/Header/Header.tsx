@@ -29,7 +29,7 @@ const Header: React.FC<PropsType> = ({ hideSearch, userName, avatar }) => {
         <div
           className={`${
             !showBrugerMenu && 'hidden'
-          } w-[21rem] absolute top-0 h-[37rem] z-50 bg-profile-dark-blue rounded-lg shadow-lg px-7 pb-8 pt-6`}
+          } w-[20rem] absolute top-0 h-[37rem] z-50 bg-profile-dark-blue rounded-lg shadow-lg px-7 pb-8 pt-6`}
         >
           <Image
             onClick={() => {

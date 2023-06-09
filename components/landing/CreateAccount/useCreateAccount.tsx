@@ -48,8 +48,13 @@ const useCreateAccount = () => {
   };
 
   const handleSignUp = async (incomingData: FormData) => {
+    const locale = localStorage.getItem('locale');
     try {
-      await signUp(incomingData);
+      if (locale === 'ka') {
+        await signUp(incomingData, locale);
+      } else {
+        await signUp(incomingData);
+      }
       showCreate(false);
       showCheck(true);
     } catch (error: any) {

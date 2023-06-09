@@ -1,8 +1,11 @@
 import { axiosInstance } from '@/services';
 import { FormData } from '@/types';
 
-const signUp = async (incomingData: FormData) => {
-  const response = await axiosInstance.post('/signup', incomingData);
+const signUp = async (incomingData: FormData, locale?: string) => {
+  const response = await axiosInstance.post(
+    `/signup?locale=${locale}`,
+    incomingData
+  );
   return response;
 };
 
