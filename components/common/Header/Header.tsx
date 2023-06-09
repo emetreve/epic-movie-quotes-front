@@ -91,6 +91,17 @@ const Header: React.FC<PropsType> = ({ hideSearch, userName, avatar }) => {
               {t('List of movies')}
             </p>
           </div>
+          <div className='flex flex-row mt-16 ml-2 border-t border-violet pt-5 mr-5'>
+            <button
+              onClick={handleLogout}
+              className='text-white opacity-80 text-xs h-8 px-3 rounded-md border ml-2 border-white hover:cursor-pointer'
+            >
+              {t('Log out')}
+            </button>
+            <div className='ml-4 mt-1'>
+              <LangSwitch fromBurgerMenu={true} />
+            </div>
+          </div>
         </div>
         <div className='flex items-center px-7'>
           {!hideSearch && (

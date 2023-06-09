@@ -588,7 +588,10 @@ export default Profile;
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale as string, ['profile'])),
+      ...(await serverSideTranslations(locale as string, [
+        'profile',
+        'newsfeed',
+      ])),
     },
   };
 };

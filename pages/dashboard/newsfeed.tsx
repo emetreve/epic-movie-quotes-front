@@ -154,7 +154,10 @@ export default Newsfeed;
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale as string, ['newsfeed'])),
+      ...(await serverSideTranslations(locale as string, [
+        'newsfeed',
+        'profile',
+      ])),
     },
   };
 };

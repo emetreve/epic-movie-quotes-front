@@ -1,7 +1,8 @@
 import Image from 'next/image';
+import { PropsType } from './types';
 import useLangSwitch from './useLangSwitch';
 
-const LangSwitch = () => {
+const LangSwitch: React.FC<PropsType> = ({ fromBurgerMenu }) => {
   const {
     locales,
     locale,
@@ -22,9 +23,11 @@ const LangSwitch = () => {
 
       <div className='relative'>
         <div
-          className={`${
-            !showLangDropdown && 'hidden'
-          } w-28 mt-11 absolute top-0 bg-profile-dark-blue bg-opacity-90 rounded-md shadow-lg -right-4`}
+          className={`${!showLangDropdown && 'hidden'} ${
+            fromBurgerMenu
+              ? '-right-24 mt-7 bg-transparent'
+              : '-right-4 mt-11 bg-profile-dark-blue'
+          } w-28 absolute top-0 bg-opacity-90 rounded-md shadow-lg`}
           id='dropdown-content'
         >
           <ul className='flex flex-col items-center rounded-m'>
@@ -32,7 +35,9 @@ const LangSwitch = () => {
               locales.map((locale) => (
                 <li
                   key={locale}
-                  className='hover:bg-opacity-100 hover:bg-violet rounded-md py-2 text-center w-full text-sm lg:text-lg'
+                  className={`${
+                    fromBurgerMenu ? '' : 'text-center'
+                  } hover:bg-opacity-100 hover:bg-violet rounded-md py-2 w-full text-sm lg:text-lg`}
                 >
                   <p
                     onClick={() => {

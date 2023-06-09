@@ -6,7 +6,7 @@ import { useTranslation } from 'next-i18next';
 const useHeader = () => {
   const [showBrugerMenu, setShowBurgerMenu] = useState(false);
 
-  const { t } = useTranslation('newsfeed');
+  const { t } = useTranslation(['newsfeed', 'profile']);
 
   const router = useRouter();
 
