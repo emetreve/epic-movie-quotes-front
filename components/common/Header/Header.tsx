@@ -8,7 +8,7 @@ const Header: React.FC<PropsType> = ({ hideSearch, userName, avatar }) => {
     handleLogout,
     t,
     showBrugerMenu,
-    setShowBurgerMenu,
+    showBurger,
     handleNavigation,
     router,
   } = useHeader();
@@ -23,15 +23,25 @@ const Header: React.FC<PropsType> = ({ hideSearch, userName, avatar }) => {
           height={96}
           className='lg:hidden inline h-5 w-auto hover:cursor-pointer px-7'
           onClick={() => {
-            setShowBurgerMenu((prev) => !prev);
+            showBurger(true);
           }}
         />
         <div
           className={`${
             !showBrugerMenu && 'hidden'
-          } w-80 absolute top-0 h-[37rem] z-50 bg-profile-dark-blue rounded-md shadow-lg px-7 py-8`}
+          } w-[21rem] absolute top-0 h-[37rem] z-50 bg-profile-dark-blue rounded-lg shadow-lg px-7 pb-8 pt-6`}
         >
-          <div className='flex flex-row'>
+          <Image
+            onClick={() => {
+              showBurger(false);
+            }}
+            src='/assets/close-btn.png'
+            alt='close button'
+            width={200}
+            height={200}
+            className='h-5 w-5 right-0 absolute mr-6 opacity-30 hover:cursor-pointer'
+          />
+          <div className='flex flex-row mt-8'>
             <Image
               src={
                 avatar

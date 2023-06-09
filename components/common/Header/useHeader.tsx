@@ -19,6 +19,13 @@ const useHeader = () => {
     }
   };
 
+  const showBurger = (show: boolean) => {
+    setShowBurgerMenu(show);
+    show
+      ? document.body.classList.add('hide-scrollbar')
+      : document.body.classList.remove('hide-scrollbar');
+  };
+
   const handleNavigation = (address: string) => {
     setShowBurgerMenu(false);
     router.push(`/dashboard/${address}`);
@@ -28,7 +35,7 @@ const useHeader = () => {
     handleLogout,
     t,
     showBrugerMenu,
-    setShowBurgerMenu,
+    showBurger,
     handleNavigation,
     router,
   };
