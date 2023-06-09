@@ -49,7 +49,7 @@ const useForgotPassword = () => {
       if (error.response.data.errors.email) {
         setError('email', {
           type: 'manual',
-          message: error.response.data.errors.email[0],
+          message: error.response.data.errors.email[router.locale as string],
         });
       }
     }
