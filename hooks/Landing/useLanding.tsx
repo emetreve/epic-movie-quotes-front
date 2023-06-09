@@ -8,7 +8,7 @@ import { useTranslation } from 'next-i18next';
 
 const useLanding = () => {
   const router = useRouter();
-  const { id, token, expires, signature, email, scope, code } = router.query;
+  const { id, token, expires, signature, email, scope } = router.query;
 
   const {
     showVerified,
@@ -50,26 +50,6 @@ const useLanding = () => {
     };
     authenticateApp();
   }, []);
-
-  useEffect(() => {
-    if (token || code) {
-      setTimeout(() => {
-        const persistedLocaleFromEmails = localStorage.getItem('locale');
-        if (persistedLocaleFromEmails) {
-          router.push(
-            {
-              pathname: '/',
-              query: { ...router.query },
-            },
-            '',
-            {
-              locale: persistedLocaleFromEmails,
-            }
-          );
-        }
-      }, 600);
-    }
-  }, [token, code]);
 
   const showNotice = async () => {
     if (id && token && expires && signature) {

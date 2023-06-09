@@ -2,10 +2,13 @@ import { axiosInstance } from '@/services';
 import { FormData } from '@/types';
 
 const signUp = async (incomingData: FormData, locale?: string) => {
-  const response = await axiosInstance.post(
-    `/signup?locale=${locale}`,
-    incomingData
-  );
+  let path;
+  if (locale) {
+    path = `/signup?locale=${locale}`;
+  } else {
+    path = '/signup';
+  }
+  const response = await axiosInstance.post(path, incomingData);
   return response;
 };
 

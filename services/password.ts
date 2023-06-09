@@ -2,8 +2,17 @@ import { axiosInstance } from '@/services';
 import { ForgotPasswordFormData } from '@/types';
 import { ResetPasswordFormData } from '@/types';
 
-const forgotPassword = async (data: ForgotPasswordFormData) => {
-  const response = await axiosInstance.post('/forgot-password', data);
+const forgotPassword = async (
+  data: ForgotPasswordFormData,
+  locale?: string
+) => {
+  let path;
+  if (locale) {
+    path = `/forgot-password/?locale=${locale}`;
+  } else {
+    path = 'forgot-password';
+  }
+  const response = await axiosInstance.post(path, data);
   return response;
 };
 

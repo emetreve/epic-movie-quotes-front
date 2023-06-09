@@ -48,10 +48,9 @@ const useCreateAccount = () => {
   };
 
   const handleSignUp = async (incomingData: FormData) => {
-    const locale = localStorage.getItem('locale');
     try {
-      if (locale === 'ka') {
-        await signUp(incomingData, locale);
+      if (router.locale === 'ka') {
+        await signUp(incomingData, 'ka');
       } else {
         await signUp(incomingData);
       }

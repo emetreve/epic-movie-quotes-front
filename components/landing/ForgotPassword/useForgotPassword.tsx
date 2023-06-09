@@ -4,10 +4,13 @@ import { ForgotPasswordFormData } from '@/types';
 import { useUiContext } from '@/store';
 import { forgotPassword } from '@/services';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 const useForgotPassword = () => {
   const { showLog, showForgot, showCheckEmailPassword } = useUiContext();
   const { t } = useTranslation('landing');
+
+  const router = useRouter();
 
   const methods = useForm({
     defaultValues: {
@@ -35,7 +38,11 @@ const useForgotPassword = () => {
 
   const handleForgotPassword = async (incomingData: ForgotPasswordFormData) => {
     try {
-      await forgotPassword(incomingData);
+      if (router.locale === 'ka') {
+        await forgotPassword(incomingData, 'ka');
+      } else {
+        await forgotPassword(incomingData);
+      }
       showForgot(false);
       showCheckEmailPassword(true);
     } catch (error: any) {
