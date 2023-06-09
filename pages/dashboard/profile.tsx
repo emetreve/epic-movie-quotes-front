@@ -56,7 +56,7 @@ const Profile = () => {
         {showEditPassword && <ChangePassword />}
 
         <div className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'>
-          <Header hideSearch={true} />
+          <Header hideSearch={true} userName={user.name} avatar={user.avatar} />
 
           {showSuccess && <SuccessNotification show={setShowSuccess} />}
 
