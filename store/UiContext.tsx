@@ -121,10 +121,16 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
 
   const showUpdateName = (show: boolean) => {
     setShowEditName(show);
+    show
+      ? document.body.classList.add('hide-scrollbar')
+      : document.body.classList.remove('hide-scrollbar');
   };
 
   const showUpdatePassword = (show: boolean) => {
     setShowEditPassword(show);
+    show
+      ? document.body.classList.add('hide-scrollbar')
+      : document.body.classList.remove('hide-scrollbar');
   };
 
   return (
