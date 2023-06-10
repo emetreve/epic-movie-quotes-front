@@ -46,6 +46,7 @@ const useLogIn = () => {
       router.push('/dashboard/newsfeed');
     } catch (error: any) {
       if (error.response.data.errors.user) {
+        reset({ password: '' });
         setError('user', {
           type: 'manual',
           message: error.response.data.errors.user[0][router.locale as string],
