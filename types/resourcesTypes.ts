@@ -15,7 +15,7 @@ export type Movie = {
     en: string;
     ka: string;
   };
-  poster: string;
+  poster?: string;
   year: string;
   description: {
     en: string;
@@ -36,7 +36,7 @@ export type Quote = {
     en: string;
     ka: string;
   };
-  image: string;
+  image?: string;
   user_id: number;
   movie_id: number;
   user: User;
