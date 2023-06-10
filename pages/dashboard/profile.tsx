@@ -423,10 +423,14 @@ const Profile = () => {
                           </div>
                           {showPasswordInputs && (
                             <div>
-                              <div>
-                                <PasswordConditionsBox />
+                              <div className='flex flex-col mt-9 w-[100%]'>
+                                <div className='flex justify-center items-center'>
+                                  <div className='flex-grow'>
+                                    <PasswordConditionsBox />
+                                  </div>
+                                  <div className='w-2 ml-8 pt-6'></div>
+                                </div>
                               </div>
-
                               <div className='flex flex-col mt-9 w-full'>
                                 <div className='flex justify-center items-center'>
                                   <div className='flex-grow'>
