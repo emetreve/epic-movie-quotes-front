@@ -41,6 +41,7 @@ const Profile = () => {
     pass,
     handleUpload,
     selectedAvatar,
+    setSelectedAvatar,
     avatarButtonTrigger,
     showMobileAvatarModal,
     setShowMobileAvatarModal,
@@ -124,7 +125,7 @@ const Profile = () => {
                   />
                 </Link>
               </div>
-              <div className='bg-violet bg-opacity-80 rounded-xl pt-6 pb-24 flex flex-col items-center'>
+              <div className='bg-violet bg-opacity-80 rounded-xl pt-6 pb-20 flex flex-col items-center'>
                 <div className='flex flex-col items-center justify-center'>
                   <Image
                     src={
@@ -231,6 +232,7 @@ const Profile = () => {
                 <p
                   onClick={() => {
                     setShowMobileAvatarModal(false);
+                    setSelectedAvatar('');
                   }}
                   className='text-input-gray hover:cursor-pointer mt-5 ml-5 py-[0.4rem]'
                 >

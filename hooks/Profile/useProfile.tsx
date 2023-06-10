@@ -174,6 +174,7 @@ const useProfile = () => {
     pass,
     handleUpload,
     selectedAvatar,
+    setSelectedAvatar,
     avatarButtonTrigger,
     showMobileAvatarModal,
     setShowMobileAvatarModal,
