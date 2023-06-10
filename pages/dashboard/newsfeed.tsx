@@ -126,52 +126,6 @@ const Newsfeed = () => {
                 />
               </div>
             ))}
-          {/* <NewsItem
-            userName='Maia Nakashidze'
-            quote='Follow you dream'
-            movie='Casablanca'
-            year='2001'
-            quoteImage='/assets/quote-sample.png'
-            likesQty={21}
-            commentsQty={2}
-            comments={[
-              {
-                image: '/assets/avatar-default.png',
-                body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nunc vel massa facilisis consequat elit morbi convallis convallis. Volutpat vitae et nisl et. Adipiscing enim integer mi leo nisl. Arcu vitae mauris odio eget.',
-                name: 'Nika Tsetskhladze',
-                id: 1,
-              },
-              {
-                image: '/assets/avatar-default.png',
-                body: 'Lorem ipsum dolor sit amet, consectetur adipiscin',
-                name: 'Ekaterine Shervashidze',
-                id: 2,
-              },
-            ]}
-          /> */}
-          {/* <NewsItem
-            userName='Maia Nakashidze'
-            quote='Follow you dream'
-            movie='Casablanca'
-            year='2001'
-            quoteImage='/assets/quote-sample.png'
-            likesQty={21}
-            commentsQty={2}
-            comments={[
-              {
-                image: '/assets/avatar-default.png',
-                body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nunc vel massa facilisis consequat',
-                name: 'Nika Tsetskhladze',
-                id: 1,
-              },
-              {
-                image: '/assets/avatar-default.png',
-                body: 'Lorem ipsum dolor sit amet, consectetur adipiscin',
-                name: 'Ekaterine Shervashidze',
-                id: 2,
-              },
-            ]}
-          /> */}
         </div>
       </div>
     );
