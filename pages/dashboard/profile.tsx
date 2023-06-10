@@ -255,7 +255,7 @@ const Profile = () => {
           <div className='lg:block hidden'>
             <FormProvider {...methods}>
               <form noValidate onSubmit={handleSubmit(onSubmit)}>
-                <div className='text-white ml-[30%] w-[40%] top-[8rem] -mt-[12rem]'>
+                <div className='text-white ml-[30%] w-[42%] top-[8rem] -mt-[12rem]'>
                   <h1 className='text-2xl mb-5 block'>{t('My profile')}</h1>
                   <div className='flex flex-col items-center justify-center'>
                     <Image
@@ -304,7 +304,7 @@ const Profile = () => {
                             onClick={() => {
                               setShowUsernameInput(true);
                             }}
-                            className='text-input-gray hover:cursor-pointer ml-8 pt-6'
+                            className='text-input-gray hover:cursor-pointer ml-8 pt-6 w-2'
                           >
                             {t('Edit')}
                           </div>
@@ -312,7 +312,7 @@ const Profile = () => {
                       </div>
 
                       {showUsernameInput && (
-                        <div className=' flex flex-col mt-9 w-[87%]'>
+                        <div className=' flex flex-col mt-9 w-full'>
                           <div className='flex justify-center items-center'>
                             <div className='flex-grow'>
                               <label
@@ -363,11 +363,12 @@ const Profile = () => {
                                 </p>
                               </div>
                             </div>
+                            <div className='w-2 ml-8 pt-6'></div>
                           </div>
                         </div>
                       )}
 
-                      <div className='flex flex-col mt-9 w-[87%]'>
+                      <div className='flex flex-col mt-9 w-full'>
                         <div className='flex justify-center items-center'>
                           <div className='flex-grow'>
                             <label
@@ -383,6 +384,7 @@ const Profile = () => {
                               className='bg-input-gray mt-1 w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
                             />
                           </div>
+                          <div className='w-2 ml-8 pt-6'></div>
                         </div>
                       </div>
                       {!user.is_google_user && (
@@ -413,7 +415,7 @@ const Profile = () => {
                               </div>
                               <p
                                 onClick={() => setShowPasswordInputs(true)}
-                                className='text-input-gray hover:cursor-pointer ml-8 pt-6'
+                                className='text-input-gray hover:cursor-pointer ml-8 pt-6 w-2'
                               >
                                 {t('Edit')}
                               </p>
@@ -425,7 +427,7 @@ const Profile = () => {
                                 <PasswordConditionsBox />
                               </div>
 
-                              <div className='flex flex-col mt-9 w-[87%]'>
+                              <div className='flex flex-col mt-9 w-full'>
                                 <div className='flex justify-center items-center'>
                                   <div className='flex-grow'>
                                     <label
@@ -491,10 +493,11 @@ const Profile = () => {
                                       </p>
                                     </div>
                                   </div>
+                                  <div className='w-2 ml-8 pt-6'></div>
                                 </div>
                               </div>
 
-                              <div className='flex flex-col mt-9 w-[87%]'>
+                              <div className='flex flex-col mt-7 w-full'>
                                 <div className='flex justify-center items-center'>
                                   <div className='flex-grow'>
                                     <label
@@ -556,6 +559,7 @@ const Profile = () => {
                                       </p>
                                     </div>
                                   </div>
+                                  <div className='w-2 ml-8 pt-6'></div>
                                 </div>
                               </div>
                             </div>
