@@ -223,7 +223,7 @@ const Profile = () => {
 
           {showMobileAvatarModal && (
             <div className='rounded-lg flex flex-col items-center justify-center h-[11rem] mt-20 bg-gradient-gray mx-8'>
-              <p className='text-white pb-8 text-sm pt-10'>
+              <p className='text-white pb-8 text-sm pt-10 text-center'>
                 {t('Are you sure to make changes')}
               </p>
               <div className='border-b border-b-gray-600 w-full'></div>
