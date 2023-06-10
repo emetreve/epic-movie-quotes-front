@@ -255,7 +255,7 @@ const Profile = () => {
           <div className='lg:block hidden'>
             <FormProvider {...methods}>
               <form noValidate onSubmit={handleSubmit(onSubmit)}>
-                <div className='text-white ml-[30%] w-[42%] top-[8rem] -mt-[12rem]'>
+                <div className='text-white ml-[30%] w-[43%] top-[8rem] -mt-[12rem]'>
                   <h1 className='text-2xl mb-5 block'>{t('My profile')}</h1>
                   <div className='flex flex-col items-center justify-center'>
                     <Image
@@ -282,8 +282,8 @@ const Profile = () => {
                       />
                     </label>
                   </div>
-                  <div className='-mt-[7.6rem] bg-profile-dark-blue backdrop-blur-25 rounded-xl pt-6 pb-36 flex flex-col items-center'>
-                    <div className='mt-32 w-full px-44'>
+                  <div className='-mt-[7.6rem] pr-10 bg-profile-dark-blue backdrop-blur-25 rounded-xl pt-6 pb-36 flex flex-col items-center'>
+                    <div className='mt-32 w-full px-40'>
                       <div className='flex flex-col mt-1 w-[100%]'>
                         <div className='flex justify-center items-center'>
                           <div className='flex-grow'>
