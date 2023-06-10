@@ -571,16 +571,18 @@ const Profile = () => {
                   {(showUsernameInput ||
                     showPasswordInputs ||
                     avatarButtonTrigger) && (
-                    <div className='flex flex-row'>
-                      <p
-                        onClick={handleCancelLg}
-                        className='relative left-[32.5rem] mt-14 py-[0.6rem] text-input-gray'
-                      >
-                        {t('Cancel')}
-                      </p>
-                      <button className='text-white relative left-[35rem] mt-14 bg-red py-[0.6rem] px-4 text-lg rounded-md mr-5 hover:bg-red-hover'>
-                        {t('Save changes')}
-                      </button>
+                    <div className='container flex justify-end'>
+                      <div className='flex flex-row w-fit'>
+                        <p
+                          onClick={handleCancelLg}
+                          className='mt-14 py-[0.6rem] text-input-gray mr-6'
+                        >
+                          {t('Cancel')}
+                        </p>
+                        <button className='text-white mt-14 bg-red py-[0.6rem] px-4 text-lg rounded-md mr-5 hover:bg-red-hover'>
+                          {t('Save changes')}
+                        </button>
+                      </div>
                     </div>
                   )}
                 </div>
