@@ -1,2 +1,2 @@
 export * from './formTypes';
-export * from './userType';
+export * from './resourcesTypes';

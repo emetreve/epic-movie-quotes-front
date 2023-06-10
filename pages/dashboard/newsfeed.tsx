@@ -6,7 +6,7 @@ import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const Newsfeed = () => {
-  const { logged, user, t } = useNewsFeed();
+  const { logged, user, quotes, locale, t } = useNewsFeed();
 
   if (logged) {
     return (
@@ -98,7 +98,35 @@ const Newsfeed = () => {
         </div>
 
         <div className='lg:ml-[26.7%] lg:w-[46.2%] w-full static top-[9.5rem] lg:top-[8rem] lg:-mt-[7.8rem]'>
-          <NewsItem
+          {quotes &&
+            quotes.map((quote) => (
+              <div key={quote.id}>
+                <NewsItem
+                  userName={quote.user.name}
+                  quote={quote.body[locale as keyof typeof quote.body]}
+                  movie={quote.movie.name[locale as keyof typeof quote.body]}
+                  year={quote.movie.year}
+                  quoteImage={quote.image || '/assets/quote-sample.png'}
+                  likesQty={21}
+                  commentsQty={2}
+                  comments={[
+                    {
+                      image: '/assets/avatar-default.png',
+                      body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nunc vel massa facilisis consequat elit morbi convallis convallis. Volutpat vitae et nisl et. Adipiscing enim integer mi leo nisl. Arcu vitae mauris odio eget.',
+                      name: 'Nika Tsetskhladze',
+                      id: 1,
+                    },
+                    {
+                      image: '/assets/avatar-default.png',
+                      body: 'Lorem ipsum dolor sit amet, consectetur adipiscin',
+                      name: 'Ekaterine Shervashidze',
+                      id: 2,
+                    },
+                  ]}
+                />
+              </div>
+            ))}
+          {/* <NewsItem
             userName='Maia Nakashidze'
             quote='Follow you dream'
             movie='Casablanca'
@@ -120,8 +148,8 @@ const Newsfeed = () => {
                 id: 2,
               },
             ]}
-          />
-          <NewsItem
+          /> */}
+          {/* <NewsItem
             userName='Maia Nakashidze'
             quote='Follow you dream'
             movie='Casablanca'
@@ -143,7 +171,7 @@ const Newsfeed = () => {
                 id: 2,
               },
             ]}
-          />
+          /> */}
         </div>
       </div>
     );
