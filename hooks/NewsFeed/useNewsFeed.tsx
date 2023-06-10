@@ -13,7 +13,7 @@ const useNewsFeed = () => {
 
   const { logged, user } = useCheckIfLoggedIn();
 
-  const fetchMovies = async () => {
+  const fetchQuotes = async () => {
     try {
       const response = await getQuotes();
       setQuotes(response.data);
@@ -23,7 +23,7 @@ const useNewsFeed = () => {
   };
 
   useEffect(() => {
-    fetchMovies();
+    fetchQuotes();
   }, []);
 
   return { logged, user, quotes, locale, t };
