@@ -46,6 +46,7 @@ const Profile = () => {
     showMobileAvatarModal,
     setShowMobileAvatarModal,
     submitMobileAvatarChange,
+    handleCancelLg,
     t,
   } = useProfile();
 
@@ -567,7 +568,10 @@ const Profile = () => {
                     showPasswordInputs ||
                     avatarButtonTrigger) && (
                     <div className='flex flex-row'>
-                      <p className='relative left-[32.5rem] mt-14 py-[0.6rem] text-input-gray'>
+                      <p
+                        onClick={handleCancelLg}
+                        className='relative left-[32.5rem] mt-14 py-[0.6rem] text-input-gray'
+                      >
                         {t('Cancel')}
                       </p>
                       <button className='text-white relative left-[35rem] mt-14 bg-red py-[0.6rem] px-4 text-lg rounded-md mr-5 hover:bg-red-hover'>

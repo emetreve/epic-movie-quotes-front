@@ -57,6 +57,7 @@ const useProfile = () => {
     formState: { errors },
     formState,
     control,
+    reset,
     setError,
   } = methods;
 
@@ -147,6 +148,12 @@ const useProfile = () => {
     }
   };
 
+  const handleCancelLg = () => {
+    setShowPasswordInputs(false);
+    setShowUsernameInput(false);
+    reset();
+  };
+
   return {
     logged,
     user,
@@ -179,6 +186,7 @@ const useProfile = () => {
     showMobileAvatarModal,
     setShowMobileAvatarModal,
     submitMobileAvatarChange,
+    handleCancelLg,
     t,
   };
 };
