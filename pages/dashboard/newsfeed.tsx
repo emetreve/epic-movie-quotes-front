@@ -4,6 +4,7 @@ import { useNewsFeed } from '@/hooks';
 import { Header, NewsItem } from '@/components';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { Quote } from '@/types';
 
 const Newsfeed = () => {
   const { logged, user, quotes, locale, t } = useNewsFeed();
@@ -99,7 +100,7 @@ const Newsfeed = () => {
 
         <div className='lg:ml-[26.7%] lg:w-[46.2%] w-full static top-[9.5rem] lg:top-[8rem] lg:-mt-[7.8rem]'>
           {quotes &&
-            quotes.map((quote) => (
+            quotes.map((quote: Quote) => (
               <div key={quote.id}>
                 <NewsItem
                   userName={quote.user.name}
