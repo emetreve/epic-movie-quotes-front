@@ -4,7 +4,7 @@ const PasswordConditionsBox = () => {
   const { t } = useTranslation('profile');
 
   return (
-    <div className='pl-6 bg-transparent border mt-8 lg:w-[87%] py-5 border-password-box-border rounded'>
+    <div className='pl-6 bg-transparent border mt-8 lg:w-full py-5 border-password-box-border rounded'>
       <p>Passwords should contain:</p>
       <ul className='list-disc list-inside mt-2'>
         <li className='flex items-center'>

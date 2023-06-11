@@ -41,10 +41,12 @@ const Profile = () => {
     pass,
     handleUpload,
     selectedAvatar,
+    setSelectedAvatar,
     avatarButtonTrigger,
     showMobileAvatarModal,
     setShowMobileAvatarModal,
     submitMobileAvatarChange,
+    handleCancelLg,
     t,
   } = useProfile();
 
@@ -124,7 +126,7 @@ const Profile = () => {
                   />
                 </Link>
               </div>
-              <div className='bg-violet bg-opacity-80 rounded-xl pt-6 pb-24 flex flex-col items-center'>
+              <div className='bg-violet bg-opacity-80 rounded-xl pt-6 pb-20 flex flex-col items-center'>
                 <div className='flex flex-col items-center justify-center'>
                   <Image
                     src={
@@ -223,7 +225,7 @@ const Profile = () => {
 
           {showMobileAvatarModal && (
             <div className='rounded-lg flex flex-col items-center justify-center h-[11rem] mt-20 bg-gradient-gray mx-8'>
-              <p className='text-white pb-8 text-sm pt-10'>
+              <p className='text-white pb-8 text-sm pt-10 text-center'>
                 {t('Are you sure to make changes')}
               </p>
               <div className='border-b border-b-gray-600 w-full'></div>
@@ -231,6 +233,7 @@ const Profile = () => {
                 <p
                   onClick={() => {
                     setShowMobileAvatarModal(false);
+                    setSelectedAvatar('');
                   }}
                   className='text-input-gray hover:cursor-pointer mt-5 ml-5 py-[0.4rem]'
                 >
@@ -252,7 +255,7 @@ const Profile = () => {
           <div className='lg:block hidden'>
             <FormProvider {...methods}>
               <form noValidate onSubmit={handleSubmit(onSubmit)}>
-                <div className='text-white ml-[30%] w-[40%] top-[8rem] -mt-[12rem]'>
+                <div className='text-white ml-[30%] w-[43%] top-[8rem] -mt-[12rem]'>
                   <h1 className='text-2xl mb-5 block'>{t('My profile')}</h1>
                   <div className='flex flex-col items-center justify-center'>
                     <Image
@@ -279,8 +282,8 @@ const Profile = () => {
                       />
                     </label>
                   </div>
-                  <div className='-mt-[7.6rem] bg-profile-dark-blue backdrop-blur-25 rounded-xl pt-6 pb-36 flex flex-col items-center'>
-                    <div className='mt-32 w-full px-44'>
+                  <div className='-mt-[7.6rem] pr-10 bg-profile-dark-blue backdrop-blur-25 rounded-xl pt-6 pb-36 flex flex-col items-center'>
+                    <div className='mt-32 w-full px-40'>
                       <div className='flex flex-col mt-1 w-[100%]'>
                         <div className='flex justify-center items-center'>
                           <div className='flex-grow'>
@@ -301,7 +304,7 @@ const Profile = () => {
                             onClick={() => {
                               setShowUsernameInput(true);
                             }}
-                            className='text-input-gray hover:cursor-pointer ml-8 pt-6'
+                            className='text-input-gray hover:cursor-pointer ml-8 pt-6 w-2'
                           >
                             {t('Edit')}
                           </div>
@@ -309,7 +312,7 @@ const Profile = () => {
                       </div>
 
                       {showUsernameInput && (
-                        <div className=' flex flex-col mt-9 w-[87%]'>
+                        <div className=' flex flex-col mt-9 w-full'>
                           <div className='flex justify-center items-center'>
                             <div className='flex-grow'>
                               <label
@@ -360,11 +363,12 @@ const Profile = () => {
                                 </p>
                               </div>
                             </div>
+                            <div className='w-2 ml-8 pt-6'></div>
                           </div>
                         </div>
                       )}
 
-                      <div className='flex flex-col mt-9 w-[87%]'>
+                      <div className='flex flex-col mt-9 w-full'>
                         <div className='flex justify-center items-center'>
                           <div className='flex-grow'>
                             <label
@@ -380,6 +384,7 @@ const Profile = () => {
                               className='bg-input-gray mt-1 w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
                             />
                           </div>
+                          <div className='w-2 ml-8 pt-6'></div>
                         </div>
                       </div>
                       {!user.is_google_user && (
@@ -410,7 +415,7 @@ const Profile = () => {
                               </div>
                               <p
                                 onClick={() => setShowPasswordInputs(true)}
-                                className='text-input-gray hover:cursor-pointer ml-8 pt-6'
+                                className='text-input-gray hover:cursor-pointer ml-8 pt-6 w-2'
                               >
                                 {t('Edit')}
                               </p>
@@ -418,11 +423,15 @@ const Profile = () => {
                           </div>
                           {showPasswordInputs && (
                             <div>
-                              <div>
-                                <PasswordConditionsBox />
+                              <div className='flex flex-col mt-9 w-[100%]'>
+                                <div className='flex justify-center items-center'>
+                                  <div className='flex-grow'>
+                                    <PasswordConditionsBox />
+                                  </div>
+                                  <div className='w-2 ml-8 pt-6'></div>
+                                </div>
                               </div>
-
-                              <div className='flex flex-col mt-9 w-[87%]'>
+                              <div className='flex flex-col mt-9 w-full'>
                                 <div className='flex justify-center items-center'>
                                   <div className='flex-grow'>
                                     <label
@@ -488,10 +497,11 @@ const Profile = () => {
                                       </p>
                                     </div>
                                   </div>
+                                  <div className='w-2 ml-8 pt-6'></div>
                                 </div>
                               </div>
 
-                              <div className='flex flex-col mt-9 w-[87%]'>
+                              <div className='flex flex-col mt-7 w-full'>
                                 <div className='flex justify-center items-center'>
                                   <div className='flex-grow'>
                                     <label
@@ -553,6 +563,7 @@ const Profile = () => {
                                       </p>
                                     </div>
                                   </div>
+                                  <div className='w-2 ml-8 pt-6'></div>
                                 </div>
                               </div>
                             </div>
@@ -564,13 +575,18 @@ const Profile = () => {
                   {(showUsernameInput ||
                     showPasswordInputs ||
                     avatarButtonTrigger) && (
-                    <div className='flex flex-row'>
-                      <p className='relative left-[32.5rem] mt-14 py-[0.6rem] text-input-gray'>
-                        {t('Cancel')}
-                      </p>
-                      <button className='text-white relative left-[35rem] mt-14 bg-red py-[0.6rem] px-4 text-lg rounded-md mr-5 hover:bg-red-hover'>
-                        {t('Save changes')}
-                      </button>
+                    <div className='container flex justify-end'>
+                      <div className='flex flex-row w-fit'>
+                        <p
+                          onClick={handleCancelLg}
+                          className='mt-14 py-[0.6rem] text-input-gray mr-6'
+                        >
+                          {t('Cancel')}
+                        </p>
+                        <button className='text-white mt-14 bg-red py-[0.6rem] px-4 text-lg rounded-md mr-5 hover:bg-red-hover'>
+                          {t('Save changes')}
+                        </button>
+                      </div>
                     </div>
                   )}
                 </div>
