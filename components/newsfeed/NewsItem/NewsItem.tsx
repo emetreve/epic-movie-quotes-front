@@ -1,7 +1,10 @@
 import Image from 'next/image';
 import { PropsType } from './types';
+import useNewsItem from './useNewsItem';
 
 const NewsItem: React.FC<PropsType> = ({
+  quote_id,
+  user_id,
   avatar,
   userName,
   quote,
@@ -12,6 +15,8 @@ const NewsItem: React.FC<PropsType> = ({
   commentsQty,
   comments,
 }) => {
+  const { handleSubmit, onSubmit, register } = useNewsItem();
+
   return (
     <div className='text-white w-full px-7 bg-news-bg bg-opacity-25 py-6 h-auto mb-10 lg:rounded-xl'>
       <div className='flex flex-row items-center lg:mb-4'>
@@ -38,7 +43,7 @@ const NewsItem: React.FC<PropsType> = ({
 
       <div className='mt-3 lg:mt-5 flex border-b-[0.1rem] border-gray-600 pb-3 lg:pb-5'>
         <div className='flex flex-row items-center'>
-          <p className='text-xl'>{commentsQty}</p>
+          <p className='text-lg'>{commentsQty}</p>
           <Image
             src='/assets/comments-quantity.png'
             alt='comments quantity'
@@ -48,7 +53,7 @@ const NewsItem: React.FC<PropsType> = ({
           />
         </div>
         <div className='flex flex-row items-center ml-6'>
-          <p className='text-xl'>{likesQty}</p>
+          <p className='text-lg'>{likesQty}</p>
           <Image
             src='/assets/likes-quantity.png'
             alt='comments quantity'
@@ -68,13 +73,17 @@ const NewsItem: React.FC<PropsType> = ({
             >
               <div className='flex flex-row py-3 items-center'>
                 <Image
-                  src='/assets/avatar-default.png'
+                  src={
+                    comment.user.avatar
+                      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${comment.user.avatar}`
+                      : '/assets/avatar-default.png'
+                  }
                   alt='user headshot'
                   width={512}
                   height={512}
                   className='h-11 w-auto mr-2 lg:h-14'
                 />
-                <p className='ml-3 lg:text-xl'>{comment.name}</p>
+                <p className='ml-3 lg:text-xl'>{comment.user.name}</p>
               </div>
               <p className='text-sm lg:text-lg lg:ml-[4.8rem] lg:mr-1 lg:-mt-4'>
                 {comment.body}
@@ -91,10 +100,26 @@ const NewsItem: React.FC<PropsType> = ({
           height={512}
           className='h-11 w-auto mr-2'
         />
-        <input
-          placeholder='Write a comment'
-          className='bg-comment-input-bg py-[0.43rem] pl-3 rounded-lg w-full lg:ml-5'
-        />
+        <form onSubmit={handleSubmit(onSubmit)} className='w-full lg:pr-5'>
+          <input
+            {...register('body', { required: true })}
+            placeholder='Write a comment'
+            className='bg-comment-input-bg py-[0.43rem] pl-3 rounded-lg w-full lg:ml-5'
+          />
+          <input
+            {...register('user_id', { required: true })}
+            type='hidden'
+            name='user_id'
+            defaultValue={user_id}
+          />
+          <input
+            {...register('quote_id', { required: true })}
+            type='hidden'
+            name='quote_id'
+            defaultValue={quote_id}
+          />
+          <button type='submit' className='hidden'></button>
+        </form>
       </div>
     </div>
   );

@@ -28,3 +28,9 @@ export type ChangeUserData = {
   password?: string;
   password_confirmation?: string;
 };
+
+export type AddCommentData = {
+  body: string;
+  user_id: number;
+  quote_id: number;
+};
