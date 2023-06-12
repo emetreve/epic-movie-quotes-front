@@ -30,6 +30,14 @@ export type Movie = {
   user: User;
 };
 
+export type Comment = {
+  id: number;
+  body: string;
+  user: User;
+  user_id: number;
+  quote_id: number;
+};
+
 export type Quote = {
   id: number;
   body: {
@@ -41,4 +49,5 @@ export type Quote = {
   movie_id: number;
   user: User;
   movie: Movie;
+  comments: Comment[] | null;
 };

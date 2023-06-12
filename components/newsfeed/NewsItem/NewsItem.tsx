@@ -38,7 +38,7 @@ const NewsItem: React.FC<PropsType> = ({
 
       <div className='mt-3 lg:mt-5 flex border-b-[0.1rem] border-gray-600 pb-3 lg:pb-5'>
         <div className='flex flex-row items-center'>
-          <p className='text-xl'>{commentsQty}</p>
+          <p className='text-lg'>{commentsQty}</p>
           <Image
             src='/assets/comments-quantity.png'
             alt='comments quantity'
@@ -48,7 +48,7 @@ const NewsItem: React.FC<PropsType> = ({
           />
         </div>
         <div className='flex flex-row items-center ml-6'>
-          <p className='text-xl'>{likesQty}</p>
+          <p className='text-lg'>{likesQty}</p>
           <Image
             src='/assets/likes-quantity.png'
             alt='comments quantity'
@@ -68,13 +68,17 @@ const NewsItem: React.FC<PropsType> = ({
             >
               <div className='flex flex-row py-3 items-center'>
                 <Image
-                  src='/assets/avatar-default.png'
+                  src={
+                    comment.user.avatar
+                      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${comment.user.avatar}`
+                      : '/assets/avatar-default.png'
+                  }
                   alt='user headshot'
                   width={512}
                   height={512}
                   className='h-11 w-auto mr-2 lg:h-14'
                 />
-                <p className='ml-3 lg:text-xl'>{comment.name}</p>
+                <p className='ml-3 lg:text-xl'>{comment.user.name}</p>
               </div>
               <p className='text-sm lg:text-lg lg:ml-[4.8rem] lg:mr-1 lg:-mt-4'>
                 {comment.body}

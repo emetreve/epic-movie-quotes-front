@@ -13,6 +13,7 @@ const useNewsFeed = () => {
 
   const fetchQuotes = async () => {
     const response = await getQuotes();
+    console.log(response.data);
     return response.data;
   };
 

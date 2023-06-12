@@ -1,9 +1,4 @@
-export type Comment = {
-  image: string;
-  body: string;
-  name: string;
-  id: number;
-};
+import { Comment } from '@/types';
 
 export type PropsType = {
   avatar?: string;
@@ -13,6 +8,6 @@ export type PropsType = {
   year: string;
   quoteImage: string;
   likesQty: number;
-  commentsQty: number;
-  comments: Comment[];
+  commentsQty: number | null;
+  comments: Comment[] | null;
 };
