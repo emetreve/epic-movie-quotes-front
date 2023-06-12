@@ -1,6 +1,8 @@
 import { Comment } from '@/types';
 
 export type PropsType = {
+  quote_id: nunmber;
+  user_id: number;
   avatar?: string;
   userName: string;
   quote: string;

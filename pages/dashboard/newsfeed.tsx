@@ -103,6 +103,8 @@ const Newsfeed = () => {
             quotes.map((quote: Quote) => (
               <div key={quote.id}>
                 <NewsItem
+                  quote_id={quote.id}
+                  user_id={user.id}
                   userName={quote.user.name}
                   quote={quote.body[locale as keyof typeof quote.body]}
                   movie={quote.movie.name[locale as keyof typeof quote.body]}

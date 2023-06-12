@@ -1,7 +1,10 @@
 import Image from 'next/image';
 import { PropsType } from './types';
+import useNewsItem from './useNewsItem';
 
 const NewsItem: React.FC<PropsType> = ({
+  quote_id,
+  user_id,
   avatar,
   userName,
   quote,
@@ -12,6 +15,8 @@ const NewsItem: React.FC<PropsType> = ({
   commentsQty,
   comments,
 }) => {
+  const { handleSubmit, onSubmit, register } = useNewsItem();
+
   return (
     <div className='text-white w-full px-7 bg-news-bg bg-opacity-25 py-6 h-auto mb-10 lg:rounded-xl'>
       <div className='flex flex-row items-center lg:mb-4'>
@@ -95,10 +100,26 @@ const NewsItem: React.FC<PropsType> = ({
           height={512}
           className='h-11 w-auto mr-2'
         />
-        <input
-          placeholder='Write a comment'
-          className='bg-comment-input-bg py-[0.43rem] pl-3 rounded-lg w-full lg:ml-5'
-        />
+        <form onSubmit={handleSubmit(onSubmit)} className='w-full lg:pr-5'>
+          <input
+            {...register('body', { required: true })}
+            placeholder='Write a comment'
+            className='bg-comment-input-bg py-[0.43rem] pl-3 rounded-lg w-full lg:ml-5'
+          />
+          <input
+            {...register('user_id', { required: true })}
+            type='hidden'
+            name='user_id'
+            defaultValue={user_id}
+          />
+          <input
+            {...register('quote_id', { required: true })}
+            type='hidden'
+            name='quote_id'
+            defaultValue={quote_id}
+          />
+          <button type='submit' className='hidden'></button>
+        </form>
       </div>
     </div>
   );
