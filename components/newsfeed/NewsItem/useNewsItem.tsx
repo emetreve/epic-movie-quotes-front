@@ -5,6 +5,7 @@ import { createComment } from '@/services';
 
 const useNewsItem = () => {
   const { register, handleSubmit, reset } = useForm<AddCommentData>();
+
   const queryClient = useQueryClient();
 
   const createCommentMutation = useMutation(createComment, {
