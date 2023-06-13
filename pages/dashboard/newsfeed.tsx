@@ -7,11 +7,25 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Quote } from '@/types';
 
 const Newsfeed = () => {
-  const { logged, user, quotes, locale, t } = useNewsFeed();
+  const {
+    logged,
+    user,
+    quotes,
+    locale,
+    t,
+    showSearchLg,
+    setShowSearchLg,
+    focused,
+    setFocused,
+    handleOutsideClick,
+  } = useNewsFeed();
 
   if (logged) {
     return (
-      <div className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'>
+      <div
+        onClick={handleOutsideClick}
+        className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'
+      >
         <Header userName={user.name} avatar={user.avatar} />
         <div className='lg:hidden hover:cursor-pointer flex px-7 py-8 items-center'>
           <Image
@@ -72,8 +86,16 @@ const Newsfeed = () => {
             </div>
 
             <div className='w-[50%]'>
-              <div className='flex frex-row justify-between'>
-                <div className='h-12 flex flex-row items-center bg-violet bg-opacity-80 w-[82%] rounded-lg text-lg'>
+              <div
+                className={`flex frex-row  ${
+                  showSearchLg ? '' : 'justify-between'
+                }`}
+              >
+                <div
+                  className={`${
+                    showSearchLg ? 'w-fit pr-3' : 'w-[82%]'
+                  } transition-width duration-300 ease-in-out h-12 flex flex-row items-center bg-violet bg-opacity-80 rounded-lg text-lg`}
+                >
                   <Image
                     src='/assets/write-new-quote.png'
                     alt='write new quote'
@@ -83,15 +105,58 @@ const Newsfeed = () => {
                   />
                   <p>{t('Write new quote')}</p>
                 </div>
-                <div className='h-12 flex flex-row items-center mr-3 text-lg'>
+                <div
+                  className={`${
+                    showSearchLg
+                      ? 'pl-6 w-[40rem] border-b border-slate-600 pb-3 ml-12 relative'
+                      : 'mr-3'
+                  } h-12 flex flex-row items-center text-lg`}
+                >
                   <Image
                     src='/assets/search-magnifying-glass.png'
                     alt='search magnifying glass'
                     width={96}
                     height={96}
-                    className='h-[1.2rem] w-auto mr-5'
+                    onClick={() => {
+                      setShowSearchLg(true);
+                    }}
+                    className={`${
+                      showSearchLg && 'px-0 mx-0 absolute left-1'
+                    } h-[1.2rem] w-auto mr-5 hover:cursor-pointer z-50`}
                   />
-                  <p className='text-gray-400'>{t('Search by')}</p>
+                  {showSearchLg ? (
+                    <div
+                      onClick={(event) => {
+                        event.stopPropagation();
+                      }}
+                      className='w-full relative text-gray-400 z-50'
+                    >
+                      <p className={`${focused && 'invisible'} ml-5`}>
+                        Enter <span className='text-white'>@</span> to search
+                        movies, Enter <span className='text-white'>#</span> to
+                        search quotes
+                      </p>
+                      <input
+                        id='search'
+                        className='text-white w-full pl-1 ml-4 bg-transparent bottom-[0.04rem] absolute'
+                        name='search'
+                        onFocus={() => setFocused(true)}
+                        onBlur={() => {
+                          setShowSearchLg(false);
+                          setFocused(false);
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <p
+                      onClick={() => {
+                        setShowSearchLg(true);
+                      }}
+                      className='text-gray-400 hover:cursor-pointer z-50 relative'
+                    >
+                      {t('Search by')}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
