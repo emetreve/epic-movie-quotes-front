@@ -47,17 +47,21 @@ const Profile = () => {
     setShowMobileAvatarModal,
     submitMobileAvatarChange,
     handleCancelLg,
+    handleOutsideClick,
     t,
   } = useProfile();
 
   if (logged) {
     return (
       <>
-        {showEditName && <ChangeName />}
+        {showEditName && <ChangeName userName={user.name} />}
 
         {showEditPassword && <ChangePassword />}
 
-        <div className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'>
+        <div
+          onClick={handleOutsideClick}
+          className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'
+        >
           <Header hideSearch={true} userName={user.name} avatar={user.avatar} />
 
           {showSuccess && <SuccessNotification show={setShowSuccess} />}

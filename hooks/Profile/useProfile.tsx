@@ -26,8 +26,14 @@ const useProfile = () => {
 
   const { logged, user } = useCheckIfLoggedIn();
 
-  const { showEditName, showUpdateName, showUpdatePassword, showEditPassword } =
-    useUiContext();
+  const {
+    showEditName,
+    showUpdateName,
+    showUpdatePassword,
+    showEditPassword,
+    showBrugerMenu,
+    showBurger,
+  } = useUiContext();
 
   useEffect(() => {
     if (status === 'success') {
@@ -154,6 +160,12 @@ const useProfile = () => {
     reset();
   };
 
+  const handleOutsideClick = () => {
+    if (showBrugerMenu) {
+      showBurger(false);
+    }
+  };
+
   return {
     logged,
     user,
@@ -187,6 +199,7 @@ const useProfile = () => {
     setShowMobileAvatarModal,
     submitMobileAvatarChange,
     handleCancelLg,
+    handleOutsideClick,
     t,
   };
 };

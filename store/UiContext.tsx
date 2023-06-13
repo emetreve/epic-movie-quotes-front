@@ -26,6 +26,8 @@ const UiContext = createContext({
   showUpdateName: (show: boolean) => {},
   showEditPassword: false,
   showUpdatePassword: (show: boolean) => {},
+  showBrugerMenu: false,
+  showBurger: (show: boolean) => {},
 });
 
 export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
@@ -47,6 +49,7 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
 
   const [showEditName, setShowEditName] = useState(false);
   const [showEditPassword, setShowEditPassword] = useState(false);
+  const [showBrugerMenu, setShowBurgerMenu] = useState(false);
 
   const showCreate = (show: boolean) => {
     setShowCreateAccount(show);
@@ -133,6 +136,13 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
       : document.body.classList.remove('hide-scrollbar');
   };
 
+  const showBurger = (show: boolean) => {
+    setShowBurgerMenu(show);
+    show
+      ? document.body.classList.add('hide-scrollbar')
+      : document.body.classList.remove('hide-scrollbar');
+  };
+
   return (
     <UiContext.Provider
       value={{
@@ -160,6 +170,8 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
         showUpdateName,
         showUpdatePassword,
         showEditPassword,
+        showBrugerMenu,
+        showBurger,
       }}
     >
       {children}

@@ -27,10 +27,14 @@ const ChangePassword = () => {
     setShowPassForm,
     handleConfirm,
     t,
+    handleOutsideClick,
   } = useChangePassword();
 
   return (
-    <div className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'>
+    <div
+      onClick={handleOutsideClick}
+      className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'
+    >
       <Header hideSearch={true} />
       <div>
         <Link href='/dashboard/profile'>

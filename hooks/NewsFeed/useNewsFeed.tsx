@@ -4,10 +4,12 @@ import { useQuery } from 'react-query';
 import { useCheckIfLoggedIn } from '@/hooks';
 import { useTranslation } from 'next-i18next';
 import { getQuotes } from '@/services';
+import { useUiContext } from '@/store';
 
 const useNewsFeed = () => {
   const [showSearchLg, setShowSearchLg] = useState(false);
   const [focused, setFocused] = useState(false);
+  const { showBrugerMenu, showBurger } = useUiContext();
 
   const { t } = useTranslation('newsfeed');
 
@@ -25,6 +27,9 @@ const useNewsFeed = () => {
   const handleOutsideClick = () => {
     if (showSearchLg) {
       setShowSearchLg(false);
+    }
+    if (showBrugerMenu) {
+      showBurger(false);
     }
   };
 

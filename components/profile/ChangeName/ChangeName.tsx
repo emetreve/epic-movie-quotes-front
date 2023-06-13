@@ -4,8 +4,9 @@ import { FormProvider } from 'react-hook-form';
 import { Header } from '@/components';
 import useChangeName from './useChangeName';
 import { ValidationIcons } from '@/components';
+import { PropsType } from './types';
 
-const ChangeName = () => {
+const ChangeName: React.FC<PropsType> = ({ userName }) => {
   const {
     showUpdateName,
     applyInputStyle,
@@ -21,11 +22,15 @@ const ChangeName = () => {
     setShowNameForm,
     handleConfirm,
     t,
+    handleOutsideClick,
   } = useChangeName();
 
   return (
-    <div className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'>
-      <Header hideSearch={true} />
+    <div
+      onClick={handleOutsideClick}
+      className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'
+    >
+      <Header hideSearch={true} userName={userName} />
       <div>
         <Link href='/dashboard/profile'>
           <Image
