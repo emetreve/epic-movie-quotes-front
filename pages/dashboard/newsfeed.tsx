@@ -21,6 +21,7 @@ const Newsfeed = () => {
     register,
     handleSubmit,
     onSubmit,
+    searchedQuotes,
   } = useNewsFeed();
 
   if (logged) {
@@ -171,7 +172,25 @@ const Newsfeed = () => {
 
         <div className='lg:ml-[26.7%] lg:w-[46.2%] w-full static top-[9.5rem] lg:top-[8rem] lg:-mt-[7.8rem]'>
           {quotes?.length > 0 &&
+            !searchedQuotes &&
             quotes.map((quote: Quote) => (
+              <div key={quote.id}>
+                <NewsItem
+                  quote_id={quote.id}
+                  user_id={user.id}
+                  userName={quote.user.name}
+                  quote={quote.body[locale as keyof typeof quote.body]}
+                  movie={quote.movie.name[locale as keyof typeof quote.body]}
+                  year={quote.movie.year}
+                  quoteImage={quote.image || '/assets/quote-sample.png'}
+                  likesQty={21}
+                  commentsQty={quote.comments?.length || null}
+                  comments={quote.comments}
+                />
+              </div>
+            ))}
+          {searchedQuotes &&
+            searchedQuotes.map((quote: Quote) => (
               <div key={quote.id}>
                 <NewsItem
                   quote_id={quote.id}

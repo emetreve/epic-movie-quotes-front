@@ -5,13 +5,13 @@ import { useCheckIfLoggedIn } from '@/hooks';
 import { useTranslation } from 'next-i18next';
 import { getQuotes } from '@/services';
 import { useUiContext } from '@/store';
-import { useQueryClient } from 'react-query';
 import { useForm } from 'react-hook-form';
-import { SearchQuotesData } from '@/types';
+import { SearchQuotesData, Quote } from '@/types';
 
 const useNewsFeed = () => {
   const [showSearchLg, setShowSearchLg] = useState(false);
   const [focused, setFocused] = useState(false);
+  const [searchedQuotes, setSearchedQuotes] = useState<Quote[]>();
   const { showBrugerMenu, showBurger } = useUiContext();
 
   const { t } = useTranslation('newsfeed');
@@ -27,6 +27,12 @@ const useNewsFeed = () => {
 
   const { data: quotes } = useQuery('quotes', fetchQuotes);
 
+  const { register, handleSubmit, reset } = useForm({
+    defaultValues: {
+      search: '',
+    },
+  });
+
   const handleOutsideClick = () => {
     if (showSearchLg) {
       setShowSearchLg(false);
@@ -34,19 +40,12 @@ const useNewsFeed = () => {
     if (showBrugerMenu) {
       showBurger(false);
     }
+    reset();
   };
-
-  const { register, handleSubmit, reset } = useForm({
-    defaultValues: {
-      search: '',
-    },
-  });
-  const queryClient = useQueryClient();
 
   const fetchNewSearchQuotes = async (search?: string) => {
     try {
       const response = await getQuotes(search);
-      console.log(response);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -56,7 +55,7 @@ const useNewsFeed = () => {
   const handleFetchNewSearchQuotes = async (search: string) => {
     try {
       const newQuotesData = await fetchNewSearchQuotes(search);
-      queryClient.setQueryData('quotes', newQuotesData);
+      setSearchedQuotes(newQuotesData);
     } catch (error) {
       console.log(error);
     }
@@ -84,6 +83,7 @@ const useNewsFeed = () => {
     register,
     handleSubmit,
     onSubmit,
+    searchedQuotes,
   };
 };
 
