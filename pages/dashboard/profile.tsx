@@ -56,7 +56,7 @@ const Profile = () => {
       <>
         {showEditName && <ChangeName userName={user.name} />}
 
-        {showEditPassword && <ChangePassword />}
+        {showEditPassword && <ChangePassword userName={user.name} />}
 
         <div
           onClick={handleOutsideClick}

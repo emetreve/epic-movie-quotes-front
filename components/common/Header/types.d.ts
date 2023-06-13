@@ -1,5 +1,5 @@
 export type PropsType = {
   hideSearch?: boolean;
-  userName?: string;
+  userName: string;
   avatar?: string;
 };

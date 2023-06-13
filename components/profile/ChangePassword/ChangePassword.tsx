@@ -4,8 +4,9 @@ import { FormProvider } from 'react-hook-form';
 import { Header } from '@/components';
 import useChangePassword from './useChangePassword';
 import { ValidationIcons } from '@/components';
+import { PropsType } from './types';
 
-const ChangePassword = () => {
+const ChangePassword: React.FC<PropsType> = ({ userName }) => {
   const {
     showUpdatePassword,
     applyStylePass,
@@ -35,7 +36,7 @@ const ChangePassword = () => {
       onClick={handleOutsideClick}
       className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'
     >
-      <Header hideSearch={true} />
+      <Header hideSearch={true} userName={userName} />
       <div>
         <Link href='/dashboard/profile'>
           <Image
