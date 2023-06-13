@@ -63,6 +63,10 @@ const useNewsFeed = () => {
   };
 
   const onSubmit = (data: SearchQuotesData) => {
+    if (data.search.startsWith('#')) {
+      data.search = '*' + data.search.substring(1);
+    }
+    console.log(data);
     handleFetchNewSearchQuotes(data.search);
     reset();
   };
