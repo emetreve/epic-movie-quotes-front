@@ -5,6 +5,9 @@ import { useCheckIfLoggedIn } from '@/hooks';
 import { useTranslation } from 'next-i18next';
 import { getQuotes } from '@/services';
 import { useUiContext } from '@/store';
+import { useQueryClient } from 'react-query';
+import { useForm } from 'react-hook-form';
+import { SearchQuotesData } from '@/types';
 
 const useNewsFeed = () => {
   const [showSearchLg, setShowSearchLg] = useState(false);
@@ -33,6 +36,37 @@ const useNewsFeed = () => {
     }
   };
 
+  const { register, handleSubmit, reset } = useForm({
+    defaultValues: {
+      search: '',
+    },
+  });
+  const queryClient = useQueryClient();
+
+  const fetchNewSearchQuotes = async (search?: string) => {
+    try {
+      const response = await getQuotes(search);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleFetchNewSearchQuotes = async (search: string) => {
+    try {
+      const newQuotesData = await fetchNewSearchQuotes(search);
+      queryClient.setQueryData('quotes', newQuotesData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onSubmit = (data: SearchQuotesData) => {
+    handleFetchNewSearchQuotes(data.search);
+    reset();
+  };
+
   return {
     logged,
     user,
@@ -44,6 +78,9 @@ const useNewsFeed = () => {
     focused,
     setFocused,
     handleOutsideClick,
+    register,
+    handleSubmit,
+    onSubmit,
   };
 };
 

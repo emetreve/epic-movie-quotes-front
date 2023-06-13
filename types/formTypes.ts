@@ -34,3 +34,7 @@ export type AddCommentData = {
   user_id: number;
   quote_id: number;
 };
+
+export type SearchQuotesData = {
+  search: string;
+};

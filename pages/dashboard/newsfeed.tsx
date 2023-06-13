@@ -18,6 +18,9 @@ const Newsfeed = () => {
     focused,
     setFocused,
     handleOutsideClick,
+    register,
+    handleSubmit,
+    onSubmit,
   } = useNewsFeed();
 
   if (logged) {
@@ -136,16 +139,19 @@ const Newsfeed = () => {
                         movies, Enter <span className='text-white'>#</span> to
                         search quotes
                       </p>
-                      <input
-                        id='search'
-                        className='text-white w-full pl-1 ml-4 bg-transparent bottom-[0.04rem] absolute'
-                        name='search'
-                        onFocus={() => setFocused(true)}
-                        onBlur={() => {
-                          setShowSearchLg(false);
-                          setFocused(false);
-                        }}
-                      />
+                      <form onSubmit={handleSubmit(onSubmit)}>
+                        <input
+                          {...register('search', { required: true })}
+                          id='search'
+                          className='text-white w-full pl-1 ml-4 bg-transparent bottom-[0.04rem] absolute'
+                          name='search'
+                          onFocus={() => setFocused(true)}
+                          onBlur={() => {
+                            setShowSearchLg(false);
+                            setFocused(false);
+                          }}
+                        />
+                      </form>
                     </div>
                   ) : (
                     <p
@@ -164,7 +170,7 @@ const Newsfeed = () => {
         </div>
 
         <div className='lg:ml-[26.7%] lg:w-[46.2%] w-full static top-[9.5rem] lg:top-[8rem] lg:-mt-[7.8rem]'>
-          {quotes &&
+          {quotes?.length > 0 &&
             quotes.map((quote: Quote) => (
               <div key={quote.id}>
                 <NewsItem
