@@ -1,11 +1,13 @@
 import { axiosInstance } from '@/services';
 
-const getQuotes = async (search?: string) => {
+const getQuotes = async (locale: string, search?: string) => {
   let response;
   if (search) {
-    response = await axiosInstance.get(`/quotes/?search=${search}`);
+    response = await axiosInstance.get(
+      `/quotes/?search=${search}&locale=${locale}`
+    );
   } else {
-    response = await axiosInstance.get('/quotes');
+    response = await axiosInstance.get(`/quotes/?locale=${locale}`);
   }
   return response;
 };

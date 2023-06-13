@@ -21,7 +21,7 @@ const useNewsFeed = () => {
   const { logged, user } = useCheckIfLoggedIn();
 
   const fetchQuotes = async () => {
-    const response = await getQuotes();
+    const response = await getQuotes(locale as string);
     return response.data;
   };
 
@@ -43,9 +43,9 @@ const useNewsFeed = () => {
     reset();
   };
 
-  const fetchNewSearchQuotes = async (search?: string) => {
+  const fetchNewSearchQuotes = async (locale: string, search: string) => {
     try {
-      const response = await getQuotes(search);
+      const response = await getQuotes(search, locale);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -54,7 +54,10 @@ const useNewsFeed = () => {
 
   const handleFetchNewSearchQuotes = async (search: string) => {
     try {
-      const newQuotesData = await fetchNewSearchQuotes(search);
+      const newQuotesData = await fetchNewSearchQuotes(
+        search,
+        locale as string
+      );
       setSearchedQuotes(newQuotesData);
     } catch (error) {
       console.log(error);
