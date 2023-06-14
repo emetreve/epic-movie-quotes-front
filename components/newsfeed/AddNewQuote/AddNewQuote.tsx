@@ -1,9 +1,33 @@
 import Image from 'next/image';
 import { PropsType } from './types';
 import useAddNewQuote from './useAddNewQuote';
+import { Movie } from '@/types';
+
+import { useState } from 'react';
 
 const AddNewQuote: React.FC<PropsType> = ({ userName, avatar }) => {
-  const { showAddQuote } = useAddNewQuote();
+  const { showAddQuote, movies, locale } = useAddNewQuote();
+
+  const [selectedMovie, setSelectedMovie] = useState({
+    name: {
+      en: '',
+      ka: '',
+    },
+    id: '',
+  });
+
+  const handleMovieChange = (
+    id: string,
+    name: {
+      en: string;
+      ka: string;
+    }
+  ) => {
+    setSelectedMovie({
+      id,
+      name,
+    });
+  };
 
   return (
     <div className='z-50 scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0'>
@@ -59,9 +83,60 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar }) => {
                   />
                   <p>Upload image</p>
                 </div>
-                <button className='bg-upload-btn-violet py-2 px-[0.7rem] bg-opacity-40'>
-                  Choose file
-                </button>
+                <label className='relative bg-upload-btn-violet py-2 px-[0.7rem] bg-opacity-40 cursor-pointer'>
+                  <span>Choose file</span>
+                  <input
+                    type='file'
+                    className='absolute inset-0 w-full h-full opacity-0 cursor-pointer'
+                  />
+                </label>
+              </div>
+            </div>
+            <div>
+              <div className='relative h-[4.8rem] px-6 flex flex-row items-center justify-between w-full bg-black mt-7 rounded'>
+                <div className='flex flex-row w-[60rem]'>
+                  <Image
+                    src='/assets/movie-camera.png'
+                    alt='photo camera'
+                    width={512}
+                    height={512}
+                    className='h-6 w-6 mr-3 lg:h-14'
+                  />
+                  <p className='w-56 whitespace-nowrap overflow-hidden overflow-ellipsis'>
+                    {selectedMovie.name[
+                      locale as keyof typeof selectedMovie.name
+                    ] || 'Select movie'}
+                  </p>
+                </div>
+                <div className='absolute bottom-24 left-0 w-full max-h-72 shadow-lg overflow-scroll bg-violet bg-opacity-[95%] rounded py-4'>
+                  {movies &&
+                    movies.map((movie: Movie, index: number) => {
+                      return (
+                        <p
+                          onClick={() => {
+                            handleMovieChange(movie.id.toString(), movie.name);
+                          }}
+                          key={movie.id}
+                          className={`${
+                            index !== 0 && 'pt-4'
+                          } leading-tight block px-5`}
+                        >
+                          {movie.name[locale as keyof typeof movie.name]}
+                        </p>
+                      );
+                    })}
+                </div>
+                <div className='w-52 overflow-hidden'>
+                  <div className='pointer-events-none absolute inset-y-0 right-2 flex items-center'>
+                    <Image
+                      src='/assets/switch.png'
+                      alt='photo camera'
+                      width={512}
+                      height={512}
+                      className='h-[0.6rem] w-[0.9rem] mr-3 lg:h-14'
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </form>
