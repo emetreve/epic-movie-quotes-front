@@ -4,7 +4,8 @@ import { useTranslation } from 'next-i18next';
 import { useUiContext } from '@/store';
 
 const useHeader = () => {
-  const { showBrugerMenu, showBurger } = useUiContext();
+  const { showBrugerMenu, showBurger, showSearchMobile, showSearchMob } =
+    useUiContext();
 
   const { t } = useTranslation(['newsfeed', 'profile']);
 
@@ -31,6 +32,8 @@ const useHeader = () => {
     showBurger,
     handleNavigation,
     router,
+    showSearchMobile,
+    showSearchMob,
   };
 };
 export default useHeader;
