@@ -12,6 +12,13 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar }) => {
     handleMovieChange,
     showMovieDropdown,
     setShowMovieDropdown,
+    imageName,
+    handleUpload,
+    handleSubmit,
+    onSubmit,
+    register,
+    errors,
+    t,
   } = useAddNewQuote();
 
   return (
@@ -46,20 +53,44 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar }) => {
             />
             <p className='lg:text-xl lg:block lg:ml-1'>{userName}</p>
           </div>
-          <form className='pt-8'>
+          <form noValidate onSubmit={handleSubmit(onSubmit)} className='pt-8'>
             <div className='relative'>
               <textarea
+                {...register('bodyEn', {
+                  required: `${t('This field is required')}`,
+                  pattern: {
+                    value: /^[\w,.,()\s$?!#@%:^&*"']+$/,
+                    message: `${t('Only English text allowed')}`,
+                  },
+                })}
                 className='w-full focus:outline-none h-[5.2rem] border border-textarea-gray bg-transparent rounded py-2 px-4 placeholder-textarea-gray italic'
                 placeholder='Start creating a new quote'
               />
               <p className='absolute top-3 right-4'>Eng</p>
+              <div className='h-2'>
+                <p className='text-red text-xs'>
+                  {errors.bodyEn && errors.bodyEn.message}
+                </p>
+              </div>
             </div>
             <div className='relative mt-5'>
               <textarea
+                {...register('bodyGe', {
+                  required: `${t('This field is required')}`,
+                  pattern: {
+                    value: /^[ა-ჰ\d,.()\s$?!#:@%^&*"']+$/,
+                    message: `${t('Only Georgian text allowed')}`,
+                  },
+                })}
                 className='w-full focus:outline-none h-[5.2rem] border border-textarea-gray bg-transparent rounded py-2 px-4 placeholder-textarea-gray italic'
                 placeholder='ახალი ციტატა'
               />
               <p className='absolute top-3 right-4'>ქარ</p>
+              <div className='h-2'>
+                <p className='text-red text-xs'>
+                  {errors.bodyGe && errors.bodyGe.message}
+                </p>
+              </div>
             </div>
             <div className='mt-5 w-full h-[4.4rem] items-center flex border border-textarea-gray bg-transparent rounded py-2 px-4'>
               <div className='flex flex-row justify-between w-full'>
@@ -71,11 +102,15 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar }) => {
                     height={512}
                     className='h-6 w-6 mr-3 lg:h-14'
                   />
-                  <p>Upload image</p>
+                  <p>{imageName || 'Upload image'}</p>
                 </div>
                 <label className='relative bg-upload-btn-violet py-2 px-[0.7rem] bg-opacity-40 cursor-pointer'>
                   <span>Choose file</span>
                   <input
+                    name='image'
+                    onChange={(e) => {
+                      handleUpload(e);
+                    }}
                     type='file'
                     className='absolute inset-0 w-full h-full opacity-0 cursor-pointer'
                   />
@@ -145,6 +180,12 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar }) => {
                 </div>
               </div>
             </div>
+            <button
+              className='text-white w-full mt-6 text-lg bg-red py-2 px-4 rounded-md hover:bg-red-hover'
+              type='submit'
+            >
+              Post
+            </button>
           </form>
         </div>
       </div>
