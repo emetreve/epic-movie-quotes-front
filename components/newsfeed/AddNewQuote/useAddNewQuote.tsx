@@ -5,6 +5,9 @@ import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'next-i18next';
+import { CreateQuoteFormData } from '@/types';
+import { createQuote } from '@/services';
+import { useQueryClient } from 'react-query';
 
 const useAddNewQuote = () => {
   const [selectedMovie, setSelectedMovie] = useState({
@@ -17,11 +20,13 @@ const useAddNewQuote = () => {
   const [movieError, setMovieError] = useState('');
   const [imageName, setImageName] = useState('');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [userId, setUserId] = useState('');
 
   const { showAddQuote, showMovieDropdown, setShowMovieDropdown } =
     useUiContext();
   const router = useRouter();
   const locale = router.locale;
+  const queryClient = useQueryClient();
   const { t } = useTranslation('profile');
 
   const fetchMovies = async () => {
@@ -74,13 +79,14 @@ const useAddNewQuote = () => {
     }
   };
 
-  const handleMovieExistence = () => {
+  const handleMovieExistence = (userId: string) => {
+    setUserId(userId);
     if (!selectedMovie.id) {
       setMovieError(t('This field is required') as string);
     }
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: CreateQuoteFormData) => {
     if (!selectedMovie.id) {
       return;
     } else {
@@ -90,18 +96,18 @@ const useAddNewQuote = () => {
     if (selectedFile) {
       const formData = new FormData();
       formData.append('image', selectedFile, selectedFile.name);
-      //   try {
-      //     await updateAvatar(formData);
-      //     router.push({
-      //       pathname: router.pathname,
-      //       query: { status: 'successful' },
-      //     });
-      //     setAvatarButtonTrigger(false);
-      //   } catch (error: any) {
-      //     console.log(error);
-      //   }
+      formData.append('bodyGe', data.bodyGe);
+      formData.append('bodyEn', data.bodyEn);
+      formData.append('movie_id', selectedMovie.id);
+      formData.append('user_id', userId);
+
+      try {
+        await createQuote(formData);
+        queryClient.invalidateQueries('quotes');
+      } catch (error: any) {
+        console.log(error);
+      }
     }
-    console.log(555, data);
     reset();
     showAddQuote(false);
   };

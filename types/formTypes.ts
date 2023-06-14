@@ -38,3 +38,9 @@ export type AddCommentData = {
 export type SearchQuotesData = {
   search: string;
 };
+
+export type CreateQuoteFormData = {
+  bodyEn: string;
+  bodyGe: string;
+  image: File | null;
+};

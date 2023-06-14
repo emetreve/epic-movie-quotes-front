@@ -3,7 +3,7 @@ import { PropsType } from './types';
 import useAddNewQuote from './useAddNewQuote';
 import { Movie } from '@/types';
 
-const AddNewQuote: React.FC<PropsType> = ({ userName, avatar }) => {
+const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
   const {
     showAddQuote,
     movies,
@@ -196,7 +196,9 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar }) => {
               <p className='text-red text-xs'>{movieError}</p>
             </div>
             <button
-              onClick={handleMovieExistence}
+              onClick={() => {
+                handleMovieExistence(userId.toString());
+              }}
               className='text-white w-full mt-6 text-lg bg-red py-2 px-4 rounded-md hover:bg-red-hover'
               type='submit'
             >

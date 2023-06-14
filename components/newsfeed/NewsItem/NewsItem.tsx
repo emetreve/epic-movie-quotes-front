@@ -34,7 +34,7 @@ const NewsItem: React.FC<PropsType> = ({
         <p>{`"${quote}" - ${movie}, (${year})`}</p>
         <Image
           src={quoteImage}
-          alt='user headshot'
+          alt='quote image'
           width={916}
           height={512}
           className='h-48 lg:h-[30rem] mt-3 lg:mt-6 rounded-lg'

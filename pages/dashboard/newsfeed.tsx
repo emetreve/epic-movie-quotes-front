@@ -69,7 +69,11 @@ const Newsfeed = () => {
         )}
 
         {showAddNewQuote && (
-          <AddNewQuote userName={user.name} avatar={user.avatar} />
+          <AddNewQuote
+            userName={user.name}
+            avatar={user.avatar}
+            userId={user.id}
+          />
         )}
         <div
           onClick={() => {
@@ -227,7 +231,11 @@ const Newsfeed = () => {
                   quote={quote.body[locale as keyof typeof quote.body]}
                   movie={quote.movie.name[locale as keyof typeof quote.body]}
                   year={quote.movie.year}
-                  quoteImage={quote.image || '/assets/quote-sample.png'}
+                  quoteImage={
+                    quote.image
+                      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${quote.image}`
+                      : '/assets/quote-sample.png'
+                  }
                   likesQty={21}
                   commentsQty={quote.comments?.length || null}
                   comments={quote.comments}
@@ -244,7 +252,11 @@ const Newsfeed = () => {
                   quote={quote.body[locale as keyof typeof quote.body]}
                   movie={quote.movie.name[locale as keyof typeof quote.body]}
                   year={quote.movie.year}
-                  quoteImage={quote.image || '/assets/quote-sample.png'}
+                  quoteImage={
+                    quote.image
+                      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${quote.image}`
+                      : '/assets/quote-sample.png'
+                  }
                   likesQty={21}
                   commentsQty={quote.comments?.length || null}
                   comments={quote.comments}

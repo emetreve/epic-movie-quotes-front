@@ -7,4 +7,4 @@ export { signUp, logOut, googleAuth, verifyEmail } from './userauth';
 export { forgotPassword, resetPassword } from './password';
 export { updateUser, updateAvatar } from './updateuser';
 export { getQuotes, getMovies } from './getdata';
-export { createComment } from './postdata';
+export { createComment, createQuote } from './postdata';
