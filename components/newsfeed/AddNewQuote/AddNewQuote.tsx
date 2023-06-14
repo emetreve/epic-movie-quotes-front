@@ -1,7 +1,10 @@
 import Image from 'next/image';
 import { PropsType } from './types';
+import useAddNewQuote from './useAddNewQuote';
 
 const AddNewQuote: React.FC<PropsType> = ({ userName, avatar }) => {
+  const { showAddQuote } = useAddNewQuote();
+
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
       <div className='bg-gradient-violet lg:bg-gradient-plain-violet h-full w-full lg:h-[29rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative lg:scale-105'>
@@ -13,6 +16,9 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar }) => {
             width={512}
             height={512}
             className='w-[0.9rem] h-[0.9rem] hover:cursor-pointer absolute right-8'
+            onClick={() => {
+              showAddQuote(false);
+            }}
           />
         </div>
         <div className='px-7 mt-7'>
@@ -22,7 +28,7 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar }) => {
               alt='user headshot'
               width={512}
               height={512}
-              className='h-11 w-auto mr-3 lg:h-14'
+              className='h-10 w-auto mr-3 lg:h-14'
             />
             <p className='lg:text-xl lg:block lg:ml-1'>{userName}</p>
           </div>
