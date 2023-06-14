@@ -32,6 +32,8 @@ const UiContext = createContext({
   showSearchMob: (show: boolean) => {},
   showAddNewQuote: false,
   showAddQuote: (show: boolean) => {},
+  showMovieDropdown: false,
+  setShowMovieDropdown: (newValue: boolean) => {},
 });
 
 export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
@@ -56,6 +58,7 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
   const [showBrugerMenu, setShowBurgerMenu] = useState(false);
   const [showSearchMobile, setShowSearchMobile] = useState(false);
   const [showAddNewQuote, setShowAddNewQuote] = useState(false);
+  const [showMovieDropdown, setShowMovieDropdown] = useState(false);
 
   const showCreate = (show: boolean) => {
     setShowCreateAccount(show);
@@ -196,6 +199,8 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
         showSearchMob,
         showAddQuote,
         showAddNewQuote,
+        showMovieDropdown,
+        setShowMovieDropdown,
       }}
     >
       {children}

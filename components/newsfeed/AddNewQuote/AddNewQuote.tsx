@@ -3,34 +3,24 @@ import { PropsType } from './types';
 import useAddNewQuote from './useAddNewQuote';
 import { Movie } from '@/types';
 
-import { useState } from 'react';
-
 const AddNewQuote: React.FC<PropsType> = ({ userName, avatar }) => {
-  const { showAddQuote, movies, locale } = useAddNewQuote();
-
-  const [selectedMovie, setSelectedMovie] = useState({
-    name: {
-      en: '',
-      ka: '',
-    },
-    id: '',
-  });
-
-  const handleMovieChange = (
-    id: string,
-    name: {
-      en: string;
-      ka: string;
-    }
-  ) => {
-    setSelectedMovie({
-      id,
-      name,
-    });
-  };
+  const {
+    showAddQuote,
+    movies,
+    locale,
+    selectedMovie,
+    handleMovieChange,
+    showMovieDropdown,
+    setShowMovieDropdown,
+  } = useAddNewQuote();
 
   return (
-    <div className='z-50 scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0'>
+    <div
+      onClick={() => {
+        setShowMovieDropdown(false);
+      }}
+      className='z-50 scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0'
+    >
       <div className='bg-profile-dark-blue h-full w-full lg:h-[29rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative lg:scale-105'>
         <div className='relative pt-7 px-4 flex flex-row justify-center items-center border-b border-gray-700 pb-7'>
           <h1 className='text-xl'>Write new quote</h1>
@@ -93,7 +83,13 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar }) => {
               </div>
             </div>
             <div>
-              <div className='relative h-[4.8rem] px-6 flex flex-row items-center justify-between w-full bg-black mt-7 rounded'>
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowMovieDropdown(!showMovieDropdown);
+                }}
+                className='relative h-[4.8rem] px-6 flex flex-row items-center justify-between w-full bg-black mt-7 rounded'
+              >
                 <div className='flex flex-row w-[60rem]'>
                   <Image
                     src='/assets/movie-camera.png'
@@ -108,24 +104,34 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar }) => {
                     ] || 'Select movie'}
                   </p>
                 </div>
-                <div className='absolute bottom-24 left-0 w-full max-h-72 shadow-lg overflow-scroll bg-violet bg-opacity-[95%] rounded py-4'>
-                  {movies &&
-                    movies.map((movie: Movie, index: number) => {
-                      return (
-                        <p
-                          onClick={() => {
-                            handleMovieChange(movie.id.toString(), movie.name);
-                          }}
-                          key={movie.id}
-                          className={`${
-                            index !== 0 && 'pt-4'
-                          } leading-tight block px-5`}
-                        >
-                          {movie.name[locale as keyof typeof movie.name]}
-                        </p>
-                      );
-                    })}
-                </div>
+                {showMovieDropdown && (
+                  <div
+                    onClick={(e) => {
+                      e.stopPropagation();
+                    }}
+                    className='absolute bottom-24 left-0 w-full max-h-72 shadow-lg overflow-scroll bg-violet bg-opacity-[95%] rounded py-4'
+                  >
+                    {movies &&
+                      movies.map((movie: Movie, index: number) => {
+                        return (
+                          <p
+                            onClick={() => {
+                              handleMovieChange(
+                                movie.id.toString(),
+                                movie.name
+                              );
+                            }}
+                            key={movie.id}
+                            className={`${
+                              index !== 0 && 'pt-4'
+                            } leading-tight block px-5`}
+                          >
+                            {movie.name[locale as keyof typeof movie.name]}
+                          </p>
+                        );
+                      })}
+                  </div>
+                )}
                 <div className='w-52 overflow-hidden'>
                   <div className='pointer-events-none absolute inset-y-0 right-2 flex items-center'>
                     <Image
