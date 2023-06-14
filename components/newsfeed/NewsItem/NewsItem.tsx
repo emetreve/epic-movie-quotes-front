@@ -85,7 +85,7 @@ const NewsItem: React.FC<PropsType> = ({
                 />
                 <p className='ml-3 lg:text-xl'>{comment.user.name}</p>
               </div>
-              <p className='text-sm lg:text-lg lg:ml-[4.8rem] lg:mr-1 lg:-mt-4'>
+              <p className='text-sm lg:text-lg lg:ml-[4.8rem] lg:mr-1 lg:-mt-4 break-all'>
                 {comment.body}
               </p>
               <div className='hidden lg:flex ml-[4.8rem] border-gray-600 border-b-[0.1rem] pb-6 '></div>
