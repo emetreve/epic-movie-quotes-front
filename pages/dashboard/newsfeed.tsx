@@ -171,14 +171,14 @@ const Newsfeed = () => {
                     }}
                     className={`${
                       showSearchLg && 'px-0 mx-0 absolute left-1'
-                    } h-[1.2rem] w-auto mr-5 hover:cursor-pointer z-50`}
+                    } h-[1.2rem] w-auto mr-5 hover:cursor-pointer z-40`}
                   />
                   {showSearchLg ? (
                     <div
                       onClick={(event) => {
                         event.stopPropagation();
                       }}
-                      className='w-full relative text-gray-400 z-50'
+                      className='w-full relative text-gray-400 z-40'
                     >
                       <p className={`${focused && 'invisible'} ml-5`}>
                         Enter <span className='text-white'>@</span> to search
@@ -204,7 +204,7 @@ const Newsfeed = () => {
                       onClick={() => {
                         setShowSearchLg(true);
                       }}
-                      className='text-gray-400 hover:cursor-pointer z-50 relative'
+                      className='text-gray-400 hover:cursor-pointer z-40 relative'
                     >
                       {t('Search by')}
                     </p>
