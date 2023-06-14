@@ -1,22 +1,13 @@
 import { axiosInstance } from '@/services';
 
 const getQuotes = async (locale: string, search?: string) => {
-  let response;
+  const response = await axiosInstance.get('/quotes', {
+    params: {
+      locale,
+      search,
+    },
+  });
 
-  if (search) {
-    response = await axiosInstance.get('/quotes', {
-      params: {
-        locale,
-        search,
-      },
-    });
-  } else {
-    response = await axiosInstance.get('/quotes', {
-      params: {
-        locale,
-      },
-    });
-  }
   return response;
 };
 
