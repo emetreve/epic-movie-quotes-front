@@ -46,7 +46,7 @@ const Newsfeed = () => {
                   showSearchMob(false);
                 }}
               />
-              <form onSubmit={handleSubmit(onSubmit)}>
+              <form onSubmit={handleSubmit(onSubmit)} className='w-full'>
                 <input
                   {...register('search', { required: true })}
                   className='text-white ml-6 text-sm bg-transparent placeholder-white w-full'
