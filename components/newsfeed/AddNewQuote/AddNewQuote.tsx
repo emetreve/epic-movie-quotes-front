@@ -18,6 +18,9 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar }) => {
     onSubmit,
     register,
     errors,
+    movieError,
+    setMovieError,
+    handleMovieExistence,
     t,
   } = useAddNewQuote();
 
@@ -63,7 +66,7 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar }) => {
                     message: `${t('Only English text allowed')}`,
                   },
                 })}
-                className='w-full focus:outline-none h-[5.2rem] border border-textarea-gray bg-transparent rounded py-2 px-4 placeholder-textarea-gray italic'
+                className='w-full pr-12 focus:outline-none h-[5.2rem] border border-textarea-gray bg-transparent rounded py-2 px-4 placeholder-textarea-gray italic'
                 placeholder='Start creating a new quote'
               />
               <p className='absolute top-3 right-4'>Eng</p>
@@ -82,7 +85,7 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar }) => {
                     message: `${t('Only Georgian text allowed')}`,
                   },
                 })}
-                className='w-full focus:outline-none h-[5.2rem] border border-textarea-gray bg-transparent rounded py-2 px-4 placeholder-textarea-gray italic'
+                className='w-full pr-12 focus:outline-none h-[5.2rem] border border-textarea-gray bg-transparent rounded py-2 px-4 placeholder-textarea-gray italic'
                 placeholder='ახალი ციტატა'
               />
               <p className='absolute top-3 right-4'>ქარ</p>
@@ -107,6 +110,9 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar }) => {
                 <label className='relative bg-upload-btn-violet py-2 px-[0.7rem] bg-opacity-40 cursor-pointer'>
                   <span>Choose file</span>
                   <input
+                    {...register('image', {
+                      required: `${t('This field is required')}`,
+                    })}
                     name='image'
                     onChange={(e) => {
                       handleUpload(e);
@@ -116,6 +122,11 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar }) => {
                   />
                 </label>
               </div>
+            </div>
+            <div className='h-2 mt-1'>
+              <p className='text-red text-xs'>
+                {errors.image && errors.image.message}
+              </p>
             </div>
             <div>
               <div
@@ -155,6 +166,7 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar }) => {
                                 movie.id.toString(),
                                 movie.name
                               );
+                              setMovieError('');
                             }}
                             key={movie.id}
                             className={`${
@@ -180,7 +192,11 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar }) => {
                 </div>
               </div>
             </div>
+            <div className='h-2 mt-1'>
+              <p className='text-red text-xs'>{movieError}</p>
+            </div>
             <button
+              onClick={handleMovieExistence}
               className='text-white w-full mt-6 text-lg bg-red py-2 px-4 rounded-md hover:bg-red-hover'
               type='submit'
             >

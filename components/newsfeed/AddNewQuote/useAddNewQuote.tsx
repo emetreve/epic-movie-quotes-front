@@ -14,6 +14,7 @@ const useAddNewQuote = () => {
     },
     id: '',
   });
+  const [movieError, setMovieError] = useState('');
   const [imageName, setImageName] = useState('');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
@@ -44,17 +45,6 @@ const useAddNewQuote = () => {
 
   const { data: movies } = useQuery('movies', fetchMovies);
 
-  const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files) {
-      return;
-    }
-    const selectedFile = event.target.files[0];
-    setSelectedFile(selectedFile);
-    if (selectedFile) {
-      setImageName(selectedFile.name);
-    }
-  };
-
   const methods = useForm({
     defaultValues: {
       bodyEn: '',
@@ -69,9 +59,34 @@ const useAddNewQuote = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    clearErrors,
   } = methods;
 
+  const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) {
+      return;
+    }
+    const selectedFile = event.target.files[0];
+    setSelectedFile(selectedFile);
+    if (selectedFile) {
+      setImageName(selectedFile.name);
+      clearErrors('image');
+    }
+  };
+
+  const handleMovieExistence = () => {
+    if (!selectedMovie.id) {
+      setMovieError(t('This field is required') as string);
+    }
+  };
+
   const onSubmit = async (data) => {
+    if (!selectedMovie.id) {
+      return;
+    } else {
+      setMovieError('');
+    }
+
     if (selectedFile) {
       const formData = new FormData();
       formData.append('image', selectedFile, selectedFile.name);
@@ -88,6 +103,7 @@ const useAddNewQuote = () => {
     }
     console.log(555, data);
     reset();
+    showAddQuote(false);
   };
 
   return {
@@ -105,6 +121,9 @@ const useAddNewQuote = () => {
     onSubmit,
     register,
     errors,
+    movieError,
+    setMovieError,
+    handleMovieExistence,
     t,
   };
 };
