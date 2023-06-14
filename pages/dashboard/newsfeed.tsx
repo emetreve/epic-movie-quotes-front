@@ -7,11 +7,29 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Quote } from '@/types';
 
 const Newsfeed = () => {
-  const { logged, user, quotes, locale, t } = useNewsFeed();
+  const {
+    logged,
+    user,
+    quotes,
+    locale,
+    t,
+    showSearchLg,
+    setShowSearchLg,
+    focused,
+    setFocused,
+    handleOutsideClick,
+    register,
+    handleSubmit,
+    onSubmit,
+    searchedQuotes,
+  } = useNewsFeed();
 
   if (logged) {
     return (
-      <div className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'>
+      <div
+        onClick={handleOutsideClick}
+        className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'
+      >
         <Header userName={user.name} avatar={user.avatar} />
         <div className='lg:hidden hover:cursor-pointer flex px-7 py-8 items-center'>
           <Image
@@ -72,8 +90,16 @@ const Newsfeed = () => {
             </div>
 
             <div className='w-[50%]'>
-              <div className='flex frex-row justify-between'>
-                <div className='h-12 flex flex-row items-center bg-violet bg-opacity-80 w-[82%] rounded-lg text-lg'>
+              <div
+                className={`flex frex-row  ${
+                  showSearchLg ? '' : 'justify-between'
+                }`}
+              >
+                <div
+                  className={`${
+                    showSearchLg ? 'w-fit pr-3' : 'w-[82%]'
+                  } transition-width duration-300 ease-in-out h-12 flex flex-row items-center bg-violet bg-opacity-80 rounded-lg text-lg`}
+                >
                   <Image
                     src='/assets/write-new-quote.png'
                     alt='write new quote'
@@ -83,15 +109,61 @@ const Newsfeed = () => {
                   />
                   <p>{t('Write new quote')}</p>
                 </div>
-                <div className='h-12 flex flex-row items-center mr-3 text-lg'>
+                <div
+                  className={`${
+                    showSearchLg
+                      ? 'pl-6 w-[40rem] border-b border-slate-600 pb-3 ml-12 relative'
+                      : 'mr-3'
+                  } h-12 flex flex-row items-center text-lg`}
+                >
                   <Image
                     src='/assets/search-magnifying-glass.png'
                     alt='search magnifying glass'
                     width={96}
                     height={96}
-                    className='h-[1.2rem] w-auto mr-5'
+                    onClick={() => {
+                      setShowSearchLg(true);
+                    }}
+                    className={`${
+                      showSearchLg && 'px-0 mx-0 absolute left-1'
+                    } h-[1.2rem] w-auto mr-5 hover:cursor-pointer z-50`}
                   />
-                  <p className='text-gray-400'>{t('Search by')}</p>
+                  {showSearchLg ? (
+                    <div
+                      onClick={(event) => {
+                        event.stopPropagation();
+                      }}
+                      className='w-full relative text-gray-400 z-50'
+                    >
+                      <p className={`${focused && 'invisible'} ml-5`}>
+                        Enter <span className='text-white'>@</span> to search
+                        movies, Enter <span className='text-white'>#</span> to
+                        search quotes
+                      </p>
+                      <form onSubmit={handleSubmit(onSubmit)}>
+                        <input
+                          {...register('search', { required: true })}
+                          id='search'
+                          className='text-white w-full pl-1 ml-4 bg-transparent bottom-[0.04rem] absolute'
+                          name='search'
+                          onFocus={() => setFocused(true)}
+                          onBlur={() => {
+                            setShowSearchLg(false);
+                            setFocused(false);
+                          }}
+                        />
+                      </form>
+                    </div>
+                  ) : (
+                    <p
+                      onClick={() => {
+                        setShowSearchLg(true);
+                      }}
+                      className='text-gray-400 hover:cursor-pointer z-50 relative'
+                    >
+                      {t('Search by')}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -99,8 +171,26 @@ const Newsfeed = () => {
         </div>
 
         <div className='lg:ml-[26.7%] lg:w-[46.2%] w-full static top-[9.5rem] lg:top-[8rem] lg:-mt-[7.8rem]'>
-          {quotes &&
+          {quotes?.length > 0 &&
+            !searchedQuotes &&
             quotes.map((quote: Quote) => (
+              <div key={quote.id}>
+                <NewsItem
+                  quote_id={quote.id}
+                  user_id={user.id}
+                  userName={quote.user.name}
+                  quote={quote.body[locale as keyof typeof quote.body]}
+                  movie={quote.movie.name[locale as keyof typeof quote.body]}
+                  year={quote.movie.year}
+                  quoteImage={quote.image || '/assets/quote-sample.png'}
+                  likesQty={21}
+                  commentsQty={quote.comments?.length || null}
+                  comments={quote.comments}
+                />
+              </div>
+            ))}
+          {searchedQuotes &&
+            searchedQuotes.map((quote: Quote) => (
               <div key={quote.id}>
                 <NewsItem
                   quote_id={quote.id}

@@ -31,16 +31,6 @@ const Header: React.FC<PropsType> = ({ hideSearch, userName, avatar }) => {
             !showBrugerMenu && 'hidden'
           } w-[20rem] absolute top-0 h-[37rem] z-50 bg-profile-dark-blue rounded-lg shadow-lg px-7 pb-8 pt-6`}
         >
-          <Image
-            onClick={() => {
-              showBurger(false);
-            }}
-            src='/assets/close-btn.png'
-            alt='close button'
-            width={200}
-            height={200}
-            className='h-5 w-5 right-0 absolute mr-6 opacity-30 hover:cursor-pointer'
-          />
           <div className='flex flex-row mt-8'>
             <Image
               src={

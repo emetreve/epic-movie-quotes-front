@@ -12,6 +12,8 @@ const useChangeName = () => {
   const { showUpdateName } = useUiContext();
   const { t } = useTranslation('profile');
 
+  const { showBurger, showBrugerMenu } = useUiContext();
+
   const methods = useForm({
     defaultValues: {
       username: '',
@@ -65,6 +67,12 @@ const useChangeName = () => {
     }
   };
 
+  const handleOutsideClick = () => {
+    if (showBrugerMenu) {
+      showBurger(false);
+    }
+  };
+
   return {
     showUpdateName,
     applyInputStyle,
@@ -80,6 +88,7 @@ const useChangeName = () => {
     setShowNameForm,
     handleConfirm,
     t,
+    handleOutsideClick,
   };
 };
 export default useChangeName;

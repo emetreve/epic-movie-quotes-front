@@ -81,7 +81,7 @@ const NewsItem: React.FC<PropsType> = ({
                   alt='user headshot'
                   width={512}
                   height={512}
-                  className='h-11 w-auto mr-2 lg:h-14'
+                  className='h-11 w-auto mr-2 lg:h-14 rounded-[50%]'
                 />
                 <p className='ml-3 lg:text-xl'>{comment.user.name}</p>
               </div>
