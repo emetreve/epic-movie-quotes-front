@@ -30,7 +30,7 @@ const NewsItem: React.FC<PropsType> = ({
         <p className='lg:text-xl lg:block lg:ml-1'>{userName}</p>
       </div>
 
-      <div className='text-sm mt-3 lg:text-xl'>
+      <div className='text-sm mt-3 lg:text-xl break-all'>
         <p>{`"${quote}" - ${movie}, (${year})`}</p>
         <Image
           src={quoteImage}
