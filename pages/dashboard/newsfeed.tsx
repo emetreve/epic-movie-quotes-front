@@ -5,6 +5,7 @@ import { Header, NewsItem } from '@/components';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Quote } from '@/types';
+import { AddNewQuote } from '@/components';
 
 const Newsfeed = () => {
   const {
@@ -24,6 +25,8 @@ const Newsfeed = () => {
     searchedQuotes,
     showSearchMobile,
     showSearchMob,
+    showAddQuote,
+    showAddNewQuote,
   } = useNewsFeed();
 
   if (logged) {
@@ -64,7 +67,16 @@ const Newsfeed = () => {
             </div>
           </div>
         )}
-        <div className='lg:hidden hover:cursor-pointer flex px-7 py-8 items-center'>
+
+        {showAddNewQuote && (
+          <AddNewQuote userName={user.name} avatar={user.avatar} />
+        )}
+        <div
+          onClick={() => {
+            showAddQuote(true);
+          }}
+          className='lg:hidden hover:cursor-pointer flex px-7 py-8 items-center'
+        >
           <Image
             src='/assets/write-new-quote.png'
             alt='write new quote'

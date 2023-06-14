@@ -12,8 +12,14 @@ const useNewsFeed = () => {
   const [showSearchLg, setShowSearchLg] = useState(false);
   const [focused, setFocused] = useState(false);
   const [searchedQuotes, setSearchedQuotes] = useState<Quote[]>();
-  const { showBrugerMenu, showBurger, showSearchMobile, showSearchMob } =
-    useUiContext();
+  const {
+    showBrugerMenu,
+    showBurger,
+    showSearchMobile,
+    showSearchMob,
+    showAddQuote,
+    showAddNewQuote,
+  } = useUiContext();
 
   const { t } = useTranslation('newsfeed');
 
@@ -94,6 +100,8 @@ const useNewsFeed = () => {
     searchedQuotes,
     showSearchMobile,
     showSearchMob,
+    showAddQuote,
+    showAddNewQuote,
   };
 };
 
