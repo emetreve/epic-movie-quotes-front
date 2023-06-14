@@ -17,7 +17,7 @@ const Header: React.FC<PropsType> = ({ hideSearch, userName, avatar }) => {
 
   return (
     <>
-      {!showSearchMobile ? (
+      {!showSearchMobile && (
         <div className='flex relative lg:hidden justify-between items-center py-6 text-xs lg:text-base lg:px-16 bg-violet bg-opacity-80'>
           <Image
             src='/assets/burger-menu.png'
@@ -30,6 +30,9 @@ const Header: React.FC<PropsType> = ({ hideSearch, userName, avatar }) => {
             }}
           />
           <div
+            onClick={(event) => {
+              event.stopPropagation();
+            }}
             className={`${
               !showBrugerMenu && 'hidden'
             } w-[20rem] absolute top-0 h-[37rem] z-50 bg-profile-dark-blue rounded-lg shadow-lg px-7 pb-8 pt-6`}
@@ -101,7 +104,7 @@ const Header: React.FC<PropsType> = ({ hideSearch, userName, avatar }) => {
               >
                 {t('Log out')}
               </button>
-              <div className='ml-4 mt-1'>
+              <div className='ml-4 mt-1 h-fit'>
                 <LangSwitch fromBurgerMenu={true} />
               </div>
             </div>
@@ -127,33 +130,6 @@ const Header: React.FC<PropsType> = ({ hideSearch, userName, avatar }) => {
               height={96}
               className='lg:hidden inline ml-4 h-5 w-auto hover:cursor-pointer'
             />
-          </div>
-        </div>
-      ) : (
-        <div className='bg-gradient-violet min-h-screen w-screen absolute'>
-          <div className='pt-6 px-4 flex flex-row items-center border-b border-gray-700 pb-6'>
-            <Image
-              src='/assets/back-hd.png'
-              alt='go back'
-              width={96}
-              height={96}
-              className='inline ml-4 w-4 h-auto hover:cursor-pointer'
-              onClick={() => {
-                showSearchMob(false);
-              }}
-            />
-            <input
-              className='text-white ml-6 text-sm bg-transparent placeholder-white w-full'
-              placeholder='Search'
-            />
-          </div>
-          <div className='text-gray-500 text-sm ml-[4.5rem] pt-6'>
-            <p>
-              Enter <span className='text-white'>@</span> to search movies
-            </p>
-            <p className='pt-5'>
-              Enter <span className='text-white'>#</span> to search quotes
-            </p>
           </div>
         </div>
       )}

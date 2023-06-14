@@ -12,7 +12,8 @@ const useNewsFeed = () => {
   const [showSearchLg, setShowSearchLg] = useState(false);
   const [focused, setFocused] = useState(false);
   const [searchedQuotes, setSearchedQuotes] = useState<Quote[]>();
-  const { showBrugerMenu, showBurger } = useUiContext();
+  const { showBrugerMenu, showBurger, showSearchMobile, showSearchMob } =
+    useUiContext();
 
   const { t } = useTranslation('newsfeed');
 
@@ -70,6 +71,10 @@ const useNewsFeed = () => {
     }
     handleFetchNewSearchQuotes(data.search);
     reset();
+
+    if (showSearchMobile) {
+      showSearchMob(false);
+    }
   };
 
   return {
@@ -87,6 +92,8 @@ const useNewsFeed = () => {
     handleSubmit,
     onSubmit,
     searchedQuotes,
+    showSearchMobile,
+    showSearchMob,
   };
 };
 

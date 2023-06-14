@@ -22,6 +22,8 @@ const Newsfeed = () => {
     handleSubmit,
     onSubmit,
     searchedQuotes,
+    showSearchMobile,
+    showSearchMob,
   } = useNewsFeed();
 
   if (logged) {
@@ -31,6 +33,37 @@ const Newsfeed = () => {
         className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'
       >
         <Header userName={user.name} avatar={user.avatar} />
+        {showSearchMobile && (
+          <div className='lg:hidden bg-gradient-violet min-h-screen w-screen absolute'>
+            <div className='pt-6 px-4 flex flex-row items-center border-b border-gray-700 pb-6'>
+              <Image
+                src='/assets/back-hd.png'
+                alt='go back'
+                width={96}
+                height={96}
+                className='inline ml-4 w-4 h-auto hover:cursor-pointer'
+                onClick={() => {
+                  showSearchMob(false);
+                }}
+              />
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <input
+                  {...register('search', { required: true })}
+                  className='text-white ml-6 text-sm bg-transparent placeholder-white w-full'
+                  placeholder='Search'
+                />
+              </form>
+            </div>
+            <div className='text-gray-500 text-sm ml-[4.5rem] pt-6'>
+              <p>
+                Enter <span className='text-white'>@</span> to search movies
+              </p>
+              <p className='pt-5'>
+                Enter <span className='text-white'>#</span> to search quotes
+              </p>
+            </div>
+          </div>
+        )}
         <div className='lg:hidden hover:cursor-pointer flex px-7 py-8 items-center'>
           <Image
             src='/assets/write-new-quote.png'
