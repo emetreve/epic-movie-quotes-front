@@ -21,17 +21,22 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
     movieError,
     setMovieError,
     handleMovieExistence,
+    handleDrop,
+    handleDragOver,
+    imageError,
     t,
   } = useAddNewQuote();
 
   return (
     <div
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
       onClick={() => {
         setShowMovieDropdown(false);
       }}
-      className='z-50 scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0'
+      className='z-50 scrollbar-hide h-screen w-screen fixed backdrop-blur-sm lg:backdrop-blur-none bg-partly-transparent-dark lg:bg-violet lg:bg-opacity-30 text-white flex items-center justify-center top-0 left-0'
     >
-      <div className='bg-profile-dark-blue h-full w-full lg:h-[29rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative lg:scale-105'>
+      <div className='bg-profile-dark-blue h-full w-full lg:h-[48rem] lg:w-[54rem] lg:rounded-2xl lg:px-[2rem] relative lg:scale-105'>
         <div className='relative pt-7 px-4 flex flex-row justify-center items-center border-b border-gray-700 pb-7'>
           <h1 className='text-xl'>Write new quote</h1>
           <Image
@@ -96,23 +101,26 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
               </div>
             </div>
             <div className='mt-5 w-full h-[4.4rem] items-center flex border border-textarea-gray bg-transparent rounded py-2 px-4'>
-              <div className='flex flex-row justify-between w-full'>
+              <div className='flex flex-row justify-between w-full lg:justify-start'>
                 <div className='flex flex-row items-center'>
                   <Image
                     src='/assets/photo-camera.png'
                     alt='photo camera'
                     width={512}
                     height={512}
-                    className='h-6 w-6 mr-3 lg:h-14'
+                    className='h-6 w-6 mr-3'
                   />
-                  <p>{imageName || 'Upload image'}</p>
+                  <p className='lg:hidden block w-32 overflow-hidden whitespace-nowrap overflow-ellipsis'>
+                    {imageName || 'Upload image'}
+                  </p>
+                  <p className='hidden lg:block max-w-[34.6rem] overflow-hidden whitespace-nowrap overflow-ellipsis'>
+                    {imageName || 'Drag & drop your image here or'}
+                  </p>
                 </div>
-                <label className='relative bg-upload-btn-violet py-2 px-[0.7rem] bg-opacity-40 cursor-pointer'>
+                <label className='relative lg:ml-4 bg-upload-btn-violet py-2 px-[0.7rem] bg-opacity-40 cursor-pointer'>
                   <span>Choose file</span>
                   <input
-                    {...register('image', {
-                      required: `${t('This field is required')}`,
-                    })}
+                    {...register('image')}
                     name='image'
                     onChange={(e) => {
                       handleUpload(e);
@@ -124,9 +132,7 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
               </div>
             </div>
             <div className='h-2 mt-1'>
-              <p className='text-red text-xs'>
-                {errors.image && errors.image.message}
-              </p>
+              <p className='text-red text-xs'>{imageError && imageError}</p>
             </div>
             <div>
               <div
@@ -142,9 +148,9 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
                     alt='photo camera'
                     width={512}
                     height={512}
-                    className='h-6 w-6 mr-3 lg:h-14'
+                    className='h-6 w-6 mr-3'
                   />
-                  <p className='w-56 whitespace-nowrap overflow-hidden overflow-ellipsis'>
+                  <p className='w-56 lg:w-[37rem] whitespace-nowrap overflow-hidden overflow-ellipsis'>
                     {selectedMovie.name[
                       locale as keyof typeof selectedMovie.name
                     ] || 'Select movie'}
@@ -155,7 +161,7 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
                     onClick={(e) => {
                       e.stopPropagation();
                     }}
-                    className='absolute bottom-24 left-0 w-full max-h-72 shadow-lg overflow-scroll bg-violet bg-opacity-[95%] rounded py-4'
+                    className='absolute bottom-24 lg:bottom-[6rem] left-0 w-full max-h-72 shadow-lg overflow-scroll bg-violet bg-opacity-[95%] rounded py-4'
                   >
                     {movies &&
                       movies.map((movie: Movie, index: number) => {
@@ -186,7 +192,7 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
                       alt='photo camera'
                       width={512}
                       height={512}
-                      className='h-[0.6rem] w-[0.9rem] mr-3 lg:h-14'
+                      className='h-[0.6rem] w-[0.9rem] mr-3 lg:h-[0.8rem] lg:w-[1.2rem]'
                     />
                   </div>
                 </div>
