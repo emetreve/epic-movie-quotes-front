@@ -34,9 +34,9 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
       onClick={() => {
         setShowMovieDropdown(false);
       }}
-      className='z-50 scrollbar-hide h-screen w-screen fixed backdrop-blur-sm lg:backdrop-blur-none bg-partly-transparent-dark lg:bg-violet lg:bg-opacity-30 text-white flex items-center justify-center top-0 left-0'
+      className='z-50 lg:pb-16 scrollbar-hide h-screen w-screen fixed backdrop-blur-sm lg:backdrop-blur-none bg-partly-transparent-dark lg:bg-violet-quote-create-bg lg:bg-opacity-70 text-white flex items-center justify-center top-0 left-0'
     >
-      <div className='bg-profile-dark-blue h-full w-full lg:h-[48rem] lg:w-[54rem] lg:rounded-2xl lg:px-[2rem] relative lg:scale-105'>
+      <div className='bg-profile-dark-blue h-full w-full lg:h-[47.5rem] lg:w-[54rem] lg:rounded-2xl relative lg:scale-105'>
         <div className='relative pt-7 px-4 flex flex-row justify-center items-center border-b border-gray-700 pb-7'>
           <h1 className='text-xl'>Write new quote</h1>
           <Image
@@ -50,7 +50,7 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
             }}
           />
         </div>
-        <div className='px-7 mt-7'>
+        <div className='px-7 mt-7 lg:px-[2rem]'>
           <div className='flex flex-row items-center lg:mb-4'>
             <Image
               src={
