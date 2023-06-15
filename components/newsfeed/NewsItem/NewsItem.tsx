@@ -18,6 +18,7 @@ const NewsItem: React.FC<PropsType> = ({
   comments,
   likes,
   authUserId,
+  authUserAvatar,
 }) => {
   const { handleSubmit, onSubmit, register, handleLike } = useNewsItem();
 
@@ -101,11 +102,15 @@ const NewsItem: React.FC<PropsType> = ({
         })}
       <div className='mt-1 flex flex-row py-3 items-center'>
         <Image
-          src='/assets/avatar-default.png'
+          src={
+            authUserAvatar
+              ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${authUserAvatar}`
+              : '/assets/avatar-default.png'
+          }
           alt='user headshot'
           width={512}
           height={512}
-          className='h-11 w-auto mr-2'
+          className='h-14 w-auto mr-2 rounded-[50%]'
         />
         <form onSubmit={handleSubmit(onSubmit)} className='w-full lg:pr-5'>
           <input

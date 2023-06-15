@@ -229,6 +229,7 @@ const Newsfeed = () => {
               <div key={quote.id}>
                 <NewsItem
                   authUserId={user.id}
+                  authUserAvatar={user.avatar || ''}
                   quote_id={quote.id}
                   user_id={user.id}
                   userName={quote.user.name}
@@ -252,6 +253,7 @@ const Newsfeed = () => {
               <div key={quote.id}>
                 <NewsItem
                   authUserId={user.id}
+                  authUserAvatar={user.avatar || ''}
                   quote_id={quote.id}
                   user_id={user.id}
                   userName={quote.user.name}
