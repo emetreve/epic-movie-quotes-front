@@ -16,10 +16,10 @@ const getMovies = async () => {
   return response;
 };
 
-const getLike = async (authUserId: number, quote_id: number) => {
+const getLike = async (user_id: number, quote_id: number) => {
   const response = await axiosInstance.get('/like', {
     params: {
-      user_id: authUserId,
+      user_id,
       quote_id,
       like: 1,
     },
