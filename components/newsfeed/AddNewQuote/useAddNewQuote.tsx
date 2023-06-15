@@ -29,6 +29,7 @@ const useAddNewQuote = () => {
   const locale = router.locale;
   const queryClient = useQueryClient();
   const { t } = useTranslation('profile');
+  const { t: translate } = useTranslation('newsfeed');
 
   const fetchMovies = async () => {
     const response = await getMovies();
@@ -154,6 +155,7 @@ const useAddNewQuote = () => {
     handleDragOver,
     imageError,
     t,
+    translate,
   };
 };
 export default useAddNewQuote;
