@@ -165,7 +165,7 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
                     onClick={(e) => {
                       e.stopPropagation();
                     }}
-                    className='absolute bottom-24 lg:bottom-[6rem] left-0 w-full max-h-72 shadow-lg overflow-scroll bg-violet bg-opacity-[95%] rounded py-4'
+                    className='container absolute z-50 bottom-24 lg:bottom-[6rem] left-0 w-full max-h-72 shadow-lg overflow-y-scroll bg-violet bg-opacity-[95%] rounded py-4'
                   >
                     {movies &&
                       movies.map((movie: Movie, index: number) => {
