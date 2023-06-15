@@ -145,6 +145,9 @@ const Newsfeed = () => {
                 }`}
               >
                 <div
+                  onClick={() => {
+                    showAddQuote(true);
+                  }}
                   className={`${
                     showSearchLg ? 'w-fit pr-3' : 'w-[82%]'
                   } transition-width duration-300 ease-in-out h-12 flex flex-row items-center bg-violet bg-opacity-80 rounded-lg text-lg`}
