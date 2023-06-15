@@ -1,7 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { GetStaticProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 const NotFound = () => {
+  const { t } = useTranslation('statuspages');
+
   return (
     <div className='h-screen w-screen bg-gradient-violet pb-20 text-white flex flex-col items-center justify-center'>
       <Image
@@ -19,17 +24,25 @@ const NotFound = () => {
         className='w-24 h-auto mt-7'
       />
       <h1 className='text-bold text-2xl pt-6 pb-4 lg:pt-10 lg:pb-5 lg:text-5xl'>
-        Whoops!
+        {t('Whoops!')}
       </h1>
       <p className='text-sm lg:text-2xl'>
-        We can&apos;t see the page you are looking for
+        {t('We cant see the page you are looking for')}
       </p>
       <Link href='/' className='hover:cursor-pointer'>
-        <button className='mt-5 text-white bg-red py-[0.6rem] px-6 lg:px-0 lg:w-[10rem] lg:text-xl rounded-md lg:mt-12'>
-          Return home
+        <button className='mt-5 text-white bg-red py-[0.6rem] px-7 lg:text-xl lg:px-4 lg:w-fit rounded-md lg:mt-12'>
+          {t('Return home')}
         </button>
       </Link>
     </div>
   );
 };
 export default NotFound;
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale as string, ['statuspages'])),
+    },
+  };
+};
