@@ -24,7 +24,6 @@ const useNewsItem = () => {
   };
 
   const handleLike = async (authUserId: number, quote_id: number) => {
-    console.log(authUserId, quote_id);
     try {
       await getLike(authUserId, quote_id);
       queryClient.invalidateQueries('quotes');
