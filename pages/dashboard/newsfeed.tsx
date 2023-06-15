@@ -240,7 +240,7 @@ const Newsfeed = () => {
                       : '/assets/quote-sample.png'
                   }
                   likesQty={quote.likes?.length ? quote.likes?.length : 0}
-                  commentsQty={quote.comments?.length || null}
+                  commentsQty={quote.comments?.length || 0}
                   comments={quote.comments}
                 />
               </div>
@@ -260,8 +260,8 @@ const Newsfeed = () => {
                       ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${quote.image}`
                       : '/assets/quote-sample.png'
                   }
-                  likesQty={21}
-                  commentsQty={quote.comments?.length || null}
+                  likesQty={quote.likes?.length ? quote.likes?.length : 0}
+                  commentsQty={quote.comments?.length || 0}
                   comments={quote.comments}
                 />
               </div>
