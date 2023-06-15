@@ -1,6 +1,7 @@
-import { Comment } from '@/types';
+import { Comment, Like } from '@/types';
 
 export type PropsType = {
+  authUserId: number;
   quote_id: nunmber;
   user_id: number;
   avatar?: string;
@@ -12,4 +13,5 @@ export type PropsType = {
   likesQty: number;
   commentsQty: number | null;
   comments: Comment[] | null;
+  likes: Like[] | null;
 };

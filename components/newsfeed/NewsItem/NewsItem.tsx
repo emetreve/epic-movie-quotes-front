@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { PropsType } from './types';
 import useNewsItem from './useNewsItem';
+import { Heart } from '@/components';
+import { Like } from '@/types';
 
 const NewsItem: React.FC<PropsType> = ({
   quote_id,
@@ -14,6 +16,8 @@ const NewsItem: React.FC<PropsType> = ({
   likesQty,
   commentsQty,
   comments,
+  likes,
+  authUserId,
 }) => {
   const { handleSubmit, onSubmit, register } = useNewsItem();
 
@@ -54,12 +58,13 @@ const NewsItem: React.FC<PropsType> = ({
         </div>
         <div className='flex flex-row items-center ml-6'>
           <p className='text-lg'>{likesQty}</p>
-          <Image
-            src='/assets/likes-quantity.png'
-            alt='comments quantity'
-            width={96}
-            height={92}
-            className='h-5 w-auto ml-2 lg:h-7'
+          <Heart
+            fill={
+              likes?.some((like: Like) => like.user_id === authUserId)
+                ? 'red'
+                : 'white'
+            }
+            classes='h-5 w-auto ml-2 lg:h-7'
           />
         </div>
       </div>

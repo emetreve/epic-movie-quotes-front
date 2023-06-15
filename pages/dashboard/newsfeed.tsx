@@ -228,6 +228,7 @@ const Newsfeed = () => {
             quotes.map((quote: Quote) => (
               <div key={quote.id}>
                 <NewsItem
+                  authUserId={user.id}
                   quote_id={quote.id}
                   user_id={user.id}
                   userName={quote.user.name}
@@ -240,6 +241,7 @@ const Newsfeed = () => {
                       : '/assets/quote-sample.png'
                   }
                   likesQty={quote.likes?.length ? quote.likes?.length : 0}
+                  likes={quote.likes}
                   commentsQty={quote.comments?.length || 0}
                   comments={quote.comments}
                 />
@@ -249,6 +251,7 @@ const Newsfeed = () => {
             searchedQuotes.map((quote: Quote) => (
               <div key={quote.id}>
                 <NewsItem
+                  authUserId={user.id}
                   quote_id={quote.id}
                   user_id={user.id}
                   userName={quote.user.name}
@@ -261,6 +264,7 @@ const Newsfeed = () => {
                       : '/assets/quote-sample.png'
                   }
                   likesQty={quote.likes?.length ? quote.likes?.length : 0}
+                  likes={quote.likes}
                   commentsQty={quote.comments?.length || 0}
                   comments={quote.comments}
                 />
