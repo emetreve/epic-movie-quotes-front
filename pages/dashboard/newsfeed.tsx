@@ -5,6 +5,7 @@ import { Header, NewsItem } from '@/components';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Quote } from '@/types';
+import { AddNewQuote } from '@/components';
 
 const Newsfeed = () => {
   const {
@@ -22,6 +23,10 @@ const Newsfeed = () => {
     handleSubmit,
     onSubmit,
     searchedQuotes,
+    showSearchMobile,
+    showSearchMob,
+    showAddQuote,
+    showAddNewQuote,
   } = useNewsFeed();
 
   if (logged) {
@@ -31,7 +36,51 @@ const Newsfeed = () => {
         className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'
       >
         <Header userName={user.name} avatar={user.avatar} />
-        <div className='lg:hidden hover:cursor-pointer flex px-7 py-8 items-center'>
+        {showSearchMobile && (
+          <div className='lg:hidden bg-gradient-violet min-h-screen w-screen absolute'>
+            <div className='pt-6 px-4 flex flex-row items-center border-b border-gray-700 pb-6'>
+              <Image
+                src='/assets/back-hd.png'
+                alt='go back'
+                width={96}
+                height={96}
+                className='inline ml-4 w-4 h-auto hover:cursor-pointer'
+                onClick={() => {
+                  showSearchMob(false);
+                }}
+              />
+              <form onSubmit={handleSubmit(onSubmit)} className='w-full'>
+                <input
+                  {...register('search', { required: true })}
+                  className='text-white ml-6 text-sm bg-transparent placeholder-white w-full'
+                  placeholder='Search'
+                />
+              </form>
+            </div>
+            <div className='text-gray-500 text-sm ml-[4.5rem] pt-6'>
+              <p>
+                Enter <span className='text-white'>@</span> to search movies
+              </p>
+              <p className='pt-5'>
+                Enter <span className='text-white'>#</span> to search quotes
+              </p>
+            </div>
+          </div>
+        )}
+
+        {showAddNewQuote && (
+          <AddNewQuote
+            userName={user.name}
+            avatar={user.avatar}
+            userId={user.id}
+          />
+        )}
+        <div
+          onClick={() => {
+            showAddQuote(true);
+          }}
+          className='lg:hidden hover:cursor-pointer flex px-7 py-8 items-center'
+        >
           <Image
             src='/assets/write-new-quote.png'
             alt='write new quote'
@@ -126,14 +175,14 @@ const Newsfeed = () => {
                     }}
                     className={`${
                       showSearchLg && 'px-0 mx-0 absolute left-1'
-                    } h-[1.2rem] w-auto mr-5 hover:cursor-pointer z-50`}
+                    } h-[1.2rem] w-auto mr-5 hover:cursor-pointer z-40`}
                   />
                   {showSearchLg ? (
                     <div
                       onClick={(event) => {
                         event.stopPropagation();
                       }}
-                      className='w-full relative text-gray-400 z-50'
+                      className='w-full relative text-gray-400 z-40'
                     >
                       <p className={`${focused && 'invisible'} ml-5`}>
                         Enter <span className='text-white'>@</span> to search
@@ -159,7 +208,7 @@ const Newsfeed = () => {
                       onClick={() => {
                         setShowSearchLg(true);
                       }}
-                      className='text-gray-400 hover:cursor-pointer z-50 relative'
+                      className='text-gray-400 hover:cursor-pointer z-40 relative'
                     >
                       {t('Search by')}
                     </p>
@@ -182,7 +231,11 @@ const Newsfeed = () => {
                   quote={quote.body[locale as keyof typeof quote.body]}
                   movie={quote.movie.name[locale as keyof typeof quote.body]}
                   year={quote.movie.year}
-                  quoteImage={quote.image || '/assets/quote-sample.png'}
+                  quoteImage={
+                    quote.image
+                      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${quote.image}`
+                      : '/assets/quote-sample.png'
+                  }
                   likesQty={21}
                   commentsQty={quote.comments?.length || null}
                   comments={quote.comments}
@@ -199,7 +252,11 @@ const Newsfeed = () => {
                   quote={quote.body[locale as keyof typeof quote.body]}
                   movie={quote.movie.name[locale as keyof typeof quote.body]}
                   year={quote.movie.year}
-                  quoteImage={quote.image || '/assets/quote-sample.png'}
+                  quoteImage={
+                    quote.image
+                      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${quote.image}`
+                      : '/assets/quote-sample.png'
+                  }
                   likesQty={21}
                   commentsQty={quote.comments?.length || null}
                   comments={quote.comments}

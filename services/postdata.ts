@@ -6,4 +6,13 @@ const createComment = async (data: AddCommentData) => {
   return response;
 };
 
-export { createComment };
+const createQuote = async (data: FormData) => {
+  const response = await axiosInstance.post('/create-quote', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response;
+};
+
+export { createComment, createQuote };

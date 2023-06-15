@@ -28,6 +28,12 @@ const UiContext = createContext({
   showUpdatePassword: (show: boolean) => {},
   showBrugerMenu: false,
   showBurger: (show: boolean) => {},
+  showSearchMobile: false,
+  showSearchMob: (show: boolean) => {},
+  showAddNewQuote: false,
+  showAddQuote: (show: boolean) => {},
+  showMovieDropdown: false,
+  setShowMovieDropdown: (newValue: boolean) => {},
 });
 
 export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
@@ -50,6 +56,9 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
   const [showEditName, setShowEditName] = useState(false);
   const [showEditPassword, setShowEditPassword] = useState(false);
   const [showBrugerMenu, setShowBurgerMenu] = useState(false);
+  const [showSearchMobile, setShowSearchMobile] = useState(false);
+  const [showAddNewQuote, setShowAddNewQuote] = useState(false);
+  const [showMovieDropdown, setShowMovieDropdown] = useState(false);
 
   const showCreate = (show: boolean) => {
     setShowCreateAccount(show);
@@ -143,6 +152,20 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
       : document.body.classList.remove('hide-scrollbar');
   };
 
+  const showSearchMob = (show: boolean) => {
+    setShowSearchMobile(show);
+    show
+      ? document.body.classList.add('hide-scrollbar')
+      : document.body.classList.remove('hide-scrollbar');
+  };
+
+  const showAddQuote = (show: boolean) => {
+    setShowAddNewQuote(show);
+    show
+      ? document.body.classList.add('hide-scrollbar')
+      : document.body.classList.remove('hide-scrollbar');
+  };
+
   return (
     <UiContext.Provider
       value={{
@@ -172,6 +195,12 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
         showEditPassword,
         showBrugerMenu,
         showBurger,
+        showSearchMobile,
+        showSearchMob,
+        showAddQuote,
+        showAddNewQuote,
+        showMovieDropdown,
+        setShowMovieDropdown,
       }}
     >
       {children}

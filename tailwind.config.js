@@ -37,6 +37,8 @@ module.exports = {
         'success-green': '#0F5132',
         'success-bg': '#D1E7DD',
         'password-box-border': 'rgba(206, 212, 218, 0.2)',
+        'textarea-gray': '#6C757D',
+        'upload-btn-violet': '#9747FF',
       },
     },
   },

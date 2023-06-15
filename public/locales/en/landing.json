@@ -37,7 +37,7 @@
     "Forgot password": "Forgot password",
     "Sign in": "Sign in",
     "Sign in with Google": "Sign in with Google",
-    "Don't have an account": "Don&apos;t have an account?",
+    "Don't have an account": "Don't have an account?",
     "Thank you": "Thank you!",
     "Please check your email and follow the instructions to activate your account.": "Please check your email and follow the instructions to activate your account.",
     "Back to homepage": "Back to homepage",
@@ -53,8 +53,8 @@
     "Your new password must be different from previous used passwords": "Your new password must be different from previous used passwords",
     "Reset password": "Reset password",
     "Link expired!": "Link expired!",
-   "Password reset link has expired, because you havent used it": "Password reset link has expired, because you haven&apos;t used it",
+   "Password reset link has expired, because you havent used it": "Password reset link has expired, because you haven't used it",
    "Request another link": "Request another link",
-   "Email verification link has expired, because you havent used it": "Email verification link has expired, because you haven&apos;t used it",
+   "Email verification link has expired, because you havent used it": "Email verification link has expired, because you haven't used it",
    "Your Password changed successfully": "Your Password changed successfully"
 }

@@ -30,11 +30,11 @@ const NewsItem: React.FC<PropsType> = ({
         <p className='lg:text-xl lg:block lg:ml-1'>{userName}</p>
       </div>
 
-      <div className='text-sm mt-3 lg:text-xl'>
+      <div className='text-sm mt-3 lg:text-xl break-all'>
         <p>{`"${quote}" - ${movie}, (${year})`}</p>
         <Image
           src={quoteImage}
-          alt='user headshot'
+          alt='quote image'
           width={916}
           height={512}
           className='h-48 lg:h-[30rem] mt-3 lg:mt-6 rounded-lg'
@@ -85,7 +85,7 @@ const NewsItem: React.FC<PropsType> = ({
                 />
                 <p className='ml-3 lg:text-xl'>{comment.user.name}</p>
               </div>
-              <p className='text-sm lg:text-lg lg:ml-[4.8rem] lg:mr-1 lg:-mt-4'>
+              <p className='text-sm lg:text-lg lg:ml-[4.8rem] lg:mr-1 lg:-mt-4 break-all'>
                 {comment.body}
               </p>
               <div className='hidden lg:flex ml-[4.8rem] border-gray-600 border-b-[0.1rem] pb-6 '></div>

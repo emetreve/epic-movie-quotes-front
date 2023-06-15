@@ -51,7 +51,7 @@ const LangSwitch: React.FC<PropsType> = ({ fromBurgerMenu }) => {
           </ul>
         </div>
         <Image
-          src='/assets/lang-switch.png'
+          src='/assets/switch.png'
           alt='language switcher'
           width={768}
           height={512}

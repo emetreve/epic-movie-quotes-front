@@ -26,5 +26,8 @@
     "Confirm password": "დაადასტურეთ პაროლი",
     "8 or more characters": "8 ან მეტი სიმბოლო",
     "15 lowercase characters": "15 დაბალი რეგისტრის სიმბოლო",
-    "Changes updated succsessfully": "ცვლილებები წარმატებით შეინახა"
+    "Changes updated succsessfully": "ცვლილებები წარმატებით შეინახა",
+    "Only English text allowed": "დაწერეთ მხოლოდ ინგლისური ტექსტი",
+    "Only Georgian text allowed": "დაწერეთ მხოლოდ ქართული ტექსტი"
+
 }
