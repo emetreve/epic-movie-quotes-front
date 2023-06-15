@@ -21,11 +21,16 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
     movieError,
     setMovieError,
     handleMovieExistence,
+    handleDrop,
+    handleDragOver,
+    imageError,
     t,
   } = useAddNewQuote();
 
   return (
     <div
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
       onClick={() => {
         setShowMovieDropdown(false);
       }}
@@ -96,7 +101,7 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
               </div>
             </div>
             <div className='mt-5 w-full h-[4.4rem] items-center flex border border-textarea-gray bg-transparent rounded py-2 px-4'>
-              <div className='flex flex-row justify-between w-full'>
+              <div className='flex flex-row justify-between w-full lg:justify-start'>
                 <div className='flex flex-row items-center'>
                   <Image
                     src='/assets/photo-camera.png'
@@ -105,17 +110,17 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
                     height={512}
                     className='h-6 w-6 mr-3'
                   />
-                  <p className='lg:hidden'>{imageName || 'Upload image'}</p>
-                  <p className='hidden lg:block'>
+                  <p className='lg:hidden block w-32 overflow-hidden whitespace-nowrap overflow-ellipsis'>
+                    {imageName || 'Upload image'}
+                  </p>
+                  <p className='hidden lg:block max-w-[34.6rem] overflow-hidden whitespace-nowrap overflow-ellipsis'>
                     {imageName || 'Drag & drop your image here or'}
                   </p>
                 </div>
-                <label className='relative lg:right-[20.6rem] bg-upload-btn-violet py-2 px-[0.7rem] bg-opacity-40 cursor-pointer'>
+                <label className='relative lg:ml-4 bg-upload-btn-violet py-2 px-[0.7rem] bg-opacity-40 cursor-pointer'>
                   <span>Choose file</span>
                   <input
-                    {...register('image', {
-                      required: `${t('This field is required')}`,
-                    })}
+                    {...register('image')}
                     name='image'
                     onChange={(e) => {
                       handleUpload(e);
@@ -127,9 +132,7 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
               </div>
             </div>
             <div className='h-2 mt-1'>
-              <p className='text-red text-xs'>
-                {errors.image && errors.image.message}
-              </p>
+              <p className='text-red text-xs'>{imageError && imageError}</p>
             </div>
             <div>
               <div

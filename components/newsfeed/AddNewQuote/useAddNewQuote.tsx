@@ -19,6 +19,7 @@ const useAddNewQuote = () => {
   });
   const [movieError, setMovieError] = useState('');
   const [imageName, setImageName] = useState('');
+  const [imageError, setImageError] = useState('');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [userId, setUserId] = useState('');
 
@@ -64,26 +65,40 @@ const useAddNewQuote = () => {
     handleSubmit,
     formState: { errors },
     reset,
-    clearErrors,
   } = methods;
 
   const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files) {
+    if (!event.target?.files) {
       return;
     }
     const selectedFile = event.target.files[0];
     setSelectedFile(selectedFile);
     if (selectedFile) {
       setImageName(selectedFile.name);
-      clearErrors('image');
+      setImageError('');
     }
   };
 
   const handleMovieExistence = (userId: string) => {
     setUserId(userId);
     if (!selectedMovie.id) {
-      setMovieError(t('This field is required') as string);
+      setMovieError(`${t('This field is required')}`);
     }
+    if (!imageName) {
+      setImageError(`${t('This field is required')}`);
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const selectedFile = e.dataTransfer.files[0];
+    setSelectedFile(selectedFile);
+    setImageName(selectedFile.name);
+    setImageError('');
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
   };
 
   const onSubmit = async (data: CreateQuoteFormData) => {
@@ -91,6 +106,11 @@ const useAddNewQuote = () => {
       return;
     } else {
       setMovieError('');
+    }
+
+    if (!imageName) {
+      setImageError(`${t('This field is required')}`);
+      return;
     }
 
     if (selectedFile) {
@@ -130,6 +150,9 @@ const useAddNewQuote = () => {
     movieError,
     setMovieError,
     handleMovieExistence,
+    handleDrop,
+    handleDragOver,
+    imageError,
     t,
   };
 };
