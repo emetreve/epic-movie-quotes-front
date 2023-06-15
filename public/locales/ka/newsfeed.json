@@ -1,8 +1,12 @@
 {
-    "Write new quote": "ახალი ციტატა",
-    "Edit your profile": "დაარედაქტირე პროფილი",
-    "News feed": "ახალი ამბების ფიდი",
-    "List of movies": "ფილმების სია",
-    "Search by": "ძებნა", 
-    "Log out": "გასვლა"
+  "Write new quote": "ახალი ციტატა",
+  "Edit your profile": "დაარედაქტირე პროფილი",
+  "News feed": "ახალი ამბების ფიდი",
+  "List of movies": "ფილმების სია",
+  "Search by": "ძებნა",
+  "Log out": "გასვლა",
+  "Enter": "აკრიფე",
+  "to search movies": "ფილმების საძებნად",
+  "to search quotes": "ციტატების საძებნად",
+  "Search": "ძებნა"
 }

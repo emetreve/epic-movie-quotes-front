@@ -53,16 +53,18 @@ const Newsfeed = () => {
                 <input
                   {...register('search', { required: true })}
                   className='text-white ml-6 text-sm bg-transparent placeholder-white w-full'
-                  placeholder='Search'
+                  placeholder={`${t('Search')}`}
                 />
               </form>
             </div>
             <div className='text-gray-500 text-sm ml-[4.5rem] pt-6'>
               <p>
-                Enter <span className='text-white'>@</span> to search movies
+                {t('Enter')} <span className='text-white'>@</span>{' '}
+                {t('to search movies')}
               </p>
               <p className='pt-5'>
-                Enter <span className='text-white'>#</span> to search quotes
+                {t('Enter')} <span className='text-white'>#</span>{' '}
+                {t('to search quotes')}
               </p>
             </div>
           </div>
@@ -188,9 +190,10 @@ const Newsfeed = () => {
                       className='w-full relative text-gray-400 z-40'
                     >
                       <p className={`${focused && 'invisible'} ml-5`}>
-                        Enter <span className='text-white'>@</span> to search
-                        movies, Enter <span className='text-white'>#</span> to
-                        search quotes
+                        {t('Enter')} <span className='text-white'>@</span>{' '}
+                        {t('to search movies')}, {t('Enter')}{' '}
+                        <span className='text-white'>#</span>{' '}
+                        {t('to search quotes')}
                       </p>
                       <form onSubmit={handleSubmit(onSubmit)}>
                         <input
