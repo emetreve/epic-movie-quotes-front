@@ -19,7 +19,7 @@ const NewsItem: React.FC<PropsType> = ({
   likes,
   authUserId,
 }) => {
-  const { handleSubmit, onSubmit, register } = useNewsItem();
+  const { handleSubmit, onSubmit, register, handleLike } = useNewsItem();
 
   return (
     <div className='text-white w-full px-7 bg-news-bg bg-opacity-25 py-6 h-auto mb-10 lg:rounded-xl'>
@@ -58,14 +58,16 @@ const NewsItem: React.FC<PropsType> = ({
         </div>
         <div className='flex flex-row items-center ml-6'>
           <p className='text-lg'>{likesQty}</p>
-          <Heart
-            fill={
-              likes?.some((like: Like) => like.user_id === authUserId)
-                ? 'red'
-                : 'white'
-            }
-            classes='h-5 w-auto ml-2 lg:h-7'
-          />
+          <div onClick={() => handleLike(authUserId, quote_id)}>
+            <Heart
+              fill={
+                likes?.some((like: Like) => like.user_id === authUserId)
+                  ? 'red'
+                  : 'white'
+              }
+              classes='h-5 w-auto ml-2 lg:h-7'
+            />
+          </div>
         </div>
       </div>
 

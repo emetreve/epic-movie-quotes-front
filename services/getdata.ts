@@ -16,4 +16,15 @@ const getMovies = async () => {
   return response;
 };
 
-export { getQuotes, getMovies };
+const getLike = async (authUserId: number, quote_id: number) => {
+  const response = await axiosInstance.get('/like', {
+    params: {
+      user_id: authUserId,
+      quote_id,
+      like: 1,
+    },
+  });
+  return response;
+};
+
+export { getQuotes, getMovies, getLike };
