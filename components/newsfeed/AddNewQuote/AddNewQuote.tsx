@@ -53,11 +53,15 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
         <div className='px-7 mt-7'>
           <div className='flex flex-row items-center lg:mb-4'>
             <Image
-              src={avatar ? avatar : '/assets/avatar-default.png'}
+              src={
+                avatar
+                  ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${avatar}`
+                  : '/assets/avatar-default.png'
+              }
               alt='user headshot'
               width={512}
               height={512}
-              className='h-10 w-auto mr-3 lg:h-14'
+              className='h-11 w-auto mr-3 lg:h-14 rounded-[50%]'
             />
             <p className='lg:text-xl lg:block lg:ml-1'>{userName}</p>
           </div>
