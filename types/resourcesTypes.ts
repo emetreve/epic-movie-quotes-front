@@ -38,6 +38,14 @@ export type Comment = {
   quote_id: number;
 };
 
+export type Like = {
+  created_at: string;
+  id: number;
+  like: number;
+  quote_id: number;
+  user_id: number;
+};
+
 export type Quote = {
   id: number;
   body: {
@@ -50,4 +58,5 @@ export type Quote = {
   user: User;
   movie: Movie;
   comments: Comment[] | null;
+  likes: Like[] | null;
 };

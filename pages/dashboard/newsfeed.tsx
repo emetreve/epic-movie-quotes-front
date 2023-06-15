@@ -239,7 +239,7 @@ const Newsfeed = () => {
                       ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${quote.image}`
                       : '/assets/quote-sample.png'
                   }
-                  likesQty={21}
+                  likesQty={quote.likes?.length ? quote.likes?.length : 0}
                   commentsQty={quote.comments?.length || null}
                   comments={quote.comments}
                 />
