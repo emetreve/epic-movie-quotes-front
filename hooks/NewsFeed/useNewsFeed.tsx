@@ -42,14 +42,24 @@ const useNewsFeed = () => {
   usePusher();
 
   useEffect(() => {
-    const channel = window.Echo.channel('like-updated');
-    channel.listen('LikeUpdated', function (data: Like) {
+    const channelLike = window.Echo.channel('like-updated');
+    channelLike.listen('LikeUpdated', function (data: Like) {
       if (data) {
         queryClient.invalidateQueries('quotes');
       }
     });
+
+    const channelComment = window.Echo.channel('comment-updated');
+    channelComment.listen('CommentUpdated', function (data: Like) {
+      if (data) {
+        console.log(data);
+        queryClient.invalidateQueries('quotes');
+      }
+    });
+
     return () => {
-      channel.stopListening('LikeUpdated');
+      channelLike.stopListening('LikeUpdated');
+      channelComment.stopListening('CommentUpdated');
     };
   }, [user]);
 
