@@ -52,7 +52,6 @@ const useNewsFeed = () => {
     const channelComment = window.Echo.channel('comment-updated');
     channelComment.listen('CommentUpdated', function (data: Like) {
       if (data) {
-        console.log(data);
         queryClient.invalidateQueries('quotes');
       }
     });
