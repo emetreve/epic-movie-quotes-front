@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 import { useCheckIfLoggedIn } from '@/hooks';
@@ -7,6 +7,7 @@ import { getQuotes } from '@/services';
 import { useUiContext } from '@/store';
 import { useForm } from 'react-hook-form';
 import { SearchQuotesData, Quote } from '@/types';
+import { usePusher } from '@/hooks';
 
 const useNewsFeed = () => {
   const [showSearchLg, setShowSearchLg] = useState(false);
@@ -26,6 +27,17 @@ const useNewsFeed = () => {
   const { locale } = useRouter();
 
   const { logged, user } = useCheckIfLoggedIn();
+
+  usePusher();
+  useEffect(() => {
+    var channel = window.Echo.channel('like-updated');
+    channel.listen('LikeUpdated', function (data) {
+      console.log(data);
+    });
+    return () => {
+      window.Echo.disconnect();
+    };
+  }, [user]);
 
   const fetchQuotes = async () => {
     const response = await getQuotes(locale as string);
