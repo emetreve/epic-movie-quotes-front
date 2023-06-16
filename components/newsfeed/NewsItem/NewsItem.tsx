@@ -61,12 +61,11 @@ const NewsItem: React.FC<PropsType> = ({
           <p className='text-lg'>{likesQty}</p>
           <div onClick={() => handleLike(authUserId, quote_id)}>
             <Heart
-              fill={
+              classes={`h-5 w-auto ml-2 lg:h-7 ${
                 likes?.some((like: Like) => like.user_id === authUserId)
-                  ? 'red'
-                  : 'white'
-              }
-              classes='h-5 w-auto ml-2 lg:h-7'
+                  ? 'fill-red'
+                  : 'fill-white'
+              }`}
             />
           </div>
         </div>
