@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { PropsType } from './types';
 import useNewsItem from './useNewsItem';
+import { Heart } from '@/components';
+import { Like } from '@/types';
 
 const NewsItem: React.FC<PropsType> = ({
   quote_id,
@@ -14,8 +16,11 @@ const NewsItem: React.FC<PropsType> = ({
   likesQty,
   commentsQty,
   comments,
+  likes,
+  authUserId,
+  authUserAvatar,
 }) => {
-  const { handleSubmit, onSubmit, register } = useNewsItem();
+  const { handleSubmit, onSubmit, register, handleLike } = useNewsItem();
 
   return (
     <div className='text-white w-full px-7 bg-news-bg bg-opacity-25 py-6 h-auto mb-10 lg:rounded-xl'>
@@ -54,13 +59,15 @@ const NewsItem: React.FC<PropsType> = ({
         </div>
         <div className='flex flex-row items-center ml-6'>
           <p className='text-lg'>{likesQty}</p>
-          <Image
-            src='/assets/likes-quantity.png'
-            alt='comments quantity'
-            width={96}
-            height={92}
-            className='h-5 w-auto ml-2 lg:h-7'
-          />
+          <div onClick={() => handleLike(authUserId, quote_id)}>
+            <Heart
+              classes={`h-5 w-auto ml-2 lg:h-7 ${
+                likes?.some((like: Like) => like.user_id === authUserId)
+                  ? 'fill-red'
+                  : 'fill-white'
+              }`}
+            />
+          </div>
         </div>
       </div>
 
@@ -94,11 +101,15 @@ const NewsItem: React.FC<PropsType> = ({
         })}
       <div className='mt-1 flex flex-row py-3 items-center'>
         <Image
-          src='/assets/avatar-default.png'
+          src={
+            authUserAvatar
+              ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${authUserAvatar}`
+              : '/assets/avatar-default.png'
+          }
           alt='user headshot'
           width={512}
           height={512}
-          className='h-11 w-auto mr-2'
+          className='h-14 w-auto mr-2 rounded-[50%]'
         />
         <form onSubmit={handleSubmit(onSubmit)} className='w-full lg:pr-5'>
           <input

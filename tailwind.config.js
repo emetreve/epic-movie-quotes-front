@@ -39,6 +39,7 @@ module.exports = {
         'password-box-border': 'rgba(206, 212, 218, 0.2)',
         'textarea-gray': '#6C757D',
         'upload-btn-violet': '#9747FF',
+        'violet-quote-create-bg': '#181623',
       },
     },
   },

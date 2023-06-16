@@ -25,6 +25,7 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
     handleDragOver,
     imageError,
     t,
+    translate,
   } = useAddNewQuote();
 
   return (
@@ -34,11 +35,11 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
       onClick={() => {
         setShowMovieDropdown(false);
       }}
-      className='z-50 scrollbar-hide h-screen w-screen fixed backdrop-blur-sm lg:backdrop-blur-none bg-partly-transparent-dark lg:bg-violet lg:bg-opacity-30 text-white flex items-center justify-center top-0 left-0'
+      className='z-50 lg:pb-16 scrollbar-hide h-screen w-screen fixed backdrop-blur-sm lg:backdrop-blur-none bg-partly-transparent-dark lg:bg-violet-quote-create-bg lg:bg-opacity-70 text-white flex items-center justify-center top-0 left-0'
     >
-      <div className='bg-profile-dark-blue h-full w-full lg:h-[48rem] lg:w-[54rem] lg:rounded-2xl lg:px-[2rem] relative lg:scale-105'>
+      <div className='bg-profile-dark-blue h-full w-full lg:h-[47.5rem] lg:w-[54rem] lg:rounded-2xl relative lg:scale-105'>
         <div className='relative pt-7 px-4 flex flex-row justify-center items-center border-b border-gray-700 pb-7'>
-          <h1 className='text-xl'>Write new quote</h1>
+          <h1 className='text-xl'>{translate('Write new quote')}</h1>
           <Image
             src='/assets/close-thin.png'
             alt='close modal'
@@ -50,14 +51,18 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
             }}
           />
         </div>
-        <div className='px-7 mt-7'>
+        <div className='px-7 mt-7 lg:px-[2rem]'>
           <div className='flex flex-row items-center lg:mb-4'>
             <Image
-              src={avatar ? avatar : '/assets/avatar-default.png'}
+              src={
+                avatar
+                  ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${avatar}`
+                  : '/assets/avatar-default.png'
+              }
               alt='user headshot'
               width={512}
               height={512}
-              className='h-10 w-auto mr-3 lg:h-14'
+              className='h-11 w-auto mr-3 lg:h-14 rounded-[50%]'
             />
             <p className='lg:text-xl lg:block lg:ml-1'>{userName}</p>
           </div>
@@ -110,15 +115,17 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
                     height={512}
                     className='h-6 w-6 mr-3'
                   />
-                  <p className='lg:hidden block w-32 overflow-hidden whitespace-nowrap overflow-ellipsis'>
-                    {imageName || 'Upload image'}
+                  <p className='lg:hidden block text-sm w-32 overflow-hidden whitespace-nowrap overflow-ellipsis'>
+                    {imageName || translate('Upload image')}
                   </p>
                   <p className='hidden lg:block max-w-[34.6rem] overflow-hidden whitespace-nowrap overflow-ellipsis'>
-                    {imageName || 'Drag & drop your image here or'}
+                    {imageName || translate('Drag & drop your image here or')}
                   </p>
                 </div>
-                <label className='relative lg:ml-4 bg-upload-btn-violet py-2 px-[0.7rem] bg-opacity-40 cursor-pointer'>
-                  <span>Choose file</span>
+                <label className='relative lg:ml-4 bg-upload-btn-violet py-2 lg:px-[0.7rem] px-[0.4rem] bg-opacity-40 cursor-pointer'>
+                  <span className='text-xs lg:text-base'>
+                    {translate('Choose file')}
+                  </span>
                   <input
                     {...register('image')}
                     name='image'
@@ -153,7 +160,7 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
                   <p className='w-56 lg:w-[37rem] whitespace-nowrap overflow-hidden overflow-ellipsis'>
                     {selectedMovie.name[
                       locale as keyof typeof selectedMovie.name
-                    ] || 'Select movie'}
+                    ] || translate('Select movie')}
                   </p>
                 </div>
                 {showMovieDropdown && (
@@ -161,7 +168,7 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
                     onClick={(e) => {
                       e.stopPropagation();
                     }}
-                    className='absolute bottom-24 lg:bottom-[6rem] left-0 w-full max-h-72 shadow-lg overflow-scroll bg-violet bg-opacity-[95%] rounded py-4'
+                    className='container absolute z-50 bottom-24 lg:bottom-[6rem] left-0 w-full max-h-72 shadow-lg overflow-y-scroll bg-violet bg-opacity-[95%] rounded py-4'
                   >
                     {movies &&
                       movies.map((movie: Movie, index: number) => {
@@ -205,10 +212,10 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
               onClick={() => {
                 handleMovieExistence(userId.toString());
               }}
-              className='text-white w-full mt-6 text-lg bg-red py-2 px-4 rounded-md hover:bg-red-hover'
+              className='text-white w-full lg:mt-6 mt-4 text-lg bg-red py-2 px-4 rounded-md hover:bg-red-hover'
               type='submit'
             >
-              Post
+              {translate('Post')}
             </button>
           </form>
         </div>

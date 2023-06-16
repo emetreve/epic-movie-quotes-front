@@ -53,16 +53,18 @@ const Newsfeed = () => {
                 <input
                   {...register('search', { required: true })}
                   className='text-white ml-6 text-sm bg-transparent placeholder-white w-full'
-                  placeholder='Search'
+                  placeholder={`${t('Search')}`}
                 />
               </form>
             </div>
             <div className='text-gray-500 text-sm ml-[4.5rem] pt-6'>
               <p>
-                Enter <span className='text-white'>@</span> to search movies
+                {t('Enter')} <span className='text-white'>@</span>{' '}
+                {t('to search movies')}
               </p>
               <p className='pt-5'>
-                Enter <span className='text-white'>#</span> to search quotes
+                {t('Enter')} <span className='text-white'>#</span>{' '}
+                {t('to search quotes')}
               </p>
             </div>
           </div>
@@ -150,7 +152,7 @@ const Newsfeed = () => {
                   }}
                   className={`${
                     showSearchLg ? 'w-fit pr-3' : 'w-[82%]'
-                  } transition-width duration-300 ease-in-out h-12 flex flex-row items-center bg-violet bg-opacity-80 rounded-lg text-lg`}
+                  } hover:cursor-pointer transition-width duration-300 ease-in-out h-12 flex flex-row items-center bg-violet bg-opacity-80 rounded-lg text-lg`}
                 >
                   <Image
                     src='/assets/write-new-quote.png'
@@ -188,9 +190,10 @@ const Newsfeed = () => {
                       className='w-full relative text-gray-400 z-40'
                     >
                       <p className={`${focused && 'invisible'} ml-5`}>
-                        Enter <span className='text-white'>@</span> to search
-                        movies, Enter <span className='text-white'>#</span> to
-                        search quotes
+                        {t('Enter')} <span className='text-white'>@</span>{' '}
+                        {t('to search movies')}, {t('Enter')}{' '}
+                        <span className='text-white'>#</span>{' '}
+                        {t('to search quotes')}
                       </p>
                       <form onSubmit={handleSubmit(onSubmit)}>
                         <input
@@ -228,6 +231,8 @@ const Newsfeed = () => {
             quotes.map((quote: Quote) => (
               <div key={quote.id}>
                 <NewsItem
+                  authUserId={user.id}
+                  authUserAvatar={user.avatar || ''}
                   quote_id={quote.id}
                   user_id={user.id}
                   userName={quote.user.name}
@@ -239,8 +244,9 @@ const Newsfeed = () => {
                       ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${quote.image}`
                       : '/assets/quote-sample.png'
                   }
-                  likesQty={21}
-                  commentsQty={quote.comments?.length || null}
+                  likesQty={quote.likes?.length ? quote.likes?.length : 0}
+                  likes={quote.likes}
+                  commentsQty={quote.comments?.length || 0}
                   comments={quote.comments}
                 />
               </div>
@@ -249,6 +255,8 @@ const Newsfeed = () => {
             searchedQuotes.map((quote: Quote) => (
               <div key={quote.id}>
                 <NewsItem
+                  authUserId={user.id}
+                  authUserAvatar={user.avatar || ''}
                   quote_id={quote.id}
                   user_id={user.id}
                   userName={quote.user.name}
@@ -260,8 +268,9 @@ const Newsfeed = () => {
                       ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${quote.image}`
                       : '/assets/quote-sample.png'
                   }
-                  likesQty={21}
-                  commentsQty={quote.comments?.length || null}
+                  likesQty={quote.likes?.length ? quote.likes?.length : 0}
+                  likes={quote.likes}
+                  commentsQty={quote.comments?.length || 0}
                   comments={quote.comments}
                 />
               </div>
