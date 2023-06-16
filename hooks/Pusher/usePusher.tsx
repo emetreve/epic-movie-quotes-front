@@ -15,7 +15,6 @@ const usePusher = () => {
       key: '701ba4f50bcb4e1612ec',
       cluster: 'eu',
       Pusher,
-      forceTLS: true,
       authorizer: (channel: { name: string }) => {
         return {
           authorize: (socketId: string, callback: Function) => {

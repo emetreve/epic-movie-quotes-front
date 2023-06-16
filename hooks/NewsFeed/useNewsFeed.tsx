@@ -8,6 +8,8 @@ import { useUiContext } from '@/store';
 import { useForm } from 'react-hook-form';
 import { SearchQuotesData, Quote } from '@/types';
 import { usePusher } from '@/hooks';
+import { useQueryClient } from 'react-query';
+import { Like } from '@/types';
 
 const useNewsFeed = () => {
   const [showSearchLg, setShowSearchLg] = useState(false);
@@ -28,23 +30,28 @@ const useNewsFeed = () => {
 
   const { logged, user } = useCheckIfLoggedIn();
 
-  usePusher();
-  useEffect(() => {
-    var channel = window.Echo.channel('like-updated');
-    channel.listen('LikeUpdated', function (data) {
-      console.log(data);
-    });
-    return () => {
-      window.Echo.disconnect();
-    };
-  }, [user]);
-
   const fetchQuotes = async () => {
     const response = await getQuotes(locale as string);
     return response.data;
   };
 
   const { data: quotes } = useQuery('quotes', fetchQuotes);
+
+  const queryClient = useQueryClient();
+
+  usePusher();
+
+  useEffect(() => {
+    const channel = window.Echo.channel('like-updated');
+    channel.listen('LikeUpdated', function (data: Like) {
+      if (data) {
+        queryClient.invalidateQueries('quotes');
+      }
+    });
+    return () => {
+      channel.stopListening('LikeUpdated');
+    };
+  }, [user]);
 
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {

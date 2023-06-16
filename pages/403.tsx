@@ -26,11 +26,11 @@ const Forbidden = () => {
         />
       </div>
       <h1 className='text-bold text-2xl pt-6 pb-4 lg:pt-10 lg:pb-5 lg:text-5xl'>
-        {t('You shall not pass!')}
+        {t('You shall not pass')}
       </h1>
       <div className='w-64 text-center lg:w-full lg:mt-3'>
         <p className='text-sm lg:text-2xl'>
-          {t('უკაცრავად, მაგრამ თქვენ არ გაქვთ ამ გვერდზე წვდომის უფლება')}
+          {t('Sorry but you dont have permission to access this page')}
         </p>
       </div>
       <Link href='/' className='hover:cursor-pointer'>
