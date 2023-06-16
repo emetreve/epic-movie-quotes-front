@@ -12,7 +12,7 @@ const usePusher = () => {
   useEffect(() => {
     window.Echo = new Echo({
       broadcaster: 'pusher',
-      key: '701ba4f50bcb4e1612ec',
+      key: process.env.NEXT_PUBLIC_PUSHER_KEY,
       cluster: 'eu',
       Pusher,
       authorizer: (channel: { name: string }) => {
