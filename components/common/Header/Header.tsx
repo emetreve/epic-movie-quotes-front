@@ -148,14 +148,15 @@ const Header: React.FC<PropsType> = ({
       {showNotifications && (
         <div>
           <div className='inline absolute z-40 w-0 h-0 lg:top-[4.2rem] top-[3.5rem] lg:right-[17.43rem] right-[1.28rem] border-l-[1rem] border-l-transparent border-b-[1.5625rem] border-b-black border-r-[1rem] border-r-transparent'></div>
-          <div className='container absolute z-50 lg:top-[5.5rem] lg:right-[4rem] lg:w-[48rem] lg:max-h-[37rem] max-h-[35rem] shadow-lg overflow-y-scroll bg-black lg:rounded-lg lg:py-9 lg:px-7 px-6'>
+          <div className='container absolute z-50 lg:top-[5.5rem] lg:right-[4rem] lg:w-[48rem] lg:max-h-[37rem] max-h-[35rem] min-h-[15rem] shadow-lg overflow-y-scroll bg-black lg:rounded-lg lg:py-9 lg:px-7 px-6'>
             <div className='flex flex-column justify-between text-white lg:my-0 my-6'>
               <h1 className='lg:text-[1.7rem] text-[1.1rem]'>Notifications</h1>
               <p
                 className={`underline lg:text-base text-xs ${
                   notifications &&
                   !notifications.some(
-                    (notification) => notification.end_user_id === authUserId
+                    (notification: Notification) =>
+                      notification.end_user_id === authUserId
                   ) &&
                   'hidden'
                 }`}
@@ -234,11 +235,14 @@ const Header: React.FC<PropsType> = ({
                         </div>
                       </div>
                     );
+                  } else {
+                    return true;
                   }
                 })}
               {notifications &&
                 !notifications.some(
-                  (notification) => notification.end_user_id === authUserId
+                  (notification: Notification) =>
+                    notification.end_user_id === authUserId
                 ) && (
                   <div
                     key='no notifications'
