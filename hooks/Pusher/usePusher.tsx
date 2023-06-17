@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { axiosInstance } from '@/services';
+import { pusherInstance } from '@/services';
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 
@@ -17,18 +17,13 @@ const usePusher = () => {
       cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER,
       authorizer: (channel: { name: string }) => {
         return {
-          authorize: (socketId: string, callback: Function) => {
-            axiosInstance
-              .post('/broadcasting/auth', {
-                socket_id: socketId,
-                channel_name: channel.name,
-              })
-              .then((response) => {
-                callback(null, response.data);
-              })
-              .catch((error) => {
-                callback(error);
-              });
+          authorize: async (socketId: string, callback: Function) => {
+            try {
+              const response = await pusherInstance(socketId, channel.name);
+              return callback(null, response.data);
+            } catch (error) {
+              callback(error);
+            }
           },
         };
       },

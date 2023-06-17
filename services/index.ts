@@ -8,3 +8,4 @@ export { forgotPassword, resetPassword } from './password';
 export { updateUser, updateAvatar } from './updateuser';
 export { getQuotes, getMovies, getLike, getNotifications } from './getdata';
 export { createComment, createQuote } from './postdata';
+export { default as pusherInstance } from './pusher';
