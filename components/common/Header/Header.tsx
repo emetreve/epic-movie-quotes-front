@@ -163,17 +163,40 @@ const Header: React.FC<PropsType> = ({
       {showNotifications && (
         <div>
           <div className='hidden lg:inline absolute w-0 h-0 top-[4.2rem] z-[100] right-[17.75rem] border-l-[1rem] border-l-transparent border-b-[1.5625rem] border-b-black border-r-[1rem] border-r-transparent'></div>
-          <div className='container absolute z-50 lg:top-[5.5rem] lg:right-[4rem] lg:w-[52rem] lg:max-h-72 shadow-lg overflow-y-scroll bg-black rounded-lg lg:py-4 lg:px-6'>
+          <div className='container absolute z-50 lg:top-[5.5rem] lg:right-[4rem] lg:w-[52rem] lg:max-h-[30rem] shadow-lg overflow-y-scroll bg-black rounded-lg lg:py-4 lg:px-6'>
             <div className='flex flex-column justify-between text-white'>
               <h1 className='text-xl'>Notifications</h1>
               <p className='underline'>Mark all as read</p>
             </div>
-            <div>
+            <div className='mt-6'>
               {notifications &&
                 notifications.map((notification: Notification) => {
                   return (
-                    <div key={notification.id} className='text-white'>
-                      <p>{notification.created_at}</p>
+                    <div key={notification.id} className='text-white h-24'>
+                      <div className='flex flex-row'>
+                        <div>
+                          <Image
+                            src={
+                              notification.user.avatar
+                                ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${notification.user.avatar}`
+                                : '/assets/avatar-default.png'
+                            }
+                            alt='user headshot'
+                            width={96}
+                            height={96}
+                            className='h-12 w-auto'
+                          />
+                        </div>
+                        <div>
+                          <h1>{notification.user.name}</h1>
+                          {notification.comment && (
+                            <div>Commented to your movie quote</div>
+                          )}
+                          {notification.like_id && (
+                            <div>Reacted to your quote</div>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   );
                 })}
