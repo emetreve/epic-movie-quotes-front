@@ -14,7 +14,7 @@ const usePusher = () => {
       Pusher,
       broadcaster: 'pusher',
       key: process.env.NEXT_PUBLIC_PUSHER_KEY,
-      cluster: 'eu',
+      cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER,
       authorizer: (channel: { name: string }) => {
         return {
           authorize: (socketId: string, callback: Function) => {

@@ -27,37 +27,9 @@ const getLike = async (user_id: number, quote_id: number) => {
   return response;
 };
 
-const broadcastLike = async (user_id: number, quote_id: number) => {
-  const response = await axiosInstance.get('/broadcastLike', {
-    params: {
-      user_id,
-      quote_id,
-      like: 1,
-    },
-  });
-  return response;
-};
-
-const broadcastComment = async (user_id: number, quote_id: number) => {
-  const response = await axiosInstance.get('/broadcastComment', {
-    params: {
-      user_id,
-      quote_id,
-    },
-  });
-  return response;
-};
-
 const getNotifications = async () => {
   const response = await axiosInstance.get('/notifications');
   return response;
 };
 
-export {
-  getQuotes,
-  getMovies,
-  getLike,
-  broadcastLike,
-  broadcastComment,
-  getNotifications,
-};
+export { getQuotes, getMovies, getLike, getNotifications };
