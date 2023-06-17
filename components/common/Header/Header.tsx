@@ -1,9 +1,7 @@
-import { useEffect } from 'react';
 import Image from 'next/image';
 import { PropsType } from './types';
 import useHeader from './useHeader';
 import { LangSwitch } from '@/components';
-import { usePusher } from '@/hooks';
 import { Notification } from '@/types';
 import { Heart } from '@/components';
 
@@ -26,21 +24,6 @@ const Header: React.FC<PropsType> = ({
     showNotifications,
     notifications,
   } = useHeader();
-
-  usePusher();
-
-  useEffect(() => {
-    const channelLike = window.Echo.private(
-      `notification-updated.${authUserId}`
-    );
-    channelLike.listen('NotificationUpdated', function (data) {
-      console.log(data);
-    });
-
-    return () => {
-      channelLike.stopListening(`.NotificationUpdated.${authUserId}`);
-    };
-  }, []);
 
   return (
     <>
