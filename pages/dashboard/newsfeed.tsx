@@ -35,7 +35,11 @@ const Newsfeed = () => {
         onClick={handleOutsideClick}
         className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'
       >
-        <Header userName={user.name} avatar={user.avatar} />
+        <Header
+          userName={user.name}
+          avatar={user.avatar}
+          authUserId={user.id}
+        />
         {showSearchMobile && (
           <div className='lg:hidden bg-gradient-violet min-h-screen w-screen absolute'>
             <div className='pt-6 px-4 flex flex-row items-center border-b border-gray-700 pb-6'>
@@ -235,6 +239,7 @@ const Newsfeed = () => {
                   authUserAvatar={user.avatar || ''}
                   quote_id={quote.id}
                   user_id={user.id}
+                  user_avatar={quote.user.avatar || ''}
                   userName={quote.user.name}
                   quote={quote.body[locale as keyof typeof quote.body]}
                   movie={quote.movie.name[locale as keyof typeof quote.body]}
@@ -259,6 +264,7 @@ const Newsfeed = () => {
                   authUserAvatar={user.avatar || ''}
                   quote_id={quote.id}
                   user_id={user.id}
+                  user_avatar={quote.user.avatar || ''}
                   userName={quote.user.name}
                   quote={quote.body[locale as keyof typeof quote.body]}
                   movie={quote.movie.name[locale as keyof typeof quote.body]}

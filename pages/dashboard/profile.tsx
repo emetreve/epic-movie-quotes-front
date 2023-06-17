@@ -54,15 +54,24 @@ const Profile = () => {
   if (logged) {
     return (
       <>
-        {showEditName && <ChangeName userName={user.name} />}
+        {showEditName && (
+          <ChangeName userName={user.name} authUserId={user.id} />
+        )}
 
-        {showEditPassword && <ChangePassword userName={user.name} />}
+        {showEditPassword && (
+          <ChangePassword userName={user.name} authUserId={user.id} />
+        )}
 
         <div
           onClick={handleOutsideClick}
           className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'
         >
-          <Header hideSearch={true} userName={user.name} avatar={user.avatar} />
+          <Header
+            hideSearch={true}
+            userName={user.name}
+            avatar={user.avatar}
+            authUserId={user.id}
+          />
 
           {showSuccess && <SuccessNotification show={setShowSuccess} />}
 

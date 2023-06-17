@@ -27,4 +27,14 @@ const getLike = async (user_id: number, quote_id: number) => {
   return response;
 };
 
-export { getQuotes, getMovies, getLike };
+const broadcastLike = async () => {
+  const response = await axiosInstance.get('/broadcastLike');
+  return response;
+};
+
+const broadcastComment = async () => {
+  const response = await axiosInstance.get('/broadcastComment');
+  return response;
+};
+
+export { getQuotes, getMovies, getLike, broadcastLike, broadcastComment };

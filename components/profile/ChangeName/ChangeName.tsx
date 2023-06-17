@@ -6,7 +6,7 @@ import useChangeName from './useChangeName';
 import { ValidationIcons } from '@/components';
 import { PropsType } from './types';
 
-const ChangeName: React.FC<PropsType> = ({ userName }) => {
+const ChangeName: React.FC<PropsType> = ({ userName, authUserId }) => {
   const {
     showUpdateName,
     applyInputStyle,
@@ -30,7 +30,7 @@ const ChangeName: React.FC<PropsType> = ({ userName }) => {
       onClick={handleOutsideClick}
       className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'
     >
-      <Header hideSearch={true} userName={userName} />
+      <Header hideSearch={true} userName={userName} authUserId={authUserId} />
       <div>
         <Link href='/dashboard/profile'>
           <Image

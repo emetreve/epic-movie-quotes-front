@@ -1,7 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { AddCommentData } from '@/types';
-import { createComment, getLike } from '@/services';
+import {
+  createComment,
+  getLike,
+  broadcastLike,
+  broadcastComment,
+} from '@/services';
 
 const useNewsItem = () => {
   const { register, handleSubmit, reset } = useForm<AddCommentData>();
@@ -11,6 +16,7 @@ const useNewsItem = () => {
   const createCommentMutation = useMutation(createComment, {
     onSuccess: () => {
       queryClient.invalidateQueries('quotes');
+      broadcastComment();
     },
   });
 
@@ -27,6 +33,7 @@ const useNewsItem = () => {
     try {
       await getLike(authUserId, quote_id);
       queryClient.invalidateQueries('quotes');
+      await broadcastLike();
     } catch (error) {
       console.log(error);
     }
