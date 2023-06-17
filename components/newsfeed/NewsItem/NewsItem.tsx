@@ -63,7 +63,7 @@ const NewsItem: React.FC<PropsType> = ({
           />
         </div>
         <div className='flex flex-row items-center ml-6'>
-          <p className='text-lg'>{likesQty}</p>
+          <p className='text-lg block w-2'>{likesQty}</p>
           <div
             onClick={() => handleLike(authUserId, quote_id)}
             className='hover:cursor-pointer'
@@ -71,7 +71,7 @@ const NewsItem: React.FC<PropsType> = ({
             <Heart
               classes={`h-5 w-auto ml-2 lg:h-7 ${
                 likes?.some((like: Like) => like.user_id === authUserId)
-                  ? 'fill-red'
+                  ? 'fill-like'
                   : 'fill-white'
               }`}
             />
