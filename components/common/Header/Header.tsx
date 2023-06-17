@@ -163,7 +163,7 @@ const Header: React.FC<PropsType> = ({
 
       {showNotifications && (
         <div>
-          <div className='inline absolute w-0 h-0 lg:top-[4.2rem] top-[3.5rem] z-[100] lg:right-[17.43rem] right-[1.28rem] border-l-[1rem] border-l-transparent border-b-[1.5625rem] border-b-black border-r-[1rem] border-r-transparent'></div>
+          <div className='inline absolute z-40 w-0 h-0 lg:top-[4.2rem] top-[3.5rem] lg:right-[17.43rem] right-[1.28rem] border-l-[1rem] border-l-transparent border-b-[1.5625rem] border-b-black border-r-[1rem] border-r-transparent'></div>
           <div className='container absolute z-50 lg:top-[5.5rem] lg:right-[4rem] lg:w-[48rem] lg:max-h-[37rem] max-h-[35rem] shadow-lg overflow-y-scroll bg-black lg:rounded-lg lg:py-9 lg:px-7 px-6'>
             <div className='flex flex-column justify-between text-white lg:my-0 my-6'>
               <h1 className='lg:text-[1.7rem] text-[1.1rem]'>Notifications</h1>
@@ -191,6 +191,9 @@ const Header: React.FC<PropsType> = ({
                               height={96}
                               className='lg:h-[4rem] h-[3.5rem] w-auto mr-6'
                             />
+                            <div className='lg:hidden ml-3 mt-1'>
+                              <p className='text-green text-sm'>New</p>
+                            </div>
                           </div>
                           <div>
                             <h1>{notification.user.name}</h1>
@@ -198,7 +201,7 @@ const Header: React.FC<PropsType> = ({
                               <div className='flex flex-row items-center mt-1'>
                                 <Image
                                   src='/assets/quote-notification.png'
-                                  alt='user headshot'
+                                  alt='quote notification'
                                   width={96}
                                   height={96}
                                   className='h-5 w-auto mr-[0.5rem]'
@@ -220,11 +223,16 @@ const Header: React.FC<PropsType> = ({
                                 </p>
                               </div>
                             )}
+                            <div className='flex-col lg:hidden'>
+                              <p className='text-input-gray font-light text-sm mt-2'>
+                                5 min ago
+                              </p>
+                            </div>
                           </div>
                         </div>
                         <div className='flex-col hidden lg:flex'>
                           <p className='text-input-gray font-light text-right'>
-                            5 mins ago
+                            5 min ago
                           </p>
                           <p className='text-green text-right'>New</p>
                         </div>
