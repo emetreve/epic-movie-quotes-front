@@ -74,3 +74,19 @@ export type Notification = {
   user: User;
   user_id: number;
 };
+
+export type NotificationMessage = {
+  message: {
+    id: number;
+    created_at: string;
+    updated_at: string;
+    user_id: number;
+    quote_id: number;
+    like_id: number | null;
+    comment_id: number | null;
+    read: number;
+    end_user_id: number;
+    user: User;
+    comment: Comment | null;
+  };
+};

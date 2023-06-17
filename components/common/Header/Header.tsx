@@ -23,7 +23,7 @@ const Header: React.FC<PropsType> = ({
     toggleNotifications,
     showNotifications,
     notifications,
-  } = useHeader();
+  } = useHeader(authUserId);
 
   return (
     <>
