@@ -33,7 +33,7 @@ const useNewsItem = () => {
     try {
       await getLike(authUserId, quote_id);
       queryClient.invalidateQueries('quotes');
-      await broadcastLike();
+      await broadcastLike(authUserId, quote_id);
     } catch (error) {
       console.log(error);
     }

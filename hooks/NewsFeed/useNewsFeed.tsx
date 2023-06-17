@@ -44,7 +44,6 @@ const useNewsFeed = () => {
   useEffect(() => {
     const channelLike = window.Echo.channel('like-updated');
     channelLike.listen('LikeUpdated', function (data: Like) {
-      console.log(data);
       if (data) {
         queryClient.invalidateQueries('quotes');
       }

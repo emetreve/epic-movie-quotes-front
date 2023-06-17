@@ -1,9 +1,16 @@
+import { useEffect } from 'react';
 import Image from 'next/image';
 import { PropsType } from './types';
 import useHeader from './useHeader';
 import { LangSwitch } from '@/components';
+import { usePusher } from '@/hooks';
 
-const Header: React.FC<PropsType> = ({ hideSearch, userName, avatar }) => {
+const Header: React.FC<PropsType> = ({
+  hideSearch,
+  userName,
+  avatar,
+  authUserId,
+}) => {
   const {
     handleLogout,
     t,
@@ -14,6 +21,21 @@ const Header: React.FC<PropsType> = ({ hideSearch, userName, avatar }) => {
     showSearchMobile,
     showSearchMob,
   } = useHeader();
+
+  usePusher();
+
+  useEffect(() => {
+    const channelLike = window.Echo.private(
+      `notification-updated.${authUserId}`
+    );
+    channelLike.listen('NotificationUpdated', function (data) {
+      console.log(data);
+    });
+
+    return () => {
+      // channelLike.stopListening(`.NotificationUpdated.${authUserId}`);
+    };
+  }, []);
 
   return (
     <>

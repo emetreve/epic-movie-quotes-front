@@ -27,8 +27,14 @@ const getLike = async (user_id: number, quote_id: number) => {
   return response;
 };
 
-const broadcastLike = async () => {
-  const response = await axiosInstance.get('/broadcastLike');
+const broadcastLike = async (user_id: number, quote_id: number) => {
+  const response = await axiosInstance.get('/broadcastLike', {
+    params: {
+      user_id,
+      quote_id,
+      like: 1,
+    },
+  });
   return response;
 };
 
