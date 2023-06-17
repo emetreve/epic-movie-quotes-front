@@ -38,7 +38,7 @@ const Header: React.FC<PropsType> = ({
     });
 
     return () => {
-      // channelLike.stopListening(`.NotificationUpdated.${authUserId}`);
+      channelLike.stopListening(`.NotificationUpdated.${authUserId}`);
     };
   }, []);
 
@@ -163,19 +163,19 @@ const Header: React.FC<PropsType> = ({
 
       {showNotifications && (
         <div>
-          <div className='hidden lg:inline absolute w-0 h-0 top-[4.2rem] z-[100] right-[17.75rem] border-l-[1rem] border-l-transparent border-b-[1.5625rem] border-b-black border-r-[1rem] border-r-transparent'></div>
-          <div className='container absolute z-50 lg:top-[5.5rem] lg:right-[4rem] lg:w-[48rem] lg:max-h-[37rem] shadow-lg overflow-y-scroll bg-black rounded-lg lg:py-9 lg:px-7'>
-            <div className='flex flex-column justify-between text-white'>
-              <h1 className='text-[1.7rem]'>Notifications</h1>
-              <p className='underline'>Mark all as read</p>
+          <div className='inline absolute w-0 h-0 lg:top-[4.2rem] top-[3.5rem] z-[100] lg:right-[17.43rem] right-[1.28rem] border-l-[1rem] border-l-transparent border-b-[1.5625rem] border-b-black border-r-[1rem] border-r-transparent'></div>
+          <div className='container absolute z-50 lg:top-[5.5rem] lg:right-[4rem] lg:w-[48rem] lg:max-h-[37rem] max-h-[35rem] shadow-lg overflow-y-scroll bg-black lg:rounded-lg lg:py-9 lg:px-7 px-6'>
+            <div className='flex flex-column justify-between text-white lg:my-0 my-6'>
+              <h1 className='lg:text-[1.7rem] text-[1.1rem]'>Notifications</h1>
+              <p className='underline lg:text-base text-xs'>Mark all as read</p>
             </div>
-            <div className='mt-6'>
+            <div className='mt-4'>
               {notifications &&
                 notifications.map((notification: Notification) => {
                   return (
                     <div
                       key={notification.id}
-                      className='text-white h-[6.3rem] border border-slate-600 rounded-md border-opacity-50 mt-4 px-5'
+                      className='text-white h-[6.3rem] border border-gray-600 lg:rounded-md rounded-sm border-opacity-50 mt-[0.8rem] lg:px-5 px-3'
                     >
                       <div className='flex h-full flex-row items-center justify-between'>
                         <div className='flex flex-row'>
@@ -189,7 +189,7 @@ const Header: React.FC<PropsType> = ({
                               alt='user headshot'
                               width={96}
                               height={96}
-                              className='h-[4rem] w-auto mr-6'
+                              className='lg:h-[4rem] h-[3.5rem] w-auto mr-6'
                             />
                           </div>
                           <div>
@@ -203,7 +203,7 @@ const Header: React.FC<PropsType> = ({
                                   height={96}
                                   className='h-5 w-auto mr-[0.5rem]'
                                 />
-                                <p className='text-input-gray font-light'>
+                                <p className='text-input-gray block lg:w-full w-[11rem] whitespace-nowrap overflow-hidden overflow-ellipsis font-light lg:text-base text-sm'>
                                   Commented to your movie quote
                                 </p>
                               </div>
@@ -215,14 +215,14 @@ const Header: React.FC<PropsType> = ({
                                     'fill-like h-5 relative right-[0.4rem]'
                                   }
                                 />
-                                <p className='text-input-gray font-light block relative right-[0.3rem]'>
+                                <p className='text-input-gray lg:text-base text-sm font-light block relative right-[0.3rem]'>
                                   Reacted to your quote
                                 </p>
                               </div>
                             )}
                           </div>
                         </div>
-                        <div className='flex flex-col'>
+                        <div className='flex-col hidden lg:flex'>
                           <p className='text-input-gray font-light text-right'>
                             5 mins ago
                           </p>
