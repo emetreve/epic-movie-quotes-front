@@ -11,10 +11,10 @@ declare global {
 const usePusher = () => {
   useEffect(() => {
     window.Echo = new Echo({
+      Pusher,
       broadcaster: 'pusher',
       key: process.env.NEXT_PUBLIC_PUSHER_KEY,
       cluster: 'eu',
-      Pusher,
       authorizer: (channel: { name: string }) => {
         return {
           authorize: (socketId: string, callback: Function) => {

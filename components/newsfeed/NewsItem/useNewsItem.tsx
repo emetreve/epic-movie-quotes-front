@@ -16,13 +16,13 @@ const useNewsItem = () => {
   const createCommentMutation = useMutation(createComment, {
     onSuccess: () => {
       queryClient.invalidateQueries('quotes');
-      broadcastComment();
     },
   });
 
   const onSubmit = async (data: AddCommentData) => {
     try {
       await createCommentMutation.mutateAsync(data);
+      broadcastComment(data.user_id, data.quote_id);
     } catch (error) {
       console.log(error);
     }
