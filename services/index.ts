@@ -12,5 +12,6 @@ export {
   getLike,
   broadcastLike,
   broadcastComment,
+  getNotifications,
 } from './getdata';
 export { createComment, createQuote } from './postdata';

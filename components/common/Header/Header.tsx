@@ -4,6 +4,7 @@ import { PropsType } from './types';
 import useHeader from './useHeader';
 import { LangSwitch } from '@/components';
 import { usePusher } from '@/hooks';
+import { Notification } from '@/types';
 
 const Header: React.FC<PropsType> = ({
   hideSearch,
@@ -20,6 +21,9 @@ const Header: React.FC<PropsType> = ({
     router,
     showSearchMobile,
     showSearchMob,
+    receiveNotifications,
+    showNotifications,
+    notifications,
   } = useHeader();
 
   usePusher();
@@ -156,15 +160,38 @@ const Header: React.FC<PropsType> = ({
         </div>
       )}
 
+      {showNotifications && (
+        <div>
+          <div className='hidden lg:inline absolute w-0 h-0 top-[4.2rem] z-[100] right-[17.75rem] border-l-[1rem] border-l-transparent border-b-[1.5625rem] border-b-black border-r-[1rem] border-r-transparent'></div>
+          <div className='container absolute z-50 lg:top-[5.5rem] lg:right-[4rem] lg:w-[52rem] lg:max-h-72 shadow-lg overflow-y-scroll bg-black rounded-lg lg:py-4 lg:px-6'>
+            <div className='flex flex-column justify-between text-white'>
+              <h1 className='text-xl'>Notifications</h1>
+              <p className='underline'>Mark all as read</p>
+            </div>
+            <div>
+              {notifications &&
+                notifications.map((notification: Notification) => {
+                  return (
+                    <div key={notification.id} className='text-white'>
+                      <p>{notification.created_at}</p>
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className='hidden lg:flex justify-between items-center py-5 text-base px-16 bg-violet bg-opacity-80'>
         <p className='uppercase text-cream text-base'>Movie quotes</p>
         <div className='flex items-center'>
           <Image
             src='/assets/notifications-bell.png'
-            alt='search magnifying glass'
+            alt='notifications bell'
             width={96}
             height={96}
             className='h-7 w-auto mr-7 hover:cursor-pointer'
+            onClick={receiveNotifications}
           />
           <LangSwitch />
           <button

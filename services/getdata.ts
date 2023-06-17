@@ -48,4 +48,16 @@ const broadcastComment = async (user_id: number, quote_id: number) => {
   return response;
 };
 
-export { getQuotes, getMovies, getLike, broadcastLike, broadcastComment };
+const getNotifications = async () => {
+  const response = await axiosInstance.get('/notifications');
+  return response;
+};
+
+export {
+  getQuotes,
+  getMovies,
+  getLike,
+  broadcastLike,
+  broadcastComment,
+  getNotifications,
+};
