@@ -4,13 +4,12 @@ import { logOut } from '@/services';
 import { useTranslation } from 'next-i18next';
 import { useUiContext } from '@/store';
 import { getNotifications } from '@/services';
-import { Notification } from '@/types';
+import { useQuery } from 'react-query';
 
 const useHeader = () => {
   const { showBrugerMenu, showBurger, showSearchMobile, showSearchMob } =
     useUiContext();
 
-  const [notifications, setNotifications] = useState<Notification[]>();
   const [showNotifications, setShowNotifications] = useState(false);
 
   const { t } = useTranslation(['newsfeed', 'profile']);
@@ -31,12 +30,16 @@ const useHeader = () => {
     router.push(`/dashboard/${address}`);
   };
 
-  const receiveNotifications = async () => {
-    const response = await getNotifications();
-    console.log(response);
-    setNotifications(response.data);
+  const toggleNotifications = async () => {
     setShowNotifications((prev) => !prev);
   };
+
+  const fetchNotifications = async () => {
+    const response = await getNotifications();
+    return response.data;
+  };
+
+  const { data: notifications } = useQuery('notifications', fetchNotifications);
 
   return {
     handleLogout,
@@ -47,7 +50,7 @@ const useHeader = () => {
     router,
     showSearchMobile,
     showSearchMob,
-    receiveNotifications,
+    toggleNotifications,
     showNotifications,
     setShowNotifications,
     notifications,

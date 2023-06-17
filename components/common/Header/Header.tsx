@@ -20,7 +20,7 @@ const Header: React.FC<PropsType> = ({
     router,
     showSearchMobile,
     showSearchMob,
-    receiveNotifications,
+    toggleNotifications,
     showNotifications,
     notifications,
   } = useHeader();
@@ -139,6 +139,7 @@ const Header: React.FC<PropsType> = ({
               width={96}
               height={96}
               className='lg:hidden inline ml-4 h-5 w-auto hover:cursor-pointer'
+              onClick={toggleNotifications}
             />
           </div>
         </div>
@@ -260,7 +261,7 @@ const Header: React.FC<PropsType> = ({
             width={96}
             height={96}
             className='h-7 w-auto mr-7 hover:cursor-pointer'
-            onClick={receiveNotifications}
+            onClick={toggleNotifications}
           />
           <LangSwitch />
           <button
