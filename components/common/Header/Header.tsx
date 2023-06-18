@@ -25,6 +25,7 @@ const Header: React.FC<PropsType> = ({
     notifications,
     handleMarkNotificationsRead,
     handleMarkNotificationRead,
+    notificationBellCounter,
   } = useHeader(authUserId);
 
   return (
@@ -273,16 +274,25 @@ const Header: React.FC<PropsType> = ({
       <div className='hidden lg:flex justify-between items-center py-5 text-base px-16 bg-violet bg-opacity-80'>
         <p className='uppercase text-cream text-base'>Movie quotes</p>
         <div className='flex items-center'>
-          <Image
-            src='/assets/notifications-bell.png'
-            alt='notifications bell'
-            width={96}
-            height={96}
-            className='h-7 w-auto mr-7 hover:cursor-pointer'
-            onClick={() => {
-              toggleNotifications();
-            }}
-          />
+          <div className='relative'>
+            <Image
+              src='/assets/notifications-bell.png'
+              alt='notifications bell'
+              width={96}
+              height={96}
+              className='h-[2rem] w-auto mr-7 hover:cursor-pointer'
+              onClick={() => {
+                toggleNotifications();
+              }}
+            />
+            {notificationBellCounter !== 0 && (
+              <div className='absolute flex items-center justify-center bottom-[0.7rem] left-[0.8rem] h-[1.5rem] w-[1.5rem] rounded-[50%] bg-bell-counter-red'>
+                <p className='text-white font-semibold text-center text-sm'>
+                  {notificationBellCounter}
+                </p>
+              </div>
+            )}
+          </div>
           <LangSwitch />
           <button
             onClick={handleLogout}

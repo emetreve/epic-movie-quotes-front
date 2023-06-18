@@ -10,7 +10,7 @@ import {
 } from '@/services';
 import { useQuery } from 'react-query';
 import { usePusher } from '@/hooks';
-import { NotificationMessage } from '@/types';
+import { NotificationMessage, Notification } from '@/types';
 import { useQueryClient } from 'react-query';
 
 const useHeader = (authUserId: number) => {
@@ -95,6 +95,12 @@ const useHeader = (authUserId: number) => {
     }
   };
 
+  const notificationBellCounter = notifications?.filter(
+    (each: Notification) => {
+      return each.end_user_id === authUserId && each.read === 0;
+    }
+  ).length;
+
   return {
     handleLogout,
     t,
@@ -110,6 +116,7 @@ const useHeader = (authUserId: number) => {
     notifications,
     handleMarkNotificationsRead,
     handleMarkNotificationRead,
+    notificationBellCounter,
   };
 };
 export default useHeader;
