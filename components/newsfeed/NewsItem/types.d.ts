@@ -15,4 +15,5 @@ export type PropsType = {
   commentsQty: number | null;
   comments: Comment[] | null;
   likes: Like[] | null;
+  user_avatar: string;
 };

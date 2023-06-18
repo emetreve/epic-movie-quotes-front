@@ -6,7 +6,7 @@ import useChangePassword from './useChangePassword';
 import { ValidationIcons } from '@/components';
 import { PropsType } from './types';
 
-const ChangePassword: React.FC<PropsType> = ({ userName }) => {
+const ChangePassword: React.FC<PropsType> = ({ userName, authUserId }) => {
   const {
     showUpdatePassword,
     applyStylePass,
@@ -36,7 +36,7 @@ const ChangePassword: React.FC<PropsType> = ({ userName }) => {
       onClick={handleOutsideClick}
       className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'
     >
-      <Header hideSearch={true} userName={userName} />
+      <Header hideSearch={true} userName={userName} authUserId={authUserId} />
       <div>
         <Link href='/dashboard/profile'>
           <Image

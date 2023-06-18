@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 import { useCheckIfLoggedIn } from '@/hooks';
@@ -7,6 +7,9 @@ import { getQuotes } from '@/services';
 import { useUiContext } from '@/store';
 import { useForm } from 'react-hook-form';
 import { SearchQuotesData, Quote } from '@/types';
+import { usePusher } from '@/hooks';
+import { useQueryClient } from 'react-query';
+import { Like } from '@/types';
 
 const useNewsFeed = () => {
   const [showSearchLg, setShowSearchLg] = useState(false);
@@ -33,6 +36,31 @@ const useNewsFeed = () => {
   };
 
   const { data: quotes } = useQuery('quotes', fetchQuotes);
+
+  const queryClient = useQueryClient();
+
+  usePusher();
+
+  useEffect(() => {
+    const channelLike = window.Echo.channel('like-updated');
+    channelLike.listen('LikeUpdated', function (data: Like) {
+      if (data) {
+        queryClient.invalidateQueries('quotes');
+      }
+    });
+
+    const channelComment = window.Echo.channel('comment-updated');
+    channelComment.listen('CommentUpdated', function (data: Like) {
+      if (data) {
+        queryClient.invalidateQueries('quotes');
+      }
+    });
+
+    return () => {
+      channelLike.stopListening('LikeUpdated');
+      channelComment.stopListening('CommentUpdated');
+    };
+  }, [user]);
 
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {

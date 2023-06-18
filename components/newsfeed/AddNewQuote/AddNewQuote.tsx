@@ -183,7 +183,7 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
                             }}
                             key={movie.id}
                             className={`${
-                              index !== 0 && 'pt-4'
+                              index !== 0 && 'pt-5'
                             } leading-tight block px-5`}
                           >
                             {movie.name[locale as keyof typeof movie.name]}

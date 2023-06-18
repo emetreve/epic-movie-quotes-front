@@ -60,3 +60,33 @@ export type Quote = {
   comments: Comment[] | null;
   likes: Like[] | null;
 };
+
+export type Notification = {
+  comment: Comment;
+  comment_id: number;
+  created_at: string;
+  end_user_id: number;
+  id: number;
+  like_id: number | null;
+  quote_id: number | null;
+  read: number;
+  updated_at: string;
+  user: User;
+  user_id: number;
+};
+
+export type NotificationMessage = {
+  message: {
+    id: number;
+    created_at: string;
+    updated_at: string;
+    user_id: number;
+    quote_id: number;
+    like_id: number | null;
+    comment_id: number | null;
+    read: number;
+    end_user_id: number;
+    user: User;
+    comment: Comment | null;
+  };
+};
