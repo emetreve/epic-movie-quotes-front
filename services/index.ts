@@ -6,6 +6,12 @@ export { default as googleInstance } from './googleInstance';
 export { signUp, logOut, googleAuth, verifyEmail } from './userauth';
 export { forgotPassword, resetPassword } from './password';
 export { updateUser, updateAvatar } from './updateuser';
-export { getQuotes, getMovies, getLike, getNotifications } from './getdata';
+export {
+  getQuotes,
+  getMovies,
+  getLike,
+  getNotifications,
+  markNotifications,
+} from './getdata';
 export { createComment, createQuote } from './postdata';
 export { default as pusherInstance } from './pusher';

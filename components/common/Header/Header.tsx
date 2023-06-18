@@ -23,6 +23,7 @@ const Header: React.FC<PropsType> = ({
     toggleNotifications,
     showNotifications,
     notifications,
+    handleMarkAllRead,
   } = useHeader(authUserId);
 
   return (
@@ -162,6 +163,7 @@ const Header: React.FC<PropsType> = ({
                   ) &&
                   'hidden'
                 }`}
+                onClick={handleMarkAllRead}
               >
                 Mark all as read
               </p>
@@ -187,11 +189,15 @@ const Header: React.FC<PropsType> = ({
                                 alt='user headshot'
                                 width={96}
                                 height={96}
-                                className='lg:h-[4rem] h-[3.5rem] w-auto mr-6'
+                                className={`lg:h-[4rem] h-[3.5rem] w-auto mr-6 rounded-[50%] ${
+                                  !notification.read && 'border-2 border-green'
+                                }`}
                               />
-                              <div className='lg:hidden ml-3 mt-1'>
-                                <p className='text-green text-sm'>New</p>
-                              </div>
+                              {!notification.read ? (
+                                <div className='lg:hidden ml-3 mt-1'>
+                                  <p className='text-green text-sm'>New</p>
+                                </div>
+                              ) : null}
                             </div>
                             <div>
                               <h1>{notification.user.name}</h1>
@@ -232,7 +238,9 @@ const Header: React.FC<PropsType> = ({
                             <p className='text-input-gray font-light text-right'>
                               5 min ago
                             </p>
-                            <p className='text-green text-right'>New</p>
+                            {!notification.read ? (
+                              <p className='text-green text-right'>New</p>
+                            ) : null}
                           </div>
                         </div>
                       </div>

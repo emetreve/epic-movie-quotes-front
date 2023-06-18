@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { logOut } from '@/services';
 import { useTranslation } from 'next-i18next';
 import { useUiContext } from '@/store';
-import { getNotifications } from '@/services';
+import { getNotifications, markNotifications } from '@/services';
 import { useQuery } from 'react-query';
 import { usePusher } from '@/hooks';
 import { NotificationMessage } from '@/types';
@@ -31,7 +31,7 @@ const useHeader = (authUserId: number) => {
           `private channel notification for the user with id ${authUserId} `,
           data
         );
-        // TODO: handle showing this notification to user
+        // TODO: handle updating notification bell number
         queryClient.invalidateQueries('notifications');
       }
     );
@@ -72,6 +72,15 @@ const useHeader = (authUserId: number) => {
 
   const { data: notifications } = useQuery('notifications', fetchNotifications);
 
+  const handleMarkAllRead = () => {
+    try {
+      markNotifications(authUserId);
+    } catch (error) {
+      console.log(error);
+    }
+    queryClient.invalidateQueries('notifications');
+  };
+
   return {
     handleLogout,
     t,
@@ -85,6 +94,7 @@ const useHeader = (authUserId: number) => {
     showNotifications,
     setShowNotifications,
     notifications,
+    handleMarkAllRead,
   };
 };
 export default useHeader;
