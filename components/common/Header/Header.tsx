@@ -135,24 +135,37 @@ const Header: React.FC<PropsType> = ({
                 }}
               />
             )}
-
-            <Image
-              src='/assets/notifications-bell.png'
-              alt='notifications bell'
-              width={96}
-              height={96}
-              className='lg:hidden inline ml-4 h-5 w-auto hover:cursor-pointer'
-              onClick={() => {
-                toggleNotifications(true);
-              }}
-            />
+            <div className='relative'>
+              <Image
+                src='/assets/notifications-bell.png'
+                alt='notifications bell'
+                width={96}
+                height={96}
+                className='lg:hidden inline ml-4 h-6 w-auto hover:cursor-pointer'
+                onClick={() => {
+                  toggleNotifications(true);
+                }}
+              />
+              {notificationBellCounter !== 0 && (
+                <div
+                  onClick={() => {
+                    toggleNotifications();
+                  }}
+                  className='absolute flex items-center justify-center bottom-[0.5rem] left-[1.6rem] h-[1.1rem] w-[1.1rem] rounded-[50%] bg-bell-counter-red'
+                >
+                  <p className='text-white font-semibold text-center text-xs'>
+                    {notificationBellCounter}
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
 
       {showNotifications && (
         <div>
-          <div className='inline absolute z-40 w-0 h-0 lg:top-[4.2rem] top-[3.5rem] lg:right-[17.7rem] right-[1.28rem] border-l-[1rem] border-l-transparent border-b-[1.5625rem] border-b-black border-r-[1rem] border-r-transparent'></div>
+          <div className='inline absolute z-40 w-0 h-0 lg:top-[4.2rem] top-[3.5rem] lg:right-[17.8rem] right-[1.28rem] border-l-[1rem] border-l-transparent border-b-[1.5625rem] border-b-black border-r-[1rem] border-r-transparent'></div>
           <div className='container absolute z-50 lg:top-[5.5rem] lg:right-[4rem] lg:w-[48rem] lg:max-h-[37rem] max-h-[35rem] lg:min-h-[13rem] min-h-[calc(100vh-4.1rem)] shadow-lg overflow-y-scroll bg-black lg:rounded-lg lg:py-9 lg:px-7 px-6'>
             <div className='flex flex-column justify-between text-white lg:my-0 my-6'>
               <h1 className='lg:text-[1.7rem] text-[1.1rem]'>Notifications</h1>
@@ -286,7 +299,12 @@ const Header: React.FC<PropsType> = ({
               }}
             />
             {notificationBellCounter !== 0 && (
-              <div className='absolute flex items-center justify-center bottom-[0.7rem] left-[0.8rem] h-[1.5rem] w-[1.5rem] rounded-[50%] bg-bell-counter-red'>
+              <div
+                onClick={() => {
+                  toggleNotifications();
+                }}
+                className='absolute flex items-center justify-center bottom-[0.7rem] left-[0.8rem] h-[1.5rem] w-[1.5rem] rounded-[50%] bg-bell-counter-red'
+              >
                 <p className='text-white font-semibold text-center text-sm'>
                   {notificationBellCounter}
                 </p>
