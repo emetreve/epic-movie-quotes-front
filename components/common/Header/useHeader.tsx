@@ -42,7 +42,7 @@ const useHeader = (authUserId: number) => {
     return () => {
       channelLike.stopListening(`.NotificationUpdated.${authUserId}`);
     };
-  }, []);
+  }, [authUserId]);
 
   const router = useRouter();
 
