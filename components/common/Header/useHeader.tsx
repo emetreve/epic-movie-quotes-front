@@ -7,6 +7,7 @@ import { getNotifications } from '@/services';
 import { useQuery } from 'react-query';
 import { usePusher } from '@/hooks';
 import { NotificationMessage } from '@/types';
+import { useQueryClient } from 'react-query';
 
 const useHeader = (authUserId: number) => {
   const { showBrugerMenu, showBurger, showSearchMobile, showSearchMob } =
@@ -15,6 +16,8 @@ const useHeader = (authUserId: number) => {
   const [showNotifications, setShowNotifications] = useState(false);
 
   const { t } = useTranslation(['newsfeed', 'profile']);
+
+  const queryClient = useQueryClient();
 
   usePusher();
   useEffect(() => {
@@ -29,6 +32,7 @@ const useHeader = (authUserId: number) => {
           data
         );
         // TODO: handle showing this notification to user
+        queryClient.invalidateQueries('notifications');
       }
     );
     return () => {
@@ -52,7 +56,12 @@ const useHeader = (authUserId: number) => {
     router.push(`/dashboard/${address}`);
   };
 
-  const toggleNotifications = async () => {
+  const toggleNotifications = async (mobile?: boolean) => {
+    if (mobile && !showNotifications) {
+      document.body.classList.add('hide-scrollbar');
+    } else if (mobile && showNotifications) {
+      document.body.classList.remove('hide-scrollbar');
+    }
     setShowNotifications((prev) => !prev);
   };
 

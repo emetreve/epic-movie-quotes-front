@@ -139,7 +139,9 @@ const Header: React.FC<PropsType> = ({
               width={96}
               height={96}
               className='lg:hidden inline ml-4 h-5 w-auto hover:cursor-pointer'
-              onClick={toggleNotifications}
+              onClick={() => {
+                toggleNotifications(true);
+              }}
             />
           </div>
         </div>
@@ -148,7 +150,7 @@ const Header: React.FC<PropsType> = ({
       {showNotifications && (
         <div>
           <div className='inline absolute z-40 w-0 h-0 lg:top-[4.2rem] top-[3.5rem] lg:right-[17.43rem] right-[1.28rem] border-l-[1rem] border-l-transparent border-b-[1.5625rem] border-b-black border-r-[1rem] border-r-transparent'></div>
-          <div className='container absolute z-50 lg:top-[5.5rem] lg:right-[4rem] lg:w-[48rem] lg:max-h-[37rem] max-h-[35rem] min-h-[15rem] shadow-lg overflow-y-scroll bg-black lg:rounded-lg lg:py-9 lg:px-7 px-6'>
+          <div className='container absolute z-50 lg:top-[5.5rem] lg:right-[4rem] lg:w-[48rem] lg:max-h-[37rem] max-h-[35rem] lg:min-h-[13rem] min-h-[calc(100vh-4.1rem)] shadow-lg overflow-y-scroll bg-black lg:rounded-lg lg:py-9 lg:px-7 px-6'>
             <div className='flex flex-column justify-between text-white lg:my-0 my-6'>
               <h1 className='lg:text-[1.7rem] text-[1.1rem]'>Notifications</h1>
               <p
@@ -265,7 +267,9 @@ const Header: React.FC<PropsType> = ({
             width={96}
             height={96}
             className='h-7 w-auto mr-7 hover:cursor-pointer'
-            onClick={toggleNotifications}
+            onClick={() => {
+              toggleNotifications();
+            }}
           />
           <LangSwitch />
           <button
