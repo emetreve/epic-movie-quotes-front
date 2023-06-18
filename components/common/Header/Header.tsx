@@ -106,7 +106,12 @@ const Header: React.FC<PropsType> = ({
                 height={462}
                 className='h-5 w-auto mr-3'
               />
-              <p className='text-[0.9rem] inline-block ml-5 text-white'>
+              <p
+                onClick={() => {
+                  handleNavigation('movies');
+                }}
+                className='text-[0.9rem] inline-block ml-5 text-white'
+              >
                 {t('List of movies')}
               </p>
             </div>
@@ -146,7 +151,7 @@ const Header: React.FC<PropsType> = ({
                   toggleNotifications(true);
                 }}
               />
-              {notificationBellCounter !== 0 && (
+              {notificationBellCounter > 0 && (
                 <div
                   onClick={() => {
                     toggleNotifications();
@@ -298,7 +303,7 @@ const Header: React.FC<PropsType> = ({
                 toggleNotifications();
               }}
             />
-            {notificationBellCounter !== 0 && (
+            {notificationBellCounter > 0 && (
               <div
                 onClick={() => {
                   toggleNotifications();

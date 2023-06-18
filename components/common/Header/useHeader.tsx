@@ -57,6 +57,11 @@ const useHeader = (authUserId: number) => {
   const handleNavigation = (address: string) => {
     showBurger(false);
     router.push(`/dashboard/${address}`);
+    if (address === 'newsfeed') {
+      setTimeout(() => {
+        router.reload();
+      }, 500);
+    }
   };
 
   const toggleNotifications = async (mobile?: boolean) => {

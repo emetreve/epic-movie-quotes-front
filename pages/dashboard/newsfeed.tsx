@@ -138,9 +138,11 @@ const Newsfeed = () => {
                   height={462}
                   className='h-7 w-auto mr-3'
                 />
-                <p className='text-xl inline-block ml-5'>
-                  {t('List of movies')}
-                </p>
+                <Link href='/dashboard/movies'>
+                  <p className='text-xl inline-block ml-5'>
+                    {t('List of movies')}
+                  </p>
+                </Link>
               </div>
             </div>
 
