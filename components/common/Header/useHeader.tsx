@@ -35,7 +35,6 @@ const useHeader = (authUserId: number) => {
           `private channel notification for the user with id ${authUserId} `,
           data
         );
-        // TODO: handle updating notification bell number
         queryClient.invalidateQueries('notifications');
       }
     );
