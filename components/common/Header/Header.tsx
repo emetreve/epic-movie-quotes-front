@@ -4,6 +4,7 @@ import useHeader from './useHeader';
 import { LangSwitch } from '@/components';
 import { Notification } from '@/types';
 import { Heart } from '@/components';
+import { getTimeAgo } from '@/helpers';
 
 const Header: React.FC<PropsType> = ({
   hideSearch,
@@ -252,14 +253,14 @@ const Header: React.FC<PropsType> = ({
                               )}
                               <div className='flex-col lg:hidden'>
                                 <p className='text-input-gray font-light text-sm mt-2'>
-                                  5 min ago
+                                  {getTimeAgo(notification.created_at)}
                                 </p>
                               </div>
                             </div>
                           </div>
                           <div className='flex-col hidden lg:flex'>
                             <p className='text-input-gray font-light text-right'>
-                              5 min ago
+                              {getTimeAgo(notification.created_at)}
                             </p>
                             {!notification.read ? (
                               <p className='text-green text-right'>New</p>
