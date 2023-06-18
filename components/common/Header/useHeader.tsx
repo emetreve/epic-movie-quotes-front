@@ -3,7 +3,11 @@ import { useRouter } from 'next/router';
 import { logOut } from '@/services';
 import { useTranslation } from 'next-i18next';
 import { useUiContext } from '@/store';
-import { getNotifications, markNotifications } from '@/services';
+import {
+  getNotifications,
+  markNotifications,
+  markNotification,
+} from '@/services';
 import { useQuery } from 'react-query';
 import { usePusher } from '@/hooks';
 import { NotificationMessage } from '@/types';
@@ -72,13 +76,23 @@ const useHeader = (authUserId: number) => {
 
   const { data: notifications } = useQuery('notifications', fetchNotifications);
 
-  const handleMarkAllRead = () => {
+  const handleMarkNotificationsRead = () => {
     try {
       markNotifications(authUserId);
     } catch (error) {
       console.log(error);
     }
     queryClient.invalidateQueries('notifications');
+  };
+
+  const handleMarkNotificationRead = (notification_id: number) => {
+    try {
+      // TODO: redirect to quote's modal view
+      markNotification(notification_id);
+      queryClient.invalidateQueries('notifications');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return {
@@ -94,7 +108,8 @@ const useHeader = (authUserId: number) => {
     showNotifications,
     setShowNotifications,
     notifications,
-    handleMarkAllRead,
+    handleMarkNotificationsRead,
+    handleMarkNotificationRead,
   };
 };
 export default useHeader;

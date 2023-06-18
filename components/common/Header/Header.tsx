@@ -23,7 +23,8 @@ const Header: React.FC<PropsType> = ({
     toggleNotifications,
     showNotifications,
     notifications,
-    handleMarkAllRead,
+    handleMarkNotificationsRead,
+    handleMarkNotificationRead,
   } = useHeader(authUserId);
 
   return (
@@ -150,7 +151,7 @@ const Header: React.FC<PropsType> = ({
 
       {showNotifications && (
         <div>
-          <div className='inline absolute z-40 w-0 h-0 lg:top-[4.2rem] top-[3.5rem] lg:right-[17.43rem] right-[1.28rem] border-l-[1rem] border-l-transparent border-b-[1.5625rem] border-b-black border-r-[1rem] border-r-transparent'></div>
+          <div className='inline absolute z-40 w-0 h-0 lg:top-[4.2rem] top-[3.5rem] lg:right-[17.7rem] right-[1.28rem] border-l-[1rem] border-l-transparent border-b-[1.5625rem] border-b-black border-r-[1rem] border-r-transparent'></div>
           <div className='container absolute z-50 lg:top-[5.5rem] lg:right-[4rem] lg:w-[48rem] lg:max-h-[37rem] max-h-[35rem] lg:min-h-[13rem] min-h-[calc(100vh-4.1rem)] shadow-lg overflow-y-scroll bg-black lg:rounded-lg lg:py-9 lg:px-7 px-6'>
             <div className='flex flex-column justify-between text-white lg:my-0 my-6'>
               <h1 className='lg:text-[1.7rem] text-[1.1rem]'>Notifications</h1>
@@ -163,7 +164,7 @@ const Header: React.FC<PropsType> = ({
                   ) &&
                   'hidden'
                 }`}
-                onClick={handleMarkAllRead}
+                onClick={handleMarkNotificationsRead}
               >
                 Mark all as read
               </p>
@@ -175,7 +176,10 @@ const Header: React.FC<PropsType> = ({
                     return (
                       <div
                         key={notification.id}
-                        className='text-white h-[6.3rem] border border-gray-600 lg:rounded-md rounded-sm border-opacity-50 mt-[0.8rem] lg:px-5 px-3'
+                        onClick={() => {
+                          handleMarkNotificationRead(notification.id);
+                        }}
+                        className='text-white hover:cursor-pointer h-[6.3rem] border border-gray-600 lg:rounded-md rounded-sm border-opacity-50 mt-[0.8rem] lg:px-5 px-3'
                       >
                         <div className='flex h-full flex-row items-center justify-between'>
                           <div className='flex flex-row'>

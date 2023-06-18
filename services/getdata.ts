@@ -41,4 +41,20 @@ const markNotifications = async (end_user_id: number) => {
   return response;
 };
 
-export { getQuotes, getMovies, getLike, getNotifications, markNotifications };
+const markNotification = async (notification_id: number) => {
+  const response = await axiosInstance.get('/mark-one-read', {
+    params: {
+      notification_id,
+    },
+  });
+  return response;
+};
+
+export {
+  getQuotes,
+  getMovies,
+  getLike,
+  getNotifications,
+  markNotifications,
+  markNotification,
+};
