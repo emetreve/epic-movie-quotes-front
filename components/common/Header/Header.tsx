@@ -174,9 +174,11 @@ const Header: React.FC<PropsType> = ({
           <div className='inline absolute z-40 w-0 h-0 lg:top-[4.2rem] top-[3.5rem] lg:right-[17.8rem] right-[1.28rem] border-l-[1rem] border-l-transparent border-b-[1.5625rem] border-b-black border-r-[1rem] border-r-transparent'></div>
           <div className='container absolute z-50 lg:top-[5.5rem] lg:right-[4rem] lg:w-[48rem] lg:max-h-[37rem] max-h-[35rem] lg:min-h-[13rem] min-h-[calc(100vh-4.1rem)] shadow-lg overflow-y-scroll bg-black lg:rounded-lg lg:py-9 lg:px-7 px-6'>
             <div className='flex flex-column justify-between text-white lg:my-0 my-6'>
-              <h1 className='lg:text-[1.7rem] text-[1.1rem]'>Notifications</h1>
+              <h1 className='lg:text-[1.7rem] text-[1.1rem]'>
+                {t('Notifications')}
+              </h1>
               <p
-                className={`underline lg:text-base text-xs ${
+                className={`underline lg:text-base text-xs lg:inline block lg:max-w-fit max-w-[6rem] ${
                   notifications &&
                   !notifications.some(
                     (notification: Notification) =>
@@ -186,7 +188,7 @@ const Header: React.FC<PropsType> = ({
                 }`}
                 onClick={handleMarkNotificationsRead}
               >
-                Mark all as read
+                {t('Mark all as read')}
               </p>
             </div>
             <div className='mt-4'>
@@ -218,8 +220,10 @@ const Header: React.FC<PropsType> = ({
                                 }`}
                               />
                               {!notification.read ? (
-                                <div className='lg:hidden ml-3 mt-1'>
-                                  <p className='text-green text-sm'>New</p>
+                                <div className='lg:hidden mt-1'>
+                                  <p className='text-green text-sm block w-[3.5rem] text-center'>
+                                    {t('New')}
+                                  </p>
                                 </div>
                               ) : null}
                             </div>
@@ -235,7 +239,7 @@ const Header: React.FC<PropsType> = ({
                                     className='h-5 w-auto mr-[0.5rem]'
                                   />
                                   <p className='text-input-gray block lg:w-full w-[11rem] whitespace-nowrap overflow-hidden overflow-ellipsis font-light lg:text-base text-sm'>
-                                    Commented to your movie quote
+                                    {t('Commented to your movie quote')}
                                   </p>
                                 </div>
                               )}
@@ -247,7 +251,7 @@ const Header: React.FC<PropsType> = ({
                                     }
                                   />
                                   <p className='text-input-gray lg:text-base text-sm font-light block relative right-[0.3rem]'>
-                                    Reacted to your quote
+                                    {t('Reacted to your quote')}
                                   </p>
                                 </div>
                               )}
@@ -263,7 +267,9 @@ const Header: React.FC<PropsType> = ({
                               {getTimeAgo(notification.created_at)}
                             </p>
                             {!notification.read ? (
-                              <p className='text-green text-right'>New</p>
+                              <p className='text-green text-right'>
+                                {t('New')}
+                              </p>
                             ) : null}
                           </div>
                         </div>
@@ -282,7 +288,7 @@ const Header: React.FC<PropsType> = ({
                     key='no notifications'
                     className='text-white lg:text-lg pt-4 lg:pb-0 pb-9'
                   >
-                    <h1>No notifications</h1>
+                    <h1>{t('No notifications')}</h1>
                   </div>
                 )}
             </div>

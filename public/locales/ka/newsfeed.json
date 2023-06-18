@@ -13,5 +13,11 @@
   "Drag & drop your image here or": "ჩააგდე სურათი აქ, ან",
   "Choose file": "აარჩიე ფაილი",
   "Select movie": "აარჩიე ფილმი",
-  "Post": "დაამატე"
+  "Post": "დაამატე",
+  "Notifications": "შეტყობინებები",
+  "Mark all as read": "ყველა მონიშნე წაკითხულად",
+  "New": "ახალი",
+  "Commented to your movie quote": "დააკომენტარა თქვენს ციტატაზე",
+  "Reacted to your quote": "დაალაიქა თქვენი ციტატა",
+  "No notifications": "ნოტიფიკაციები არ გაქვთ"
 }
