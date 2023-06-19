@@ -6,7 +6,7 @@ import { useTranslation } from 'next-i18next';
 import { getQuotes } from '@/services';
 import { useUiContext } from '@/store';
 import { useForm } from 'react-hook-form';
-import { SearchQuotesData, Quote } from '@/types';
+import { SearchQuotesData } from '@/types';
 import { usePusher } from '@/hooks';
 import { useQueryClient } from 'react-query';
 import { Like } from '@/types';
@@ -15,8 +15,6 @@ import { useQuotesContext } from '@/store';
 const useNewsFeed = () => {
   const [showSearchLg, setShowSearchLg] = useState(false);
   const [focused, setFocused] = useState(false);
-  // const [searchedQuotes, setSearchedQuotes] = useState<Quote[]>([]);
-  // const [quotesData, setQuotesData] = useState<Quote[]>([]);
   const [firstRender, setFirstRender] = useState(true);
   const [currentSearchPage, setCurrentSearchPage] = useState(1);
   const [lastSearchPage, setLastSearchPage] = useState(1);
