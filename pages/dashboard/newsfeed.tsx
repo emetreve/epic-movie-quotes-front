@@ -11,7 +11,7 @@ const Newsfeed = () => {
   const {
     logged,
     user,
-    quotes,
+    quotesData,
     locale,
     t,
     showSearchLg,
@@ -27,6 +27,7 @@ const Newsfeed = () => {
     showSearchMob,
     showAddQuote,
     showAddNewQuote,
+    observerRef,
   } = useNewsFeed();
 
   if (logged) {
@@ -232,32 +233,65 @@ const Newsfeed = () => {
         </div>
 
         <div className='lg:ml-[26.7%] lg:w-[46.2%] w-full static top-[9.5rem] lg:top-[8rem] lg:-mt-[7.8rem]'>
-          {quotes?.length > 0 &&
+          {quotesData?.length > 0 &&
             !searchedQuotes &&
-            quotes.map((quote: Quote) => (
-              <div key={quote.id}>
-                <NewsItem
-                  authUserId={user.id}
-                  authUserAvatar={user.avatar || ''}
-                  quote_id={quote.id}
-                  user_id={user.id}
-                  user_avatar={quote.user.avatar || ''}
-                  userName={quote.user.name}
-                  quote={quote.body[locale as keyof typeof quote.body]}
-                  movie={quote.movie.name[locale as keyof typeof quote.body]}
-                  year={quote.movie.year}
-                  quoteImage={
-                    quote.image
-                      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${quote.image}`
-                      : '/assets/quote-sample.png'
-                  }
-                  likesQty={quote.likes?.length ? quote.likes?.length : 0}
-                  likes={quote.likes}
-                  commentsQty={quote.comments?.length || 0}
-                  comments={quote.comments}
-                />
-              </div>
-            ))}
+            quotesData.map((quote: Quote, quoteIndex: number) => {
+              if (quotesData.length === quoteIndex + 1) {
+                return (
+                  <div key={quote.id} ref={observerRef}>
+                    <NewsItem
+                      authUserId={user.id}
+                      authUserAvatar={user.avatar || ''}
+                      quote_id={quote.id}
+                      user_id={user.id}
+                      user_avatar={quote.user.avatar || ''}
+                      userName={quote.user.name}
+                      quote={quote.body[locale as keyof typeof quote.body]}
+                      movie={
+                        quote.movie.name[locale as keyof typeof quote.body]
+                      }
+                      year={quote.movie.year}
+                      quoteImage={
+                        quote.image
+                          ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${quote.image}`
+                          : '/assets/quote-sample.png'
+                      }
+                      likesQty={quote.likes?.length ? quote.likes?.length : 0}
+                      likes={quote.likes}
+                      commentsQty={quote.comments?.length || 0}
+                      comments={quote.comments}
+                    />
+                  </div>
+                );
+              } else {
+                return (
+                  <div key={quote.id}>
+                    <NewsItem
+                      authUserId={user.id}
+                      authUserAvatar={user.avatar || ''}
+                      quote_id={quote.id}
+                      user_id={user.id}
+                      user_avatar={quote.user.avatar || ''}
+                      userName={quote.user.name}
+                      quote={quote.body[locale as keyof typeof quote.body]}
+                      movie={
+                        quote.movie.name[locale as keyof typeof quote.body]
+                      }
+                      year={quote.movie.year}
+                      quoteImage={
+                        quote.image
+                          ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${quote.image}`
+                          : '/assets/quote-sample.png'
+                      }
+                      likesQty={quote.likes?.length ? quote.likes?.length : 0}
+                      likes={quote.likes}
+                      commentsQty={quote.comments?.length || 0}
+                      comments={quote.comments}
+                    />
+                  </div>
+                );
+              }
+            })}
           {searchedQuotes &&
             searchedQuotes.map((quote: Quote) => (
               <div key={quote.id}>
