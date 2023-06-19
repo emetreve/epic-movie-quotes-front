@@ -38,8 +38,19 @@ const useNewsItem = () => {
 
   const handleLike = async (authUserId: number, quote_id: number) => {
     try {
-      await getLike(authUserId, quote_id);
-      queryClient.invalidateQueries('quotes');
+      const response = await getLike(authUserId, quote_id);
+      const updatedQuote = { ...response.data };
+      if (searchedQuotes.length > 0) {
+        const updatedQuotes = searchedQuotes.map((quote) =>
+          quote.id === updatedQuote.id ? updatedQuote : quote
+        );
+        setSearchedQuotes(updatedQuotes);
+      } else {
+        const updatedQuotes = quotesData.map((quote) =>
+          quote.id === updatedQuote.id ? updatedQuote : quote
+        );
+        setQuotesData(updatedQuotes);
+      }
     } catch (error) {
       console.log(error);
     }
