@@ -16,6 +16,7 @@ const useNewsFeed = () => {
   const [focused, setFocused] = useState(false);
   const [searchedQuotes, setSearchedQuotes] = useState<Quote[]>();
   const [quotesData, setQuotesData] = useState<Quote[]>([]);
+  const [firstRender, setFirstRender] = useState(true);
   const {
     showBrugerMenu,
     showBurger,
@@ -33,6 +34,7 @@ const useNewsFeed = () => {
 
   const fetchQuotes = async ({ pageParam = 1 }) => {
     const response = await getQuotes(locale as string, pageParam);
+    setFirstRender(false);
     return response.data;
   };
 
@@ -42,12 +44,11 @@ const useNewsFeed = () => {
         const nextPage = lastPage.pagination.current_page + 1;
         return nextPage <= lastPage.pagination.last_page ? nextPage : undefined;
       },
-
-      // getNextPageParam: (lastPage) => lastPage.pagination.current_page + 1,
       onSuccess: (newQuotes) => {
         const latestQuotes = newQuotes.pages[newQuotes.pages.length - 1].quotes;
         setQuotesData((prevQuotes) => [...prevQuotes, ...latestQuotes]);
       },
+      enabled: firstRender,
     });
 
   console.log(999, data?.pages[0].quotes);
@@ -165,8 +166,6 @@ const useNewsFeed = () => {
       showSearchMob(false);
     }
   };
-
-  const quotes = data?.pages[0].quotes;
 
   return {
     logged,
