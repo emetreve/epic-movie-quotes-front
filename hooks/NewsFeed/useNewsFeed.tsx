@@ -163,7 +163,6 @@ const useNewsFeed = () => {
   ) => {
     try {
       const response = await getQuotes(search, page, locale);
-      console.log(response.data);
       setCurrentSearchPage(response.data.pagination.current_page);
       setLastSearchPage(response.data.pagination.last_page);
       return response.data;
@@ -201,7 +200,7 @@ const useNewsFeed = () => {
     },
     [lastSearchPage, currentSearchPage]
   );
-  console.log(lastSearchPage);
+
   const observerRefSearch = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -228,7 +227,6 @@ const useNewsFeed = () => {
   const queryClient = useQueryClient();
 
   const onSubmit = (data: SearchQuotesData) => {
-    console.log(quotesData);
     setSearchedQuotes([]);
     setQuotesData([]);
     queryClient.removeQueries('quotes');
