@@ -28,6 +28,7 @@ const Newsfeed = () => {
     showAddQuote,
     showAddNewQuote,
     observerRef,
+    observerRefSearch,
   } = useNewsFeed();
 
   if (logged) {
@@ -234,7 +235,7 @@ const Newsfeed = () => {
 
         <div className='lg:ml-[26.7%] lg:w-[46.2%] w-full static top-[9.5rem] lg:top-[8rem] lg:-mt-[7.8rem]'>
           {quotesData?.length > 0 &&
-            !searchedQuotes &&
+            searchedQuotes.length < 1 &&
             quotesData.map((quote: Quote, quoteIndex: number) => {
               if (quotesData.length === quoteIndex + 1) {
                 return (
@@ -293,30 +294,63 @@ const Newsfeed = () => {
               }
             })}
           {searchedQuotes &&
-            searchedQuotes.map((quote: Quote) => (
-              <div key={quote.id}>
-                <NewsItem
-                  authUserId={user.id}
-                  authUserAvatar={user.avatar || ''}
-                  quote_id={quote.id}
-                  user_id={user.id}
-                  user_avatar={quote.user.avatar || ''}
-                  userName={quote.user.name}
-                  quote={quote.body[locale as keyof typeof quote.body]}
-                  movie={quote.movie.name[locale as keyof typeof quote.body]}
-                  year={quote.movie.year}
-                  quoteImage={
-                    quote.image
-                      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${quote.image}`
-                      : '/assets/quote-sample.png'
-                  }
-                  likesQty={quote.likes?.length ? quote.likes?.length : 0}
-                  likes={quote.likes}
-                  commentsQty={quote.comments?.length || 0}
-                  comments={quote.comments}
-                />
-              </div>
-            ))}
+            searchedQuotes.map((quote: Quote, index) => {
+              if (searchedQuotes.length === index + 1) {
+                return (
+                  <div key={quote.id} ref={observerRefSearch}>
+                    <NewsItem
+                      authUserId={user.id}
+                      authUserAvatar={user.avatar || ''}
+                      quote_id={quote.id}
+                      user_id={user.id}
+                      user_avatar={quote.user.avatar || ''}
+                      userName={quote.user.name}
+                      quote={quote.body[locale as keyof typeof quote.body]}
+                      movie={
+                        quote.movie.name[locale as keyof typeof quote.body]
+                      }
+                      year={quote.movie.year}
+                      quoteImage={
+                        quote.image
+                          ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${quote.image}`
+                          : '/assets/quote-sample.png'
+                      }
+                      likesQty={quote.likes?.length ? quote.likes?.length : 0}
+                      likes={quote.likes}
+                      commentsQty={quote.comments?.length || 0}
+                      comments={quote.comments}
+                    />
+                  </div>
+                );
+              } else {
+                return (
+                  <div key={quote.id}>
+                    <NewsItem
+                      authUserId={user.id}
+                      authUserAvatar={user.avatar || ''}
+                      quote_id={quote.id}
+                      user_id={user.id}
+                      user_avatar={quote.user.avatar || ''}
+                      userName={quote.user.name}
+                      quote={quote.body[locale as keyof typeof quote.body]}
+                      movie={
+                        quote.movie.name[locale as keyof typeof quote.body]
+                      }
+                      year={quote.movie.year}
+                      quoteImage={
+                        quote.image
+                          ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${quote.image}`
+                          : '/assets/quote-sample.png'
+                      }
+                      likesQty={quote.likes?.length ? quote.likes?.length : 0}
+                      likes={quote.likes}
+                      commentsQty={quote.comments?.length || 0}
+                      comments={quote.comments}
+                    />
+                  </div>
+                );
+              }
+            })}
         </div>
       </div>
     );

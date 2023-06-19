@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/router';
-import { useQuery, useInfiniteQuery } from 'react-query';
+import { useInfiniteQuery } from 'react-query';
 import { useCheckIfLoggedIn } from '@/hooks';
 import { useTranslation } from 'next-i18next';
 import { getQuotes } from '@/services';
@@ -14,9 +14,12 @@ import { Like } from '@/types';
 const useNewsFeed = () => {
   const [showSearchLg, setShowSearchLg] = useState(false);
   const [focused, setFocused] = useState(false);
-  const [searchedQuotes, setSearchedQuotes] = useState<Quote[]>();
+  const [searchedQuotes, setSearchedQuotes] = useState<Quote[]>([]);
   const [quotesData, setQuotesData] = useState<Quote[]>([]);
   const [firstRender, setFirstRender] = useState(true);
+  const [currentSearchPage, setCurrentSearchPage] = useState(1);
+  const [lastSearchPage, setLastSearchPage] = useState(1);
+
   const {
     showBrugerMenu,
     showBurger,
@@ -38,8 +41,10 @@ const useNewsFeed = () => {
     return response.data;
   };
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useInfiniteQuery('quotes', fetchQuotes, {
+  const { fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery(
+    'quotes',
+    fetchQuotes,
+    {
       getNextPageParam: (lastPage) => {
         const nextPage = lastPage.pagination.current_page + 1;
         return nextPage <= lastPage.pagination.last_page ? nextPage : undefined;
@@ -49,9 +54,8 @@ const useNewsFeed = () => {
         setQuotesData((prevQuotes) => [...prevQuotes, ...latestQuotes]);
       },
       enabled: firstRender,
-    });
-
-  console.log(999, data?.pages[0].quotes);
+    }
+  );
 
   const handleObserver = useCallback(
     (entries: IntersectionObserverEntry[]) => {
@@ -85,10 +89,6 @@ const useNewsFeed = () => {
       }
     };
   }, [handleObserver]);
-
-  // const { data: quotes } = useQuery('quotes', fetchQuotes);
-
-  // const queryClient = useQueryClient();
 
   usePusher();
 
@@ -136,6 +136,9 @@ const useNewsFeed = () => {
   ) => {
     try {
       const response = await getQuotes(search, page, locale);
+      console.log(response.data);
+      setCurrentSearchPage(response.data.pagination.current_page);
+      setLastSearchPage(response.data.pagination.last_page);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -149,19 +152,61 @@ const useNewsFeed = () => {
         page,
         locale as string
       );
-      setSearchedQuotes(newQuotesData);
+      setSearchedQuotes((prev) => [...prev, ...newQuotesData.quotes]);
     } catch (error) {
       console.log(error);
     }
   };
 
+  const handleObserverSearch = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      const target = entries[0];
+      if (target.isIntersecting && lastSearchPage - currentSearchPage !== 0) {
+        handleFetchNewSearchQuotes(
+          localStorage.getItem('search') as string,
+          currentSearchPage + 1
+        );
+      }
+    },
+    [lastSearchPage, currentSearchPage]
+  );
+  console.log(lastSearchPage);
+  const observerRefSearch = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0,
+    };
+
+    const observer = new IntersectionObserver(handleObserverSearch, options);
+    const currentObserver = observerRefSearch.current;
+
+    if (currentObserver) {
+      observer.observe(currentObserver);
+    }
+
+    return () => {
+      if (currentObserver) {
+        observer.unobserve(currentObserver);
+      }
+    };
+  }, [handleObserverSearch]);
+
+  const queryClient = useQueryClient();
+
   const onSubmit = (data: SearchQuotesData) => {
     if (data.search.startsWith('#')) {
       data.search = '*' + data.search.substring(1);
     }
+    queryClient.removeQueries('quotes');
+    queryClient.removeQueries('searchquotes');
+    setSearchedQuotes([]);
+    setQuotesData([]);
+    localStorage.setItem('search', data.search);
     handleFetchNewSearchQuotes(data.search, 1);
     reset();
-
     if (showSearchMobile) {
       showSearchMob(false);
     }
@@ -187,6 +232,7 @@ const useNewsFeed = () => {
     showAddQuote,
     showAddNewQuote,
     observerRef,
+    observerRefSearch,
   };
 };
 
