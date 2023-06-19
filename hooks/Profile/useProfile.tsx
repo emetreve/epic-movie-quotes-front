@@ -166,6 +166,15 @@ const useProfile = () => {
     }
   };
 
+  const handleNavigation = (route: string) => {
+    router.push(`/dashboard/${route}`);
+    if (route === 'newsfeed') {
+      setTimeout(() => {
+        router.reload();
+      }, 500);
+    }
+  };
+
   return {
     logged,
     user,
@@ -200,6 +209,7 @@ const useProfile = () => {
     submitMobileAvatarChange,
     handleCancelLg,
     handleOutsideClick,
+    handleNavigation,
     t,
   };
 };

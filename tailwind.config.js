@@ -41,6 +41,7 @@ module.exports = {
         'upload-btn-violet': '#9747FF',
         'violet-quote-create-bg': '#181623',
         like: '#F3426C',
+        'bell-counter-red': '#E33812',
       },
     },
   },

@@ -4,6 +4,7 @@ import useHeader from './useHeader';
 import { LangSwitch } from '@/components';
 import { Notification } from '@/types';
 import { Heart } from '@/components';
+import { getTimeAgo } from '@/helpers';
 
 const Header: React.FC<PropsType> = ({
   hideSearch,
@@ -23,6 +24,9 @@ const Header: React.FC<PropsType> = ({
     toggleNotifications,
     showNotifications,
     notifications,
+    handleMarkNotificationsRead,
+    handleMarkNotificationRead,
+    notificationBellCounter,
   } = useHeader(authUserId);
 
   return (
@@ -103,7 +107,12 @@ const Header: React.FC<PropsType> = ({
                 height={462}
                 className='h-5 w-auto mr-3'
               />
-              <p className='text-[0.9rem] inline-block ml-5 text-white'>
+              <p
+                onClick={() => {
+                  handleNavigation('movies');
+                }}
+                className='text-[0.9rem] inline-block ml-5 text-white'
+              >
                 {t('List of movies')}
               </p>
             </div>
@@ -132,27 +141,44 @@ const Header: React.FC<PropsType> = ({
                 }}
               />
             )}
-
-            <Image
-              src='/assets/notifications-bell.png'
-              alt='notifications bell'
-              width={96}
-              height={96}
-              className='lg:hidden inline ml-4 h-5 w-auto hover:cursor-pointer'
-              onClick={toggleNotifications}
-            />
+            <div className='relative'>
+              <Image
+                src='/assets/notifications-bell.png'
+                alt='notifications bell'
+                width={96}
+                height={96}
+                className='lg:hidden inline ml-4 h-6 w-auto hover:cursor-pointer'
+                onClick={() => {
+                  toggleNotifications(true);
+                }}
+              />
+              {notificationBellCounter > 0 && (
+                <div
+                  onClick={() => {
+                    toggleNotifications();
+                  }}
+                  className='absolute flex items-center justify-center bottom-[0.5rem] left-[1.6rem] h-[1.1rem] w-[1.1rem] rounded-[50%] bg-bell-counter-red'
+                >
+                  <p className='text-white font-semibold text-center text-xs'>
+                    {notificationBellCounter}
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
 
       {showNotifications && (
         <div>
-          <div className='inline absolute z-40 w-0 h-0 lg:top-[4.2rem] top-[3.5rem] lg:right-[17.43rem] right-[1.28rem] border-l-[1rem] border-l-transparent border-b-[1.5625rem] border-b-black border-r-[1rem] border-r-transparent'></div>
-          <div className='container absolute z-50 lg:top-[5.5rem] lg:right-[4rem] lg:w-[48rem] lg:max-h-[37rem] max-h-[35rem] min-h-[15rem] shadow-lg overflow-y-scroll bg-black lg:rounded-lg lg:py-9 lg:px-7 px-6'>
+          <div className='inline absolute z-40 w-0 h-0 lg:top-[4.2rem] top-[3.5rem] lg:right-[17.8rem] right-[1.28rem] border-l-[1rem] border-l-transparent border-b-[1.5625rem] border-b-black border-r-[1rem] border-r-transparent'></div>
+          <div className='container absolute z-50 lg:top-[5.5rem] lg:right-[4rem] lg:w-[48rem] lg:max-h-[37rem] max-h-[35rem] lg:min-h-[13rem] min-h-[calc(100vh-4.1rem)] shadow-lg overflow-y-scroll bg-black lg:rounded-lg lg:py-9 lg:px-7 px-6'>
             <div className='flex flex-column justify-between text-white lg:my-0 my-6'>
-              <h1 className='lg:text-[1.7rem] text-[1.1rem]'>Notifications</h1>
+              <h1 className='lg:text-[1.7rem] text-[1.1rem]'>
+                {t('Notifications')}
+              </h1>
               <p
-                className={`underline lg:text-base text-xs ${
+                className={`underline lg:text-base text-xs lg:inline block lg:max-w-fit max-w-[6rem] ${
                   notifications &&
                   !notifications.some(
                     (notification: Notification) =>
@@ -160,8 +186,9 @@ const Header: React.FC<PropsType> = ({
                   ) &&
                   'hidden'
                 }`}
+                onClick={handleMarkNotificationsRead}
               >
-                Mark all as read
+                {t('Mark all as read')}
               </p>
             </div>
             <div className='mt-4'>
@@ -171,7 +198,10 @@ const Header: React.FC<PropsType> = ({
                     return (
                       <div
                         key={notification.id}
-                        className='text-white h-[6.3rem] border border-gray-600 lg:rounded-md rounded-sm border-opacity-50 mt-[0.8rem] lg:px-5 px-3'
+                        onClick={() => {
+                          handleMarkNotificationRead(notification.id);
+                        }}
+                        className='text-white hover:cursor-pointer h-[6.3rem] border border-gray-600 lg:rounded-md rounded-sm border-opacity-50 mt-[0.8rem] lg:px-5 px-3'
                       >
                         <div className='flex h-full flex-row items-center justify-between'>
                           <div className='flex flex-row'>
@@ -185,11 +215,17 @@ const Header: React.FC<PropsType> = ({
                                 alt='user headshot'
                                 width={96}
                                 height={96}
-                                className='lg:h-[4rem] h-[3.5rem] w-auto mr-6'
+                                className={`lg:h-[4rem] h-[3.5rem] w-auto mr-6 rounded-[50%] ${
+                                  !notification.read && 'border-2 border-green'
+                                }`}
                               />
-                              <div className='lg:hidden ml-3 mt-1'>
-                                <p className='text-green text-sm'>New</p>
-                              </div>
+                              {!notification.read ? (
+                                <div className='lg:hidden mt-1'>
+                                  <p className='text-green text-sm block w-[3.5rem] text-center'>
+                                    {t('New')}
+                                  </p>
+                                </div>
+                              ) : null}
                             </div>
                             <div>
                               <h1>{notification.user.name}</h1>
@@ -203,7 +239,7 @@ const Header: React.FC<PropsType> = ({
                                     className='h-5 w-auto mr-[0.5rem]'
                                   />
                                   <p className='text-input-gray block lg:w-full w-[11rem] whitespace-nowrap overflow-hidden overflow-ellipsis font-light lg:text-base text-sm'>
-                                    Commented to your movie quote
+                                    {t('Commented to your movie quote')}
                                   </p>
                                 </div>
                               )}
@@ -215,22 +251,26 @@ const Header: React.FC<PropsType> = ({
                                     }
                                   />
                                   <p className='text-input-gray lg:text-base text-sm font-light block relative right-[0.3rem]'>
-                                    Reacted to your quote
+                                    {t('Reacted to your quote')}
                                   </p>
                                 </div>
                               )}
                               <div className='flex-col lg:hidden'>
                                 <p className='text-input-gray font-light text-sm mt-2'>
-                                  5 min ago
+                                  {getTimeAgo(notification.created_at)}
                                 </p>
                               </div>
                             </div>
                           </div>
                           <div className='flex-col hidden lg:flex'>
                             <p className='text-input-gray font-light text-right'>
-                              5 min ago
+                              {getTimeAgo(notification.created_at)}
                             </p>
-                            <p className='text-green text-right'>New</p>
+                            {!notification.read ? (
+                              <p className='text-green text-right'>
+                                {t('New')}
+                              </p>
+                            ) : null}
                           </div>
                         </div>
                       </div>
@@ -248,7 +288,7 @@ const Header: React.FC<PropsType> = ({
                     key='no notifications'
                     className='text-white lg:text-lg pt-4 lg:pb-0 pb-9'
                   >
-                    <h1>No notifications</h1>
+                    <h1>{t('No notifications')}</h1>
                   </div>
                 )}
             </div>
@@ -259,14 +299,30 @@ const Header: React.FC<PropsType> = ({
       <div className='hidden lg:flex justify-between items-center py-5 text-base px-16 bg-violet bg-opacity-80'>
         <p className='uppercase text-cream text-base'>Movie quotes</p>
         <div className='flex items-center'>
-          <Image
-            src='/assets/notifications-bell.png'
-            alt='notifications bell'
-            width={96}
-            height={96}
-            className='h-7 w-auto mr-7 hover:cursor-pointer'
-            onClick={toggleNotifications}
-          />
+          <div className='relative'>
+            <Image
+              src='/assets/notifications-bell.png'
+              alt='notifications bell'
+              width={96}
+              height={96}
+              className='h-[2rem] w-auto mr-7 hover:cursor-pointer'
+              onClick={() => {
+                toggleNotifications();
+              }}
+            />
+            {notificationBellCounter > 0 && (
+              <div
+                onClick={() => {
+                  toggleNotifications();
+                }}
+                className='absolute flex items-center justify-center bottom-[0.7rem] left-[0.8rem] h-[1.5rem] w-[1.5rem] rounded-[50%] bg-bell-counter-red'
+              >
+                <p className='text-white font-semibold text-center text-sm'>
+                  {notificationBellCounter}
+                </p>
+              </div>
+            )}
+          </div>
           <LangSwitch />
           <button
             onClick={handleLogout}

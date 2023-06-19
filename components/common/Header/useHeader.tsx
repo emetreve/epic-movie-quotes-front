@@ -3,10 +3,15 @@ import { useRouter } from 'next/router';
 import { logOut } from '@/services';
 import { useTranslation } from 'next-i18next';
 import { useUiContext } from '@/store';
-import { getNotifications } from '@/services';
+import {
+  getNotifications,
+  markNotifications,
+  markNotification,
+} from '@/services';
 import { useQuery } from 'react-query';
 import { usePusher } from '@/hooks';
-import { NotificationMessage } from '@/types';
+import { NotificationMessage, Notification } from '@/types';
+import { useQueryClient } from 'react-query';
 
 const useHeader = (authUserId: number) => {
   const { showBrugerMenu, showBurger, showSearchMobile, showSearchMob } =
@@ -15,6 +20,8 @@ const useHeader = (authUserId: number) => {
   const [showNotifications, setShowNotifications] = useState(false);
 
   const { t } = useTranslation(['newsfeed', 'profile']);
+
+  const queryClient = useQueryClient();
 
   usePusher();
   useEffect(() => {
@@ -28,13 +35,13 @@ const useHeader = (authUserId: number) => {
           `private channel notification for the user with id ${authUserId} `,
           data
         );
-        // TODO: handle showing this notification to user
+        queryClient.invalidateQueries('notifications');
       }
     );
     return () => {
       channelLike.stopListening(`.NotificationUpdated.${authUserId}`);
     };
-  }, []);
+  }, [authUserId]);
 
   const router = useRouter();
 
@@ -50,9 +57,19 @@ const useHeader = (authUserId: number) => {
   const handleNavigation = (address: string) => {
     showBurger(false);
     router.push(`/dashboard/${address}`);
+    if (address === 'newsfeed') {
+      setTimeout(() => {
+        router.reload();
+      }, 500);
+    }
   };
 
-  const toggleNotifications = async () => {
+  const toggleNotifications = async (mobile?: boolean) => {
+    if (mobile && !showNotifications) {
+      document.body.classList.add('hide-scrollbar');
+    } else if (mobile && showNotifications) {
+      document.body.classList.remove('hide-scrollbar');
+    }
     setShowNotifications((prev) => !prev);
   };
 
@@ -62,6 +79,31 @@ const useHeader = (authUserId: number) => {
   };
 
   const { data: notifications } = useQuery('notifications', fetchNotifications);
+
+  const handleMarkNotificationsRead = () => {
+    try {
+      markNotifications(authUserId);
+    } catch (error) {
+      console.log(error);
+    }
+    queryClient.invalidateQueries('notifications');
+  };
+
+  const handleMarkNotificationRead = (notification_id: number) => {
+    try {
+      // TODO: redirect to quote's modal view (this view is not done yes)
+      markNotification(notification_id);
+      queryClient.invalidateQueries('notifications');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const notificationBellCounter = notifications?.filter(
+    (each: Notification) => {
+      return each.end_user_id === authUserId && each.read === 0;
+    }
+  ).length;
 
   return {
     handleLogout,
@@ -76,6 +118,9 @@ const useHeader = (authUserId: number) => {
     showNotifications,
     setShowNotifications,
     notifications,
+    handleMarkNotificationsRead,
+    handleMarkNotificationRead,
+    notificationBellCounter,
   };
 };
 export default useHeader;
