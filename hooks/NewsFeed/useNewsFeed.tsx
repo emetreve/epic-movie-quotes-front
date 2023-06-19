@@ -6,10 +6,9 @@ import { useTranslation } from 'next-i18next';
 import { getQuotes } from '@/services';
 import { useUiContext } from '@/store';
 import { useForm } from 'react-hook-form';
-import { SearchQuotesData } from '@/types';
+import { SearchQuotesData, QuoteMessage } from '@/types';
 import { usePusher } from '@/hooks';
 import { useQueryClient } from 'react-query';
-import { Like } from '@/types';
 import { useQuotesContext } from '@/store';
 
 const useNewsFeed = () => {
@@ -96,16 +95,42 @@ const useNewsFeed = () => {
 
   useEffect(() => {
     const channelLike = window.Echo.channel('like-updated');
-    channelLike.listen('LikeUpdated', function (data: Like) {
+    channelLike.listen('LikeUpdated', function (data: QuoteMessage) {
       if (data) {
-        // queryClient.invalidateQueries('quotes');
+        if (data) {
+          const updatedQuote = data.message;
+
+          if (searchedQuotes.length > 0) {
+            const updatedQuotes = searchedQuotes.map((quote) =>
+              quote.id === updatedQuote.id ? updatedQuote : quote
+            );
+            setSearchedQuotes(updatedQuotes);
+          } else {
+            const updatedQuotes = quotesData.map((quote) =>
+              quote.id === updatedQuote.id ? updatedQuote : quote
+            );
+            setQuotesData(updatedQuotes);
+          }
+        }
       }
     });
 
     const channelComment = window.Echo.channel('comment-updated');
-    channelComment.listen('CommentUpdated', function (data: Like) {
+    channelComment.listen('CommentUpdated', function (data: QuoteMessage) {
       if (data) {
-        // queryClient.invalidateQueries('quotes');
+        const updatedQuote = data.message;
+
+        if (searchedQuotes.length > 0) {
+          const updatedQuotes = searchedQuotes.map((quote) =>
+            quote.id === updatedQuote.id ? updatedQuote : quote
+          );
+          setSearchedQuotes(updatedQuotes);
+        } else {
+          const updatedQuotes = quotesData.map((quote) =>
+            quote.id === updatedQuote.id ? updatedQuote : quote
+          );
+          setQuotesData(updatedQuotes);
+        }
       }
     });
 
@@ -113,7 +138,7 @@ const useNewsFeed = () => {
       channelLike.stopListening('LikeUpdated');
       channelComment.stopListening('CommentUpdated');
     };
-  }, [user]);
+  }, [user, quotesData]);
 
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {

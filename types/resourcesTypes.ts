@@ -90,3 +90,20 @@ export type NotificationMessage = {
     comment: Comment | null;
   };
 };
+
+export type QuoteMessage = {
+  message: {
+    id: number;
+    body: {
+      en: string;
+      ka: string;
+    };
+    image?: string;
+    user_id: number;
+    movie_id: number;
+    user: User;
+    movie: Movie;
+    comments: Comment[] | null;
+    likes: Like[] | null;
+  };
+};

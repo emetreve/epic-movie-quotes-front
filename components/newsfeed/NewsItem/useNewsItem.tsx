@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation } from 'react-query';
 import { AddCommentData } from '@/types';
 import { createComment, getLike } from '@/services';
 import { useQuotesContext } from '@/store';
@@ -9,8 +9,6 @@ const useNewsItem = () => {
 
   const { searchedQuotes, setSearchedQuotes, quotesData, setQuotesData } =
     useQuotesContext();
-
-  const queryClient = useQueryClient();
 
   const createCommentMutation = useMutation(createComment);
 
