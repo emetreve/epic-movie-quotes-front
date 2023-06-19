@@ -10,12 +10,13 @@ import { SearchQuotesData, Quote } from '@/types';
 import { usePusher } from '@/hooks';
 import { useQueryClient } from 'react-query';
 import { Like } from '@/types';
+import { useQuotesContext } from '@/store';
 
 const useNewsFeed = () => {
   const [showSearchLg, setShowSearchLg] = useState(false);
   const [focused, setFocused] = useState(false);
-  const [searchedQuotes, setSearchedQuotes] = useState<Quote[]>([]);
-  const [quotesData, setQuotesData] = useState<Quote[]>([]);
+  // const [searchedQuotes, setSearchedQuotes] = useState<Quote[]>([]);
+  // const [quotesData, setQuotesData] = useState<Quote[]>([]);
   const [firstRender, setFirstRender] = useState(true);
   const [currentSearchPage, setCurrentSearchPage] = useState(1);
   const [lastSearchPage, setLastSearchPage] = useState(1);
@@ -28,6 +29,9 @@ const useNewsFeed = () => {
     showAddQuote,
     showAddNewQuote,
   } = useUiContext();
+
+  const { searchedQuotes, setSearchedQuotes, quotesData, setQuotesData } =
+    useQuotesContext();
 
   const { t } = useTranslation('newsfeed');
 
@@ -51,7 +55,7 @@ const useNewsFeed = () => {
       },
       onSuccess: (newQuotes) => {
         const latestQuotes = newQuotes.pages[newQuotes.pages.length - 1].quotes;
-        setQuotesData((prevQuotes) => [...prevQuotes, ...latestQuotes]);
+        setQuotesData([...quotesData, ...latestQuotes]);
       },
       enabled: firstRender,
     }
@@ -152,7 +156,11 @@ const useNewsFeed = () => {
         page,
         locale as string
       );
-      setSearchedQuotes((prev) => [...prev, ...newQuotesData.quotes]);
+      if (page === 1) {
+        setSearchedQuotes([...newQuotesData.quotes]);
+      } else {
+        setSearchedQuotes([...searchedQuotes, ...newQuotesData.quotes]);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -197,15 +205,18 @@ const useNewsFeed = () => {
   const queryClient = useQueryClient();
 
   const onSubmit = (data: SearchQuotesData) => {
+    console.log(quotesData);
+    setSearchedQuotes([]);
+    setQuotesData([]);
+    queryClient.removeQueries('quotes');
+    queryClient.removeQueries('searchquotes');
     if (data.search.startsWith('#')) {
       data.search = '*' + data.search.substring(1);
     }
-    queryClient.removeQueries('quotes');
-    queryClient.removeQueries('searchquotes');
-    setSearchedQuotes([]);
-    setQuotesData([]);
     localStorage.setItem('search', data.search);
-    handleFetchNewSearchQuotes(data.search, 1);
+    setTimeout(() => {
+      handleFetchNewSearchQuotes(data.search, 1);
+    }, 500);
     reset();
     if (showSearchMobile) {
       showSearchMob(false);
