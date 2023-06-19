@@ -137,7 +137,7 @@ const NewsItem: React.FC<PropsType> = ({
             name='quote_id'
             defaultValue={quote_id}
           />
-          <button onClick={(e) => e.preventDefault} className='hidden'></button>
+          <button className='hidden'></button>
         </form>
       </div>
     </div>
