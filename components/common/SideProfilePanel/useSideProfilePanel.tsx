@@ -4,7 +4,9 @@ import { useRouter } from 'next/router';
 const useSideProfilePanel = () => {
   const { t } = useTranslation(['newsfeed', 'profile']);
 
-  const [router, { asPath }] = [useRouter(), useRouter()];
+  const router = useRouter();
+
+  const asPath = router.asPath;
 
   const handleNavigation = async (route: string) => {
     if (route === 'newsfeed') {
