@@ -37,11 +37,13 @@ const Newsfeed = () => {
         onClick={handleOutsideClick}
         className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'
       >
-        <Header
-          userName={user.name}
-          avatar={user.avatar}
-          authUserId={user.id}
-        />
+        <div className='h-[5rem]'>
+          <Header
+            userName={user.name}
+            avatar={user.avatar}
+            authUserId={user.id}
+          />
+        </div>
         {showSearchMobile && (
           <div className='lg:hidden bg-gradient-violet min-h-screen w-screen absolute'>
             <div className='pt-6 px-4 flex flex-row items-center border-b border-gray-700 pb-6'>

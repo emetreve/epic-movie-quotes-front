@@ -67,12 +67,14 @@ const Profile = () => {
           onClick={handleOutsideClick}
           className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'
         >
-          <Header
-            hideSearch={true}
-            userName={user.name}
-            avatar={user.avatar}
-            authUserId={user.id}
-          />
+          <div className='h-[5rem]'>
+            <Header
+              hideSearch={true}
+              userName={user.name}
+              avatar={user.avatar}
+              authUserId={user.id}
+            />
+          </div>
 
           {showSuccess && <SuccessNotification show={setShowSuccess} />}
 
