@@ -79,65 +79,7 @@ const Profile = () => {
           {showSuccess && <SuccessNotification show={setShowSuccess} />}
 
           <SideProfilePanel avatar={user.avatar} name={user.name} />
-          {/* <div className='h-[13rem] w-full hidden lg:flex'>
-            <div className='fixed text-white px-16 pt-10 w-full'>
-              <div className='w-[25%]'>
-                <div className='flex flex-row'>
-                  <Image
-                    src={
-                      user.avatar
-                        ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${user.avatar}`
-                        : '/assets/avatar-default.png'
-                    }
-                    alt='user headshot'
-                    width={512}
-                    height={512}
-                    className='h-16 w-16 mr-3 border-2 border-red rounded-[50%]'
-                  />
-                  <div className='ml-3 pt-1'>
-                    <p className='text-xl'>{user.name}</p>
-                    <Link href='/dashboard/profile'>
-                      <p className='text-gray-400'>{t('Edit your profile')}</p>
-                    </Link>
-                  </div>
-                </div>
-                <div className='flex flex-row mt-9 ml-3'>
-                  <Image
-                    src='/assets/home-wht.png'
-                    alt='home'
-                    width={512}
-                    height={462}
-                    className='h-7 w-auto mr-3'
-                  />
-                  <p
-                    onClick={() => {
-                      handleNavigation('newsfeed');
-                    }}
-                    className='text-xl inline-block ml-7 hover:cursor-pointer'
-                  >
-                    {t('News feed')}
-                  </p>
-                </div>
-                <div className='flex flex-row mt-10 ml-3'>
-                  <Image
-                    src='/assets/movie-camera.png'
-                    alt='camera for shooting movies'
-                    width={512}
-                    height={462}
-                    className='h-7 w-auto mr-3'
-                  />
-                  <p
-                    onClick={() => {
-                      handleNavigation('movies');
-                    }}
-                    className='text-xl inline-block ml-7 hover:cursor-pointer'
-                  >
-                    {t('List of movies')}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div> */}
+
           {!showMobileAvatarModal && (
             <div className='lg:hidden text-white lg:ml-[26.7%] lg:w-[46.2%] w-full static top-[9.5rem] lg:top-[8rem] lg:-mt-[12rem]'>
               <div onClick={handleBack}>

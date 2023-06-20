@@ -1,11 +1,10 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { useNewsFeed } from '@/hooks';
 import { Header, NewsItem } from '@/components';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Quote } from '@/types';
-import { AddNewQuote } from '@/components';
+import { AddNewQuote, SideProfilePanel } from '@/components';
 
 const Newsfeed = () => {
   const {
@@ -101,57 +100,13 @@ const Newsfeed = () => {
           <p className='text-white text-sm'>{t('Write new quote')}</p>
         </div>
         <div>
-          <div className='hidden lg:flex text-white px-16 pt-10'>
+          <div className='hidden lg:flex text-white'>
             <div className='w-[25%] fixed'>
-              <div className='flex flex-row'>
-                <Image
-                  src={
-                    user.avatar
-                      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${user.avatar}`
-                      : '/assets/avatar-default.png'
-                  }
-                  alt='user headshot'
-                  width={512}
-                  height={512}
-                  className='h-16 w-16 rounded-[50%] mr-3'
-                />
-                <div className='ml-3 pt-1'>
-                  <p className='text-xl'>{user.name}</p>
-                  <Link href='/dashboard/profile'>
-                    <p className='text-gray-400'>{t('Edit your profile')}</p>
-                  </Link>
-                </div>
-              </div>
-              <div className='flex flex-row mt-9 ml-3'>
-                <Image
-                  src='/assets/home-red.png'
-                  alt='home'
-                  width={512}
-                  height={462}
-                  className='h-7 w-auto mr-3'
-                />
-                <Link href='/dashboard/newsfeed'>
-                  <p className='text-xl inline-block ml-7'>{t('News feed')}</p>
-                </Link>
-              </div>
-              <div className='flex flex-row mt-10 ml-3'>
-                <Image
-                  src='/assets/movie-camera.png'
-                  alt='camera for shooting movies'
-                  width={512}
-                  height={462}
-                  className='h-7 w-auto mr-3'
-                />
-                <Link href='/dashboard/movies'>
-                  <p className='text-xl inline-block ml-7'>
-                    {t('List of movies')}
-                  </p>
-                </Link>
-              </div>
+              <SideProfilePanel avatar={user.avatar} name={user.name} />
             </div>
 
-            <div className='h-[13rem] ml-[25.2%] w-full '>
-              <div className='w-[66%]'>
+            <div className='h-[13rem] ml-[25.2%] w-full'>
+              <div className='w-[66%] px-8 pt-10'>
                 <div
                   className={`flex frex-row  ${
                     showSearchLg ? '' : 'justify-between'
@@ -237,7 +192,7 @@ const Newsfeed = () => {
           </div>
         </div>
 
-        <div className='lg:ml-[26.7%] lg:w-[46.2%] w-full static top-[9.5rem] lg:top-[8rem] lg:-mt-[7.8rem]'>
+        <div className='lg:ml-[26.7%] lg:w-[46.2%] w-full static top-[9.5rem] lg:top-[8rem] lg:-mt-[6rem]'>
           {quotesData?.length > 0 &&
             searchedQuotes.length < 1 &&
             quotesData.map((quote: Quote, quoteIndex: number) => {
