@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { FormProvider } from 'react-hook-form';
 import { useProfile } from '@/hooks';
 import {
@@ -12,6 +11,7 @@ import {
 } from '@/components';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { SideProfilePanel } from '@/components';
 
 const Profile = () => {
   const {
@@ -48,7 +48,7 @@ const Profile = () => {
     submitMobileAvatarChange,
     handleCancelLg,
     handleOutsideClick,
-    handleNavigation,
+    handleBack,
     t,
   } = useProfile();
 
@@ -78,7 +78,8 @@ const Profile = () => {
 
           {showSuccess && <SuccessNotification show={setShowSuccess} />}
 
-          <div className='h-[13rem] w-full hidden lg:flex'>
+          <SideProfilePanel avatar={user.avatar} name={user.name} />
+          {/* <div className='h-[13rem] w-full hidden lg:flex'>
             <div className='fixed text-white px-16 pt-10 w-full'>
               <div className='w-[25%]'>
                 <div className='flex flex-row'>
@@ -136,19 +137,17 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           {!showMobileAvatarModal && (
             <div className='lg:hidden text-white lg:ml-[26.7%] lg:w-[46.2%] w-full static top-[9.5rem] lg:top-[8rem] lg:-mt-[12rem]'>
-              <div>
-                <Link href='/dashboard/newsfeed'>
-                  <Image
-                    src='/assets/back-hd.png'
-                    alt='go back'
-                    width={520}
-                    height={512}
-                    className='w-[0.9rem] h-auto ml-[2rem] my-5'
-                  />
-                </Link>
+              <div onClick={handleBack}>
+                <Image
+                  src='/assets/back-hd.png'
+                  alt='go back'
+                  width={520}
+                  height={512}
+                  className='w-[0.9rem] h-auto ml-[2rem] my-5'
+                />
               </div>
               <div className='bg-violet bg-opacity-80 rounded-xl pt-6 pb-20 flex flex-col items-center'>
                 <div className='flex flex-col items-center justify-center'>

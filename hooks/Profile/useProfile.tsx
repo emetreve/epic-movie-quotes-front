@@ -160,18 +160,14 @@ const useProfile = () => {
     reset();
   };
 
+  const handleBack = async () => {
+    await router.push(`/dashboard/newsfeed`);
+    router.reload();
+  };
+
   const handleOutsideClick = () => {
     if (showBrugerMenu) {
       showBurger(false);
-    }
-  };
-
-  const handleNavigation = (route: string) => {
-    router.push(`/dashboard/${route}`);
-    if (route === 'newsfeed') {
-      setTimeout(() => {
-        router.reload();
-      }, 500);
     }
   };
 
@@ -209,7 +205,7 @@ const useProfile = () => {
     submitMobileAvatarChange,
     handleCancelLg,
     handleOutsideClick,
-    handleNavigation,
+    handleBack,
     t,
   };
 };
