@@ -2,9 +2,10 @@ import Image from 'next/image';
 import { PropsType } from './types';
 import Link from 'next/link';
 import useSideProfilePanel from './useSideProfilePanel';
+import { Home, Camera } from '@/components';
 
 const SideProfilePanel: React.FC<PropsType> = ({ avatar, name }) => {
-  const { t, handleNavigation } = useSideProfilePanel();
+  const { t, handleNavigation, asPath } = useSideProfilePanel();
 
   return (
     <div className='h-[13rem] w-full hidden lg:flex'>
@@ -20,7 +21,9 @@ const SideProfilePanel: React.FC<PropsType> = ({ avatar, name }) => {
               alt='user headshot'
               width={512}
               height={512}
-              className='h-16 w-16 mr-3 border-2 border-red rounded-[50%]'
+              className={`h-16 w-16 mr-3 ${
+                asPath?.includes('profile') && 'border-red border-2'
+              } rounded-[50%]`}
             />
             <div className='ml-3 pt-1'>
               <p className='text-xl'>{name}</p>
@@ -30,12 +33,10 @@ const SideProfilePanel: React.FC<PropsType> = ({ avatar, name }) => {
             </div>
           </div>
           <div className='flex flex-row mt-9 ml-3'>
-            <Image
-              src='/assets/home-wht.png'
-              alt='home'
-              width={512}
-              height={462}
-              className='h-7 w-auto mr-3'
+            <Home
+              classes={
+                asPath.includes('newsfeed') ? 'fill-red h-7' : 'fill-white h-7'
+              }
             />
             <p
               onClick={() => {
@@ -47,12 +48,10 @@ const SideProfilePanel: React.FC<PropsType> = ({ avatar, name }) => {
             </p>
           </div>
           <div className='flex flex-row mt-10 ml-3'>
-            <Image
-              src='/assets/movie-camera.png'
-              alt='camera for shooting movies'
-              width={512}
-              height={462}
-              className='h-7 w-auto mr-3'
+            <Camera
+              classes={
+                asPath.includes('movies') ? 'fill-red h-7' : 'fill-white h-7'
+              }
             />
             <p
               onClick={() => {
