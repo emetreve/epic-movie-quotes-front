@@ -13,7 +13,7 @@ const NewsItem: React.FC<PropsType> = ({
   year,
   quoteImage,
   likesQuantity,
-  commentsQty,
+  commentsQuantity,
   comments,
   likes,
   authUserId,
@@ -52,7 +52,7 @@ const NewsItem: React.FC<PropsType> = ({
 
       <div className='mt-3 lg:mt-5 flex border-b-[0.1rem] border-gray-600 pb-3 lg:pb-5'>
         <div className='flex flex-row items-center'>
-          <p className='text-lg'>{commentsQty}</p>
+          <p className='text-lg'>{commentsQuantity}</p>
           <Image
             src='/assets/comments-quantity.png'
             alt='comments quantity'

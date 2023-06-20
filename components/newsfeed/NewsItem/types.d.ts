@@ -12,7 +12,7 @@ export type PropsType = {
   year: string;
   quoteImage: string;
   likesQuantity: number;
-  commentsQty: number | null;
+  commentsQuantity: number | null;
   comments: Comment[] | null;
   likes: Like[] | null;
   userAvatar: string;

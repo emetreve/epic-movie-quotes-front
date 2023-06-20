@@ -265,7 +265,7 @@ const Newsfeed = () => {
                       quote.likes?.length ? quote.likes?.length : 0
                     }
                     likes={quote.likes}
-                    commentsQty={quote.comments?.length || 0}
+                    commentsQuantity={quote.comments?.length || 0}
                     comments={quote.comments}
                   />
                 </div>
@@ -301,7 +301,7 @@ const Newsfeed = () => {
                       quote.likes?.length ? quote.likes?.length : 0
                     }
                     likes={quote.likes}
-                    commentsQty={quote.comments?.length || 0}
+                    commentsQuantity={quote.comments?.length || 0}
                     comments={quote.comments}
                   />
                 </div>
