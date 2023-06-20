@@ -1,7 +1,7 @@
 import '@/styles/globals.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import type { AppProps } from 'next/app';
-import { UiContextProvider } from '@/store';
+import { UiContextProvider, QuotesContextProvider } from '@/store';
 import { appWithTranslation } from 'next-i18next';
 
 function App({ Component, pageProps }: AppProps) {
@@ -9,7 +9,9 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <UiContextProvider>
-        <Component {...pageProps} />
+        <QuotesContextProvider>
+          <Component {...pageProps} />
+        </QuotesContextProvider>
       </UiContextProvider>
     </QueryClientProvider>
   );

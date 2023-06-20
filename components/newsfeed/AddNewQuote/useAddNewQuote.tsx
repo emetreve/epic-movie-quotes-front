@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'next-i18next';
 import { CreateQuoteFormData } from '@/types';
 import { createQuote } from '@/services';
-import { useQueryClient } from 'react-query';
+import { useQuotesContext } from '@/store';
 
 const useAddNewQuote = () => {
   const [selectedMovie, setSelectedMovie] = useState({
@@ -27,9 +27,10 @@ const useAddNewQuote = () => {
     useUiContext();
   const router = useRouter();
   const locale = router.locale;
-  const queryClient = useQueryClient();
   const { t } = useTranslation('profile');
   const { t: translate } = useTranslation('newsfeed');
+
+  const { quotesData, setQuotesData } = useQuotesContext();
 
   const fetchMovies = async () => {
     const response = await getMovies();
@@ -123,8 +124,8 @@ const useAddNewQuote = () => {
       formData.append('user_id', userId);
 
       try {
-        await createQuote(formData);
-        queryClient.invalidateQueries('quotes');
+        const response = await createQuote(formData);
+        setQuotesData([response.data, ...quotesData]);
       } catch (error: any) {
         console.log(error);
       }
