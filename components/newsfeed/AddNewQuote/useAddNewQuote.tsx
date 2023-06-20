@@ -7,7 +7,6 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'next-i18next';
 import { CreateQuoteFormData } from '@/types';
 import { createQuote } from '@/services';
-import { useQueryClient } from 'react-query';
 import { useQuotesContext } from '@/store';
 
 const useAddNewQuote = () => {
