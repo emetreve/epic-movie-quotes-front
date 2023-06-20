@@ -7,7 +7,6 @@ import { Like } from '@/types';
 const NewsItem: React.FC<PropsType> = ({
   quote_id,
   user_id,
-  avatar,
   userName,
   quote,
   movie,
