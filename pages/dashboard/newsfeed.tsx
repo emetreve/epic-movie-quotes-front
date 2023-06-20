@@ -118,7 +118,7 @@ const Newsfeed = () => {
                     }}
                     className={`${
                       showSearchLg ? 'w-fit pr-3' : 'w-[82%]'
-                    } hover:cursor-pointer transition-width duration-300 ease-in-out h-12 flex flex-row items-center bg-violet bg-opacity-80 rounded-lg text-lg`}
+                    } z-10 hover:cursor-pointer transition-width duration-300 ease-in-out h-12 flex flex-row items-center bg-violet bg-opacity-80 rounded-lg text-lg`}
                   >
                     <Image
                       src='/assets/write-new-quote.png'

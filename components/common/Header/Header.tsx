@@ -5,6 +5,7 @@ import { LangSwitch } from '@/components';
 import { Notification } from '@/types';
 import { Heart } from '@/components';
 import { getTimeAgo } from '@/helpers';
+import { Home, Camera } from '@/components';
 
 const Header: React.FC<PropsType> = ({
   hideSearch,
@@ -52,7 +53,7 @@ const Header: React.FC<PropsType> = ({
                 !showBrugerMenu && 'hidden'
               } w-[20rem] absolute top-0 h-[37rem] z-50 bg-profile-dark-blue rounded-lg shadow-lg px-7 pb-8 pt-6`}
             >
-              <div className='flex flex-row mt-8'>
+              <div className='flex flex-row mt-8 items-center'>
                 <Image
                   src={
                     avatar
@@ -63,11 +64,10 @@ const Header: React.FC<PropsType> = ({
                   width={512}
                   height={512}
                   className={`${
-                    router.pathname.includes('profile') &&
-                    'border border-red rounded-[50%]'
-                  } h-10 w-10 rounded-[50%] mr-2 mt-2`}
+                    router.pathname.includes('profile') && 'border border-red'
+                  } h-11 w-11 rounded-[50%] mr-2 mt-2`}
                 />
-                <div className='ml-3'>
+                <div className='ml-2'>
                   <p className='text-lg text-white'>{userName}</p>
                   <p
                     onClick={() => {
@@ -79,17 +79,13 @@ const Header: React.FC<PropsType> = ({
                   </p>
                 </div>
               </div>
-              <div className='flex flex-row mt-8 ml-2'>
-                <Image
-                  src={
+              <div className='flex flex-row mt-8 ml-1 items-center'>
+                <Home
+                  classes={
                     router.pathname.includes('newsfeed')
-                      ? '/assets/home-red.png'
-                      : '/assets/home-wht.png'
+                      ? 'fill-red h-5'
+                      : 'fill-white h-5'
                   }
-                  alt='home'
-                  width={512}
-                  height={462}
-                  className='h-5 w-auto mr-3'
                 />
                 <p
                   onClick={() => {
@@ -100,13 +96,13 @@ const Header: React.FC<PropsType> = ({
                   {t('News feed')}
                 </p>
               </div>
-              <div className='flex flex-row mt-6 ml-2'>
-                <Image
-                  src='/assets/movie-camera.png'
-                  alt='camera for shooting movies'
-                  width={512}
-                  height={462}
-                  className='h-5 w-auto mr-3'
+              <div className='flex flex-row mt-6 ml-[0.33rem] items-center'>
+                <Camera
+                  classes={
+                    router.pathname.includes('movies')
+                      ? 'fill-red h-5'
+                      : 'fill-white h-5'
+                  }
                 />
                 <p
                   onClick={() => {
