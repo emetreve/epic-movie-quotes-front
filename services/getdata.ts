@@ -17,6 +17,11 @@ const getMovies = async () => {
   return response;
 };
 
+const getUserMovies = async () => {
+  const response = await axiosInstance.get('/user-movies');
+  return response;
+};
+
 const getLike = async (user_id: number, quote_id: number) => {
   const response = await axiosInstance.get('/like', {
     params: {
@@ -54,6 +59,7 @@ const markNotification = async (notification_id: number) => {
 export {
   getQuotes,
   getMovies,
+  getUserMovies,
   getLike,
   getNotifications,
   markNotifications,

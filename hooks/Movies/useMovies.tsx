@@ -1,6 +1,6 @@
 import { useCheckIfLoggedIn } from '@/hooks';
 import { useUiContext } from '@/store';
-import { getMovies } from '@/services';
+import { getUserMovies } from '@/services';
 import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
 
@@ -10,7 +10,7 @@ const useMovies = () => {
   const { locale } = useRouter();
 
   const fetchMovies = async () => {
-    const response = await getMovies();
+    const response = await getUserMovies();
     return response.data;
   };
 
