@@ -5,20 +5,20 @@ import { Heart } from '@/components';
 import { Like } from '@/types';
 
 const NewsItem: React.FC<PropsType> = ({
-  quote_id,
-  user_id,
+  quoteId,
+  userId,
   userName,
   quote,
   movie,
   year,
   quoteImage,
-  likesQty,
+  likesQuantity,
   commentsQty,
   comments,
   likes,
   authUserId,
   authUserAvatar,
-  user_avatar,
+  userAvatar,
 }) => {
   const { handleSubmit, onSubmit, register, handleLike } = useNewsItem();
 
@@ -27,8 +27,8 @@ const NewsItem: React.FC<PropsType> = ({
       <div className='flex flex-row items-center lg:mb-4'>
         <Image
           src={
-            user_avatar
-              ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${user_avatar}`
+            userAvatar
+              ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${userAvatar}`
               : '/assets/avatar-default.png'
           }
           alt='user headshot'
@@ -62,9 +62,9 @@ const NewsItem: React.FC<PropsType> = ({
           />
         </div>
         <div className='flex flex-row items-center ml-6'>
-          <p className='text-lg block w-2'>{likesQty}</p>
+          <p className='text-lg block w-2'>{likesQuantity}</p>
           <div
-            onClick={() => handleLike(authUserId, quote_id)}
+            onClick={() => handleLike(authUserId, quoteId)}
             className='hover:cursor-pointer'
           >
             <Heart
@@ -128,13 +128,13 @@ const NewsItem: React.FC<PropsType> = ({
             {...register('user_id', { required: true })}
             type='hidden'
             name='user_id'
-            defaultValue={user_id}
+            defaultValue={userId}
           />
           <input
             {...register('quote_id', { required: true })}
             type='hidden'
             name='quote_id'
-            defaultValue={quote_id}
+            defaultValue={quoteId}
           />
           <button className='hidden'></button>
         </form>

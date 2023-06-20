@@ -249,9 +249,9 @@ const Newsfeed = () => {
                   <NewsItem
                     authUserId={user.id}
                     authUserAvatar={user.avatar || ''}
-                    quote_id={quote.id}
-                    user_id={user.id}
-                    user_avatar={quote.user.avatar || ''}
+                    quoteId={quote.id}
+                    userId={user.id}
+                    userAvatar={quote.user.avatar || ''}
                     userName={quote.user.name}
                     quote={quote.body[locale as keyof typeof quote.body]}
                     movie={quote.movie.name[locale as keyof typeof quote.body]}
@@ -261,7 +261,9 @@ const Newsfeed = () => {
                         ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${quote.image}`
                         : '/assets/quote-sample.png'
                     }
-                    likesQty={quote.likes?.length ? quote.likes?.length : 0}
+                    likesQuantity={
+                      quote.likes?.length ? quote.likes?.length : 0
+                    }
                     likes={quote.likes}
                     commentsQty={quote.comments?.length || 0}
                     comments={quote.comments}
@@ -283,9 +285,9 @@ const Newsfeed = () => {
                   <NewsItem
                     authUserId={user.id}
                     authUserAvatar={user.avatar || ''}
-                    quote_id={quote.id}
-                    user_id={user.id}
-                    user_avatar={quote.user.avatar || ''}
+                    quoteId={quote.id}
+                    userId={user.id}
+                    userAvatar={quote.user.avatar || ''}
                     userName={quote.user.name}
                     quote={quote.body[locale as keyof typeof quote.body]}
                     movie={quote.movie.name[locale as keyof typeof quote.body]}
@@ -295,7 +297,9 @@ const Newsfeed = () => {
                         ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${quote.image}`
                         : '/assets/quote-sample.png'
                     }
-                    likesQty={quote.likes?.length ? quote.likes?.length : 0}
+                    likesQuantity={
+                      quote.likes?.length ? quote.likes?.length : 0
+                    }
                     likes={quote.likes}
                     commentsQty={quote.comments?.length || 0}
                     comments={quote.comments}
