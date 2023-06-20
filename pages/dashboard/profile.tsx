@@ -78,8 +78,8 @@ const Profile = () => {
 
           {showSuccess && <SuccessNotification show={setShowSuccess} />}
 
-          <div>
-            <div className='hidden lg:flex text-white px-16 pt-10'>
+          <div className='h-[13rem] w-full hidden lg:flex'>
+            <div className='fixed text-white px-16 pt-10 w-full'>
               <div className='w-[25%]'>
                 <div className='flex flex-row'>
                   <Image
@@ -112,7 +112,7 @@ const Profile = () => {
                     onClick={() => {
                       handleNavigation('newsfeed');
                     }}
-                    className='text-xl inline-block ml-5 hover:cursor-pointer'
+                    className='text-xl inline-block ml-7 hover:cursor-pointer'
                   >
                     {t('News feed')}
                   </p>
@@ -129,7 +129,7 @@ const Profile = () => {
                     onClick={() => {
                       handleNavigation('movies');
                     }}
-                    className='text-xl inline-block ml-5 hover:cursor-pointer'
+                    className='text-xl inline-block ml-7 hover:cursor-pointer'
                   >
                     {t('List of movies')}
                   </p>

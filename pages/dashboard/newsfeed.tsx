@@ -131,7 +131,7 @@ const Newsfeed = () => {
                   className='h-7 w-auto mr-3'
                 />
                 <Link href='/dashboard/newsfeed'>
-                  <p className='text-xl inline-block ml-5'>{t('News feed')}</p>
+                  <p className='text-xl inline-block ml-7'>{t('News feed')}</p>
                 </Link>
               </div>
               <div className='flex flex-row mt-10 ml-3'>
@@ -143,7 +143,7 @@ const Newsfeed = () => {
                   className='h-7 w-auto mr-3'
                 />
                 <Link href='/dashboard/movies'>
-                  <p className='text-xl inline-block ml-5'>
+                  <p className='text-xl inline-block ml-7'>
                     {t('List of movies')}
                   </p>
                 </Link>
