@@ -160,8 +160,8 @@ const useProfile = () => {
     reset();
   };
 
-  const handleBack = async () => {
-    await router.push(`/dashboard/newsfeed`);
+  const handleBack = async (path: string) => {
+    await router.push(`/dashboard/${path}`);
     router.reload();
   };
 

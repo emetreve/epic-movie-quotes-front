@@ -82,7 +82,11 @@ const Profile = () => {
 
           {!showMobileAvatarModal && (
             <div className='lg:hidden text-white lg:ml-[26.7%] lg:w-[46.2%] w-full static top-[9.5rem] lg:top-[8rem] lg:-mt-[12rem]'>
-              <div onClick={handleBack}>
+              <div
+                onClick={() => {
+                  handleBack('newsfeed');
+                }}
+              >
                 <Image
                   src='/assets/back-hd.png'
                   alt='go back'
