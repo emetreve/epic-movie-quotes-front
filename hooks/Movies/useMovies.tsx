@@ -9,12 +9,12 @@ const useMovies = () => {
   const { logged, user } = useCheckIfLoggedIn();
   const { locale } = useRouter();
 
-  const fetchMovies = async () => {
+  const fetchUserMovies = async () => {
     const response = await getUserMovies();
     return response.data;
   };
 
-  const { data: movies } = useQuery('movies', fetchMovies);
+  const { data: movies } = useQuery('usermovies', fetchUserMovies);
 
   const handleOutsideClick = () => {
     if (showBrugerMenu) {
