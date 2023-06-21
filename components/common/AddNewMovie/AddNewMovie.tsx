@@ -14,6 +14,9 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
     selectedGenres,
     locale,
     handleGenreSelection,
+    showGenresDropdown,
+    setShowGenresDropdown,
+    handleRemoveGenre,
   } = useAddNewMovie();
 
   console.log(genres);
@@ -103,20 +106,39 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
             </div>
             <div
               onClick={(e) => {
-                //   e.stopPropagation();
-                //   setShowMovieDropdown(!showMovieDropdown);
+                setShowGenresDropdown((prev) => !prev);
               }}
-              className='relative min-h-[3.2rem] focus:outline-none border border-textarea-gray px-6 flex flex-row items-center justify-between w-full bg-transparent rounded'
+              className='relative min-h-[3.2rem] focus:outline-none border border-textarea-gray px-5 flex flex-row items-center justify-between w-full bg-transparent rounded'
             >
-              <div className='flex flex-row w-[60rem]'>
-                <div className='w-56 lg:w-[37rem] whitespace-nowrap overflow-hidden overflow-ellipsis'>
+              <div className='flex flex-row py-[0.2rem] lg:py-0'>
+                <div className=''>
                   {selectedGenres.length > 0 ? (
-                    <div className='flex gap-x-1'>
+                    <div className='grid grid-cols-3 text-sm lg:text-base lg:grid-cols-7 lg:gap-x-4 gap-x-4'>
                       {selectedGenres.map((genre: Genre) => {
                         return (
-                          <p key={genre.id}>
-                            {genre.name[locale as keyof typeof genre.name]}
-                          </p>
+                          <div
+                            key={genre.id}
+                            className='flex lg:w-[6.5rem] w-[5.7rem] flex-row items-center my-2 py-[0.3rem] lg:py-[0.4rem] lg:mr-3 mr-1 justify-center bg-textarea-gray bg-opacity-95 rounded'
+                          >
+                            <p className='text-center block mr-2 w-fit'>
+                              {genre.name[locale as keyof typeof genre.name]}
+                            </p>
+                            <Image
+                              src='/assets/genre-remove.png'
+                              alt='close modal'
+                              height={539}
+                              width={512}
+                              className='w-[0.6rem] h-auto hover:cursor-pointer'
+                              onClick={(
+                                e: React.MouseEvent<
+                                  HTMLImageElement,
+                                  MouseEvent
+                                >
+                              ) => {
+                                handleRemoveGenre(e, genre.id);
+                              }}
+                            />
+                          </div>
                         );
                       })}
                     </div>
@@ -125,12 +147,12 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
                   )}
                 </div>
               </div>
-              {true && (
+              {showGenresDropdown && (
                 <div
                   onClick={(e) => {
-                    //   e.stopPropagation();
+                    e.stopPropagation();
                   }}
-                  className='container absolute z-50 bottom-14 left-0 w-full max-h-72 shadow-lg overflow-y-scroll bg-violet bg-opacity-[95%] rounded py-4'
+                  className='container absolute z-50 bottom-[6.4rem] left-0 w-full max-h-72 shadow-lg overflow-y-scroll bg-violet bg-opacity-[95%] rounded py-4'
                 >
                   {genres &&
                     genres.map((genre: Genre, index: number) => {
@@ -144,7 +166,7 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
                           key={genre.id}
                           className={`${
                             index !== 0 && 'pt-4'
-                          } leading-tight block px-6`}
+                          } leading-tight block px-6 hover:cursor-pointer`}
                         >
                           {genre.name[locale as keyof typeof genre.name]}
                         </p>

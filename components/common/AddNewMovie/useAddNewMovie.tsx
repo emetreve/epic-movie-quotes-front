@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 
 const useAddNewMovie = () => {
   const [selectedGenres, setSelectedGenres] = useState<Genre[]>([]);
+  const [showGenresDropdown, setShowGenresDropdown] = useState(false);
 
   const { showCreateMovie, showAddMovie } = useUiContext();
   const router = useRouter();
@@ -44,6 +45,20 @@ const useAddNewMovie = () => {
     if (!isAlreadySelected) {
       setSelectedGenres((prev) => [...prev, genre]);
     }
+
+    setShowGenresDropdown(false);
+  };
+
+  const handleRemoveGenre = (
+    e: React.MouseEvent<HTMLImageElement, MouseEvent>,
+    id: number
+  ) => {
+    e.stopPropagation();
+
+    setSelectedGenres((prevGenres) => {
+      const updatedGenres = prevGenres.filter((genre) => genre.id !== id);
+      return updatedGenres;
+    });
   };
 
   const onSubmit = (data) => {
@@ -61,6 +76,9 @@ const useAddNewMovie = () => {
     selectedGenres,
     locale,
     handleGenreSelection,
+    showGenresDropdown,
+    setShowGenresDropdown,
+    handleRemoveGenre,
   };
 };
 export default useAddNewMovie;
