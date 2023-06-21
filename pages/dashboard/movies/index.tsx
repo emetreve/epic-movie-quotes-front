@@ -1,4 +1,4 @@
-import { Header, SideProfilePanel } from '@/components';
+import { Header, SideProfilePanel, AddNewMovie } from '@/components';
 import { useMovies } from '@/hooks';
 import Image from 'next/image';
 import { MovieForMoviesPage } from '@/types';
@@ -11,6 +11,13 @@ const Movies = () => {
         onClick={handleOutsideClick}
         className='min-h-screen bg-gradient-violet relative'
       >
+        {
+          <AddNewMovie
+            userName={user.name}
+            userId={user.id}
+            avatar={user.avatar}
+          />
+        }
         <div className='h-[5rem]'>
           <Header
             hideSearch={true}
