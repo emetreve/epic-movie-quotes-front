@@ -25,6 +25,7 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
     imageName,
     imageError,
     setImageError,
+    t,
   } = useAddNewMovie();
 
   return (
@@ -38,7 +39,7 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
     >
       <div className='h-full lg:mt-[13rem] lg:bg-profile-dark-blue w-full lg:h-fit lg:w-[54rem] lg:rounded-2xl relative lg:scale-105'>
         <div className='relative pt-7 px-4 flex flex-row justify-center items-center border-b border-gray-700 pb-7'>
-          <h1 className='text-xl'>Add movie</h1>
+          <h1 className='text-xl'>{t('Add movie modal')}</h1>
           <Image
             src='/assets/close-thin.png'
             alt='close modal'
@@ -121,12 +122,22 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
               <div className='flex flex-row py-[0.2rem] lg:py-0'>
                 <div className=''>
                   {selectedGenres.length > 0 ? (
-                    <div className='grid grid-cols-3 text-sm lg:text-base lg:grid-cols-7 lg:gap-x-4 gap-x-4'>
+                    <div
+                      className={`grid ${
+                        locale === 'en'
+                          ? 'grid-cols-3 lg:grid-cols-7 lg:gap-x-4'
+                          : 'grid-cols-2 lg:grid-cols-6 lg:gap-x-6'
+                      } text-sm lg:text-base gap-x-4`}
+                    >
                       {selectedGenres.map((genre: Genre) => {
                         return (
                           <div
                             key={genre.id}
-                            className='flex lg:w-[6.5rem] w-[5.7rem] flex-row items-center my-2 py-[0.3rem] lg:py-[0.4rem] lg:mr-3 mr-1 justify-center bg-textarea-gray bg-opacity-95 rounded'
+                            className={`flex ${
+                              locale === 'en'
+                                ? 'lg:w-[6.5rem] w-[5.7rem] py-[0.3rem]'
+                                : 'lg:w-[7rem] w-[7rem] text-xs py-[0.45rem]'
+                            } flex-row items-center my-2 lg:py-[0.4rem] lg:mr-3 mr-1 justify-center bg-textarea-gray bg-opacity-95 rounded`}
                           >
                             <p className='text-center block mr-2 w-fit'>
                               {genre.name[locale as keyof typeof genre.name]}
@@ -151,7 +162,7 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
                       })}
                     </div>
                   ) : (
-                    <p>Select genres</p>
+                    <p>{t('Select genres')}</p>
                   )}
                 </div>
               </div>

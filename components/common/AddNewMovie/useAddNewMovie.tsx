@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import { CreateMovieFormData } from '@/types';
 import { createMovie } from '@/services';
 import { useQueryClient } from 'react-query';
+import { useTranslation } from 'next-i18next';
 
 const useAddNewMovie = () => {
   const [selectedGenres, setSelectedGenres] = useState<Genre[]>([]);
@@ -21,6 +22,8 @@ const useAddNewMovie = () => {
   const router = useRouter();
   const locale = router.locale;
   const queryClient = useQueryClient();
+
+  const { t } = useTranslation('movies');
 
   const fetchGenres = async () => {
     const response = await getGenres();
@@ -167,6 +170,7 @@ const useAddNewMovie = () => {
     imageName,
     imageError,
     setImageError,
+    t,
   };
 };
 export default useAddNewMovie;
