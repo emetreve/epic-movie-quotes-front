@@ -94,7 +94,7 @@ const Movies = () => {
                         alt='create new'
                         width={96}
                         height={96}
-                        className='w-full lg:w-[25rem] h-auto hover:cursor-pointer mr-2 rounded-2xl'
+                        className='w-full lg:w-[25rem] lg:h-[20rem] h-full max-h-[17rem] lg:max-h-[20rem] hover:cursor-pointer mr-2 rounded-2xl'
                       />
                       <p className='text-white text-lg mt-4'>
                         {`${movie.name[locale as keyof typeof movie.name]} (${

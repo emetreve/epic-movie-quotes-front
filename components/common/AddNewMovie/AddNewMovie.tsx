@@ -210,6 +210,25 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
 
             <div className='relative'>
               <input
+                {...register('revenue', {
+                  required: `${'This field is required'}`,
+                  pattern: {
+                    value: /^\d+$/,
+                    message: 'Please use only numbers',
+                  },
+                })}
+                className='w-full pr-12 focus:outline-none h-[3.2rem] border border-textarea-gray bg-transparent rounded px-4 placeholder-white'
+                placeholder='შემოსავალი/Revenue'
+              />
+              <div className='h-2'>
+                <p className='text-red text-xs'>
+                  {errors.revenue && errors.revenue.message}
+                </p>
+              </div>
+            </div>
+
+            <div className='relative'>
+              <input
                 {...register('directorEn', {
                   required: `${'This field is required'}`,
                   pattern: {
@@ -233,7 +252,7 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
                 {...register('directorGe', {
                   required: `${'This field is required'}`,
                   pattern: {
-                    value: /^[\w,.,()\s$?!#@%:^&*"']+$/,
+                    value: /^[ა-ჰ\d,.()\s$?!#:@%^&*"']+$/,
                     message: `${'Only Georgian text allowed'}`,
                   },
                 })}
@@ -300,14 +319,10 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
                   </p>
                   <p className='hidden lg:block max-w-[34.6rem] overflow-hidden whitespace-nowrap overflow-ellipsis'>
                     {imageName || 'Drag & drop your image here or'}
-                    IMAGE NAME
                   </p>
                 </div>
                 <label className='relative lg:ml-4 bg-upload-btn-violet py-2 lg:px-[0.7rem] px-[0.4rem] bg-opacity-40 cursor-pointer'>
-                  <span className='text-xs lg:text-base'>
-                    {/* {translate('Choose file')} */}
-                    Choose file
-                  </span>
+                  <span className='text-xs lg:text-base'>Choose file</span>
                   <input
                     {...register('image')}
                     name='image'

@@ -15,4 +15,13 @@ const createQuote = async (data: FormData) => {
   return response;
 };
 
-export { createComment, createQuote };
+const createMovie = async (data: FormData) => {
+  const response = await axiosInstance.post('/create-movie', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response;
+};
+
+export { createComment, createQuote, createMovie };

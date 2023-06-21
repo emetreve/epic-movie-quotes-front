@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useUiContext } from '@/store';
 import { useForm } from 'react-hook-form';
 import { getGenres } from '@/services';
 import { useQuery } from 'react-query';
 import { Genre } from '@/types';
 import { useRouter } from 'next/router';
+import { CreateMovieFormData } from '@/types';
+import { createMovie } from '@/services';
+import { useQueryClient } from 'react-query';
 
 const useAddNewMovie = () => {
   const [selectedGenres, setSelectedGenres] = useState<Genre[]>([]);
@@ -17,6 +20,7 @@ const useAddNewMovie = () => {
   const { showCreateMovie, showAddMovie } = useUiContext();
   const router = useRouter();
   const locale = router.locale;
+  const queryClient = useQueryClient();
 
   const fetchGenres = async () => {
     const response = await getGenres();
@@ -34,6 +38,7 @@ const useAddNewMovie = () => {
       directorGe: '',
       descriptionEn: '',
       descriptionGe: '',
+      revenue: '',
       image: null,
     },
     mode: 'onChange',
@@ -107,7 +112,7 @@ const useAddNewMovie = () => {
     e.preventDefault();
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data: CreateMovieFormData) => {
     if (selectedGenres.length < 1) {
       setGenreSelectionValid('Please select at least one');
       return;
@@ -116,8 +121,31 @@ const useAddNewMovie = () => {
       setImageError(`${'This field is required'}`);
       return;
     }
-    console.log(data);
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append('image', selectedFile, selectedFile.name);
+      formData.append('genres', JSON.stringify(selectedGenres));
+      formData.append('nameGe', data.nameGe);
+      formData.append('nameEn', data.nameEn);
+      formData.append('year', data.year);
+      formData.append('directorEn', data.directorEn);
+      formData.append('directorGe', data.directorGe);
+      formData.append('descriptionEn', data.descriptionEn);
+      formData.append('descriptionGe', data.descriptionGe);
+      formData.append('revenue', data.revenue);
+
+      try {
+        createMovie(formData);
+      } catch (error: any) {
+        console.log(error);
+      }
+    }
+    reset();
+    showAddMovie(false);
+    queryClient.invalidateQueries('usermovies');
   };
+
+  console.log(selectedGenres);
 
   return {
     showCreateMovie,
