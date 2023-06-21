@@ -107,3 +107,15 @@ export type QuoteMessage = {
     likes: Like[] | null;
   };
 };
+
+export type MovieForMoviesPage = {
+  id: number;
+  name: {
+    en: string;
+    ka: string;
+  };
+  poster?: string;
+  year: string;
+  user_id: number;
+  quotes_count: number;
+};

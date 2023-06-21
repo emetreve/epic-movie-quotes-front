@@ -9,6 +9,7 @@ export { updateUser, updateAvatar } from './updateuser';
 export {
   getQuotes,
   getMovies,
+  getUserMovies,
   getLike,
   getNotifications,
   markNotifications,

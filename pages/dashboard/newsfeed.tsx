@@ -1,11 +1,10 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { useNewsFeed } from '@/hooks';
 import { Header, NewsItem } from '@/components';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Quote } from '@/types';
-import { AddNewQuote } from '@/components';
+import { AddNewQuote, SideProfilePanel } from '@/components';
 
 const Newsfeed = () => {
   const {
@@ -37,11 +36,13 @@ const Newsfeed = () => {
         onClick={handleOutsideClick}
         className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'
       >
-        <Header
-          userName={user.name}
-          avatar={user.avatar}
-          authUserId={user.id}
-        />
+        <div className='h-[5rem]'>
+          <Header
+            userName={user.name}
+            avatar={user.avatar}
+            authUserId={user.id}
+          />
+        </div>
         {showSearchMobile && (
           <div className='lg:hidden bg-gradient-violet min-h-screen w-screen absolute'>
             <div className='pt-6 px-4 flex flex-row items-center border-b border-gray-700 pb-6'>
@@ -99,141 +100,99 @@ const Newsfeed = () => {
           <p className='text-white text-sm'>{t('Write new quote')}</p>
         </div>
         <div>
-          <div className='hidden lg:flex text-white px-16 pt-10'>
-            <div className='w-[25%]'>
-              <div className='flex flex-row'>
-                <Image
-                  src={
-                    user.avatar
-                      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${user.avatar}`
-                      : '/assets/avatar-default.png'
-                  }
-                  alt='user headshot'
-                  width={512}
-                  height={512}
-                  className='h-16 w-16 rounded-[50%] mr-3'
-                />
-                <div className='ml-3 pt-1'>
-                  <p className='text-xl'>{user.name}</p>
-                  <Link href='/dashboard/profile'>
-                    <p className='text-gray-400'>{t('Edit your profile')}</p>
-                  </Link>
-                </div>
-              </div>
-              <div className='flex flex-row mt-9 ml-3'>
-                <Image
-                  src='/assets/home-red.png'
-                  alt='home'
-                  width={512}
-                  height={462}
-                  className='h-7 w-auto mr-3'
-                />
-                <Link href='/dashboard/newsfeed'>
-                  <p className='text-xl inline-block ml-5'>{t('News feed')}</p>
-                </Link>
-              </div>
-              <div className='flex flex-row mt-10 ml-3'>
-                <Image
-                  src='/assets/movie-camera.png'
-                  alt='camera for shooting movies'
-                  width={512}
-                  height={462}
-                  className='h-7 w-auto mr-3'
-                />
-                <Link href='/dashboard/movies'>
-                  <p className='text-xl inline-block ml-5'>
-                    {t('List of movies')}
-                  </p>
-                </Link>
-              </div>
+          <div className='hidden lg:flex text-white'>
+            <div className='w-[25%] fixed'>
+              <SideProfilePanel avatar={user.avatar} name={user.name} />
             </div>
 
-            <div className='w-[50%]'>
-              <div
-                className={`flex frex-row  ${
-                  showSearchLg ? '' : 'justify-between'
-                }`}
-              >
+            <div className='h-[13rem] ml-[25.2%] w-full'>
+              <div className='w-[66%] px-8 pt-10'>
                 <div
-                  onClick={() => {
-                    showAddQuote(true);
-                  }}
-                  className={`${
-                    showSearchLg ? 'w-fit pr-3' : 'w-[82%]'
-                  } hover:cursor-pointer transition-width duration-300 ease-in-out h-12 flex flex-row items-center bg-violet bg-opacity-80 rounded-lg text-lg`}
+                  className={`flex frex-row  ${
+                    showSearchLg ? '' : 'justify-between'
+                  }`}
                 >
-                  <Image
-                    src='/assets/write-new-quote.png'
-                    alt='write new quote'
-                    width={96}
-                    height={96}
-                    className='h-6 w-auto ml-3 mr-4'
-                  />
-                  <p>{t('Write new quote')}</p>
-                </div>
-                <div
-                  className={`${
-                    showSearchLg
-                      ? 'pl-6 w-[40rem] border-b border-slate-600 pb-3 ml-12 relative'
-                      : 'mr-3'
-                  } h-12 flex flex-row items-center text-lg`}
-                >
-                  <Image
-                    src='/assets/search-magnifying-glass.png'
-                    alt='search magnifying glass'
-                    width={96}
-                    height={96}
+                  <div
                     onClick={() => {
-                      setShowSearchLg(true);
+                      showAddQuote(true);
                     }}
                     className={`${
-                      showSearchLg && 'px-0 mx-0 absolute left-1'
-                    } h-[1.2rem] w-auto mr-5 hover:cursor-pointer z-40`}
-                  />
-                  {showSearchLg ? (
-                    <div
-                      onClick={(event) => {
-                        event.stopPropagation();
-                      }}
-                      className='w-full relative text-gray-400 z-40'
-                    >
-                      <p className={`${focused && 'invisible'} ml-5`}>
-                        {t('Enter')} <span className='text-white'>@</span>{' '}
-                        {t('to search movies')}, {t('Enter')}{' '}
-                        <span className='text-white'>#</span>{' '}
-                        {t('to search quotes')}
-                      </p>
-                      <form onSubmit={handleSubmit(onSubmit)}>
-                        <input
-                          {...register('search', { required: true })}
-                          id='search'
-                          className='text-white w-full pl-1 ml-4 bg-transparent bottom-[0.04rem] absolute'
-                          name='search'
-                          onFocus={() => setFocused(true)}
-                          onBlur={() => {
-                            setShowSearchLg(false);
-                            setFocused(false);
-                          }}
-                        />
-                      </form>
-                    </div>
-                  ) : (
-                    <p
+                      showSearchLg ? 'w-fit pr-3' : 'w-[82%]'
+                    } z-10 hover:cursor-pointer transition-width duration-300 ease-in-out h-12 flex flex-row items-center bg-violet bg-opacity-80 rounded-lg text-lg`}
+                  >
+                    <Image
+                      src='/assets/write-new-quote.png'
+                      alt='write new quote'
+                      width={96}
+                      height={96}
+                      className='h-6 w-auto ml-3 mr-4'
+                    />
+                    <p>{t('Write new quote')}</p>
+                  </div>
+                  <div
+                    className={`${
+                      showSearchLg
+                        ? 'pl-6 w-[40rem] border-b border-slate-600 pb-3 ml-12 relative'
+                        : 'mr-3'
+                    } h-12 flex flex-row items-center text-lg`}
+                  >
+                    <Image
+                      src='/assets/search-magnifying-glass.png'
+                      alt='search magnifying glass'
+                      width={96}
+                      height={96}
                       onClick={() => {
                         setShowSearchLg(true);
                       }}
-                      className='text-gray-400 hover:cursor-pointer z-40 relative'
-                    >
-                      {t('Search by')}
-                    </p>
-                  )}
+                      className={`${
+                        showSearchLg && 'px-0 mx-0 absolute left-1'
+                      } h-[1.2rem] w-auto mr-5 hover:cursor-pointer z-30`}
+                    />
+                    {showSearchLg ? (
+                      <div
+                        onClick={(event) => {
+                          event.stopPropagation();
+                        }}
+                        className='w-full relative text-gray-400 z-40'
+                      >
+                        <p className={`${focused && 'invisible'} ml-5`}>
+                          {t('Enter')} <span className='text-white'>@</span>{' '}
+                          {t('to search movies')}, {t('Enter')}{' '}
+                          <span className='text-white'>#</span>{' '}
+                          {t('to search quotes')}
+                        </p>
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                          <input
+                            {...register('search', { required: true })}
+                            id='search'
+                            className='text-white w-full pl-1 ml-4 bg-transparent bottom-[0.04rem] absolute'
+                            name='search'
+                            onFocus={() => setFocused(true)}
+                            onBlur={() => {
+                              setShowSearchLg(false);
+                              setFocused(false);
+                            }}
+                          />
+                        </form>
+                      </div>
+                    ) : (
+                      <p
+                        onClick={() => {
+                          setShowSearchLg(true);
+                        }}
+                        className='text-gray-400 hover:cursor-pointer z-30 relative'
+                      >
+                        {t('Search by')}
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className='lg:ml-[26.7%] lg:w-[46.2%] w-full static top-[9.5rem] lg:top-[8rem] lg:-mt-[7.8rem]'>
+        <div className='lg:ml-[26.7%] lg:w-[46.2%] w-full static top-[9.5rem] lg:top-[8rem] lg:-mt-[6rem]'>
           {quotesData?.length > 0 &&
             searchedQuotes.length < 1 &&
             quotesData.map((quote: Quote, quoteIndex: number) => {

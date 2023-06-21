@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { FormProvider } from 'react-hook-form';
 import { useProfile } from '@/hooks';
 import {
@@ -12,6 +11,7 @@ import {
 } from '@/components';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { SideProfilePanel } from '@/components';
 
 const Profile = () => {
   const {
@@ -48,7 +48,7 @@ const Profile = () => {
     submitMobileAvatarChange,
     handleCancelLg,
     handleOutsideClick,
-    handleNavigation,
+    handleBack,
     t,
   } = useProfile();
 
@@ -67,86 +67,33 @@ const Profile = () => {
           onClick={handleOutsideClick}
           className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'
         >
-          <Header
-            hideSearch={true}
-            userName={user.name}
-            avatar={user.avatar}
-            authUserId={user.id}
-          />
+          <div className='h-[5rem]'>
+            <Header
+              hideSearch={true}
+              userName={user.name}
+              avatar={user.avatar}
+              authUserId={user.id}
+            />
+          </div>
 
           {showSuccess && <SuccessNotification show={setShowSuccess} />}
 
-          <div>
-            <div className='hidden lg:flex text-white px-16 pt-10'>
-              <div className='w-[25%]'>
-                <div className='flex flex-row'>
-                  <Image
-                    src={
-                      user.avatar
-                        ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${user.avatar}`
-                        : '/assets/avatar-default.png'
-                    }
-                    alt='user headshot'
-                    width={512}
-                    height={512}
-                    className='h-16 w-16 mr-3 border-2 border-red rounded-[50%]'
-                  />
-                  <div className='ml-3 pt-1'>
-                    <p className='text-xl'>{user.name}</p>
-                    <Link href='/dashboard/profile'>
-                      <p className='text-gray-400'>{t('Edit your profile')}</p>
-                    </Link>
-                  </div>
-                </div>
-                <div className='flex flex-row mt-9 ml-3'>
-                  <Image
-                    src='/assets/home-wht.png'
-                    alt='home'
-                    width={512}
-                    height={462}
-                    className='h-7 w-auto mr-3'
-                  />
-                  <p
-                    onClick={() => {
-                      handleNavigation('newsfeed');
-                    }}
-                    className='text-xl inline-block ml-5 hover:cursor-pointer'
-                  >
-                    {t('News feed')}
-                  </p>
-                </div>
-                <div className='flex flex-row mt-10 ml-3'>
-                  <Image
-                    src='/assets/movie-camera.png'
-                    alt='camera for shooting movies'
-                    width={512}
-                    height={462}
-                    className='h-7 w-auto mr-3'
-                  />
-                  <p
-                    onClick={() => {
-                      handleNavigation('movies');
-                    }}
-                    className='text-xl inline-block ml-5 hover:cursor-pointer'
-                  >
-                    {t('List of movies')}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <SideProfilePanel avatar={user.avatar} name={user.name} />
+
           {!showMobileAvatarModal && (
             <div className='lg:hidden text-white lg:ml-[26.7%] lg:w-[46.2%] w-full static top-[9.5rem] lg:top-[8rem] lg:-mt-[12rem]'>
-              <div>
-                <Link href='/dashboard/newsfeed'>
-                  <Image
-                    src='/assets/back-hd.png'
-                    alt='go back'
-                    width={520}
-                    height={512}
-                    className='w-[0.9rem] h-auto ml-[2rem] my-5'
-                  />
-                </Link>
+              <div
+                onClick={() => {
+                  handleBack('newsfeed');
+                }}
+              >
+                <Image
+                  src='/assets/back-hd.png'
+                  alt='go back'
+                  width={520}
+                  height={512}
+                  className='w-[0.9rem] h-auto ml-[2rem] my-5'
+                />
               </div>
               <div className='bg-violet bg-opacity-80 rounded-xl pt-6 pb-20 flex flex-col items-center'>
                 <div className='flex flex-col items-center justify-center'>
