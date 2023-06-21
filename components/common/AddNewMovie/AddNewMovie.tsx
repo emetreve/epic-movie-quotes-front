@@ -326,14 +326,16 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
                     className='h-6 w-6 mr-3'
                   />
                   <p className='lg:hidden block text-sm w-32 overflow-hidden whitespace-nowrap overflow-ellipsis'>
-                    {imageName || 'Upload image'}
+                    {imageName || t('Upload image')}
                   </p>
                   <p className='hidden lg:block max-w-[34.6rem] overflow-hidden whitespace-nowrap overflow-ellipsis'>
-                    {imageName || 'Drag & drop your image here or'}
+                    {imageName || t('Drag & drop your image here or')}
                   </p>
                 </div>
                 <label className='relative lg:ml-4 bg-upload-btn-violet py-2 lg:px-[0.7rem] px-[0.4rem] bg-opacity-40 cursor-pointer'>
-                  <span className='text-xs lg:text-base'>Choose file</span>
+                  <span className='text-xs lg:text-base'>
+                    {t('Choose file')}
+                  </span>
                   <input
                     {...register('image')}
                     name='image'
@@ -355,7 +357,7 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
             className='text-white mb-[4rem] lg:mb-12 w-full lg:mt-8 mt-10 text-lg bg-red py-2 px-4 rounded-md hover:bg-red-hover'
             type='submit'
           >
-            Add movie
+            {t('Add movie modal')}
           </button>
         </form>
       </div>
