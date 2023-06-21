@@ -5,7 +5,8 @@ import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
 
 const useMovies = () => {
-  const { showBrugerMenu, showBurger } = useUiContext();
+  const { showBrugerMenu, showBurger, showCreateMovie, showAddMovie } =
+    useUiContext();
   const { logged, user } = useCheckIfLoggedIn();
   const { locale } = useRouter();
 
@@ -22,7 +23,15 @@ const useMovies = () => {
     }
   };
 
-  return { movies, locale, logged, user, handleOutsideClick };
+  return {
+    movies,
+    locale,
+    logged,
+    user,
+    handleOutsideClick,
+    showCreateMovie,
+    showAddMovie,
+  };
 };
 
 export default useMovies;

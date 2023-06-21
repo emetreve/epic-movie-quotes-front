@@ -119,3 +119,11 @@ export type MovieForMoviesPage = {
   user_id: number;
   quotes_count: number;
 };
+
+export type Genre = {
+  id: number;
+  name: {
+    en: string;
+    ka: string;
+  };
+};

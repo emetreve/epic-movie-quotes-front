@@ -4,20 +4,29 @@ import Image from 'next/image';
 import { MovieForMoviesPage } from '@/types';
 
 const Movies = () => {
-  const { movies, locale, user, logged, handleOutsideClick } = useMovies();
+  const {
+    movies,
+    locale,
+    user,
+    logged,
+    handleOutsideClick,
+    showCreateMovie,
+    showAddMovie,
+  } = useMovies();
+
   if (logged) {
     return (
       <div
         onClick={handleOutsideClick}
         className='min-h-screen bg-gradient-violet relative'
       >
-        {
+        {showCreateMovie && (
           <AddNewMovie
             userName={user.name}
             userId={user.id}
             avatar={user.avatar}
           />
-        }
+        )}
         <div className='h-[5rem]'>
           <Header
             hideSearch={true}
@@ -40,7 +49,12 @@ const Movies = () => {
                   movies ? movies.length : 0
                 })`}</p>
               </div>
-              <button className='text-white bg-red py-[0.5rem] px-3  hover:bg-red-hover rounded-md font-thin text-[1.1rem]'>
+              <button
+                onClick={() => {
+                  showAddMovie(true);
+                }}
+                className='text-white z-10 bg-red py-[0.5rem] px-3  hover:bg-red-hover rounded-md font-thin text-[1.1rem]'
+              >
                 <div className='flex flex-row items-center'>
                   <Image
                     src='/assets/create-new.png'
