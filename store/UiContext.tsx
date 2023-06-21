@@ -172,9 +172,12 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
 
   const showAddMovie = (show: boolean) => {
     setShowCreateMovie(show);
-    show
-      ? document.body.classList.add('hide-scrollbar')
-      : document.body.classList.remove('hide-scrollbar');
+    const moviesPage = document.getElementById('movies');
+    if (moviesPage) {
+      show
+        ? moviesPage.classList.add('screenHeight')
+        : moviesPage.classList.remove('screenHeight');
+    }
   };
 
   return (

@@ -49,3 +49,8 @@ input:focus {
 .container::-webkit-scrollbar { 
   display: none; 
 }
+
+.screenHeight{
+  max-height: 100vh;
+  overflow: hidden;
+}

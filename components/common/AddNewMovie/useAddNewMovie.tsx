@@ -27,6 +27,8 @@ const useAddNewMovie = () => {
       nameEn: '',
       nameGe: '',
       year: '',
+      directorEn: '',
+      directorGe: '',
       image: null,
     },
     mode: 'onChange',

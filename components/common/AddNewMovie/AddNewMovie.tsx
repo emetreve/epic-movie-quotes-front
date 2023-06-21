@@ -28,9 +28,9 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
       //   onClick={() => {
       //     setShowMovieDropdown(false);
       //   }}
-      className='z-50 lg:pb-16 scrollbar-hide h-screen w-screen fixed backdrop-blur-sm lg:backdrop-blur-none bg-partly-transparent-dark lg:bg-violet-quote-create-bg lg:bg-opacity-70 text-white flex items-center justify-center top-0 left-0'
+      className='z-50 lg:pb-16 bg-profile-dark-blue lg:scrollbar-hide overflow-auto h-screen w-screen fixed backdrop-blur-sm lg:backdrop-blur-none bg-partly-transparent-dark lg:bg-violet-quote-create-bg lg:bg-opacity-70 text-white flex items-center justify-center top-0 left-0'
     >
-      <div className='bg-profile-dark-blue h-full w-full lg:h-[47.5rem] lg:w-[54rem] lg:rounded-2xl relative lg:scale-105'>
+      <div className='h-full lg:bg-profile-dark-blue w-full lg:h-[47.5rem] lg:w-[54rem] lg:rounded-2xl relative lg:scale-105'>
         <div className='relative pt-7 px-4 flex flex-row justify-center items-center border-b border-gray-700 pb-7'>
           <h1 className='text-xl'>Add movie</h1>
           <Image
@@ -201,10 +201,50 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
                 </p>
               </div>
             </div>
+
+            <div className='relative'>
+              <input
+                {...register('directorEn', {
+                  required: `${'This field is required'}`,
+                  pattern: {
+                    value: /^[\w,.,()\s$?!#@%:^&*"']+$/,
+                    message: `${'Only English text allowed'}`,
+                  },
+                })}
+                className='w-full pr-12 focus:outline-none h-[3.2rem] border border-textarea-gray bg-transparent rounded px-4 placeholder-white'
+                placeholder='Movie name'
+              />
+              <p className='absolute top-3 right-4 text-textarea-gray'>Eng</p>
+              <div className='h-2'>
+                <p className='text-red text-xs'>
+                  {errors.directorEn && errors.directorEn.message}
+                </p>
+              </div>
+            </div>
+
+            <div className='relative'>
+              <input
+                {...register('directorGe', {
+                  required: `${'This field is required'}`,
+                  pattern: {
+                    value: /^[\w,.,()\s$?!#@%:^&*"']+$/,
+                    message: `${'Only Georgian text allowed'}`,
+                  },
+                })}
+                className='w-full pr-12 focus:outline-none h-[3.2rem] border border-textarea-gray bg-transparent rounded px-4 placeholder-white'
+                placeholder='Movie name'
+              />
+              <p className='absolute top-3 right-4 text-textarea-gray'>ქარ</p>
+              <div className='h-2'>
+                <p className='text-red text-xs'>
+                  {errors.directorGe && errors.directorGe.message}
+                </p>
+              </div>
+            </div>
           </div>
           <button
             onClick={handleSubmitCheckForGenres}
-            className='text-white w-full lg:mt-6 mt-4 text-lg bg-red py-2 px-4 rounded-md hover:bg-red-hover'
+            className='text-white mb-10 lg:mb-0 w-full lg:mt-6 mt-4 text-lg bg-red py-2 px-4 rounded-md hover:bg-red-hover'
             type='submit'
           >
             Add movie
