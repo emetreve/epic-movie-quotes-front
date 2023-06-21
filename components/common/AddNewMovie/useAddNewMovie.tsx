@@ -145,8 +145,6 @@ const useAddNewMovie = () => {
     queryClient.invalidateQueries('usermovies');
   };
 
-  console.log(selectedGenres);
-
   return {
     showCreateMovie,
     showAddMovie,

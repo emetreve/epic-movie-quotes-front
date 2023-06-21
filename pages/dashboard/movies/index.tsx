@@ -2,6 +2,8 @@ import { Header, SideProfilePanel, AddNewMovie } from '@/components';
 import { useMovies } from '@/hooks';
 import Image from 'next/image';
 import { MovieForMoviesPage } from '@/types';
+import { GetStaticProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const Movies = () => {
   const {
@@ -12,6 +14,7 @@ const Movies = () => {
     handleOutsideClick,
     showCreateMovie,
     showAddMovie,
+    t,
   } = useMovies();
 
   if (logged) {
@@ -45,17 +48,23 @@ const Movies = () => {
           <div className='lg:px-[4rem] px-7 pb-16 lg:ml-[25%] lg:w-[75%] w-full lg:mt-[2rem]'>
             <div className='text-white lg:mb-1'>
               <div className='flex flex-row justify-between items-center mt-2'>
-                <div className='flex flex-row items-center'>
-                  <p className='text-xl lg:text-xl'>My list of movies</p>
-                  <p className='lg:block hidden ml-2 lg:text-xl'>{`(Total ${
-                    movies ? movies.length : 0
-                  })`}</p>
+                <div
+                  className={`flex flex-row items-center ${
+                    locale === 'ka' && 'font-helvetica-caps-ka'
+                  }`}
+                >
+                  <p className='text-xl lg:text-xl'>{t('My list of movies')}</p>
+                  <p className='lg:block hidden ml-2 lg:text-xl'>{`(${t(
+                    'Total'
+                  )} ${movies ? movies.length : 0})`}</p>
                 </div>
                 <button
                   onClick={() => {
                     showAddMovie(true);
                   }}
-                  className='text-white z-10 bg-red py-[0.5rem] px-3  hover:bg-red-hover rounded-md font-thin text-[1.1rem]'
+                  className={`text-white z-10 bg-red py-[0.5rem] px-3  hover:bg-red-hover rounded-md ${
+                    locale === 'en' && 'font-thin'
+                  } text-[1.1rem]`}
                 >
                   <div className='flex flex-row items-center'>
                     <Image
@@ -65,7 +74,7 @@ const Movies = () => {
                       height={96}
                       className='w-4 h-auto hover:cursor-pointer mr-2'
                     />
-                    Add movie
+                    {t('Add movie')}
                   </div>
                 </button>
               </div>
@@ -122,3 +131,11 @@ const Movies = () => {
   }
 };
 export default Movies;
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale as string, ['movies'])),
+    },
+  };
+};
