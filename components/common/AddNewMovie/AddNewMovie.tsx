@@ -17,9 +17,9 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
     showGenresDropdown,
     setShowGenresDropdown,
     handleRemoveGenre,
+    handleSubmitCheckForGenres,
+    genreSelectionValid,
   } = useAddNewMovie();
-
-  console.log(genres);
 
   return (
     <div
@@ -108,7 +108,7 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
               onClick={(e) => {
                 setShowGenresDropdown((prev) => !prev);
               }}
-              className='relative min-h-[3.2rem] focus:outline-none border border-textarea-gray px-5 flex flex-row items-center justify-between w-full bg-transparent rounded'
+              className='relative mb-2 min-h-[3.5rem] focus:outline-none border border-textarea-gray px-5 flex flex-row items-center justify-between w-full bg-transparent rounded'
             >
               <div className='flex flex-row py-[0.2rem] lg:py-0'>
                 <div className=''>
@@ -152,7 +152,11 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
-                  className='container absolute z-50 bottom-[6.4rem] left-0 w-full max-h-72 shadow-lg overflow-y-scroll bg-violet bg-opacity-[95%] rounded py-4'
+                  className={`container absolute z-50 lg:bottom-[4.5rem] ${
+                    selectedGenres.length < 4
+                      ? 'bottom-[4rem]'
+                      : 'bottom-[6.7rem]'
+                  } left-0 w-full max-h-72 shadow-lg overflow-y-scroll bg-violet bg-opacity-[95%] rounded py-4`}
                 >
                   {genres &&
                     genres.map((genre: Genre, index: number) => {
@@ -174,12 +178,32 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
                     })}
                 </div>
               )}
+              <div className='h-2 absolute -bottom-2 left-0'>
+                <p className='text-red text-xs'>{genreSelectionValid}</p>
+              </div>
+            </div>
+
+            <div className='relative'>
+              <input
+                {...register('year', {
+                  required: `${'This field is required'}`,
+                  pattern: {
+                    value: /^\d+$/,
+                    message: 'Please use only numbers',
+                  },
+                })}
+                className='w-full pr-12 focus:outline-none h-[3.2rem] border border-textarea-gray bg-transparent rounded px-4 placeholder-white'
+                placeholder='წელი/Year'
+              />
+              <div className='h-2'>
+                <p className='text-red text-xs'>
+                  {errors.year && errors.year.message}
+                </p>
+              </div>
             </div>
           </div>
           <button
-            onClick={() => {
-              // handleMovieExistence(userId.toString());
-            }}
+            onClick={handleSubmitCheckForGenres}
             className='text-white w-full lg:mt-6 mt-4 text-lg bg-red py-2 px-4 rounded-md hover:bg-red-hover'
             type='submit'
           >

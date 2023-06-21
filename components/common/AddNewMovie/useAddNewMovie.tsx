@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useUiContext } from '@/store';
 import { useForm } from 'react-hook-form';
 import { getGenres } from '@/services';
@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 const useAddNewMovie = () => {
   const [selectedGenres, setSelectedGenres] = useState<Genre[]>([]);
   const [showGenresDropdown, setShowGenresDropdown] = useState(false);
+  const [genreSelectionValid, setGenreSelectionValid] = useState('');
 
   const { showCreateMovie, showAddMovie } = useUiContext();
   const router = useRouter();
@@ -25,6 +26,7 @@ const useAddNewMovie = () => {
     defaultValues: {
       nameEn: '',
       nameGe: '',
+      year: '',
       image: null,
     },
     mode: 'onChange',
@@ -59,9 +61,24 @@ const useAddNewMovie = () => {
       const updatedGenres = prevGenres.filter((genre) => genre.id !== id);
       return updatedGenres;
     });
+
+    if (selectedGenres.length === 1) {
+      setGenreSelectionValid('Please select at least one');
+    }
+  };
+
+  const handleSubmitCheckForGenres = () => {
+    if (selectedGenres.length < 1) {
+      setGenreSelectionValid('Please select at least one');
+      return;
+    }
   };
 
   const onSubmit = (data) => {
+    if (selectedGenres.length < 1) {
+      setGenreSelectionValid('Please select at least one');
+      return;
+    }
     console.log(data);
   };
 
@@ -79,6 +96,8 @@ const useAddNewMovie = () => {
     showGenresDropdown,
     setShowGenresDropdown,
     handleRemoveGenre,
+    handleSubmitCheckForGenres,
+    genreSelectionValid,
   };
 };
 export default useAddNewMovie;
