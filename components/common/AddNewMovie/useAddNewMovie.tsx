@@ -29,6 +29,8 @@ const useAddNewMovie = () => {
       year: '',
       directorEn: '',
       directorGe: '',
+      descriptionEn: '',
+      descriptionGe: '',
       image: null,
     },
     mode: 'onChange',
