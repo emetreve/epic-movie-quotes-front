@@ -10,6 +10,9 @@ const useAddNewMovie = () => {
   const [selectedGenres, setSelectedGenres] = useState<Genre[]>([]);
   const [showGenresDropdown, setShowGenresDropdown] = useState(false);
   const [genreSelectionValid, setGenreSelectionValid] = useState('');
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [imageName, setImageName] = useState('');
+  const [imageError, setImageError] = useState('');
 
   const { showCreateMovie, showAddMovie } = useUiContext();
   const router = useRouter();
@@ -74,13 +77,43 @@ const useAddNewMovie = () => {
   const handleSubmitCheckForGenres = () => {
     if (selectedGenres.length < 1) {
       setGenreSelectionValid('Please select at least one');
+    }
+    if (!imageName) {
+      setImageError(`${'This field is required'}`);
+    }
+  };
+
+  const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target?.files) {
       return;
     }
+    const selectedFile = event.target.files[0];
+    setSelectedFile(selectedFile);
+    if (selectedFile) {
+      setImageName(selectedFile.name);
+      setImageError('');
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const selectedFile = e.dataTransfer.files[0];
+    setSelectedFile(selectedFile);
+    setImageName(selectedFile.name);
+    setImageError('');
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
   };
 
   const onSubmit = (data) => {
     if (selectedGenres.length < 1) {
       setGenreSelectionValid('Please select at least one');
+      return;
+    }
+    if (!imageName) {
+      setImageError(`${'This field is required'}`);
       return;
     }
     console.log(data);
@@ -102,6 +135,12 @@ const useAddNewMovie = () => {
     handleRemoveGenre,
     handleSubmitCheckForGenres,
     genreSelectionValid,
+    handleUpload,
+    handleDrop,
+    handleDragOver,
+    imageName,
+    imageError,
+    setImageError,
   };
 };
 export default useAddNewMovie;

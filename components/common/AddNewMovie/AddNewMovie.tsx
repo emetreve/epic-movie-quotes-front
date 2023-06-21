@@ -19,15 +19,21 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
     handleRemoveGenre,
     handleSubmitCheckForGenres,
     genreSelectionValid,
+    handleUpload,
+    handleDrop,
+    handleDragOver,
+    imageName,
+    imageError,
+    setImageError,
   } = useAddNewMovie();
 
   return (
     <div
-      //   onDrop={handleDrop}
-      //   onDragOver={handleDragOver}
-      //   onClick={() => {
-      //     setShowMovieDropdown(false);
-      //   }}
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
+      onClick={() => {
+        setShowGenresDropdown(false);
+      }}
       className='z-50 lg:pb-16 bg-profile-dark-blue overflow-auto h-screen w-screen fixed backdrop-blur-sm lg:backdrop-blur-none bg-partly-transparent-dark lg:bg-violet-quote-create-bg lg:bg-opacity-70 text-white flex items-center justify-center top-0 left-0'
     >
       <div className='h-full lg:mt-[13rem] lg:bg-profile-dark-blue w-full lg:h-fit lg:w-[54rem] lg:rounded-2xl relative lg:scale-105'>
@@ -40,6 +46,7 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
             height={512}
             className='w-[0.9rem] h-[0.9rem] hover:cursor-pointer absolute right-8'
             onClick={() => {
+              setImageError('');
               showAddMovie(false);
             }}
           />
@@ -106,6 +113,7 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
             </div>
             <div
               onClick={(e) => {
+                e.stopPropagation();
                 setShowGenresDropdown((prev) => !prev);
               }}
               className='relative mb-2 min-h-[3.5rem] focus:outline-none border border-textarea-gray px-5 flex flex-row items-center justify-between w-full bg-transparent rounded'
@@ -164,8 +172,6 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
                         <p
                           onClick={() => {
                             handleGenreSelection(genre);
-                            //   handleMovieChange(movie.id.toString(), movie.name);
-                            //   setMovieError('');
                           }}
                           key={genre.id}
                           className={`${
@@ -279,10 +285,48 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
                 </p>
               </div>
             </div>
+            <div className='-mt-1 w-full h-[4.4rem] items-center flex border border-textarea-gray bg-transparent rounded py-2 px-4'>
+              <div className='flex flex-row justify-between w-full lg:justify-start'>
+                <div className='flex flex-row items-center'>
+                  <Image
+                    src='/assets/photo-camera.png'
+                    alt='photo camera'
+                    width={512}
+                    height={512}
+                    className='h-6 w-6 mr-3'
+                  />
+                  <p className='lg:hidden block text-sm w-32 overflow-hidden whitespace-nowrap overflow-ellipsis'>
+                    {imageName || 'Upload image'}
+                  </p>
+                  <p className='hidden lg:block max-w-[34.6rem] overflow-hidden whitespace-nowrap overflow-ellipsis'>
+                    {imageName || 'Drag & drop your image here or'}
+                    IMAGE NAME
+                  </p>
+                </div>
+                <label className='relative lg:ml-4 bg-upload-btn-violet py-2 lg:px-[0.7rem] px-[0.4rem] bg-opacity-40 cursor-pointer'>
+                  <span className='text-xs lg:text-base'>
+                    {/* {translate('Choose file')} */}
+                    Choose file
+                  </span>
+                  <input
+                    {...register('image')}
+                    name='image'
+                    onChange={(e) => {
+                      handleUpload(e);
+                    }}
+                    type='file'
+                    className='absolute inset-0 w-full h-full opacity-0 cursor-pointer'
+                  />
+                </label>
+              </div>
+            </div>
+            <div className='h-2 -mt-3'>
+              <p className='text-red text-xs'>{imageError && imageError}</p>
+            </div>
           </div>
           <button
             onClick={handleSubmitCheckForGenres}
-            className='text-white mb-10 lg:mb-12 w-full lg:mt-6 mt-4 text-lg bg-red py-2 px-4 rounded-md hover:bg-red-hover'
+            className='text-white mb-[4rem] lg:mb-12 w-full lg:mt-8 mt-10 text-lg bg-red py-2 px-4 rounded-md hover:bg-red-hover'
             type='submit'
           >
             Add movie
