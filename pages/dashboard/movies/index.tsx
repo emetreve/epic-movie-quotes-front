@@ -135,7 +135,11 @@ export default Movies;
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale as string, ['movies'])),
+      ...(await serverSideTranslations(locale as string, [
+        'movies',
+        'newsfeed',
+        'profile',
+      ])),
     },
   };
 };
