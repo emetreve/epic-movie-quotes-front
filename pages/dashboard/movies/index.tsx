@@ -25,7 +25,7 @@ const Movies = () => {
         </div>
 
         <div className='lg:px-[4rem] px-7 pb-16 lg:ml-[25%] lg:w-[75%] w-full lg:mt-[2rem]'>
-          <div className='text-white lg:mb-12'>
+          <div className='text-white lg:mb-1'>
             <div className='flex flex-row justify-between items-center mt-2'>
               <div className='flex flex-row items-center'>
                 <p className='text-xl lg:text-xl'>My list of movies</p>
@@ -50,7 +50,11 @@ const Movies = () => {
               movies ? movies.length : 0
             })`}</p>
           </div>
-          <div className='lg:grid lg:grid-cols-3 gap-x-20 lg:w-full'>
+          <div
+            className={`lg:grid lg:grid-cols-3 gap-x-20 lg:w-full ${
+              locale === 'en' ? 'uppercase' : 'font-helvetica-caps-ka'
+            }`}
+          >
             {movies &&
               movies.map((movie: MovieForMoviesPage, index: number) => {
                 return (
