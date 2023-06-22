@@ -144,10 +144,10 @@ const useAddNewMovie = () => {
       }
     }
 
-    await queryClient.invalidateQueries('usermovies');
-
-    reset();
-    showAddMovie(false);
+    queryClient.invalidateQueries('usermovies').then(() => {
+      reset();
+      showAddMovie(false);
+    });
   };
 
   return {
