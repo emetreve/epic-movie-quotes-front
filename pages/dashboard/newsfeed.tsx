@@ -48,7 +48,7 @@ const Newsfeed = () => {
               />
               <form onSubmit={handleSubmit(onSubmit)} className='w-full'>
                 <input
-                  {...register('search', { required: true })}
+                  {...register('search')}
                   className='text-white ml-6 text-sm bg-transparent placeholder-white w-full'
                   placeholder={`${t('Search')}`}
                 />
@@ -164,7 +164,7 @@ const Newsfeed = () => {
                           </p>
                           <form onSubmit={handleSubmit(onSubmit)}>
                             <input
-                              {...register('search', { required: true })}
+                              {...register('search')}
                               id='search'
                               className='text-white w-full pl-1 ml-4 bg-transparent bottom-[0.04rem] absolute'
                               name='search'
