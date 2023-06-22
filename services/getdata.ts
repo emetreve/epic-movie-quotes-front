@@ -56,6 +56,11 @@ const markNotification = async (notification_id: number) => {
   return response;
 };
 
+const getGenres = async () => {
+  const response = await axiosInstance.get('/genres');
+  return response;
+};
+
 export {
   getQuotes,
   getMovies,
@@ -64,4 +69,5 @@ export {
   getNotifications,
   markNotifications,
   markNotification,
+  getGenres,
 };

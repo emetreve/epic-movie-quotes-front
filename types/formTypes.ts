@@ -44,3 +44,15 @@ export type CreateQuoteFormData = {
   bodyGe: string;
   image: File | null;
 };
+
+export type CreateMovieFormData = {
+  nameEn: string;
+  nameGe: string;
+  year: string;
+  directorEn: string;
+  directorGe: string;
+  descriptionEn: string;
+  descriptionGe: string;
+  revenue: string;
+  image: File | null;
+};
