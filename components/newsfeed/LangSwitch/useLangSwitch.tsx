@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 
 const useLangSwitch = () => {
   const [showLangDropdown, setShowLangDropdown] = useState(false);
-  const { locales, locale, push, pathname } = useRouter();
+  const { locales, locale, push, pathname, query } = useRouter();
 
   const handleLocaleChange = (locale: string) => {
-    push(pathname, pathname, { locale });
+    push({ pathname, query }, undefined, { locale });
   };
 
   return {
