@@ -92,6 +92,12 @@ const Movie = () => {
                 </div>
               </div>
             </div>
+            <div className='mt-5'>
+              <div className='text-white'>
+                <p className='text-2xl'>All quotes</p>
+                <p>{`(Total: ${movie?.quotes_count})`}</p>
+              </div>
+            </div>
           </div>
         </div>
       </>
