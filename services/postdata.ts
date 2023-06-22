@@ -16,7 +16,7 @@ const createQuote = async (data: FormData) => {
 };
 
 const createMovie = async (data: FormData) => {
-  const response = await axiosInstance.post('/create-movie', data, {
+  const response = await axiosInstance.post('/movie', data, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
