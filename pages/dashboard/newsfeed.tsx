@@ -44,7 +44,7 @@ const Newsfeed = () => {
           />
         </div>
         {showSearchMobile && (
-          <div className='lg:hidden bg-gradient-violet min-h-screen w-screen absolute'>
+          <div className='lg:hidden bg-gradient-violet min-h-screen w-screen absolute z-[50]'>
             <div className='pt-6 px-4 flex flex-row items-center border-b border-gray-700 pb-6'>
               <Image
                 src='/assets/back-hd.png'

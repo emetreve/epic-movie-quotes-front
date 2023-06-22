@@ -6,7 +6,7 @@ import { useTranslation } from 'next-i18next';
 import { getQuotes } from '@/services';
 import { useUiContext } from '@/store';
 import { useForm } from 'react-hook-form';
-import { SearchQuotesData, QuoteMessage } from '@/types';
+import { SearchQuotesData, QuoteMessage, Quote } from '@/types';
 import { usePusher } from '@/hooks';
 import { useQueryClient } from 'react-query';
 import { useQuotesContext } from '@/store';
@@ -17,6 +17,7 @@ const useNewsFeed = () => {
   const [firstRender, setFirstRender] = useState(true);
   const [currentSearchPage, setCurrentSearchPage] = useState(1);
   const [lastSearchPage, setLastSearchPage] = useState(1);
+  const [likeReceived, setLikeReveiced] = useState<Quote>();
 
   const {
     showBrugerMenu,
@@ -94,23 +95,26 @@ const useNewsFeed = () => {
   usePusher();
 
   useEffect(() => {
+    if (searchedQuotes.length > 0) {
+      const updatedQuotes = searchedQuotes.map((quote) =>
+        quote.id === likeReceived?.id ? likeReceived : quote
+      );
+      setSearchedQuotes(updatedQuotes);
+    }
+  }, [likeReceived]);
+
+  useEffect(() => {
     const channelLike = window.Echo.channel('like-updated');
     channelLike.listen('LikeUpdated', function (data: QuoteMessage) {
       if (data) {
-        if (data) {
-          const updatedQuote = data.message;
+        setLikeReveiced(data.message);
+        const updatedQuote = data.message;
 
-          if (searchedQuotes.length > 0) {
-            const updatedQuotes = searchedQuotes.map((quote) =>
-              quote.id === updatedQuote.id ? updatedQuote : quote
-            );
-            setSearchedQuotes(updatedQuotes);
-          } else {
-            const updatedQuotes = quotesData.map((quote) =>
-              quote.id === updatedQuote.id ? updatedQuote : quote
-            );
-            setQuotesData(updatedQuotes);
-          }
+        if (!(searchedQuotes.length > 0)) {
+          const updatedQuotes = quotesData.map((quote) =>
+            quote.id === updatedQuote.id ? updatedQuote : quote
+          );
+          setQuotesData(updatedQuotes);
         }
       }
     });
