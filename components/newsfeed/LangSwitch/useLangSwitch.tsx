@@ -6,7 +6,7 @@ const useLangSwitch = () => {
   const { locales, locale, push, pathname, query } = useRouter();
 
   const handleLocaleChange = (locale: string) => {
-    push({ pathname, query }, undefined, { locale });
+    push({ pathname, query }, '', { locale });
   };
 
   return {
