@@ -17,8 +17,13 @@ const getMovies = async () => {
   return response;
 };
 
-const getUserMovies = async () => {
-  const response = await axiosInstance.get('/user-movies');
+const getUserMovies = async (locale?: string, search?: string) => {
+  const response = await axiosInstance.get('/user-movies', {
+    params: {
+      locale,
+      search,
+    },
+  });
   return response;
 };
 
