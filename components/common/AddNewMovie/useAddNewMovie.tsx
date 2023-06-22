@@ -143,9 +143,11 @@ const useAddNewMovie = () => {
         console.log(error);
       }
     }
-    reset();
-    showAddMovie(false);
-    queryClient.invalidateQueries('usermovies');
+
+    queryClient.invalidateQueries('usermovies').then(() => {
+      reset();
+      showAddMovie(false);
+    });
   };
 
   return {

@@ -14,6 +14,15 @@ const Movies = () => {
     handleOutsideClick,
     showCreateMovie,
     showAddMovie,
+    showSearchLg,
+    setShowSearchLg,
+    setFocused,
+    register,
+    handleSubmit,
+    onSubmit,
+    searchTracker,
+    searchResult,
+    handleBlur,
     t,
   } = useMovies();
 
@@ -58,25 +67,83 @@ const Movies = () => {
                     'Total'
                   )} ${movies ? movies.length : 0})`}</p>
                 </div>
-                <button
-                  onClick={() => {
-                    showAddMovie(true);
-                  }}
-                  className={`text-white z-10 bg-red py-[0.5rem] px-3 ${
-                    locale === 'ka' ? 'px-0 text-sm' : 'px-3'
-                  }  hover:bg-red-hover rounded-md font-thin lg:text-lg text-[1.1rem]`}
-                >
-                  <div className='flex flex-row items-center'>
+                <div className='flex flex-row'>
+                  <div
+                    className={`${
+                      showSearchLg
+                        ? 'pl-6 w-[20rem] border-b border-slate-600 pb-3 ml-12 relative'
+                        : 'mr-3'
+                    } hidden lg:flex h-12 flex-row items-center text-lg`}
+                  >
                     <Image
-                      src='/assets/create-new.png'
-                      alt='create new'
+                      src='/assets/search-magnifying-glass.png'
+                      alt='search magnifying glass'
                       width={96}
                       height={96}
-                      className='w-4 h-auto hover:cursor-pointer mr-2'
+                      onClick={() => {
+                        setShowSearchLg(true);
+                      }}
+                      className={`${
+                        showSearchLg && 'px-0 mx-0 absolute left-1'
+                      } h-[1.2rem] w-auto mr-5 hover:cursor-pointer z-30`}
                     />
-                    {t('Add movie')}
+                    {showSearchLg ? (
+                      <div
+                        onClick={(event) => {
+                          event.stopPropagation();
+                        }}
+                        className='w-full relative text-gray-400 z-40'
+                      >
+                        <p
+                          className={`${
+                            searchTracker?.length > 0 && 'text-transparent'
+                          } ml-5`}
+                        >
+                          Search movie
+                        </p>
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                          <input
+                            {...register('search')}
+                            id='search'
+                            className='text-white w-full pl-1 ml-4 bg-transparent bottom-[0.01rem] absolute'
+                            name='search'
+                            onFocus={() => setFocused(true)}
+                            onBlur={handleBlur}
+                          />
+                        </form>
+                      </div>
+                    ) : (
+                      <p
+                        onClick={() => {
+                          setShowSearchLg(true);
+                          setFocused(true);
+                        }}
+                        className='text-gray-400 hover:cursor-pointer z-30 relative'
+                      >
+                        {t('Search by')}
+                      </p>
+                    )}
                   </div>
-                </button>
+                  <button
+                    onClick={() => {
+                      showAddMovie(true);
+                    }}
+                    className={`text-white z-10 bg-red py-[0.5rem] px-3 ml-5 ${
+                      locale === 'ka' ? 'px-0 text-sm' : 'px-3'
+                    }  hover:bg-red-hover rounded-md font-thin lg:text-lg text-[1.1rem]`}
+                  >
+                    <div className='flex flex-row items-center'>
+                      <Image
+                        src='/assets/create-new.png'
+                        alt='create new'
+                        width={96}
+                        height={96}
+                        className='w-4 h-auto hover:cursor-pointer mr-2'
+                      />
+                      {t('Add movie')}
+                    </div>
+                  </button>
+                </div>
               </div>
               <p className='block lg:hidden'>{`(Total ${
                 movies ? movies.length : 0
@@ -88,7 +155,45 @@ const Movies = () => {
               }`}
             >
               {movies &&
+                searchResult.length < 1 &&
                 movies.map((movie: MovieForMoviesPage, index: number) => {
+                  return (
+                    <div
+                      key={movie.id}
+                      className={`${index === 0 ? 'mt-6 lg:mt-12' : 'mt-12'}`}
+                    >
+                      <Image
+                        src={
+                          movie.poster
+                            ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${movie.poster}`
+                            : '/assets/movie-sample.png'
+                        }
+                        alt='create new'
+                        width={96}
+                        height={96}
+                        className='w-full lg:w-[25rem] lg:h-[20rem] h-full max-h-[17rem] lg:max-h-[20rem] hover:cursor-pointer mr-2 rounded-2xl'
+                      />
+                      <p className='text-white text-lg mt-4'>
+                        {`${movie.name[locale as keyof typeof movie.name]} (${
+                          movie.year
+                        })`}
+                      </p>
+                      <div className='flex flex-row items-center text-white mt-4'>
+                        <p className='text-lg'>{movie.quotes_count}</p>
+                        <Image
+                          src='/assets/quote-notification.png'
+                          alt='quote'
+                          width={96}
+                          height={96}
+                          className='w-5 h-auto ml-2'
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+
+              {searchResult.length > 0 &&
+                searchResult.map((movie: MovieForMoviesPage, index: number) => {
                   return (
                     <div
                       key={movie.id}

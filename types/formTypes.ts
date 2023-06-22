@@ -56,3 +56,7 @@ export type CreateMovieFormData = {
   revenue: string;
   image: File | null;
 };
+
+export type SearchMoviesData = {
+  search: string;
+};
