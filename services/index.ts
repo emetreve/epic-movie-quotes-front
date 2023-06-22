@@ -15,6 +15,7 @@ export {
   markNotifications,
   markNotification,
   getGenres,
+  getMovie,
 } from './getdata';
 export { createComment, createQuote, createMovie } from './postdata';
 export { default as pusherInstance } from './pusher';
