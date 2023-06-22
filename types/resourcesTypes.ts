@@ -127,3 +127,20 @@ export type Genre = {
     ka: string;
   };
 };
+
+export type QuoteFromMoviePage = {
+  id: number;
+  body: {
+    en: string;
+    ka: string;
+  };
+  image?: string;
+  user_id: number;
+  movie_id: number;
+  user: User;
+  movie: Movie;
+  comments: Comment[] | null;
+  likes: Like[];
+  likes_count: number;
+  comments_count: number;
+};
