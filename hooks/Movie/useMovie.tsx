@@ -7,18 +7,22 @@ const useMovie = () => {
   const router = useRouter();
   const { logged, user } = useCheckIfLoggedIn();
 
+  const { locale } = useRouter();
   const { id } = router.query;
 
   const fetchMovie = async () => {
-    const response = await getMovie(id as string);
-    console.log(response.data);
-    return response.data;
+    try {
+      const response = await getMovie(id as string);
+      return response.data;
+    } catch {
+      router.push('/404');
+    }
   };
 
   const { data: movie } = useQuery('usermovies', fetchMovie, {
     enabled: !!id,
   });
 
-  return { id, logged, user, movie };
+  return { id, logged, user, movie, locale };
 };
 export default useMovie;
