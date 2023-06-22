@@ -121,7 +121,7 @@ const NewsItem: React.FC<PropsType> = ({
         <form onSubmit={handleSubmit(onSubmit)} className='w-full lg:pr-5'>
           <input
             {...register('body', { required: true })}
-            placeholder={t('Write a comment')}
+            placeholder={`${t('Write a comment')}`}
             className='bg-comment-input-bg py-[0.43rem] pl-3 rounded-lg w-full lg:ml-5'
           />
           <input
