@@ -65,7 +65,7 @@ const NewsItem: React.FC<PropsType> = ({
           <p className='text-lg block w-2'>{likesQuantity}</p>
           <div
             onClick={() => handleLike(authUserId, quoteId)}
-            className='hover:cursor-pointer'
+            className='hover:cursor-pointer z-[30]'
           >
             <Heart
               classes={`h-5 w-auto ml-2 lg:h-7 ${
