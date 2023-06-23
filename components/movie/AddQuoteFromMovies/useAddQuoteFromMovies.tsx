@@ -5,10 +5,9 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'next-i18next';
 import { CreateQuoteFormData } from '@/types';
 import { createQuote } from '@/services';
-import { useQuotesContext } from '@/store';
+import { useQueryClient } from 'react-query';
 
-const useAddQuoteFromMovies = () => {
-  const [movieError, setMovieError] = useState('');
+const useAddQuoteFromMovies = (movieId: string) => {
   const [imageName, setImageName] = useState('');
   const [imageError, setImageError] = useState('');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -23,8 +22,7 @@ const useAddQuoteFromMovies = () => {
   const locale = router.locale;
   const { t } = useTranslation('profile');
   const { t: translate } = useTranslation('newsfeed');
-
-  const { quotesData, setQuotesData } = useQuotesContext();
+  const queryClient = useQueryClient();
 
   const methods = useForm({
     defaultValues: {
@@ -85,11 +83,11 @@ const useAddQuoteFromMovies = () => {
       formData.append('bodyGe', data.bodyGe);
       formData.append('bodyEn', data.bodyEn);
       formData.append('user_id', userId);
-      // TODO: append movie id
+      formData.append('movie_id', movieId);
 
       try {
-        const response = await createQuote(formData);
-        setQuotesData([response.data, ...quotesData]);
+        await createQuote(formData);
+        queryClient.invalidateQueries('movie');
       } catch (error: any) {
         console.log(error);
       }
@@ -110,8 +108,6 @@ const useAddQuoteFromMovies = () => {
     onSubmit,
     register,
     errors,
-    movieError,
-    setMovieError,
     handleMovieExistence,
     handleDrop,
     handleDragOver,

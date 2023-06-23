@@ -8,10 +8,9 @@ import {
   markNotifications,
   markNotification,
 } from '@/services';
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import { usePusher } from '@/hooks';
 import { NotificationMessage, Notification } from '@/types';
-import { useQueryClient } from 'react-query';
 
 const useHeader = (authUserId: number) => {
   const { showBrugerMenu, showBurger, showSearchMobile, showSearchMob } =

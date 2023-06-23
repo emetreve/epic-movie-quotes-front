@@ -1,11 +1,18 @@
 import Image from 'next/image';
 import { PropsType } from './types';
 import useAddNewQuote from './useAddQuoteFromMovies';
+import { Genre } from '@/types';
 
 const AddQuoteFromMovies: React.FC<PropsType> = ({
   userName,
   avatar,
   userId,
+  movieDirector,
+  movieName,
+  movieYear,
+  moviePoster,
+  movieId,
+  movieGenres,
 }) => {
   const {
     showAddQuoteFromMoviesPage: showAddQuote,
@@ -17,14 +24,13 @@ const AddQuoteFromMovies: React.FC<PropsType> = ({
     onSubmit,
     register,
     errors,
-    movieError,
     handleMovieExistence,
     handleDrop,
     handleDragOver,
     imageError,
     t,
     translate,
-  } = useAddNewQuote();
+  } = useAddNewQuote(movieId);
 
   return (
     <div
@@ -49,7 +55,7 @@ const AddQuoteFromMovies: React.FC<PropsType> = ({
             }}
           />
         </div>
-        <div className='px-7 mt-7 lg:px-[2rem]'>
+        <div className='px-7 mt-6 lg:px-[2rem]'>
           <div className='flex flex-row items-center lg:mb-4'>
             <Image
               src={
@@ -64,8 +70,93 @@ const AddQuoteFromMovies: React.FC<PropsType> = ({
             />
             <p className='lg:text-xl lg:block lg:ml-1'>{userName}</p>
           </div>
-          <form noValidate onSubmit={handleSubmit(onSubmit)} className='pt-8'>
-            <div className='relative'>
+          <form noValidate onSubmit={handleSubmit(onSubmit)} className='pt-5'>
+            <div className='relative min-h-[5.8rem] px-2 flex flex-row items-center justify-between w-full bg-black lg:bg-transparent rounded'>
+              <div className='flex flex-row w-fulls items-start'>
+                <Image
+                  src={
+                    moviePoster
+                      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${moviePoster}`
+                      : '/assets/movie-sample.png'
+                  }
+                  alt='movie poster'
+                  width={512}
+                  height={512}
+                  className='h-[4.6rem] w-[6.5rem] lg:h-[10rem] lg:w-[20rem] mr-2 rounded-lg'
+                />
+                <div className='text-[0.75rem] flex flex-col lg:text-[1.2rem] py-[0.15rem] lg:ml-2'>
+                  <p className='block w-[11.5rem] lg:w-[28rem] lg:mb-3 text-cream overflow-hidden whitespace-nowrap overflow-ellipsis'>{`${movieName} (${movieYear})`}</p>
+
+                  <p className='block mt-1 w-[11.5rem] lg:w-[28rem] lg:mb-3 order-1 lg:order-2 overflow-hidden whitespace-nowrap overflow-ellipsis'>
+                    <span className='font-semibold text-input-gray'>
+                      Director:{' '}
+                    </span>
+                    {movieDirector}
+                  </p>
+                  <div className='flex flex-wrap mt-1 order-2 lg:order-1'>
+                    {movieGenres.map((genre: Genre) => {
+                      return (
+                        <div
+                          key={genre.id}
+                          className={`px-1 text-[0.56rem] lg:text-sm lg:px-2 py-[0.2rem] text-white text-center bg-textarea-gray rounded mr-2 mb-2`}
+                        >
+                          <p className='text-center block'>
+                            {genre.name[locale as keyof typeof genre.name]}
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div className='w-full h-[4.4rem] mt-4 items-center flex border border-textarea-gray bg-transparent rounded py-2 px-4'>
+                <div className='flex flex-row justify-between w-full lg:justify-start'>
+                  <div className='flex flex-row items-center'>
+                    <Image
+                      src='/assets/photo-camera.png'
+                      alt='photo camera'
+                      width={512}
+                      height={512}
+                      className='h-6 w-6 mr-3'
+                    />
+                    <p
+                      className={`${
+                        imageName && 'text-upload-btn-violet opacity-70'
+                      } lg:hidden block text-sm w-32 overflow-hidden whitespace-nowrap overflow-ellipsis`}
+                    >
+                      {imageName || translate('Upload image')}
+                    </p>
+                    <p
+                      className={`${
+                        imageName && 'text-upload-btn-violet opacity-70'
+                      } hidden lg:block max-w-[34.6rem] overflow-hidden whitespace-nowrap overflow-ellipsis`}
+                    >
+                      {imageName || translate('Drag & drop your image here or')}
+                    </p>
+                  </div>
+                  <label className='relative lg:ml-4 bg-upload-btn-violet py-2 lg:px-[0.7rem] px-[0.4rem] bg-opacity-40 cursor-pointer'>
+                    <span className='text-xs lg:text-base'>
+                      {translate('Choose file')}
+                    </span>
+                    <input
+                      {...register('image')}
+                      name='image'
+                      onChange={(e) => {
+                        handleUpload(e);
+                      }}
+                      type='file'
+                      className='absolute inset-0 w-full h-full opacity-0 cursor-pointer'
+                    />
+                  </label>
+                </div>
+              </div>
+              <div className='h-2 mt-1'>
+                <p className='text-red text-xs'>{imageError && imageError}</p>
+              </div>
+            </div>
+            <div className='relative mt-4'>
               <textarea
                 {...register('bodyEn', {
                   required: `${t('This field is required')}`,
@@ -84,7 +175,7 @@ const AddQuoteFromMovies: React.FC<PropsType> = ({
                 </p>
               </div>
             </div>
-            <div className='relative mt-5'>
+            <div className='relative mt-3'>
               <textarea
                 {...register('bodyGe', {
                   required: `${t('This field is required')}`,
@@ -103,54 +194,7 @@ const AddQuoteFromMovies: React.FC<PropsType> = ({
                 </p>
               </div>
             </div>
-            <div className='mt-5 w-full h-[4.4rem] items-center flex border border-textarea-gray bg-transparent rounded py-2 px-4'>
-              <div className='flex flex-row justify-between w-full lg:justify-start'>
-                <div className='flex flex-row items-center'>
-                  <Image
-                    src='/assets/photo-camera.png'
-                    alt='photo camera'
-                    width={512}
-                    height={512}
-                    className='h-6 w-6 mr-3'
-                  />
-                  <p
-                    className={`${
-                      imageName && 'text-upload-btn-violet opacity-70'
-                    } lg:hidden block text-sm w-32 overflow-hidden whitespace-nowrap overflow-ellipsis`}
-                  >
-                    {imageName || translate('Upload image')}
-                  </p>
-                  <p
-                    className={`${
-                      imageName && 'text-upload-btn-violet opacity-70'
-                    } hidden lg:block max-w-[34.6rem] overflow-hidden whitespace-nowrap overflow-ellipsis`}
-                  >
-                    {imageName || translate('Drag & drop your image here or')}
-                  </p>
-                </div>
-                <label className='relative lg:ml-4 bg-upload-btn-violet py-2 lg:px-[0.7rem] px-[0.4rem] bg-opacity-40 cursor-pointer'>
-                  <span className='text-xs lg:text-base'>
-                    {translate('Choose file')}
-                  </span>
-                  <input
-                    {...register('image')}
-                    name='image'
-                    onChange={(e) => {
-                      handleUpload(e);
-                    }}
-                    type='file'
-                    className='absolute inset-0 w-full h-full opacity-0 cursor-pointer'
-                  />
-                </label>
-              </div>
-            </div>
-            <div className='h-2 mt-1'>
-              <p className='text-red text-xs'>{imageError && imageError}</p>
-            </div>
 
-            <div className='h-2 mt-1'>
-              <p className='text-red text-xs'>{movieError}</p>
-            </div>
             <button
               onClick={() => {
                 handleMovieExistence(userId.toString());

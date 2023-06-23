@@ -39,6 +39,14 @@ const Movie = () => {
               userName={user.name}
               avatar={user.avatar}
               userId={user.id}
+              moviePoster={movie.poster}
+              movieName={movie.name[locale as keyof typeof movie.name]}
+              movieYear={movie.year}
+              movieDirector={
+                movie.director[locale as keyof typeof movie.director]
+              }
+              movieGenres={movie.genres}
+              movieId={movie.id}
             />
           )}
 

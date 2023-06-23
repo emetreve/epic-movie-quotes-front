@@ -25,7 +25,7 @@ const useMovie = () => {
     }
   };
 
-  const { data: movie } = useQuery('usermovies', fetchMovie, {
+  const { data: movie } = useQuery('movie', fetchMovie, {
     enabled: !!id,
   });
 
