@@ -139,15 +139,14 @@ const useAddNewMovie = () => {
 
       try {
         createMovie(formData);
+        queryClient.invalidateQueries('usermovies').then(() => {
+          reset();
+          showAddMovie(false);
+        });
       } catch (error: any) {
         console.log(error);
       }
     }
-
-    queryClient.invalidateQueries('usermovies').then(() => {
-      reset();
-      showAddMovie(false);
-    });
   };
 
   return {
