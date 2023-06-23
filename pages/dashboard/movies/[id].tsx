@@ -2,9 +2,11 @@ import { useMovie } from '@/hooks';
 import Image from 'next/image';
 import { Header, SideProfilePanel, QuoteListing } from '@/components';
 import { Genre, QuoteFromMoviePage } from '@/types';
+import { GetStaticProps, GetStaticPaths } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const Movie = () => {
-  const { locale, logged, user, movie } = useMovie();
+  const { locale, logged, user, movie, t } = useMovie();
 
   if (logged && movie) {
     return (
@@ -25,7 +27,7 @@ const Movie = () => {
 
           <div className='lg:px-[4rem] px-7 pb-8 lg:ml-[25%] lg:w-[75%] w-full lg:mt-[2rem]'>
             <div className='text-xl text-white mt-3 lg:block hidden'>
-              <p>Movie description</p>
+              <p>{t('Movie description')}</p>
             </div>
             <div className='lg:flex flex-row'>
               <Image
@@ -137,3 +139,22 @@ const Movie = () => {
 };
 
 export default Movie;
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: true,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale as string, [
+        'movies',
+        'newsfeed',
+        'profile',
+      ])),
+    },
+  };
+};
