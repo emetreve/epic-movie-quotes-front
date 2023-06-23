@@ -4,3 +4,4 @@ export * from './SideProfilePanel';
 export * from './Home';
 export * from './Camera';
 export * from './AddNewMovie';
+export * from './ViewOptions';

@@ -1,8 +1,8 @@
 import { PropsType } from './types';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { Heart } from '@/components';
+import { Heart, ViewOptions } from '@/components';
 import { Like } from '@/types';
+import useQuoteListing from './useQuoteListing';
 
 const QuoteListing: React.FC<PropsType> = ({
   likesCount,
@@ -11,11 +11,48 @@ const QuoteListing: React.FC<PropsType> = ({
   image,
   likes,
   authUserId,
+  quoteId,
 }) => {
-  const { locale } = useRouter();
+  const { locale, handleViewOptions } = useQuoteListing(quoteId);
 
   return (
-    <div className='text-white shadow-lg w-full lg:w-[43rem] lg:rounded-xl pt-5 pb-0 bg-profile-dark-blue bg-opacity-95'>
+    <div className='text-white relative shadow-lg w-full lg:w-[43rem] lg:rounded-xl pt-5 pb-0 bg-profile-dark-blue bg-opacity-95'>
+      {true && (
+        <div className='absolute flex items-center pl-8 bottom-10 right-7 bg-violet-quote shadow-lg rounded-lg h-[9rem] w-[12rem]'>
+          <div className='font-light text-sm flex flex-col gap-5'>
+            <div className='flex flex-row items-center'>
+              <Image
+                src='/assets/view.png'
+                alt='view quote'
+                width={80}
+                height={56}
+                className='h-[0.9rem] w-auto mr-[0.8rem]'
+              />
+              <p>Vew quote</p>
+            </div>
+            <div className='flex flex-row items-center'>
+              <Image
+                src='/assets/edit.png'
+                alt='edit quote'
+                width={80}
+                height={80}
+                className='h-[1rem] w-auto mr-[1.1rem]'
+              />
+              <p>Edit</p>
+            </div>
+            <div className='flex flex-row items-center'>
+              <Image
+                src='/assets/delete.png'
+                alt='delete quote'
+                width={70}
+                height={80}
+                className='h-[0.97rem] w-auto mr-[1.15rem]'
+              />
+              <p>Delete</p>
+            </div>
+          </div>
+        </div>
+      )}
       <div className='lg:flex flex-row items-center lg:mb-5'>
         <Image
           src={
@@ -35,7 +72,7 @@ const QuoteListing: React.FC<PropsType> = ({
         </div>
       </div>
       <div className='px-7'>
-        <div className='border-t border-gray-600 border-opacity-70'>
+        <div className='border-t border-gray-600 border-opacity-70 flex items-center justify-between'>
           <div className='mt-3 lg:mt-5 flex pb-3 lg:pb-5'>
             <div className='flex flex-row items-center'>
               <p className='text-lg'>{commentsCount}</p>
@@ -59,6 +96,12 @@ const QuoteListing: React.FC<PropsType> = ({
                 />
               </div>
             </div>
+          </div>
+          <div
+            onClick={handleViewOptions}
+            className='mr-1 hover:cursor-pointer'
+          >
+            <ViewOptions />
           </div>
         </div>
       </div>

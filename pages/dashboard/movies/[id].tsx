@@ -160,6 +160,7 @@ const Movie = () => {
                       }`}
                     >
                       <QuoteListing
+                        quoteId={quote.id}
                         image={quote.image}
                         body={quote.body}
                         likesCount={quote.likes_count}
