@@ -18,6 +18,14 @@ const QuoteListing: React.FC<PropsType> = ({
 
   return (
     <div className='text-white relative shadow-lg w-full lg:w-[43rem] lg:rounded-xl pt-5 pb-0 bg-profile-dark-blue bg-opacity-95'>
+      <div className='justify-end hidden lg:flex'>
+        <div
+          onClick={handleViewOptions}
+          className='relative right-7 top-3 mr-1 hover:cursor-pointer'
+        >
+          <ViewOptions classes='h-[0.36rem]' />
+        </div>
+      </div>
       {showOptions && (
         <div className='absolute flex items-center pl-8 bottom-10 right-7 bg-violet-quote shadow-lg rounded-lg h-[9rem] w-[12rem]'>
           <div className='font-light text-sm flex flex-col gap-5'>
@@ -102,9 +110,9 @@ const QuoteListing: React.FC<PropsType> = ({
           </div>
           <div
             onClick={handleViewOptions}
-            className='mr-1 hover:cursor-pointer'
+            className='mr-1 hover:cursor-pointer lg:hidden'
           >
-            <ViewOptions />
+            <ViewOptions classes='h-[0.36rem]' />
           </div>
         </div>
       </div>
