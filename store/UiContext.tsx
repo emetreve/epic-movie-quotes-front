@@ -36,6 +36,8 @@ const UiContext = createContext({
   setShowMovieDropdown: (newValue: boolean) => {},
   showCreateMovie: false,
   showAddMovie: (show: boolean) => {},
+  showAddQuoteFromMovies: false,
+  showAddQuoteFromMoviesPage: (show: boolean) => {},
 });
 
 export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
@@ -63,6 +65,7 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
   const [showMovieDropdown, setShowMovieDropdown] = useState(false);
 
   const [showCreateMovie, setShowCreateMovie] = useState(false);
+  const [showAddQuoteFromMovies, setShowAddQuoteFromMovies] = useState(false);
 
   const showCreate = (show: boolean) => {
     setShowCreateAccount(show);
@@ -180,6 +183,13 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
     }
   };
 
+  const showAddQuoteFromMoviesPage = (show: boolean) => {
+    setShowAddQuoteFromMovies(show);
+    show
+      ? document.body.classList.add('hide-scrollbar')
+      : document.body.classList.remove('hide-scrollbar');
+  };
+
   return (
     <UiContext.Provider
       value={{
@@ -217,6 +227,8 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
         setShowMovieDropdown,
         showCreateMovie,
         showAddMovie,
+        showAddQuoteFromMovies,
+        showAddQuoteFromMoviesPage,
       }}
     >
       {children}

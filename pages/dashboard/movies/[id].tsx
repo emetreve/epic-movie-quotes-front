@@ -1,12 +1,25 @@
 import { useMovie } from '@/hooks';
 import Image from 'next/image';
-import { Header, SideProfilePanel, QuoteListing } from '@/components';
+import {
+  Header,
+  SideProfilePanel,
+  QuoteListing,
+  AddQuoteFromMovies,
+} from '@/components';
 import { Genre, QuoteFromMoviePage } from '@/types';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const Movie = () => {
-  const { locale, logged, user, movie, t } = useMovie();
+  const {
+    locale,
+    logged,
+    user,
+    movie,
+    showAddQuoteFromMoviesPage,
+    showAddQuoteFromMovies,
+    t,
+  } = useMovie();
 
   if (logged && movie) {
     return (
@@ -20,6 +33,14 @@ const Movie = () => {
               authUserId={user.id}
             />
           </div>
+
+          {showAddQuoteFromMovies && (
+            <AddQuoteFromMovies
+              userName={user.name}
+              avatar={user.avatar}
+              userId={user.id}
+            />
+          )}
 
           <div className='w-[25%] fixed'>
             <SideProfilePanel avatar={user.avatar} name={user.name} />
@@ -70,6 +91,9 @@ const Movie = () => {
                 </p>
                 <div className='lg:hidden py-8 border-b border-gray-600 border-opacity-80'>
                   <button
+                    onClick={() => {
+                      showAddQuoteFromMoviesPage(true);
+                    }}
                     className={`text-white z-10 bg-red py-[0.5rem] px-3 ${
                       locale === 'ka' ? 'px-0 text-sm' : 'px-3'
                     }  hover:bg-red-hover rounded-md font-thin lg:text-lg text-[1.1rem]`}
@@ -97,6 +121,9 @@ const Movie = () => {
               </div>
               <div className='hidden lg:block ml-3'>
                 <button
+                  onClick={() => {
+                    showAddQuoteFromMoviesPage(true);
+                  }}
                   className={`text-white z-10 bg-red py-[0.5rem] px-3 ${
                     locale === 'ka' ? 'px-0 text-sm' : 'px-3'
                   } hover:bg-red-hover rounded-md font-thin lg:text-lg text-[1.1rem]`}
