@@ -4,3 +4,4 @@ export * from './NewsFeed';
 export * from './Profile';
 export * from './Pusher';
 export * from './Movies';
+export * from './Movie';

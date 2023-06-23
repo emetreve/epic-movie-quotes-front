@@ -3,12 +3,15 @@ import { useMutation } from 'react-query';
 import { AddCommentData } from '@/types';
 import { createComment, getLike } from '@/services';
 import { useQuotesContext } from '@/store';
+import { useTranslation } from 'next-i18next';
 
 const useNewsItem = () => {
   const { register, handleSubmit, reset } = useForm<AddCommentData>();
 
   const { searchedQuotes, setSearchedQuotes, quotesData, setQuotesData } =
     useQuotesContext();
+
+  const { t } = useTranslation('newsfeed');
 
   const createCommentMutation = useMutation(createComment);
 
@@ -42,6 +45,6 @@ const useNewsItem = () => {
     }
   };
 
-  return { register, handleSubmit, onSubmit, handleLike };
+  return { register, handleSubmit, onSubmit, handleLike, t };
 };
 export default useNewsItem;

@@ -119,27 +119,17 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
               }}
               className='relative mb-2 min-h-[3.5rem] focus:outline-none border border-textarea-gray px-5 flex flex-row items-center justify-between w-full bg-transparent rounded'
             >
-              <div className='flex flex-row py-[0.2rem] lg:py-0'>
+              <div className='flex flex-row lg:py-0'>
                 <div className=''>
                   {selectedGenres.length > 0 ? (
-                    <div
-                      className={`grid ${
-                        locale === 'en'
-                          ? 'grid-cols-3 lg:grid-cols-7 lg:gap-x-4'
-                          : 'grid-cols-2 lg:grid-cols-6 lg:gap-x-6'
-                      } text-sm lg:text-base gap-x-4`}
-                    >
-                      {selectedGenres.map((genre: Genre) => {
-                        return (
-                          <div
-                            key={genre.id}
-                            className={`flex ${
-                              locale === 'en'
-                                ? 'lg:w-[6.5rem] w-[5.7rem] py-[0.3rem]'
-                                : 'lg:w-[7rem] w-[7rem] text-xs py-[0.45rem]'
-                            } flex-row items-center my-2 lg:py-[0.4rem] lg:mr-3 mr-1 justify-center bg-textarea-gray bg-opacity-95 rounded`}
-                          >
-                            <p className='text-center block mr-2 w-fit'>
+                    <div className='flex flex-wrap mt-2'>
+                      {selectedGenres.map((genre: Genre) => (
+                        <div
+                          key={genre.id}
+                          className={`px-2 text-xs lg:text-base py-[0.3rem] text-white text-center bg-textarea-gray rounded mr-2 mb-2`}
+                        >
+                          <div className='flex flex-row items-center'>
+                            <p className='text-center block'>
                               {genre.name[locale as keyof typeof genre.name]}
                             </p>
                             <Image
@@ -147,7 +137,7 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
                               alt='close modal'
                               height={539}
                               width={512}
-                              className='w-[0.6rem] h-auto hover:cursor-pointer'
+                              className='w-[0.6rem] h-auto hover:cursor-pointer ml-[0.3rem]'
                               onClick={(
                                 e: React.MouseEvent<
                                   HTMLImageElement,
@@ -158,8 +148,8 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
                               }}
                             />
                           </div>
-                        );
-                      })}
+                        </div>
+                      ))}
                     </div>
                   ) : (
                     <p>{t('Select genres')}</p>

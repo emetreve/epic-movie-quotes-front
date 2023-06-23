@@ -27,6 +27,11 @@ const getUserMovies = async (locale?: string, search?: string) => {
   return response;
 };
 
+const getMovie = async (id: string) => {
+  const response = await axiosInstance.get(`/movie/${id}`);
+  return response;
+};
+
 const getLike = async (user_id: number, quote_id: number) => {
   const response = await axiosInstance.get('/like', {
     params: {
@@ -75,4 +80,5 @@ export {
   markNotifications,
   markNotification,
   getGenres,
+  getMovie,
 };

@@ -20,7 +20,7 @@ const NewsItem: React.FC<PropsType> = ({
   authUserAvatar,
   userAvatar,
 }) => {
-  const { handleSubmit, onSubmit, register, handleLike } = useNewsItem();
+  const { handleSubmit, onSubmit, register, handleLike, t } = useNewsItem();
 
   return (
     <div className='text-white w-full px-7 bg-news-bg bg-opacity-25 py-6 h-auto mb-10 lg:rounded-xl'>
@@ -121,7 +121,7 @@ const NewsItem: React.FC<PropsType> = ({
         <form onSubmit={handleSubmit(onSubmit)} className='w-full lg:pr-5'>
           <input
             {...register('body', { required: true })}
-            placeholder='Write a comment'
+            placeholder={`${t('Write a comment')}`}
             className='bg-comment-input-bg py-[0.43rem] pl-3 rounded-lg w-full lg:ml-5'
           />
           <input
