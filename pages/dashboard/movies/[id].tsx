@@ -39,8 +39,8 @@ const Movie = () => {
                 height={96}
                 className='w-full lg:w-[43rem] lg:max-h-[24rem] mt-7 h-full hover:cursor-pointer mr-2 rounded-xl'
               />
-              <div className='lg:mt-2 ml-2 break-all'>
-                <h1 className='text-cream text-xl mt-5'>
+              <div className='lg:mt-2 ml-2 break-all lg:w-[36.5rem]'>
+                <h1 className='text-cream text-xl mt-5 lg:w-[29rem]'>
                   {`${movie?.name[locale as keyof typeof movie.name]} (${
                     movie?.year
                   })`}
