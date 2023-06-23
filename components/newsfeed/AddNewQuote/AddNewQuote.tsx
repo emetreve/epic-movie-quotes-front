@@ -117,14 +117,14 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
                   />
                   <p
                     className={`${
-                      imageName && 'text-upload-btn-violet'
+                      imageName && 'text-upload-btn-violet opacity-70'
                     } lg:hidden block text-sm w-32 overflow-hidden whitespace-nowrap overflow-ellipsis`}
                   >
                     {imageName || translate('Upload image')}
                   </p>
                   <p
                     className={`${
-                      imageName && 'text-upload-btn-violet'
+                      imageName && 'text-upload-btn-violet opacity-70'
                     } hidden lg:block max-w-[34.6rem] overflow-hidden whitespace-nowrap overflow-ellipsis`}
                   >
                     {imageName || translate('Drag & drop your image here or')}

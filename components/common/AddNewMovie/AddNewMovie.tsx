@@ -315,10 +315,18 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
                     height={512}
                     className='h-6 w-6 mr-3'
                   />
-                  <p className='lg:hidden block text-sm w-32 overflow-hidden whitespace-nowrap overflow-ellipsis'>
+                  <p
+                    className={`${
+                      imageName && 'text-upload-btn-violet opacity-70'
+                    } lg:hidden block text-sm w-32 overflow-hidden whitespace-nowrap overflow-ellipsis`}
+                  >
                     {imageName || t('Upload image')}
                   </p>
-                  <p className='hidden lg:block max-w-[34.6rem] overflow-hidden whitespace-nowrap overflow-ellipsis'>
+                  <p
+                    className={`${
+                      imageName && 'text-upload-btn-violet opacity-70'
+                    } hidden lg:block max-w-[34.6rem] overflow-hidden whitespace-nowrap overflow-ellipsis`}
+                  >
                     {imageName || t('Drag & drop your image here or')}
                   </p>
                 </div>

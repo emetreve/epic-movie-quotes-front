@@ -114,23 +114,29 @@ const Movie = () => {
                 </button>
               </div>
             </div>
-            {movie?.quotes?.map((quote: QuoteFromMoviePage, index: number) => {
-              return (
-                <div
-                  key={quote.id}
-                  className={`${index !== movie.quotes.length - 1 && 'mb-8'}`}
-                >
-                  <QuoteListing
-                    image={quote.image}
-                    body={quote.body}
-                    likesCount={quote.likes_count}
-                    commentsCount={quote.comments_count}
-                    likes={quote.likes}
-                    authUserId={user.id}
-                  />
-                </div>
-              );
-            })}
+            <div className='lg:pb-28 pb-20'>
+              {movie?.quotes?.map(
+                (quote: QuoteFromMoviePage, index: number) => {
+                  return (
+                    <div
+                      key={quote.id}
+                      className={`${
+                        index !== movie.quotes.length - 1 && 'mb-8'
+                      }`}
+                    >
+                      <QuoteListing
+                        image={quote.image}
+                        body={quote.body}
+                        likesCount={quote.likes_count}
+                        commentsCount={quote.comments_count}
+                        likes={quote.likes}
+                        authUserId={user.id}
+                      />
+                    </div>
+                  );
+                }
+              )}
+            </div>
           </div>
         </div>
       </>
