@@ -18,6 +18,8 @@ const Movie = () => {
     movie,
     showAddQuoteFromMoviesPage,
     showAddQuoteFromMovies,
+    whichQuoteModalIsOpen,
+    setWhichQuoteModalIsOpen,
     t,
   } = useMovie();
 
@@ -167,6 +169,8 @@ const Movie = () => {
                         commentsCount={quote.comments_count}
                         likes={quote.likes}
                         authUserId={user.id}
+                        whichModalOpen={whichQuoteModalIsOpen}
+                        setWhichModalOpen={setWhichQuoteModalIsOpen}
                       />
                     </div>
                   );

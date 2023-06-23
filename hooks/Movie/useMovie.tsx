@@ -4,8 +4,10 @@ import { useQuery } from 'react-query';
 import { getMovie } from '@/services';
 import { useTranslation } from 'next-i18next';
 import { useUiContext } from '@/store';
+import { useState } from 'react';
 
 const useMovie = () => {
+  const [whichQuoteModalIsOpen, setWhichQuoteModalIsOpen] = useState(null);
   const router = useRouter();
   const { logged, user } = useCheckIfLoggedIn();
 
@@ -37,6 +39,8 @@ const useMovie = () => {
     locale,
     showAddQuoteFromMoviesPage,
     showAddQuoteFromMovies,
+    whichQuoteModalIsOpen,
+    setWhichQuoteModalIsOpen,
     t,
   };
 };

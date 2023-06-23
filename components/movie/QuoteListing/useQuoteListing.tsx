@@ -1,28 +1,32 @@
-import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { deleteQuote } from '@/services';
 import { useQueryClient } from 'react-query';
 
-const useQuoteListing = (quoteId: number) => {
-  const [showOptions, setShowOptions] = useState(false);
+const useQuoteListing = (
+  quoteId: number,
+  setWhichModalOpen: Function,
+  whichModalOpen: number | null
+) => {
   const { locale } = useRouter();
   const queryClient = useQueryClient();
 
   const handleViewOptions = () => {
-    setShowOptions(!showOptions);
-    console.log(quoteId);
+    if (whichModalOpen === quoteId) {
+      setWhichModalOpen(null);
+    } else {
+      setWhichModalOpen(quoteId);
+    }
   };
 
   const handleDelete = async () => {
     try {
       await deleteQuote(quoteId);
-      setShowOptions(false);
       queryClient.invalidateQueries('movie');
     } catch (error) {
       console.log(error);
     }
   };
 
-  return { locale, handleViewOptions, showOptions, handleDelete };
+  return { locale, handleDelete, handleViewOptions };
 };
 export default useQuoteListing;

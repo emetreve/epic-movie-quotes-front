@@ -11,4 +11,6 @@ export type PropsType = {
   likes: Like[];
   authUserId: number;
   quoteId: number;
+  whichModalOpen: number | null;
+  setWhichModalOpen: Function;
 };

@@ -12,9 +12,14 @@ const QuoteListing: React.FC<PropsType> = ({
   likes,
   authUserId,
   quoteId,
+  whichModalOpen,
+  setWhichModalOpen,
 }) => {
-  const { locale, handleViewOptions, showOptions, handleDelete } =
-    useQuoteListing(quoteId);
+  const { locale, handleDelete, handleViewOptions } = useQuoteListing(
+    quoteId,
+    setWhichModalOpen,
+    whichModalOpen
+  );
 
   return (
     <div className='text-white relative shadow-lg w-full lg:w-[43rem] lg:rounded-xl pt-5 pb-0 bg-profile-dark-blue bg-opacity-95'>
@@ -26,9 +31,9 @@ const QuoteListing: React.FC<PropsType> = ({
           <ViewOptions classes='h-[0.36rem]' />
         </div>
       </div>
-      {showOptions && (
-        <div className='absolute flex items-center pl-8 bottom-10 right-7 bg-violet-quote shadow-lg rounded-lg h-[9rem] w-[12rem]'>
-          <div className='font-light text-sm flex flex-col gap-5'>
+      {whichModalOpen === quoteId && (
+        <div className='absolute lg:translate-x-[11.5rem] lg:bottom-6 flex items-center pl-8 bottom-10 right-7 bg-violet-quote shadow-lg rounded-lg h-[9rem] lg:h-[11rem] w-[12rem] lg:w-[13rem]'>
+          <div className='font-light text-sm lg:text-base flex flex-col gap-5'>
             <div className='flex flex-row items-center'>
               <Image
                 src='/assets/view.png'
