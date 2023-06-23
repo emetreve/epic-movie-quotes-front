@@ -2,6 +2,8 @@ import { useRouter } from 'next/router';
 import { useCheckIfLoggedIn } from '@/hooks';
 import { useQuery } from 'react-query';
 import { getMovie } from '@/services';
+import { useTranslation } from 'next-i18next';
+import { useUiContext } from '@/store';
 
 const useMovie = () => {
   const router = useRouter();
@@ -9,6 +11,10 @@ const useMovie = () => {
 
   const { locale } = useRouter();
   const { id } = router.query;
+
+  const { t } = useTranslation('movies');
+
+  const { showAddQuoteFromMoviesPage, showAddQuoteFromMovies } = useUiContext();
 
   const fetchMovie = async () => {
     try {
@@ -19,10 +25,19 @@ const useMovie = () => {
     }
   };
 
-  const { data: movie } = useQuery('usermovies', fetchMovie, {
+  const { data: movie } = useQuery('movie', fetchMovie, {
     enabled: !!id,
   });
 
-  return { id, logged, user, movie, locale };
+  return {
+    id,
+    logged,
+    user,
+    movie,
+    locale,
+    showAddQuoteFromMoviesPage,
+    showAddQuoteFromMovies,
+    t,
+  };
 };
 export default useMovie;

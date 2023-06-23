@@ -7,7 +7,7 @@ const createComment = async (data: AddCommentData) => {
 };
 
 const createQuote = async (data: FormData) => {
-  const response = await axiosInstance.post('/create-quote', data, {
+  const response = await axiosInstance.post('/quotes', data, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
@@ -16,7 +16,7 @@ const createQuote = async (data: FormData) => {
 };
 
 const createMovie = async (data: FormData) => {
-  const response = await axiosInstance.post('/movie', data, {
+  const response = await axiosInstance.post('/movies', data, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },

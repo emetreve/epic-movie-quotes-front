@@ -1,10 +1,25 @@
 import { useMovie } from '@/hooks';
 import Image from 'next/image';
-import { Header, SideProfilePanel, QuoteListing } from '@/components';
+import {
+  Header,
+  SideProfilePanel,
+  QuoteListing,
+  AddQuoteFromMovies,
+} from '@/components';
 import { Genre, QuoteFromMoviePage } from '@/types';
+import { GetStaticProps, GetStaticPaths } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const Movie = () => {
-  const { locale, logged, user, movie } = useMovie();
+  const {
+    locale,
+    logged,
+    user,
+    movie,
+    showAddQuoteFromMoviesPage,
+    showAddQuoteFromMovies,
+    t,
+  } = useMovie();
 
   if (logged && movie) {
     return (
@@ -19,13 +34,29 @@ const Movie = () => {
             />
           </div>
 
+          {showAddQuoteFromMovies && (
+            <AddQuoteFromMovies
+              userName={user.name}
+              avatar={user.avatar}
+              userId={user.id}
+              moviePoster={movie.poster}
+              movieName={movie.name[locale as keyof typeof movie.name]}
+              movieYear={movie.year}
+              movieDirector={
+                movie.director[locale as keyof typeof movie.director]
+              }
+              movieGenres={movie.genres}
+              movieId={movie.id}
+            />
+          )}
+
           <div className='w-[25%] fixed'>
             <SideProfilePanel avatar={user.avatar} name={user.name} />
           </div>
 
           <div className='lg:px-[4rem] px-7 pb-8 lg:ml-[25%] lg:w-[75%] w-full lg:mt-[2rem]'>
             <div className='text-xl text-white mt-3 lg:block hidden'>
-              <p>Movie description</p>
+              <p>{t('Movie description')}</p>
             </div>
             <div className='lg:flex flex-row'>
               <Image
@@ -39,8 +70,8 @@ const Movie = () => {
                 height={96}
                 className='w-full lg:w-[43rem] lg:max-h-[24rem] mt-7 h-full hover:cursor-pointer mr-2 rounded-xl'
               />
-              <div className='lg:mt-2 ml-2 break-all'>
-                <h1 className='text-cream text-xl mt-5'>
+              <div className='lg:mt-2 ml-2 break-all lg:w-[36.5rem]'>
+                <h1 className='text-cream text-xl mt-5 lg:w-[29rem]'>
                   {`${movie?.name[locale as keyof typeof movie.name]} (${
                     movie?.year
                   })`}
@@ -68,6 +99,9 @@ const Movie = () => {
                 </p>
                 <div className='lg:hidden py-8 border-b border-gray-600 border-opacity-80'>
                   <button
+                    onClick={() => {
+                      showAddQuoteFromMoviesPage(true);
+                    }}
                     className={`text-white z-10 bg-red py-[0.5rem] px-3 ${
                       locale === 'ka' ? 'px-0 text-sm' : 'px-3'
                     }  hover:bg-red-hover rounded-md font-thin lg:text-lg text-[1.1rem]`}
@@ -95,6 +129,9 @@ const Movie = () => {
               </div>
               <div className='hidden lg:block ml-3'>
                 <button
+                  onClick={() => {
+                    showAddQuoteFromMoviesPage(true);
+                  }}
                   className={`text-white z-10 bg-red py-[0.5rem] px-3 ${
                     locale === 'ka' ? 'px-0 text-sm' : 'px-3'
                   } hover:bg-red-hover rounded-md font-thin lg:text-lg text-[1.1rem]`}
@@ -112,23 +149,29 @@ const Movie = () => {
                 </button>
               </div>
             </div>
-            {movie?.quotes?.map((quote: QuoteFromMoviePage, index: number) => {
-              return (
-                <div
-                  key={quote.id}
-                  className={`${index !== movie.quotes.length - 1 && 'mb-8'}`}
-                >
-                  <QuoteListing
-                    image={quote.image}
-                    body={quote.body}
-                    likesCount={quote.likes_count}
-                    commentsCount={quote.comments_count}
-                    likes={quote.likes}
-                    authUserId={user.id}
-                  />
-                </div>
-              );
-            })}
+            <div className='lg:pb-28 pb-20'>
+              {movie?.quotes?.map(
+                (quote: QuoteFromMoviePage, index: number) => {
+                  return (
+                    <div
+                      key={quote.id}
+                      className={`${
+                        index !== movie.quotes.length - 1 && 'mb-8'
+                      }`}
+                    >
+                      <QuoteListing
+                        image={quote.image}
+                        body={quote.body}
+                        likesCount={quote.likes_count}
+                        commentsCount={quote.comments_count}
+                        likes={quote.likes}
+                        authUserId={user.id}
+                      />
+                    </div>
+                  );
+                }
+              )}
+            </div>
           </div>
         </div>
       </>
@@ -137,3 +180,22 @@ const Movie = () => {
 };
 
 export default Movie;
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: true,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale as string, [
+        'movies',
+        'newsfeed',
+        'profile',
+      ])),
+    },
+  };
+};

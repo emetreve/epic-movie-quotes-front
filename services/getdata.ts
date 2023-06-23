@@ -18,7 +18,7 @@ const getMovies = async () => {
 };
 
 const getUserMovies = async (locale?: string, search?: string) => {
-  const response = await axiosInstance.get('/user-movies', {
+  const response = await axiosInstance.get('/movies/user', {
     params: {
       locale,
       search,
@@ -28,7 +28,7 @@ const getUserMovies = async (locale?: string, search?: string) => {
 };
 
 const getMovie = async (id: string) => {
-  const response = await axiosInstance.get(`/movie/${id}`);
+  const response = await axiosInstance.get(`/movies/${id}`);
   return response;
 };
 
