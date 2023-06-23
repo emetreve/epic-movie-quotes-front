@@ -13,11 +13,12 @@ const QuoteListing: React.FC<PropsType> = ({
   authUserId,
   quoteId,
 }) => {
-  const { locale, handleViewOptions } = useQuoteListing(quoteId);
+  const { locale, handleViewOptions, showOptions, handleDelete } =
+    useQuoteListing(quoteId);
 
   return (
     <div className='text-white relative shadow-lg w-full lg:w-[43rem] lg:rounded-xl pt-5 pb-0 bg-profile-dark-blue bg-opacity-95'>
-      {true && (
+      {showOptions && (
         <div className='absolute flex items-center pl-8 bottom-10 right-7 bg-violet-quote shadow-lg rounded-lg h-[9rem] w-[12rem]'>
           <div className='font-light text-sm flex flex-col gap-5'>
             <div className='flex flex-row items-center'>
@@ -28,7 +29,7 @@ const QuoteListing: React.FC<PropsType> = ({
                 height={56}
                 className='h-[0.9rem] w-auto mr-[0.8rem]'
               />
-              <p>Vew quote</p>
+              <p className='hover:cursor-pointer'>Vew quote</p>
             </div>
             <div className='flex flex-row items-center'>
               <Image
@@ -38,7 +39,7 @@ const QuoteListing: React.FC<PropsType> = ({
                 height={80}
                 className='h-[1rem] w-auto mr-[1.1rem]'
               />
-              <p>Edit</p>
+              <p className='hover:cursor-pointer'>Edit</p>
             </div>
             <div className='flex flex-row items-center'>
               <Image
@@ -48,7 +49,9 @@ const QuoteListing: React.FC<PropsType> = ({
                 height={80}
                 className='h-[0.97rem] w-auto mr-[1.15rem]'
               />
-              <p>Delete</p>
+              <p onClick={handleDelete} className='hover:cursor-pointer'>
+                Delete
+              </p>
             </div>
           </div>
         </div>
