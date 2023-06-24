@@ -1,10 +1,25 @@
 import Image from 'next/image';
 import useEditMovie from './useEditMovie';
-import { PropsType } from './types';
+import { PropsType, Genre } from './types';
 
 const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
-  const { showMovieEdit, handleSubmit, register, onSubmit, errors } =
-    useEditMovie(movie);
+  const {
+    showMovieEdit,
+    handleSubmit,
+    register,
+    onSubmit,
+    errors,
+    genres,
+    selectedGenres,
+    handleGenreSelection,
+    showGenresDropdown,
+    setShowGenresDropdown,
+    handleRemoveGenre,
+    handleSubmitCheckForGenres,
+    genreSelectionValid,
+    locale,
+    t,
+  } = useEditMovie(movie);
 
   return (
     <div className='z-50 lg:pb-16 bg-profile-dark-blue overflow-auto h-screen w-screen fixed backdrop-blur-sm lg:backdrop-blur-none bg-partly-transparent-dark lg:bg-violet-quote-create-bg lg:bg-opacity-70 text-white flex items-center justify-center top-0 left-0'>
@@ -90,7 +105,7 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
               </div>
             </div>
 
-            {/* <div
+            <div
               onClick={(e) => {
                 e.stopPropagation();
                 setShowGenresDropdown((prev) => !prev);
@@ -166,7 +181,7 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
               <div className='h-2 absolute -bottom-2 left-0'>
                 <p className='text-red text-xs'>{genreSelectionValid}</p>
               </div>
-            </div> */}
+            </div>
 
             <div className='relative'>
               <div className='relative flex items-center w-full overflow-hidden pr-12 focus:outline-none h-[3.2rem] border border-textarea-gray bg-transparent rounded px-4'>

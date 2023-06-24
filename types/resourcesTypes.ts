@@ -162,7 +162,7 @@ export type MovieForSingleMoviePage = {
     en: string;
     ka: string;
   };
-  genres?: Genre[];
+  genres: Genre[];
   revenue: string;
   year: string;
 };

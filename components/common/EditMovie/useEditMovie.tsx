@@ -1,10 +1,31 @@
+import { useState } from 'react';
 import { useUiContext } from '@/store';
 import { useForm } from 'react-hook-form';
-import { CreateMovieFormData } from '@/types';
+import { CreateMovieFormData, Genre } from '@/types';
 import { MovieForSingleMoviePage } from '@/types';
+import { getGenres } from '@/services';
+import { useQuery } from 'react-query';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 
 const useEditMovie = (movie: MovieForSingleMoviePage) => {
+  const [selectedGenres, setSelectedGenres] = useState<Genre[]>([
+    ...movie.genres,
+  ]);
+  const [showGenresDropdown, setShowGenresDropdown] = useState(false);
+  const [genreSelectionValid, setGenreSelectionValid] = useState('');
   const { showMovieEdit } = useUiContext();
+
+  const router = useRouter();
+  const locale = router.locale;
+  const { t } = useTranslation('movies');
+
+  const fetchGenres = async () => {
+    const response = await getGenres();
+    return response.data;
+  };
+
+  const { data: genres } = useQuery('genres', fetchGenres);
 
   const methods = useForm({
     defaultValues: {
@@ -25,11 +46,45 @@ const useEditMovie = (movie: MovieForSingleMoviePage) => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = methods;
+
+  const handleGenreSelection = (genre: Genre) => {
+    const isAlreadySelected = selectedGenres.some(
+      (selectedGenre) => selectedGenre.id === genre.id
+    );
+
+    if (!isAlreadySelected) {
+      setSelectedGenres((prev) => [...prev, genre]);
+    }
+
+    setShowGenresDropdown(false);
+  };
+
+  const handleRemoveGenre = (
+    e: React.MouseEvent<HTMLImageElement, MouseEvent>,
+    id: number
+  ) => {
+    e.stopPropagation();
+
+    setSelectedGenres((prevGenres) => {
+      const updatedGenres = prevGenres.filter((genre) => genre.id !== id);
+      return updatedGenres;
+    });
+
+    if (selectedGenres.length === 1) {
+      setGenreSelectionValid('Please select at least one');
+    }
+  };
+
+  const handleSubmitCheckForGenres = () => {
+    if (selectedGenres.length < 1) {
+      setGenreSelectionValid('Please select at least one');
+    }
+  };
 
   const onSubmit = async (data: CreateMovieFormData) => {
     console.log(data);
+    console.log(selectedGenres);
     //   if (selectedGenres.length < 1) {
     //     setGenreSelectionValid('Please select at least one');
     //     return;
@@ -62,6 +117,22 @@ const useEditMovie = (movie: MovieForSingleMoviePage) => {
     //   }
   };
 
-  return { showMovieEdit, handleSubmit, register, onSubmit, errors };
+  return {
+    showMovieEdit,
+    handleSubmit,
+    register,
+    onSubmit,
+    errors,
+    genres,
+    selectedGenres,
+    handleGenreSelection,
+    showGenresDropdown,
+    setShowGenresDropdown,
+    handleRemoveGenre,
+    handleSubmitCheckForGenres,
+    genreSelectionValid,
+    locale,
+    t,
+  };
 };
 export default useEditMovie;

@@ -2,12 +2,11 @@ import { useState } from 'react';
 import { useUiContext } from '@/store';
 import { useForm } from 'react-hook-form';
 import { getGenres } from '@/services';
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import { Genre } from '@/types';
 import { useRouter } from 'next/router';
 import { CreateMovieFormData } from '@/types';
 import { createMovie } from '@/services';
-import { useQueryClient } from 'react-query';
 import { useTranslation } from 'next-i18next';
 
 const useAddNewMovie = () => {
