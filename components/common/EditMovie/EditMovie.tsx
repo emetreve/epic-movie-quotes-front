@@ -169,17 +169,19 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
             </div> */}
 
             <div className='relative'>
-              <input
-                {...register('year', {
-                  required: `${'This field is required'}`,
-                  pattern: {
-                    value: /^\d+$/,
-                    message: 'Please use only numbers',
-                  },
-                })}
-                className='w-full pr-12 focus:outline-none h-[3.2rem] border border-textarea-gray bg-transparent rounded px-4 placeholder-white'
-                placeholder='წელი/Year'
-              />
+              <div className='relative flex items-center w-full overflow-hidden pr-12 focus:outline-none h-[3.2rem] border border-textarea-gray bg-transparent rounded px-4'>
+                <p className='absolute text-input-gray text-sm'>წელი/Year:</p>
+                <input
+                  {...register('year', {
+                    required: `${'This field is required'}`,
+                    pattern: {
+                      value: /^\d+$/,
+                      message: 'Please use only numbers',
+                    },
+                  })}
+                  className='absolute w-full pr-[7rem] left-[6.2rem] focus:outline-nonebg-transparent bg-transparent'
+                />
+              </div>
               <div className='h-2'>
                 <p className='text-red text-xs'>
                   {errors.year && errors.year.message}
