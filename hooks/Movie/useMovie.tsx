@@ -33,7 +33,7 @@ const useMovie = () => {
 
   const handleDelete = async (id: number) => {
     try {
-      const response = await deleteMovie(id);
+      await deleteMovie(id);
       push('/dashboard/movies');
     } catch (error) {
       console.log(error);
