@@ -19,4 +19,4 @@ export {
 } from './getdata';
 export { createComment, createQuote, createMovie } from './postdata';
 export { default as pusherInstance } from './pusher';
-export { deleteQuote } from './deletedata';
+export { deleteQuote, deleteMovie } from './deletedata';

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useCheckIfLoggedIn } from '@/hooks';
 import { useQuery } from 'react-query';
-import { getMovie } from '@/services';
+import { getMovie, deleteMovie } from '@/services';
 import { useTranslation } from 'next-i18next';
 import { useUiContext } from '@/store';
 import { useState } from 'react';
@@ -11,7 +11,7 @@ const useMovie = () => {
   const router = useRouter();
   const { logged, user } = useCheckIfLoggedIn();
 
-  const { locale } = useRouter();
+  const { locale, push } = useRouter();
   const { id } = router.query;
 
   const { t } = useTranslation('movies');
@@ -31,6 +31,15 @@ const useMovie = () => {
     enabled: !!id,
   });
 
+  const handleDelete = async (id: number) => {
+    try {
+      const response = await deleteMovie(id);
+      push('/dashboard/movies');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     id,
     logged,
@@ -41,6 +50,7 @@ const useMovie = () => {
     showAddQuoteFromMovies,
     whichQuoteModalIsOpen,
     setWhichQuoteModalIsOpen,
+    handleDelete,
     t,
   };
 };

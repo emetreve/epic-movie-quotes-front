@@ -5,4 +5,9 @@ const deleteQuote = async (id: number) => {
   return response;
 };
 
-export { deleteQuote };
+const deleteMovie = async (id: number) => {
+  const response = await axiosInstance.delete(`/movies/${id}`);
+  return response;
+};
+
+export { deleteQuote, deleteMovie };

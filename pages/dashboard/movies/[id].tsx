@@ -20,6 +20,7 @@ const Movie = () => {
     showAddQuoteFromMovies,
     whichQuoteModalIsOpen,
     setWhichQuoteModalIsOpen,
+    handleDelete,
     t,
   } = useMovie();
 
@@ -92,6 +93,9 @@ const Movie = () => {
                     <div className='border-r border-gray-600 h-3 mr-[0.1rem]'></div>
                     <div className='flex'>
                       <Image
+                        onClick={() => {
+                          handleDelete(movie.id);
+                        }}
                         src='/assets/delete.png'
                         alt='delete quote'
                         width={70}
