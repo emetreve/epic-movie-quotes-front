@@ -256,30 +256,10 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
               </div>
             </div>
 
-            {/* <div className='relative'>
-              <textarea
-                {...register('descriptionEn', {
-                  required: `${'This field is required'}`,
-                  pattern: {
-                    value: /^[\w,.,()\s$?!#@%:^&*"']+$/,
-                    message: `${'Only English text allowed'}`,
-                  },
-                })}
-                className='w-full pr-12 focus:outline-none h-[5.2rem] border border-textarea-gray bg-transparent rounded py-2 px-4 placeholder-white'
-                placeholder='Movie discription'
-              />
-              <p className='absolute top-3 right-4 text-textarea-gray'>ქარ</p>
-              <div className='h-2 -mt-1'>
-                <p className='text-red text-xs'>
-                  {errors.descriptionEn && errors.descriptionEn.message}
-                </p>
-              </div>
-            </div> */}
-
             <div className='relative'>
               <div className='relative h-[6rem] flex flex-col items-center w-full overflow-hidden pr-12 focus:outline-none border border-textarea-gray bg-transparent rounded px-4'>
                 <p className='absolute block pt-2 text-input-gray text-sm left-4'>
-                  Description:
+                  Movie description:
                 </p>
                 <textarea
                   {...register('descriptionEn', {
@@ -301,20 +281,25 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
               </div>
             </div>
 
-            <div className='relative -mt-1'>
-              <textarea
-                {...register('descriptionGe', {
-                  required: `${'This field is required'}`,
-                  pattern: {
-                    value: /^[ა-ჰ\d,.()\s$?!#:@%^&*"']+$/,
-                    message: `${'Only Georgian text allowed'}`,
-                  },
-                })}
-                className='w-full pr-12 focus:outline-none h-[5.2rem] border border-textarea-gray bg-transparent rounded py-2 px-4 placeholder-white'
-                placeholder='ფილმის აღწერა'
-              />
+            <div className='relative'>
+              <div className='relative h-[6rem] flex flex-col items-center w-full overflow-hidden pr-12 focus:outline-none border border-textarea-gray bg-transparent rounded px-4'>
+                <p className='absolute block pt-2 text-input-gray text-sm left-4'>
+                  ფილმის აღწერა:
+                </p>
+                <textarea
+                  {...register('descriptionGe', {
+                    required: `${'This field is required'}`,
+                    pattern: {
+                      value: /^[ა-ჰ\d,.()\s$?!#:@%^&*"']+$/,
+                      message: `${'Only Georgian text allowed'}`,
+                    },
+                  })}
+                  className='w-full absolute mt-8 ml-8 pr-11 focus:outline-none bg-transparent py-2 px-4 placeholder-white'
+                  placeholder='Movie description'
+                />
+              </div>
               <p className='absolute top-3 right-4 text-textarea-gray'>ქარ</p>
-              <div className='h-2 -mt-1'>
+              <div className='h-2'>
                 <p className='text-red text-xs'>
                   {errors.descriptionGe && errors.descriptionGe.message}
                 </p>
