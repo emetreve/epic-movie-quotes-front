@@ -1,10 +1,13 @@
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useCheckIfLoggedIn } from '@/hooks';
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import { getMovie, deleteMovie } from '@/services';
 import { useTranslation } from 'next-i18next';
 import { useUiContext } from '@/store';
 import { useState } from 'react';
+import { usePusher } from '@/hooks';
+import { QuoteMessage } from '@/types';
 
 const useMovie = () => {
   const [whichQuoteModalIsOpen, setWhichQuoteModalIsOpen] = useState(null);
@@ -17,6 +20,31 @@ const useMovie = () => {
   const { t } = useTranslation('movies');
 
   const { showAddQuoteFromMoviesPage, showAddQuoteFromMovies } = useUiContext();
+
+  const queryClient = useQueryClient();
+
+  usePusher();
+
+  useEffect(() => {
+    const channelLike = window.Echo.channel('like-updated');
+    channelLike.listen('LikeUpdated', function (data: QuoteMessage) {
+      if (data) {
+        queryClient.invalidateQueries('movie');
+      }
+    });
+
+    const channelComment = window.Echo.channel('comment-updated');
+    channelComment.listen('CommentUpdated', function (data: QuoteMessage) {
+      if (data) {
+        queryClient.invalidateQueries('movie');
+      }
+    });
+
+    return () => {
+      channelLike.stopListening('LikeUpdated');
+      channelComment.stopListening('CommentUpdated');
+    };
+  }, [user]);
 
   const fetchMovie = async () => {
     try {
