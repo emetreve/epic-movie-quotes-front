@@ -213,17 +213,19 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
             </div>
 
             <div className='relative'>
-              <input
-                {...register('directorEn', {
-                  required: `${'This field is required'}`,
-                  pattern: {
-                    value: /^[\w,.,()\s$?!#@%:^&*"']+$/,
-                    message: `${'Only English text allowed'}`,
-                  },
-                })}
-                className='w-full pr-12 focus:outline-none h-[3.2rem] border border-textarea-gray bg-transparent rounded px-4 placeholder-white'
-                placeholder='Director'
-              />
+              <div className='relative flex items-center w-full overflow-hidden pr-12 focus:outline-none h-[3.2rem] border border-textarea-gray bg-transparent rounded px-4'>
+                <p className='absolute text-input-gray text-sm'>Director:</p>
+                <input
+                  {...register('directorEn', {
+                    required: `${'This field is required'}`,
+                    pattern: {
+                      value: /^[\w,.,()\s$?!#@%:^&*"']+$/,
+                      message: `${'Only English text allowed'}`,
+                    },
+                  })}
+                  className='absolute w-full pr-[8.3rem] left-[5rem] focus:outline-nonebg-transparent bg-transparent'
+                />
+              </div>
               <p className='absolute top-3 right-4 text-textarea-gray'>Eng</p>
               <div className='h-2'>
                 <p className='text-red text-xs'>
