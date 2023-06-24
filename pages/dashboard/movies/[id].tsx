@@ -26,7 +26,7 @@ const Movie = () => {
   if (logged && movie) {
     return (
       <>
-        <div className='min-h-screen bg-gradient-violet relative'>
+        <div id='movie' className='min-h-screen bg-gradient-violet relative'>
           <div className='h-[5rem]'>
             <Header
               hideSearch={true}

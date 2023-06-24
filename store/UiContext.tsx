@@ -185,9 +185,12 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
 
   const showAddQuoteFromMoviesPage = (show: boolean) => {
     setShowAddQuoteFromMovies(show);
-    show
-      ? document.body.classList.add('hide-scrollbar')
-      : document.body.classList.remove('hide-scrollbar');
+    const moviesPage = document.getElementById('movie');
+    if (moviesPage) {
+      show
+        ? moviesPage.classList.add('screenHeight')
+        : moviesPage.classList.remove('screenHeight');
+    }
   };
 
   return (
