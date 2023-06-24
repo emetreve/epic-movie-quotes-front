@@ -153,6 +153,7 @@ const useEditMovie = (movie: MovieForSingleMoviePage) => {
       formData.append('image', selectedFile, selectedFile.name);
     }
 
+    console.log('testing something');
     try {
       updateMovie(formData, movie.id);
       queryClient.invalidateQueries('movie').then(() => {
