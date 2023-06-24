@@ -256,7 +256,7 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
               </div>
             </div>
 
-            <div className='relative'>
+            {/* <div className='relative'>
               <textarea
                 {...register('descriptionEn', {
                   required: `${'This field is required'}`,
@@ -270,6 +270,31 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
               />
               <p className='absolute top-3 right-4 text-textarea-gray'>ქარ</p>
               <div className='h-2 -mt-1'>
+                <p className='text-red text-xs'>
+                  {errors.descriptionEn && errors.descriptionEn.message}
+                </p>
+              </div>
+            </div> */}
+
+            <div className='relative'>
+              <div className='relative h-[6rem] flex flex-col items-center w-full overflow-hidden pr-12 focus:outline-none border border-textarea-gray bg-transparent rounded px-4'>
+                <p className='absolute block pt-2 text-input-gray text-sm left-4'>
+                  Description:
+                </p>
+                <textarea
+                  {...register('descriptionEn', {
+                    required: `${'This field is required'}`,
+                    pattern: {
+                      value: /^[\w,.,()\s$?!#@%:^&*"']+$/,
+                      message: `${'Only English text allowed'}`,
+                    },
+                  })}
+                  className='w-full absolute mt-8 ml-8 pr-11 focus:outline-none bg-transparent py-2 px-4 placeholder-white'
+                  placeholder='Movie description'
+                />
+              </div>
+              <p className='absolute top-3 right-4 text-textarea-gray'>Eng</p>
+              <div className='h-2'>
                 <p className='text-red text-xs'>
                   {errors.descriptionEn && errors.descriptionEn.message}
                 </p>
