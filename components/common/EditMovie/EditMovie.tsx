@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import useEditMovie from './useEditMovie';
-import { PropsType, Genre } from './types';
+import { PropsType } from './types';
+import { Genre } from '@/types';
 
 const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
   const {
@@ -18,11 +19,22 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
     handleSubmitCheckForGenres,
     genreSelectionValid,
     locale,
+    handleUpload,
+    handleDrop,
+    handleDragOver,
+    uploadedImageToDisplay,
     t,
   } = useEditMovie(movie);
 
   return (
-    <div className='z-50 lg:pb-16 bg-profile-dark-blue overflow-auto h-screen w-screen fixed backdrop-blur-sm lg:backdrop-blur-none bg-partly-transparent-dark lg:bg-violet-quote-create-bg lg:bg-opacity-70 text-white flex items-center justify-center top-0 left-0'>
+    <div
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
+      onClick={() => {
+        setShowGenresDropdown(false);
+      }}
+      className='z-50 lg:pb-16 bg-profile-dark-blue overflow-auto h-screen w-screen fixed backdrop-blur-sm lg:backdrop-blur-none bg-partly-transparent-dark lg:bg-violet-quote-create-bg lg:bg-opacity-70 text-white flex items-center justify-center top-0 left-0'
+    >
       <div className='h-full lg:mt-[13rem] lg:bg-profile-dark-blue w-full lg:h-fit lg:w-[54rem] lg:rounded-2xl relative lg:scale-105'>
         <div className='relative pt-7 px-4 flex flex-row justify-center items-center border-b border-gray-700 pb-7'>
           <h1 className='text-xl'>Edit movie</h1>
@@ -33,7 +45,6 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
             height={512}
             className='w-[0.9rem] h-[0.9rem] hover:cursor-pointer absolute right-8'
             onClick={() => {
-              // setImageError('');
               showMovieEdit(false);
             }}
           />
@@ -321,53 +332,59 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
               </div>
             </div>
 
-            {/* <div className='-mt-1 w-full h-[4.4rem] items-center flex border border-textarea-gray bg-transparent rounded py-2 px-4'>
-              <div className='flex flex-row justify-between w-full lg:justify-start'>
+            <div className='-mt-1 w-full h-[8rem] lg:h-[10rem] items-center flex border border-textarea-gray bg-transparent rounded py-2 px-4'>
+              <div className='flex flex-row justify-between w-full h-full lg:pl-8 lg:pr-[8rem]'>
                 <div className='flex flex-row items-center'>
-                  <Image
-                    src='/assets/photo-camera.png'
-                    alt='photo camera'
-                    width={512}
-                    height={512}
-                    className='h-6 w-6 mr-3'
-                  />
-                  <p
-                    className={`${
-                      imageName && 'text-upload-btn-violet opacity-70'
-                    } lg:hidden block text-sm w-32 overflow-hidden whitespace-nowrap overflow-ellipsis`}
-                  >
-                    {imageName || t('Upload image')}
-                  </p>
-                  <p
-                    className={`${
-                      imageName && 'text-upload-btn-violet opacity-70'
-                    } hidden lg:block max-w-[34.6rem] overflow-hidden whitespace-nowrap overflow-ellipsis`}
-                  >
-                    {imageName || t('Drag & drop your image here or')}
-                  </p>
+                  <div className='py-3 lg:py-1 h-full w-full'>
+                    <Image
+                      src={
+                        uploadedImageToDisplay
+                          ? `${uploadedImageToDisplay}`
+                          : `${process.env.NEXT_PUBLIC_API_BASE_URL}${movie.poster}`
+                      }
+                      alt='photo camera'
+                      width={512}
+                      height={512}
+                      className='h-full w-full lg:w-[15rem] mr-3 border border-dashed border-pale-white'
+                    />
+                  </div>
                 </div>
-                <label className='relative lg:ml-4 bg-upload-btn-violet py-2 lg:px-[0.7rem] px-[0.4rem] bg-opacity-40 cursor-pointer'>
-                  <span className='text-xs lg:text-base'>
-                    {t('Choose file')}
-                  </span>
-                  <input
-                    {...register('image')}
-                    name='image'
-                    onChange={(e) => {
-                      handleUpload(e);
-                    }}
-                    type='file'
-                    className='absolute inset-0 w-full h-full opacity-0 cursor-pointer'
-                  />
-                </label>
+                <div className='flex flex-col text-center justify-center gap-y-3 lg:gap-y-2 align-middle h-full items-center'>
+                  <p className='text-cream uppercase block text-sm w-32 overflow-hidden whitespace-nowrap overflow-ellipsis'>
+                    Replace photo
+                  </p>
+                  <div className='flex flex-row'>
+                    <Image
+                      src='/assets/photo-camera.png'
+                      alt='photo camera'
+                      width={512}
+                      height={512}
+                      className='h-6 w-6 mr-3 hidden lg:inline'
+                    />
+                    <p className='hidden lg:block max-w-[34.6rem] overflow-hidden whitespace-nowrap overflow-ellipsis'>
+                      {t('Drag & drop your image here or')}
+                    </p>
+                  </div>
+                  <label className='relative lg:ml-4 bg-upload-btn-violet py-2 lg:px-[0.7rem] px-[0.4rem] bg-opacity-40 cursor-pointer'>
+                    <span className='text-xs lg:text-base'>
+                      {t('Choose file')}
+                    </span>
+                    <input
+                      {...register('image')}
+                      name='image'
+                      onChange={(e) => {
+                        handleUpload(e);
+                      }}
+                      type='file'
+                      className='absolute inset-0 w-full h-full opacity-0 cursor-pointer'
+                    />
+                  </label>
+                </div>
               </div>
             </div>
-            <div className='h-2 -mt-3'>
-              <p className='text-red text-xs'>{imageError && imageError}</p>
-            </div> */}
           </div>
           <button
-            // onClick={handleSubmitCheckForGenres}
+            onClick={handleSubmitCheckForGenres}
             className='text-white mb-[4rem] lg:mb-12 w-full lg:mt-8 mt-10 text-lg bg-red py-2 px-4 rounded-md hover:bg-red-hover'
             type='submit'
           >

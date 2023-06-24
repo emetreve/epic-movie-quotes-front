@@ -43,6 +43,7 @@ module.exports = {
         like: '#F3426C',
         'bell-counter-red': '#E33812',
         'violet-quote': '#24222F',
+        'pale-white': 'rgba(255, 255, 255, 0.2)',
       },
     },
   },

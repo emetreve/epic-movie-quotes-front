@@ -9,11 +9,17 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
 const useEditMovie = (movie: MovieForSingleMoviePage) => {
+  const existingGenres = movie.genres ? [...movie.genres] : [];
+
   const [selectedGenres, setSelectedGenres] = useState<Genre[]>([
-    ...movie.genres,
+    ...existingGenres,
   ]);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [showGenresDropdown, setShowGenresDropdown] = useState(false);
   const [genreSelectionValid, setGenreSelectionValid] = useState('');
+  const [imageName, setImageName] = useState('');
+  const [uploadedImageToDisplay, setUploadedImageToDisplay] = useState('');
+
   const { showMovieEdit } = useUiContext();
 
   const router = useRouter();
@@ -82,17 +88,56 @@ const useEditMovie = (movie: MovieForSingleMoviePage) => {
     }
   };
 
+  const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target?.files) {
+      return;
+    }
+    const selectedFile = event.target.files[0];
+    setSelectedFile(selectedFile);
+    if (selectedFile) {
+      setImageName(selectedFile.name);
+    }
+
+    const file = selectedFile;
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+      const binaryData = event.target?.result;
+      setUploadedImageToDisplay(binaryData as string);
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const selectedFile = e.dataTransfer.files[0];
+    setSelectedFile(selectedFile);
+    setImageName(selectedFile.name);
+
+    const file = selectedFile;
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+      const binaryData = event.target?.result;
+      setUploadedImageToDisplay(binaryData as string);
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
   const onSubmit = async (data: CreateMovieFormData) => {
     console.log(data);
     console.log(selectedGenres);
-    //   if (selectedGenres.length < 1) {
-    //     setGenreSelectionValid('Please select at least one');
-    //     return;
-    //   }
-    //   if (!imageName) {
-    //     setImageError(`${'This field is required'}`);
-    //     return;
-    //   }
+    console.log(selectedFile);
+    if (selectedGenres.length < 1) {
+      setGenreSelectionValid('Please select at least one');
+      return;
+    }
     //   if (selectedFile) {
     //     const formData = new FormData();
     //     formData.append('image', selectedFile, selectedFile.name);
@@ -132,6 +177,11 @@ const useEditMovie = (movie: MovieForSingleMoviePage) => {
     handleSubmitCheckForGenres,
     genreSelectionValid,
     locale,
+    handleUpload,
+    handleDrop,
+    handleDragOver,
+    imageName,
+    uploadedImageToDisplay,
     t,
   };
 };
