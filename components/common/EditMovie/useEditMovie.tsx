@@ -3,8 +3,8 @@ import { useUiContext } from '@/store';
 import { useForm } from 'react-hook-form';
 import { CreateMovieFormData, Genre } from '@/types';
 import { MovieForSingleMoviePage } from '@/types';
-import { getGenres } from '@/services';
-import { useQuery } from 'react-query';
+import { getGenres, updateMovie } from '@/services';
+import { useQuery, useQueryClient } from 'react-query';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
@@ -25,6 +25,8 @@ const useEditMovie = (movie: MovieForSingleMoviePage) => {
   const router = useRouter();
   const locale = router.locale;
   const { t } = useTranslation('movies');
+
+  const queryClient = useQueryClient();
 
   const fetchGenres = async () => {
     const response = await getGenres();
@@ -61,6 +63,7 @@ const useEditMovie = (movie: MovieForSingleMoviePage) => {
 
     if (!isAlreadySelected) {
       setSelectedGenres((prev) => [...prev, genre]);
+      setGenreSelectionValid('');
     }
 
     setShowGenresDropdown(false);
@@ -131,35 +134,33 @@ const useEditMovie = (movie: MovieForSingleMoviePage) => {
   };
 
   const onSubmit = async (data: CreateMovieFormData) => {
-    console.log(data);
-    console.log(selectedGenres);
-    console.log(selectedFile);
+    console.log(1901020, data);
     if (selectedGenres.length < 1) {
       setGenreSelectionValid('Please select at least one');
       return;
     }
-    //   if (selectedFile) {
-    //     const formData = new FormData();
-    //     formData.append('image', selectedFile, selectedFile.name);
-    //     formData.append('genres', JSON.stringify(selectedGenres));
-    //     formData.append('nameGe', data.nameGe);
-    //     formData.append('nameEn', data.nameEn);
-    //     formData.append('year', data.year);
-    //     formData.append('directorEn', data.directorEn);
-    //     formData.append('directorGe', data.directorGe);
-    //     formData.append('descriptionEn', data.descriptionEn);
-    //     formData.append('descriptionGe', data.descriptionGe);
-    //     formData.append('revenue', data.revenue);
-    //     try {
-    //       createMovie(formData);
-    //       queryClient.invalidateQueries('usermovies').then(() => {
-    //         reset();
-    //         showAddMovie(false);
-    //       });
-    //     } catch (error: any) {
-    //       console.log(error);
-    //     }
-    //   }
+    const formData = new FormData();
+    formData.append('genres', JSON.stringify(selectedGenres));
+    formData.append('nameGe', data.nameGe);
+    formData.append('nameEn', data.nameEn);
+    formData.append('year', data.year);
+    formData.append('directorEn', data.directorEn);
+    formData.append('directorGe', data.directorGe);
+    formData.append('descriptionEn', data.descriptionEn);
+    formData.append('descriptionGe', data.descriptionGe);
+    formData.append('revenue', data.revenue);
+    if (selectedFile) {
+      formData.append('image', selectedFile, selectedFile.name);
+    }
+
+    try {
+      updateMovie(formData, movie.id);
+      queryClient.invalidateQueries('movie').then(() => {
+        showMovieEdit(false);
+      });
+    } catch (error: any) {
+      console.log(error);
+    }
   };
 
   return {
