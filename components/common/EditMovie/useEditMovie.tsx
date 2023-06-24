@@ -134,7 +134,6 @@ const useEditMovie = (movie: MovieForSingleMoviePage) => {
   };
 
   const onSubmit = async (data: CreateMovieFormData) => {
-    console.log(1901020, data);
     if (selectedGenres.length < 1) {
       setGenreSelectionValid('Please select at least one');
       return;
@@ -153,7 +152,6 @@ const useEditMovie = (movie: MovieForSingleMoviePage) => {
       formData.append('image', selectedFile, selectedFile.name);
     }
 
-    console.log('testing something');
     try {
       updateMovie(formData, movie.id);
       queryClient.invalidateQueries('movie').then(() => {

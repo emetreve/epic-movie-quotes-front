@@ -29,7 +29,6 @@ const Movie = () => {
   } = useMovie();
 
   if (logged && movie) {
-    console.log(movie);
     return (
       <>
         <div
