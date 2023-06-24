@@ -72,7 +72,7 @@ const AddQuoteFromMovies: React.FC<PropsType> = ({
           </div>
           <form noValidate onSubmit={handleSubmit(onSubmit)} className='pt-5'>
             <div className='relative min-h-[5.8rem] px-2 flex flex-row items-center justify-between w-full bg-black lg:bg-transparent rounded'>
-              <div className='flex flex-row w-fulls items-start'>
+              <div className='flex flex-row w-fulls items-center'>
                 <Image
                   src={
                     moviePoster
