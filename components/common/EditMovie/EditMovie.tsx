@@ -56,7 +56,7 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
                       message: `${'Only English text allowed'}`,
                     },
                   })}
-                  className='absolute w-full pr-[10rem] left-[6.9rem] focus:outline-nonebg-transparent bg-transparent'
+                  className='absolute w-full pr-[10rem] left-[6.7rem] focus:outline-nonebg-transparent bg-transparent'
                 />
               </div>
               <p className='absolute top-3 right-4 text-textarea-gray'>Eng</p>
@@ -67,17 +67,21 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
               </div>
             </div>
             <div className='relative'>
-              <input
-                {...register('nameGe', {
-                  required: `${'This field is required'}`,
-                  pattern: {
-                    value: /^[ა-ჰ\d,.()\s$?!#:@%^&*"']+$/,
-                    message: `${'Only Georgian text allowed'}`,
-                  },
-                })}
-                className='w-full pr-12 focus:outline-none h-[3.2rem] border border-textarea-gray bg-transparent rounded px-4 placeholder-white'
-                placeholder='ფილმის სახელი'
-              />
+              <div className='relative flex items-center w-full overflow-hidden pr-12 focus:outline-none h-[3.2rem] border border-textarea-gray bg-transparent rounded px-4'>
+                <p className='absolute text-input-gray text-sm'>
+                  ფილმის სახელი:
+                </p>
+                <input
+                  {...register('nameGe', {
+                    required: `${'This field is required'}`,
+                    pattern: {
+                      value: /^[ა-ჰ\d,.()\s$?!#:@%^&*"']+$/,
+                      message: `${'Only Georgian text allowed'}`,
+                    },
+                  })}
+                  className='absolute w-full pr-[12.1rem] left-[8.8rem] focus:outline-nonebg-transparent bg-transparent'
+                />
+              </div>
               <p className='absolute top-3 right-4 text-textarea-gray'>ქარ</p>
               <div className='h-2'>
                 <p className='text-red text-xs'>
