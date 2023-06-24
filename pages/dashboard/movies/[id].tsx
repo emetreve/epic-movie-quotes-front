@@ -5,6 +5,7 @@ import {
   SideProfilePanel,
   QuoteListing,
   AddQuoteFromMovies,
+  EditMovie,
 } from '@/components';
 import { Genre, QuoteFromMoviePage } from '@/types';
 import { GetStaticProps, GetStaticPaths } from 'next';
@@ -21,13 +22,21 @@ const Movie = () => {
     whichQuoteModalIsOpen,
     setWhichQuoteModalIsOpen,
     handleDelete,
+    showEditMovie,
+    showMovieEdit,
+    handleOutsideClick,
     t,
   } = useMovie();
 
   if (logged && movie) {
+    console.log(movie);
     return (
       <>
-        <div id='movie' className='min-h-screen bg-gradient-violet relative'>
+        <div
+          id='movie'
+          onClick={handleOutsideClick}
+          className='min-h-screen bg-gradient-violet relative'
+        >
           <div className='h-[5rem]'>
             <Header
               hideSearch={true}
@@ -36,6 +45,15 @@ const Movie = () => {
               authUserId={user.id}
             />
           </div>
+
+          {showEditMovie && (
+            <EditMovie
+              userName={user.name}
+              userId={user.id}
+              avatar={user.avatar}
+              movie={movie}
+            />
+          )}
 
           {showAddQuoteFromMovies && (
             <AddQuoteFromMovies
@@ -83,6 +101,9 @@ const Movie = () => {
                   <div className='flex flex-row gap-x-5 items-center justify-end'>
                     <div className='flex'>
                       <Image
+                        onClick={() => {
+                          showMovieEdit(true);
+                        }}
                         src='/assets/edit.png'
                         alt='edit quote'
                         width={80}

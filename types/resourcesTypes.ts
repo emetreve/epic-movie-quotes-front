@@ -144,3 +144,25 @@ export type QuoteFromMoviePage = {
   likes_count: number;
   comments_count: number;
 };
+
+export type MovieForSingleMoviePage = {
+  id: number;
+  name: {
+    en: string;
+    ka: string;
+  };
+  poster?: string;
+  user_id: number;
+  quotes_count?: number;
+  description: {
+    en: string;
+    ka: string;
+  };
+  director: {
+    en: string;
+    ka: string;
+  };
+  genres?: Genre[];
+  revenue: string;
+  year: string;
+};

@@ -19,7 +19,14 @@ const useMovie = () => {
 
   const { t } = useTranslation('movies');
 
-  const { showAddQuoteFromMoviesPage, showAddQuoteFromMovies } = useUiContext();
+  const {
+    showAddQuoteFromMoviesPage,
+    showAddQuoteFromMovies,
+    showEditMovie,
+    showMovieEdit,
+    showBrugerMenu,
+    showBurger,
+  } = useUiContext();
 
   const queryClient = useQueryClient();
 
@@ -68,6 +75,12 @@ const useMovie = () => {
     }
   };
 
+  const handleOutsideClick = () => {
+    if (showBrugerMenu) {
+      showBurger(false);
+    }
+  };
+
   return {
     id,
     logged,
@@ -79,6 +92,9 @@ const useMovie = () => {
     whichQuoteModalIsOpen,
     setWhichQuoteModalIsOpen,
     handleDelete,
+    showEditMovie,
+    showMovieEdit,
+    handleOutsideClick,
     t,
   };
 };
