@@ -50,6 +50,8 @@ const Movie = () => {
 
           {whichQuoteToView && (
             <ViewQuote
+              authUserAvatar={user.avatar}
+              authUserName={user.name}
               whichQuoteToView={whichQuoteToView}
               setWhichQuoteToView={setWhichQuoteToView}
             />
