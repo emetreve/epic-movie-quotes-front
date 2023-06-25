@@ -96,7 +96,6 @@ const useHeader = (authUserId: number) => {
 
   const handleMarkNotificationRead = (notificationId: number) => {
     try {
-      // TODO: redirect to quote's modal view (this view is not done yes)
       markNotification(notificationId);
       queryClient.invalidateQueries('notifications');
     } catch (error) {
