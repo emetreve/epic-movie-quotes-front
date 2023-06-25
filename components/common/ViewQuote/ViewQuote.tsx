@@ -30,7 +30,7 @@ const ViewQuote: React.FC<PropsType> = ({
               <div className='flex'>
                 <Image
                   onClick={() => {
-                    // TOTO: show edut quote modal
+                    // TODO: show edut quote modal
                   }}
                   src='/assets/edit.png'
                   alt='edit quote'
