@@ -13,7 +13,7 @@ import { usePusher } from '@/hooks';
 import { NotificationMessage, Notification } from '@/types';
 
 const useHeader = (authUserId: number) => {
-  const [whichQuoteToView, setWhichQuoteToView] = useState(null);
+  const [whichQuoteToView, setWhichQuoteToView] = useState<number | null>(null);
 
   const { showBrugerMenu, showBurger, showSearchMobile, showSearchMob } =
     useUiContext();
@@ -23,6 +23,10 @@ const useHeader = (authUserId: number) => {
   const { t } = useTranslation(['newsfeed', 'profile']);
 
   const queryClient = useQueryClient();
+
+  useEffect(() => {
+    queryClient.invalidateQueries('notifications');
+  }, [whichQuoteToView]);
 
   usePusher();
   useEffect(() => {
@@ -100,6 +104,16 @@ const useHeader = (authUserId: number) => {
     }
   };
 
+  const handleNotificationClicked = (
+    notificationId: number,
+    toggle: boolean,
+    quoteId: number
+  ) => {
+    handleMarkNotificationRead(notificationId);
+    toggleNotifications(toggle);
+    setWhichQuoteToView(quoteId);
+  };
+
   const notificationBellCounter = notifications?.filter(
     (each: Notification) => {
       return each.end_user_id === authUserId && each.read === 0;
@@ -119,6 +133,7 @@ const useHeader = (authUserId: number) => {
     showNotifications,
     setShowNotifications,
     notifications,
+    handleNotificationClicked,
     handleMarkNotificationsRead,
     handleMarkNotificationRead,
     notificationBellCounter,

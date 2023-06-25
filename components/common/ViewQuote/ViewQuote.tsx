@@ -12,13 +12,14 @@ const ViewQuote: React.FC<PropsType> = ({
   authUserId,
 }) => {
   const {
-    handleBringScroll,
     register,
     handleSubmit,
     quote,
     onSubmit,
     handleLike,
-  } = useViewQuote(whichQuoteToView);
+    handleDelete,
+    handleClose,
+  } = useViewQuote(whichQuoteToView, setWhichQuoteToView);
 
   return (
     <div className='z-50 lg:pb-16 bg-profile-dark-blue overflow-auto h-screen w-screen fixed backdrop-blur-sm lg:backdrop-blur-none bg-partly-transparent-dark lg:bg-violet-quote-create-bg lg:bg-opacity-70 text-white flex items-center justify-center top-0 left-0'>
@@ -29,7 +30,7 @@ const ViewQuote: React.FC<PropsType> = ({
               <div className='flex'>
                 <Image
                   onClick={() => {
-                    // showMovieEdit(true);
+                    // TOTO: show edut quote modal
                   }}
                   src='/assets/edit.png'
                   alt='edit quote'
@@ -42,7 +43,7 @@ const ViewQuote: React.FC<PropsType> = ({
               <div className='flex'>
                 <Image
                   onClick={() => {
-                    // handleDelete(movie.id);
+                    handleDelete(quote.id);
                   }}
                   src='/assets/delete.png'
                   alt='delete quote'
@@ -59,10 +60,7 @@ const ViewQuote: React.FC<PropsType> = ({
             width={512}
             height={512}
             className='w-[0.9rem] h-[0.9rem] hover:cursor-pointer absolute right-8'
-            onClick={() => {
-              setWhichQuoteToView(null);
-              handleBringScroll();
-            }}
+            onClick={handleClose}
           />
         </div>
         <div className='flex flex-row items-center lg:mb-4 mt-6 px-6 mb-3'>

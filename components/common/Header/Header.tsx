@@ -26,10 +26,10 @@ const Header: React.FC<PropsType> = ({
     showNotifications,
     notifications,
     handleMarkNotificationsRead,
-    handleMarkNotificationRead,
     notificationBellCounter,
     whichQuoteToView,
     setWhichQuoteToView,
+    handleNotificationClicked,
   } = useHeader(authUserId);
 
   return (
@@ -207,8 +207,11 @@ const Header: React.FC<PropsType> = ({
                         <div
                           key={notification.id}
                           onClick={() => {
-                            handleMarkNotificationRead(notification.id);
-                            setWhichQuoteToView(notification.quote_id);
+                            handleNotificationClicked(
+                              notification.id,
+                              false,
+                              notification.quote_id as number
+                            );
                           }}
                           className='text-white hover:cursor-pointer h-[6.3rem] border border-gray-600 lg:rounded-md rounded-sm border-opacity-50 mt-[0.8rem] lg:px-5 px-3'
                         >

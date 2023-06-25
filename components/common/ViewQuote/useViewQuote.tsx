@@ -1,11 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { AddCommentData } from '@/types';
-import { createComment, getLike } from '@/services';
+import { createComment, getLike, deleteQuote } from '@/services';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useRouter } from 'next/router';
 import { getQuote } from '@/services';
 
-const useViewQuote = (whichQuoteToView: number) => {
+const useViewQuote = (
+  whichQuoteToView: number,
+  setWhichQuoteToView: Function
+) => {
   const { register, handleSubmit, reset } = useForm<AddCommentData>();
 
   const router = useRouter();
@@ -49,6 +52,17 @@ const useViewQuote = (whichQuoteToView: number) => {
     document.body.classList.remove('screenHeight');
   };
 
+  const handleDelete = async (id: number) => {
+    await deleteQuote(id);
+    setWhichQuoteToView(null);
+    handleBringScroll();
+  };
+
+  const handleClose = () => {
+    setWhichQuoteToView(null);
+    handleBringScroll();
+  };
+
   console.log(quote);
   return {
     handleBringScroll,
@@ -57,6 +71,8 @@ const useViewQuote = (whichQuoteToView: number) => {
     quote,
     onSubmit,
     handleLike,
+    handleDelete,
+    handleClose,
   };
 };
 export default useViewQuote;
