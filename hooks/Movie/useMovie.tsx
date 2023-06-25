@@ -35,6 +35,8 @@ const useMovie = () => {
   usePusher();
 
   useEffect(() => {
+    document.body.classList.remove('screenHeight');
+
     const channelLike = window.Echo.channel('like-updated');
     channelLike.listen('LikeUpdated', function (data: QuoteMessage) {
       if (data) {

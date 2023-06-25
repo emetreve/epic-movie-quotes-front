@@ -3,4 +3,5 @@ export type PropsType = {
   setWhichQuoteToView: Function;
   authUserAvatar?: string;
   authUserName: string;
+  authUserId: number;
 };
