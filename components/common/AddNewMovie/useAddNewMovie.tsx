@@ -127,14 +127,32 @@ const useAddNewMovie = () => {
       const formData = new FormData();
       formData.append('image', selectedFile, selectedFile.name);
       formData.append('genres', JSON.stringify(selectedGenres));
-      formData.append('nameGe', data.nameGe);
-      formData.append('nameEn', data.nameEn);
       formData.append('year', data.year);
-      formData.append('directorEn', data.directorEn);
-      formData.append('directorGe', data.directorGe);
-      formData.append('descriptionEn', data.descriptionEn);
-      formData.append('descriptionGe', data.descriptionGe);
       formData.append('revenue', data.revenue);
+
+      formData.append(
+        'name',
+        JSON.stringify({
+          en: data.nameEn,
+          ka: data.nameGe,
+        })
+      );
+
+      formData.append(
+        'director',
+        JSON.stringify({
+          en: data.directorEn,
+          ka: data.directorGe,
+        })
+      );
+
+      formData.append(
+        'description',
+        JSON.stringify({
+          en: data.descriptionEn,
+          ka: data.descriptionGe,
+        })
+      );
 
       try {
         createMovie(formData);
