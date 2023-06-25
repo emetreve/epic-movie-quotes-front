@@ -79,6 +79,9 @@ const useMovie = () => {
     if (showBrugerMenu) {
       showBurger(false);
     }
+    if (whichQuoteModalIsOpen) {
+      setWhichQuoteModalIsOpen(null);
+    }
   };
 
   return {

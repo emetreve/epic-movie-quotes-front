@@ -22,7 +22,12 @@ const QuoteListing: React.FC<PropsType> = ({
   );
 
   return (
-    <div className='text-white relative shadow-lg w-full lg:w-[43rem] lg:rounded-xl pt-5 pb-0 bg-profile-dark-blue bg-opacity-95'>
+    <div
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
+      className='text-white relative shadow-lg w-full lg:w-[43rem] lg:rounded-xl pt-5 pb-0 bg-profile-dark-blue bg-opacity-95'
+    >
       <div className='justify-end hidden lg:flex'>
         <div
           onClick={handleViewOptions}
