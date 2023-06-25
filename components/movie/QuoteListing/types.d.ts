@@ -10,4 +10,7 @@ export type PropsType = {
   image?: string;
   likes: Like[];
   authUserId: number;
+  quoteId: number;
+  whichModalOpen: number | null;
+  setWhichModalOpen: Function;
 };

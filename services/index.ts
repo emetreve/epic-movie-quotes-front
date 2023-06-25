@@ -17,5 +17,11 @@ export {
   getGenres,
   getMovie,
 } from './getdata';
-export { createComment, createQuote, createMovie } from './postdata';
+export {
+  createComment,
+  createQuote,
+  createMovie,
+  updateMovie,
+} from './postdata';
 export { default as pusherInstance } from './pusher';
+export { deleteQuote, deleteMovie } from './deletedata';

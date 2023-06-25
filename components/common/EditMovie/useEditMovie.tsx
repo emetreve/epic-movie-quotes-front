@@ -1,28 +1,32 @@
 import { useState } from 'react';
 import { useUiContext } from '@/store';
 import { useForm } from 'react-hook-form';
-import { getGenres } from '@/services';
+import { CreateMovieFormData, Genre } from '@/types';
+import { MovieForSingleMoviePage } from '@/types';
+import { getGenres, updateMovie } from '@/services';
 import { useQuery, useQueryClient } from 'react-query';
-import { Genre } from '@/types';
 import { useRouter } from 'next/router';
-import { CreateMovieFormData } from '@/types';
-import { createMovie } from '@/services';
 import { useTranslation } from 'next-i18next';
 
-const useAddNewMovie = () => {
-  const [selectedGenres, setSelectedGenres] = useState<Genre[]>([]);
+const useEditMovie = (movie: MovieForSingleMoviePage) => {
+  const existingGenres = movie.genres ? [...movie.genres] : [];
+
+  const [selectedGenres, setSelectedGenres] = useState<Genre[]>([
+    ...existingGenres,
+  ]);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [showGenresDropdown, setShowGenresDropdown] = useState(false);
   const [genreSelectionValid, setGenreSelectionValid] = useState('');
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [imageName, setImageName] = useState('');
-  const [imageError, setImageError] = useState('');
+  const [uploadedImageToDisplay, setUploadedImageToDisplay] = useState('');
 
-  const { showCreateMovie, showAddMovie } = useUiContext();
+  const { showMovieEdit } = useUiContext();
+
   const router = useRouter();
   const locale = router.locale;
-  const queryClient = useQueryClient();
-
   const { t } = useTranslation('movies');
+
+  const queryClient = useQueryClient();
 
   const fetchGenres = async () => {
     const response = await getGenres();
@@ -33,14 +37,14 @@ const useAddNewMovie = () => {
 
   const methods = useForm({
     defaultValues: {
-      nameEn: '',
-      nameGe: '',
-      year: '',
-      directorEn: '',
-      directorGe: '',
-      descriptionEn: '',
-      descriptionGe: '',
-      revenue: '',
+      nameEn: movie.name.en,
+      nameGe: movie.name.ka,
+      year: movie.year,
+      directorEn: movie.director.en,
+      directorGe: movie.director.ka,
+      descriptionEn: movie.description.en,
+      descriptionGe: movie.description.ka,
+      revenue: movie.revenue,
       image: null,
     },
     mode: 'onChange',
@@ -50,7 +54,6 @@ const useAddNewMovie = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = methods;
 
   const handleGenreSelection = (genre: Genre) => {
@@ -60,6 +63,7 @@ const useAddNewMovie = () => {
 
     if (!isAlreadySelected) {
       setSelectedGenres((prev) => [...prev, genre]);
+      setGenreSelectionValid('');
     }
 
     setShowGenresDropdown(false);
@@ -85,9 +89,6 @@ const useAddNewMovie = () => {
     if (selectedGenres.length < 1) {
       setGenreSelectionValid('Please select at least one');
     }
-    if (!imageName) {
-      setImageError(`${'This field is required'}`);
-    }
   };
 
   const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,8 +99,17 @@ const useAddNewMovie = () => {
     setSelectedFile(selectedFile);
     if (selectedFile) {
       setImageName(selectedFile.name);
-      setImageError('');
     }
+
+    const file = selectedFile;
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+      const binaryData = event.target?.result;
+      setUploadedImageToDisplay(binaryData as string);
+    };
+
+    reader.readAsDataURL(file);
   };
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
@@ -107,7 +117,16 @@ const useAddNewMovie = () => {
     const selectedFile = e.dataTransfer.files[0];
     setSelectedFile(selectedFile);
     setImageName(selectedFile.name);
-    setImageError('');
+
+    const file = selectedFile;
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+      const binaryData = event.target?.result;
+      setUploadedImageToDisplay(binaryData as string);
+    };
+
+    reader.readAsDataURL(file);
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -119,58 +138,51 @@ const useAddNewMovie = () => {
       setGenreSelectionValid('Please select at least one');
       return;
     }
-    if (!imageName) {
-      setImageError(`${'This field is required'}`);
-      return;
-    }
+    const formData = new FormData();
+    formData.append('genres', JSON.stringify(selectedGenres));
+    formData.append('nameGe', data.nameGe);
+    formData.append('nameEn', data.nameEn);
+    formData.append('year', data.year);
+    formData.append('directorEn', data.directorEn);
+    formData.append('directorGe', data.directorGe);
+    formData.append('descriptionEn', data.descriptionEn);
+    formData.append('descriptionGe', data.descriptionGe);
+    formData.append('revenue', data.revenue);
     if (selectedFile) {
-      const formData = new FormData();
       formData.append('image', selectedFile, selectedFile.name);
-      formData.append('genres', JSON.stringify(selectedGenres));
-      formData.append('nameGe', data.nameGe);
-      formData.append('nameEn', data.nameEn);
-      formData.append('year', data.year);
-      formData.append('directorEn', data.directorEn);
-      formData.append('directorGe', data.directorGe);
-      formData.append('descriptionEn', data.descriptionEn);
-      formData.append('descriptionGe', data.descriptionGe);
-      formData.append('revenue', data.revenue);
+    }
 
-      try {
-        createMovie(formData);
-        queryClient.invalidateQueries('usermovies').then(() => {
-          reset();
-          showAddMovie(false);
-        });
-      } catch (error: any) {
-        console.log(error);
-      }
+    try {
+      updateMovie(formData, movie.id);
+      queryClient.invalidateQueries('movie').then(() => {
+        showMovieEdit(false);
+      });
+    } catch (error: any) {
+      console.log(error);
     }
   };
 
   return {
-    showCreateMovie,
-    showAddMovie,
-    register,
-    errors,
+    showMovieEdit,
     handleSubmit,
+    register,
     onSubmit,
+    errors,
     genres,
     selectedGenres,
-    locale,
     handleGenreSelection,
     showGenresDropdown,
     setShowGenresDropdown,
     handleRemoveGenre,
     handleSubmitCheckForGenres,
     genreSelectionValid,
+    locale,
     handleUpload,
     handleDrop,
     handleDragOver,
     imageName,
-    imageError,
-    setImageError,
+    uploadedImageToDisplay,
     t,
   };
 };
-export default useAddNewMovie;
+export default useEditMovie;

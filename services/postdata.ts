@@ -24,4 +24,13 @@ const createMovie = async (data: FormData) => {
   return response;
 };
 
-export { createComment, createQuote, createMovie };
+const updateMovie = async (data: FormData, id: number) => {
+  const response = await axiosInstance.post(`/movies/update/${id}`, data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response;
+};
+
+export { createComment, createQuote, createMovie, updateMovie };
