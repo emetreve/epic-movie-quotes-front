@@ -23,6 +23,7 @@ const Movies = () => {
     searchTracker,
     searchResult,
     handleBlur,
+    handleMovieListingClick,
     t,
   } = useMovies();
 
@@ -160,7 +161,12 @@ const Movies = () => {
                   return (
                     <div
                       key={movie.id}
-                      className={`${index === 0 ? 'mt-6 lg:mt-12' : 'mt-12'}`}
+                      onClick={() => {
+                        handleMovieListingClick(movie.id);
+                      }}
+                      className={`${
+                        index === 0 ? 'mt-6 lg:mt-12' : 'mt-12'
+                      } hover:cursor-pointer`}
                     >
                       <Image
                         src={
@@ -197,7 +203,12 @@ const Movies = () => {
                   return (
                     <div
                       key={movie.id}
-                      className={`${index === 0 ? 'mt-6 lg:mt-12' : 'mt-12'}`}
+                      onClick={() => {
+                        handleMovieListingClick(movie.id);
+                      }}
+                      className={`${
+                        index === 0 ? 'mt-6 lg:mt-12' : 'mt-12'
+                      } hover:cursor-pointer`}
                     >
                       <Image
                         src={
