@@ -82,22 +82,26 @@ const ViewQuote: React.FC<PropsType> = ({
         <div className='relative'>
           <div className='relative w-full'>
             <div className='mr-10 pl-1'>
-              <div className='relative min-h-min-content h-fit flex flex-col items-center w-full focus:outline-none'>
-                <div className='w-full break-all relative h-fit mt-3 ml-8 pr-[4rem] rounded-[0.3rem] bg-transparent py-1 pl-4 text-input-gray italic border border-textarea-gray'>
+              <div className='relative h-fit flex flex-col items-center w-full focus:outline-none'>
+                <div className='w-full min-h-[2rem] break-all relative h-fit mt-3 ml-8 pr-[4rem] rounded-[0.3rem] bg-transparent py-1 pl-4 text-input-gray italic border border-textarea-gray'>
                   {quote && quote.body.en}
                 </div>
               </div>
-              <p className='absolute top-8 right-9 text-textarea-gray'>Eng</p>
+              <p className='absolute top-8 lg:top-4 right-9 text-textarea-gray'>
+                Eng
+              </p>
             </div>
           </div>
           <div className='relative w-full'>
             <div className='mr-10 pl-1'>
-              <div className='relative min-h-min-content h-fit flex flex-col items-center w-full focus:outline-none'>
-                <div className='w-full break-all relative h-fit mt-3 ml-8 pr-[4rem] rounded-[0.3rem] bg-transparent py-1 pl-4 text-input-gray italic border border-textarea-gray'>
+              <div className='relative h-fit flex flex-col items-center w-full focus:outline-none'>
+                <div className='w-full min-h-[2rem] break-all relative h-fit mt-3 ml-8 pr-[4rem] rounded-[0.3rem] bg-transparent py-1 pl-4 text-input-gray italic border border-textarea-gray'>
                   {quote && quote.body.ka}
                 </div>
               </div>
-              <p className='absolute top-8 right-9 text-textarea-gray'>ქარ</p>
+              <p className='absolute top-8 lg:top-4 right-9 text-textarea-gray'>
+                ქარ
+              </p>
             </div>
           </div>
 

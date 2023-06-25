@@ -13,6 +13,8 @@ import { usePusher } from '@/hooks';
 import { NotificationMessage, Notification } from '@/types';
 
 const useHeader = (authUserId: number) => {
+  const [whichQuoteToView, setWhichQuoteToView] = useState(null);
+
   const { showBrugerMenu, showBurger, showSearchMobile, showSearchMob } =
     useUiContext();
 
@@ -88,10 +90,10 @@ const useHeader = (authUserId: number) => {
     queryClient.invalidateQueries('notifications');
   };
 
-  const handleMarkNotificationRead = (notification_id: number) => {
+  const handleMarkNotificationRead = (notificationId: number) => {
     try {
       // TODO: redirect to quote's modal view (this view is not done yes)
-      markNotification(notification_id);
+      markNotification(notificationId);
       queryClient.invalidateQueries('notifications');
     } catch (error) {
       console.log(error);
@@ -120,6 +122,8 @@ const useHeader = (authUserId: number) => {
     handleMarkNotificationsRead,
     handleMarkNotificationRead,
     notificationBellCounter,
+    whichQuoteToView,
+    setWhichQuoteToView,
   };
 };
 export default useHeader;
