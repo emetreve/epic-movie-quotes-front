@@ -33,12 +33,16 @@ const updateMovie = async (data: FormData, id: number) => {
   return response;
 };
 
-const updateQuote = async (data: FormData) => {
-  const response = await axiosInstance.post(`/quotes?_method=PATCH`, data, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
+const updateQuote = async (data: FormData, id: number) => {
+  const response = await axiosInstance.post(
+    `/quotes/${id}?_method=PATCH`,
+    data,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }
+  );
   return response;
 };
 
