@@ -7,6 +7,7 @@ import {
   AddQuoteFromMovies,
   EditMovie,
   ViewQuote,
+  EditQuote,
 } from '@/components';
 import { Genre, QuoteFromMoviePage } from '@/types';
 import { GetStaticProps, GetStaticPaths } from 'next';
@@ -56,6 +57,10 @@ const Movie = () => {
               whichQuoteToView={whichQuoteToView}
               setWhichQuoteToView={setWhichQuoteToView}
             />
+          )}
+
+          {true && (
+            <EditQuote authUserAvatar={user.avatar} authUserName={user.name} />
           )}
 
           {showEditMovie && (
