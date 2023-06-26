@@ -8,8 +8,15 @@ const EditQuote: React.FC<PropsType> = ({
   whichQuote,
   setWhichQuote,
 }) => {
-  const { quote, register, errors, handleSubmit, onSubmit } =
-    useEditQuote(whichQuote);
+  const {
+    quote,
+    register,
+    errors,
+    handleSubmit,
+    onSubmit,
+    handleUpload,
+    uploadedImageToDisplay,
+  } = useEditQuote(whichQuote);
 
   return (
     <div className='z-50 lg:pb-16 bg-profile-dark-blue overflow-auto h-screen w-screen fixed backdrop-blur-sm lg:backdrop-blur-none bg-partly-transparent-dark lg:bg-violet-quote-create-bg lg:bg-opacity-70 text-white flex items-center justify-center top-0 left-0'>
@@ -23,7 +30,7 @@ const EditQuote: React.FC<PropsType> = ({
             alt='delete quote'
             width={70}
             height={80}
-            className='h-[1.06rem] absolute left-4 w-auto hover:cursor-pointer'
+            className='h-[1.06rem] absolute left-8 w-auto hover:cursor-pointer'
           />
           <div>
             <p className='block'>Edit quote</p>
@@ -97,20 +104,37 @@ const EditQuote: React.FC<PropsType> = ({
               </div>
             </div>
 
-            <div className='text-sm mt-4 lg:text-xl break-all px-6'>
-              <Image
-                src={
-                  quote?.image
-                    ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${quote.image}`
-                    : '/assets/quote-sample.png'
-                }
-                alt='quote image'
-                width={916}
-                height={512}
-                className='h-[16rem] lg:h-[25rem] mt-3 lg:mt-6 rounded-lg'
-              />
+            <div className='relative text-sm mt-1 lg:text-xl break-all px-6'>
+              <div className='flex flex-col'>
+                <Image
+                  src={
+                    uploadedImageToDisplay.length > 0
+                      ? `${uploadedImageToDisplay}`
+                      : quote?.image
+                      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${quote.image}`
+                      : '/assets/quote-sample.png'
+                  }
+                  alt='quote image'
+                  width={916}
+                  height={512}
+                  className='h-[16rem] lg:h-[25rem] mt-3 lg:mt-6 rounded-lg'
+                />
+
+                <label className='absolute top-[6rem] left-[7.5rem] w-[8rem] h-[5rem] rounded-xl lg:ml-4 bg-violet bg-opacity-70 py-2 lg:px-[0.7rem] px-[0.4rem] cursor-pointer'>
+                  <span className='text-xs lg:text-base'>Change photo</span>
+                  <input
+                    {...register('image')}
+                    name='image'
+                    onChange={(e) => {
+                      handleUpload(e);
+                    }}
+                    type='file'
+                    className='relative inset-0 h-full opacity-0 cursor-pointer'
+                  />
+                </label>
+              </div>
+
               <button
-                // onClick={handleSubmitCheckForGenres}
                 className='text-white mb-[4rem] lg:mb-12 w-full lg:mt-8 mt-10 text-lg bg-red py-2 px-4 rounded-md hover:bg-red-hover'
                 type='submit'
               >
