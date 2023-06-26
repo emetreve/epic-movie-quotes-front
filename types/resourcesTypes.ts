@@ -167,3 +167,9 @@ export type MovieForSingleMoviePage = {
   year: string;
   user: User;
 };
+
+export type EditQuoteProperties = {
+  bodyEn: string;
+  bodyKa: string;
+  avatar?: string;
+} | null;

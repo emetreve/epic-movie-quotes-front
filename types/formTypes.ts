@@ -60,3 +60,9 @@ export type CreateMovieFormData = {
 export type SearchMoviesData = {
   search: string;
 };
+
+export type editQuote = {
+  bodyEn: string | undefined;
+  bodyKa: string | undefined;
+  image: string | undefined;
+};

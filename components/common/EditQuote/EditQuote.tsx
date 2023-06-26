@@ -17,6 +17,7 @@ const EditQuote: React.FC<PropsType> = ({
     onSubmit,
     handleUpload,
     uploadedImageToDisplay,
+    handleDelete,
   } = useEditQuote(whichQuote, setWhichQuote, quoteData);
 
   return (
@@ -26,7 +27,7 @@ const EditQuote: React.FC<PropsType> = ({
           <div className='pt-6 px-4 flex flex-row items-center justify-center border-b border-gray-700 pb-6'>
             <Image
               onClick={() => {
-                // handleDelete(quote.id);
+                handleDelete(quote.id);
               }}
               src='/assets/delete.png'
               alt='delete quote'

@@ -7,5 +7,5 @@ export type PropsType = {
     bodyEn: string;
     bodyKa: string;
     image?: string;
-  };
+  } | null;
 };

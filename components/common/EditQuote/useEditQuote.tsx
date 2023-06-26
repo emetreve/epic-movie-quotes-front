@@ -1,28 +1,27 @@
 import { useState } from 'react';
 import { useQuery, useQueryClient } from 'react-query';
-import { getQuote, updateQuote } from '@/services';
+import { getQuote, updateQuote, deleteQuote } from '@/services';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
+import { editQuote, EditQuoteProperties } from '@/types';
 
 const useEditQuote = (
   whichQuote: number,
   setWhichQuote: Function,
-  quoteData: {
-    bodyEn: string;
-    bodyKa: string;
-    avatar?: string;
-  }
+  quoteData: EditQuoteProperties
 ) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploadedImageToDisplay, setUploadedImageToDisplay] = useState('');
 
   const queryClient = useQueryClient();
+  const { push } = useRouter();
 
   const fetchQuote = async () => {
     try {
       const response = await getQuote(whichQuote);
       return response.data;
     } catch {
-      // router.push('/404');
+      push('/404');
     }
   };
 
@@ -63,7 +62,14 @@ const useEditQuote = (
     reader.readAsDataURL(file);
   };
 
-  const onSubmit = async (data) => {
+  const handleDelete = async (id: number) => {
+    await deleteQuote(id);
+    queryClient.invalidateQueries('movie').then(() => {
+      setWhichQuote(null);
+    });
+  };
+
+  const onSubmit = async (data: editQuote) => {
     const formData = new FormData();
     if (selectedFile) {
       formData.append('image', selectedFile, selectedFile.name);
@@ -96,6 +102,7 @@ const useEditQuote = (
     onSubmit,
     handleUpload,
     uploadedImageToDisplay,
+    handleDelete,
   };
 };
 export default useEditQuote;
