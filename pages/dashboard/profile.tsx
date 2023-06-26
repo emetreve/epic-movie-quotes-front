@@ -155,18 +155,6 @@ const Profile = () => {
                     </div>
                   </div>
 
-                  {/* <div className='flex flex-col mt-8 '>
-                    <label htmlFor='email_read' className='mb-1 text-xs'>
-                      {t('Email')}
-                    </label>
-                    <input
-                      id='email_read'
-                      readOnly
-                      placeholder={user.email}
-                      className={`bg-transparent w-full text-sm border-b pb-[1rem]  border-input-gray placeholder-white`}
-                    />
-                  </div> */}
-
                   <div className='flex flex-col mt-8'>
                     <label htmlFor='username_read' className='mb-1 text-xs'>
                       {t('Email')}
@@ -182,7 +170,9 @@ const Profile = () => {
                         onClick={() => {
                           showUpdateEmail(true);
                         }}
-                        className='absolute bottom-[1.2rem] text-sm text-input-gray w-5 h-5 hover:cursor-pointer block right-4'
+                        className={`absolute ${
+                          user.is_google_user && 'hidden'
+                        } bottom-[1.2rem] text-sm text-input-gray w-5 h-5 hover:cursor-pointer block right-4`}
                       >
                         {t('Edit')}
                       </p>
