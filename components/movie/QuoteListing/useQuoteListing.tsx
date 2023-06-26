@@ -27,6 +27,15 @@ const useQuoteListing = (
     }
   };
 
-  return { locale, handleDelete, handleViewOptions };
+  const handleRemoveBackgroundScroll = () => {
+    document.body.classList.add('screenHeight');
+  };
+
+  return {
+    locale,
+    handleDelete,
+    handleViewOptions,
+    handleRemoveBackgroundScroll,
+  };
 };
 export default useQuoteListing;

@@ -11,6 +11,8 @@ import { QuoteMessage } from '@/types';
 
 const useMovie = () => {
   const [whichQuoteModalIsOpen, setWhichQuoteModalIsOpen] = useState(null);
+  const [whichQuoteToView, setWhichQuoteToView] = useState(null);
+
   const router = useRouter();
   const { logged, user } = useCheckIfLoggedIn();
 
@@ -33,6 +35,8 @@ const useMovie = () => {
   usePusher();
 
   useEffect(() => {
+    document.body.classList.remove('screenHeight');
+
     const channelLike = window.Echo.channel('like-updated');
     channelLike.listen('LikeUpdated', function (data: QuoteMessage) {
       if (data) {
@@ -79,6 +83,9 @@ const useMovie = () => {
     if (showBrugerMenu) {
       showBurger(false);
     }
+    if (whichQuoteModalIsOpen) {
+      setWhichQuoteModalIsOpen(null);
+    }
   };
 
   return {
@@ -95,6 +102,9 @@ const useMovie = () => {
     showEditMovie,
     showMovieEdit,
     handleOutsideClick,
+
+    whichQuoteToView,
+    setWhichQuoteToView,
     t,
   };
 };

@@ -5,7 +5,7 @@ import { LangSwitch } from '@/components';
 import { Notification } from '@/types';
 import { Heart } from '@/components';
 import { getTimeAgo } from '@/helpers';
-import { Home, Camera } from '@/components';
+import { Home, Camera, ViewQuote } from '@/components';
 
 const Header: React.FC<PropsType> = ({
   hideSearch,
@@ -26,12 +26,23 @@ const Header: React.FC<PropsType> = ({
     showNotifications,
     notifications,
     handleMarkNotificationsRead,
-    handleMarkNotificationRead,
     notificationBellCounter,
+    whichQuoteToView,
+    setWhichQuoteToView,
+    handleNotificationClicked,
   } = useHeader(authUserId);
 
   return (
     <>
+      {whichQuoteToView && (
+        <ViewQuote
+          authUserId={authUserId}
+          authUserAvatar={avatar}
+          authUserName={userName}
+          whichQuoteToView={whichQuoteToView}
+          setWhichQuoteToView={setWhichQuoteToView}
+        />
+      )}
       <div className='fixed w-full z-[40]'>
         {!showSearchMobile && (
           <div className='flex relative lg:hidden justify-between items-center py-6 text-xs lg:text-base lg:px-16 bg-violet'>
@@ -196,7 +207,11 @@ const Header: React.FC<PropsType> = ({
                         <div
                           key={notification.id}
                           onClick={() => {
-                            handleMarkNotificationRead(notification.id);
+                            handleNotificationClicked(
+                              notification.id,
+                              false,
+                              notification.quote_id as number
+                            );
                           }}
                           className='text-white hover:cursor-pointer h-[6.3rem] border border-gray-600 lg:rounded-md rounded-sm border-opacity-50 mt-[0.8rem] lg:px-5 px-3'
                         >

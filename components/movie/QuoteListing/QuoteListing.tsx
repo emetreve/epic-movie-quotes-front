@@ -14,15 +14,22 @@ const QuoteListing: React.FC<PropsType> = ({
   quoteId,
   whichModalOpen,
   setWhichModalOpen,
+  viewQuote,
 }) => {
-  const { locale, handleDelete, handleViewOptions } = useQuoteListing(
-    quoteId,
-    setWhichModalOpen,
-    whichModalOpen
-  );
+  const {
+    locale,
+    handleDelete,
+    handleViewOptions,
+    handleRemoveBackgroundScroll,
+  } = useQuoteListing(quoteId, setWhichModalOpen, whichModalOpen);
 
   return (
-    <div className='text-white relative shadow-lg w-full lg:w-[43rem] lg:rounded-xl pt-5 pb-0 bg-profile-dark-blue bg-opacity-95'>
+    <div
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
+      className='text-white relative shadow-lg w-full lg:w-[43rem] lg:rounded-xl pt-5 pb-0 bg-profile-dark-blue bg-opacity-95'
+    >
       <div className='justify-end hidden lg:flex'>
         <div
           onClick={handleViewOptions}
@@ -42,7 +49,15 @@ const QuoteListing: React.FC<PropsType> = ({
                 height={56}
                 className='h-[0.9rem] w-auto mr-[0.8rem]'
               />
-              <p className='hover:cursor-pointer'>Vew quote</p>
+              <p
+                onClick={() => {
+                  viewQuote(quoteId);
+                  handleRemoveBackgroundScroll();
+                }}
+                className='hover:cursor-pointer'
+              >
+                Vew quote
+              </p>
             </div>
             <div className='flex flex-row items-center'>
               <Image

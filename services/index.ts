@@ -16,6 +16,7 @@ export {
   markNotification,
   getGenres,
   getMovie,
+  getQuote,
 } from './getdata';
 export {
   createComment,

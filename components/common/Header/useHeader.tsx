@@ -13,6 +13,8 @@ import { usePusher } from '@/hooks';
 import { NotificationMessage, Notification } from '@/types';
 
 const useHeader = (authUserId: number) => {
+  const [whichQuoteToView, setWhichQuoteToView] = useState<number | null>(null);
+
   const { showBrugerMenu, showBurger, showSearchMobile, showSearchMob } =
     useUiContext();
 
@@ -21,6 +23,10 @@ const useHeader = (authUserId: number) => {
   const { t } = useTranslation(['newsfeed', 'profile']);
 
   const queryClient = useQueryClient();
+
+  useEffect(() => {
+    queryClient.invalidateQueries('notifications');
+  }, [whichQuoteToView]);
 
   usePusher();
   useEffect(() => {
@@ -88,14 +94,23 @@ const useHeader = (authUserId: number) => {
     queryClient.invalidateQueries('notifications');
   };
 
-  const handleMarkNotificationRead = (notification_id: number) => {
+  const handleMarkNotificationRead = (notificationId: number) => {
     try {
-      // TODO: redirect to quote's modal view (this view is not done yes)
-      markNotification(notification_id);
+      markNotification(notificationId);
       queryClient.invalidateQueries('notifications');
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleNotificationClicked = (
+    notificationId: number,
+    toggle: boolean,
+    quoteId: number
+  ) => {
+    handleMarkNotificationRead(notificationId);
+    toggleNotifications(toggle);
+    setWhichQuoteToView(quoteId);
   };
 
   const notificationBellCounter = notifications?.filter(
@@ -117,9 +132,12 @@ const useHeader = (authUserId: number) => {
     showNotifications,
     setShowNotifications,
     notifications,
+    handleNotificationClicked,
     handleMarkNotificationsRead,
     handleMarkNotificationRead,
     notificationBellCounter,
+    whichQuoteToView,
+    setWhichQuoteToView,
   };
 };
 export default useHeader;

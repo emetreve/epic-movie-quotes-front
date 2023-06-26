@@ -13,4 +13,5 @@ export type PropsType = {
   quoteId: number;
   whichModalOpen: number | null;
   setWhichModalOpen: Function;
+  viewQuote: Function;
 };

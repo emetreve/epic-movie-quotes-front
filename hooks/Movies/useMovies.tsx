@@ -15,7 +15,7 @@ const useMovies = () => {
   const { showBrugerMenu, showBurger, showCreateMovie, showAddMovie } =
     useUiContext();
   const { logged, user } = useCheckIfLoggedIn();
-  const { locale } = useRouter();
+  const { locale, push } = useRouter();
   const { t } = useTranslation('movies');
 
   const queryClient = useQueryClient();
@@ -55,6 +55,10 @@ const useMovies = () => {
     setFocused(false);
   };
 
+  const handleMovieListingClick = (id: number) => {
+    push(`/dashboard/movies/${id}`);
+  };
+
   const onSubmit = async (data: SearchMoviesData) => {
     setSearchResult([]);
     queryClient.setQueryData('usermovies', []);
@@ -83,6 +87,7 @@ const useMovies = () => {
     searchResult,
     reset,
     handleBlur,
+    handleMovieListingClick,
     t,
   };
 };
