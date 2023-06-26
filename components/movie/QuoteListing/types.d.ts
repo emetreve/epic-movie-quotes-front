@@ -14,4 +14,6 @@ export type PropsType = {
   whichModalOpen: number | null;
   setWhichModalOpen: Function;
   viewQuote: Function;
+  editQuote: Function;
+  setEditQuoteData: Function;
 };

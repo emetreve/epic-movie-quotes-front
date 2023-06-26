@@ -7,6 +7,7 @@ import {
   AddQuoteFromMovies,
   EditMovie,
   ViewQuote,
+  EditQuote,
 } from '@/components';
 import { Genre, QuoteFromMoviePage } from '@/types';
 import { GetStaticProps, GetStaticPaths } from 'next';
@@ -28,6 +29,10 @@ const Movie = () => {
     handleOutsideClick,
     whichQuoteToView,
     setWhichQuoteToView,
+    whichQuoteToEdit,
+    setWhichQuoteToEdit,
+    editQuoteData,
+    setEditQuoteData,
     t,
   } = useMovie();
 
@@ -55,6 +60,16 @@ const Movie = () => {
               authUserName={user.name}
               whichQuoteToView={whichQuoteToView}
               setWhichQuoteToView={setWhichQuoteToView}
+            />
+          )}
+
+          {whichQuoteToEdit && (
+            <EditQuote
+              authUserAvatar={user.avatar}
+              authUserName={user.name}
+              whichQuote={whichQuoteToEdit}
+              setWhichQuote={setWhichQuoteToEdit}
+              quoteData={editQuoteData}
             />
           )}
 
@@ -232,6 +247,8 @@ const Movie = () => {
                         whichModalOpen={whichQuoteModalIsOpen}
                         setWhichModalOpen={setWhichQuoteModalIsOpen}
                         viewQuote={setWhichQuoteToView}
+                        editQuote={setWhichQuoteToEdit}
+                        setEditQuoteData={setEditQuoteData}
                       />
                     </div>
                   );

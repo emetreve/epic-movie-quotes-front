@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { AddCommentData } from '@/types';
 import { createComment, getLike, deleteQuote } from '@/services';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import { useRouter } from 'next/router';
 import { getQuote } from '@/services';
 
@@ -23,15 +23,9 @@ const useViewQuote = (
     }
   };
 
-  const { data: quote } = useQuery('quote', fetchQuote, {
-    enabled: !!whichQuoteToView,
-  });
-
-  const createCommentMutation = useMutation(createComment);
-
   const onSubmit = async (data: AddCommentData) => {
     try {
-      createCommentMutation.mutateAsync(data);
+      createComment(data);
       queryClient.invalidateQueries('quote');
     } catch (error) {
       console.log(error);
@@ -63,7 +57,10 @@ const useViewQuote = (
     handleBringScroll();
   };
 
-  console.log(quote);
+  const { data: quote } = useQuery('quote', fetchQuote, {
+    enabled: !!whichQuoteToView,
+  });
+
   return {
     handleBringScroll,
     register,
