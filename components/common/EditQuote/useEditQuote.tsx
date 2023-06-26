@@ -74,6 +74,7 @@ const useEditQuote = (
     if (selectedFile) {
       formData.append('image', selectedFile, selectedFile.name);
     }
+    formData.append('id', quote.id);
 
     formData.append(
       'body',
@@ -84,7 +85,7 @@ const useEditQuote = (
     );
 
     try {
-      const response = await updateQuote(formData, quote.id);
+      const response = await updateQuote(formData);
       console.log(4444, response);
       queryClient.invalidateQueries('movie').then(() => {
         setWhichQuote(null);
