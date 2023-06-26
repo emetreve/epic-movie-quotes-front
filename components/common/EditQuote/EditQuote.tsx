@@ -114,7 +114,7 @@ const EditQuote: React.FC<PropsType> = ({
                       uploadedImageToDisplay.length > 0
                         ? `${uploadedImageToDisplay}`
                         : quote?.image
-                        ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${quote.image}`
+                        ? `${quote.full_url}`
                         : '/assets/quote-sample.png'
                     }
                     alt='quote image'
