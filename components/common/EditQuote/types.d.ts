@@ -3,4 +3,9 @@ export type PropsType = {
   authUserName: string;
   whichQuote: number;
   setWhichQuote: Function;
+  quoteData: {
+    bodyEn: string;
+    bodyKa: string;
+    image?: string;
+  };
 };

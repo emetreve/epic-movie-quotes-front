@@ -13,6 +13,7 @@ const useMovie = () => {
   const [whichQuoteModalIsOpen, setWhichQuoteModalIsOpen] = useState(null);
   const [whichQuoteToView, setWhichQuoteToView] = useState(null);
   const [whichQuoteToEdit, setWhichQuoteToEdit] = useState(null);
+  const [editQuoteData, setEditQuoteData] = useState(null);
 
   const router = useRouter();
   const { logged, user } = useCheckIfLoggedIn();
@@ -107,6 +108,8 @@ const useMovie = () => {
     setWhichQuoteToView,
     whichQuoteToEdit,
     setWhichQuoteToEdit,
+    editQuoteData,
+    setEditQuoteData,
     t,
   };
 };

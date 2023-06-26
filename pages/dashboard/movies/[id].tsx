@@ -31,6 +31,8 @@ const Movie = () => {
     setWhichQuoteToView,
     whichQuoteToEdit,
     setWhichQuoteToEdit,
+    editQuoteData,
+    setEditQuoteData,
     t,
   } = useMovie();
 
@@ -67,6 +69,7 @@ const Movie = () => {
               authUserName={user.name}
               whichQuote={whichQuoteToEdit}
               setWhichQuote={setWhichQuoteToEdit}
+              quoteData={editQuoteData}
             />
           )}
 
@@ -245,6 +248,7 @@ const Movie = () => {
                         setWhichModalOpen={setWhichQuoteModalIsOpen}
                         viewQuote={setWhichQuoteToView}
                         editQuote={setWhichQuoteToEdit}
+                        setEditQuoteData={setEditQuoteData}
                       />
                     </div>
                   );

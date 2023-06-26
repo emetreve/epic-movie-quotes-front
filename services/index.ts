@@ -23,6 +23,7 @@ export {
   createQuote,
   createMovie,
   updateMovie,
+  updateQuote,
 } from './postdata';
 export { default as pusherInstance } from './pusher';
 export { deleteQuote, deleteMovie } from './deletedata';

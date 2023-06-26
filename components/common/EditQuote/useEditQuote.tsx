@@ -1,11 +1,21 @@
 import { useState } from 'react';
-import { useQuery } from 'react-query';
-import { getQuote } from '@/services';
+import { useQuery, useQueryClient } from 'react-query';
+import { getQuote, updateQuote } from '@/services';
 import { useForm } from 'react-hook-form';
 
-const useEditQuote = (whichQuote: number) => {
+const useEditQuote = (
+  whichQuote: number,
+  setWhichQuote: Function,
+  quoteData: {
+    bodyEn: string;
+    bodyKa: string;
+    avatar?: string;
+  }
+) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploadedImageToDisplay, setUploadedImageToDisplay] = useState('');
+
+  const queryClient = useQueryClient();
 
   const fetchQuote = async () => {
     try {
@@ -22,9 +32,9 @@ const useEditQuote = (whichQuote: number) => {
 
   const methods = useForm({
     defaultValues: {
-      bodyEn: quote?.body?.en || '',
-      bodyKa: quote?.body?.ka || '',
-      image: null,
+      bodyEn: quoteData?.bodyEn,
+      bodyKa: quoteData?.bodyKa,
+      image: quoteData?.avatar,
     },
     mode: 'onChange',
   });
@@ -54,7 +64,28 @@ const useEditQuote = (whichQuote: number) => {
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
+    const formData = new FormData();
+    if (selectedFile) {
+      formData.append('image', selectedFile, selectedFile.name);
+    }
+
+    formData.append(
+      'body',
+      JSON.stringify({
+        en: data.bodyEn,
+        ka: data.bodyKa,
+      })
+    );
+
+    try {
+      const response = await updateQuote(formData, quote.id);
+      console.log(4444, response);
+      queryClient.invalidateQueries('movie').then(() => {
+        setWhichQuote(null);
+      });
+    } catch (error: any) {
+      console.log(error);
+    }
   };
 
   return {
