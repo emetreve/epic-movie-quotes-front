@@ -27,6 +27,7 @@ export type ChangeUserData = {
   username?: string;
   password?: string;
   password_confirmation?: string;
+  email?: string;
 };
 
 export type AddCommentData = {

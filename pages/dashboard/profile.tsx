@@ -8,6 +8,7 @@ import {
   ChangePassword,
   ValidationIcons,
   PasswordConditionsBox,
+  ChangeEmail,
 } from '@/components';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -49,6 +50,8 @@ const Profile = () => {
     handleCancelLg,
     handleOutsideClick,
     handleBack,
+    showUpdateEmail,
+    showEditEmail,
     t,
   } = useProfile();
 
@@ -57,6 +60,10 @@ const Profile = () => {
       <>
         {showEditName && (
           <ChangeName userName={user.name} authUserId={user.id} />
+        )}
+
+        {showEditEmail && (
+          <ChangeEmail userName={user.name} authUserId={user.id} />
         )}
 
         {showEditPassword && (
@@ -147,7 +154,8 @@ const Profile = () => {
                       </p>
                     </div>
                   </div>
-                  <div className='flex flex-col mt-8'>
+
+                  {/* <div className='flex flex-col mt-8 '>
                     <label htmlFor='email_read' className='mb-1 text-xs'>
                       {t('Email')}
                     </label>
@@ -157,7 +165,30 @@ const Profile = () => {
                       placeholder={user.email}
                       className={`bg-transparent w-full text-sm border-b pb-[1rem]  border-input-gray placeholder-white`}
                     />
+                  </div> */}
+
+                  <div className='flex flex-col mt-8'>
+                    <label htmlFor='username_read' className='mb-1 text-xs'>
+                      {t('Email')}
+                    </label>
+                    <div className='relative'>
+                      <input
+                        id='email_read'
+                        placeholder={user.email}
+                        readOnly
+                        className={`bg-transparent w-full text-sm border-b pb-[1rem]  border-input-gray placeholder-white`}
+                      />
+                      <p
+                        onClick={() => {
+                          showUpdateEmail(true);
+                        }}
+                        className='absolute bottom-[1.2rem] text-sm text-input-gray w-5 h-5 hover:cursor-pointer block right-4'
+                      >
+                        {t('Edit')}
+                      </p>
+                    </div>
                   </div>
+
                   {!user.is_google_user && (
                     <div className='flex flex-col mt-8'>
                       <label htmlFor='password_read' className='mb-1 text-xs'>

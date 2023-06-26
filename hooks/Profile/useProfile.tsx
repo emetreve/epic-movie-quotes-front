@@ -33,6 +33,8 @@ const useProfile = () => {
     showEditPassword,
     showBrugerMenu,
     showBurger,
+    showUpdateEmail,
+    showEditEmail,
   } = useUiContext();
 
   useEffect(() => {
@@ -206,6 +208,8 @@ const useProfile = () => {
     handleCancelLg,
     handleOutsideClick,
     handleBack,
+    showUpdateEmail,
+    showEditEmail,
     t,
   };
 };
