@@ -15,6 +15,7 @@ const QuoteListing: React.FC<PropsType> = ({
   whichModalOpen,
   setWhichModalOpen,
   viewQuote,
+  editQuote,
 }) => {
   const {
     locale,
@@ -67,7 +68,14 @@ const QuoteListing: React.FC<PropsType> = ({
                 height={80}
                 className='h-[1rem] w-auto mr-[1.1rem]'
               />
-              <p className='hover:cursor-pointer'>Edit</p>
+              <p
+                onClick={() => {
+                  editQuote(quoteId);
+                }}
+                className='hover:cursor-pointer'
+              >
+                Edit
+              </p>
             </div>
             <div className='flex flex-row items-center'>
               <Image

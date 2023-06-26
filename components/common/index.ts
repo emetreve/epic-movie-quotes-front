@@ -7,3 +7,4 @@ export * from './AddNewMovie';
 export * from './ViewOptions';
 export * from './EditMovie';
 export * from './ViewQuote';
+export * from './EditQuote';

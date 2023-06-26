@@ -12,6 +12,7 @@ import { QuoteMessage } from '@/types';
 const useMovie = () => {
   const [whichQuoteModalIsOpen, setWhichQuoteModalIsOpen] = useState(null);
   const [whichQuoteToView, setWhichQuoteToView] = useState(null);
+  const [whichQuoteToEdit, setWhichQuoteToEdit] = useState(null);
 
   const router = useRouter();
   const { logged, user } = useCheckIfLoggedIn();
@@ -102,9 +103,10 @@ const useMovie = () => {
     showEditMovie,
     showMovieEdit,
     handleOutsideClick,
-
     whichQuoteToView,
     setWhichQuoteToView,
+    whichQuoteToEdit,
+    setWhichQuoteToEdit,
     t,
   };
 };

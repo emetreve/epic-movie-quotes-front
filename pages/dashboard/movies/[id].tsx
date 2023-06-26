@@ -29,6 +29,8 @@ const Movie = () => {
     handleOutsideClick,
     whichQuoteToView,
     setWhichQuoteToView,
+    whichQuoteToEdit,
+    setWhichQuoteToEdit,
     t,
   } = useMovie();
 
@@ -59,8 +61,13 @@ const Movie = () => {
             />
           )}
 
-          {true && (
-            <EditQuote authUserAvatar={user.avatar} authUserName={user.name} />
+          {whichQuoteToEdit && (
+            <EditQuote
+              authUserAvatar={user.avatar}
+              authUserName={user.name}
+              whichQuote={whichQuoteToEdit}
+              setWhichQuote={setWhichQuoteToEdit}
+            />
           )}
 
           {showEditMovie && (
@@ -237,6 +244,7 @@ const Movie = () => {
                         whichModalOpen={whichQuoteModalIsOpen}
                         setWhichModalOpen={setWhichQuoteModalIsOpen}
                         viewQuote={setWhichQuoteToView}
+                        editQuote={setWhichQuoteToEdit}
                       />
                     </div>
                   );
