@@ -116,7 +116,7 @@ const ViewQuote: React.FC<PropsType> = ({
           <div className='px-6'>
             <div className='mt-3 lg:mt-5 flex pb-5 border-b-[0.1rem] border-gray-600'>
               <div className='flex flex-row items-center'>
-                <p className='text-lg'>21</p>
+                <p className='text-lg'>{quote?.comments?.length}</p>
                 <Image
                   src='/assets/comments-quantity.png'
                   alt='comments quantity'
@@ -126,13 +126,13 @@ const ViewQuote: React.FC<PropsType> = ({
                 />
               </div>
               <div className='flex flex-row items-center ml-6'>
-                <p className='text-lg block w-2'>23</p>
+                <p className='text-lg block w-2'>{quote?.likes?.length}</p>
                 <div
                   onClick={() => handleLike(authUserId, whichQuoteToView)}
                   className='hover:cursor-pointer z-[30]'
                 >
                   <Heart
-                    classes={`h-5 w-auto ml-5 lg:h-7 ${
+                    classes={`h-5 w-auto ml-2 lg:h-7 ${
                       quote?.likes?.some(
                         (like: Like) => like.user_id === authUserId
                       )
