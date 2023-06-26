@@ -52,6 +52,8 @@ const Profile = () => {
     handleBack,
     showUpdateEmail,
     showEditEmail,
+    setShowEmailInput,
+    showEmailInput,
     t,
   } = useProfile();
 
@@ -358,7 +360,7 @@ const Profile = () => {
                         </div>
                       )}
 
-                      <div className='flex flex-col mt-9 w-full'>
+                      <div className='flex flex-col mt-9 w-[100%]'>
                         <div className='flex justify-center items-center'>
                           <div className='flex-grow'>
                             <label
@@ -374,9 +376,60 @@ const Profile = () => {
                               className='bg-input-gray mt-1 w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
                             />
                           </div>
-                          <div className='w-2 ml-8 pt-6'></div>
+                          <div
+                            onClick={() => {
+                              setShowEmailInput(true);
+                            }}
+                            className={`${
+                              user.is_google_user && 'invisible'
+                            } text-input-gray hover:cursor-pointer ml-8 pt-6 w-2`}
+                          >
+                            {t('Edit')}
+                          </div>
                         </div>
                       </div>
+
+                      {showEmailInput && (
+                        <div className=' flex flex-col mt-9 w-full'>
+                          <div className='flex justify-center items-center'>
+                            <div className='flex-grow'>
+                              <label htmlFor='email' className='mb-1 text-xs'>
+                                {t('New email')}
+                              </label>
+                              <div className='relative'>
+                                <input
+                                  {...register('email', {
+                                    pattern: {
+                                      value:
+                                        /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                      message: `${t('Invalid email address')}`,
+                                    },
+                                  })}
+                                  placeholder={`${t('Enter new email')}`}
+                                  id='email'
+                                  className={`${
+                                    applyInputStyle('email')
+                                      ? 'border-red'
+                                      : formState.dirtyFields['email']
+                                      ? 'border-green'
+                                      : ''
+                                  } bg-input-gray border-2 text-txt-black mt-1 w-full py-2 rounded-md px-4 placeholder-gray`}
+                                />
+                                <div className='-mt-[0.15rem]'>
+                                  <ValidationIcons name='email' />
+                                </div>
+                              </div>
+                              <div className='h-2 pt-[0.3rem]'>
+                                <p className='text-red text-xs'>
+                                  {errors['email']?.message}
+                                </p>
+                              </div>
+                            </div>
+                            <div className='w-2 ml-8 pt-6'></div>
+                          </div>
+                        </div>
+                      )}
+
                       {!user.is_google_user && (
                         <>
                           <div className='flex flex-col mt-9 w-[100%]'>
@@ -564,7 +617,8 @@ const Profile = () => {
                   </div>
                   {(showUsernameInput ||
                     showPasswordInputs ||
-                    avatarButtonTrigger) && (
+                    avatarButtonTrigger ||
+                    showEmailInput) && (
                     <div className='container flex justify-end'>
                       <div className='flex flex-row w-fit'>
                         <p

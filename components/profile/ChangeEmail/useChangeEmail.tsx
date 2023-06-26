@@ -55,7 +55,7 @@ const useChangeEmail = () => {
       if (error?.response?.data?.message) {
         setError('email', {
           type: 'manual',
-          message: error.response.data.message,
+          message: `${t('The username has already been taken')}`,
         });
       }
     }

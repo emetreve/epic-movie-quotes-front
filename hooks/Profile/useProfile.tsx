@@ -18,6 +18,7 @@ const useProfile = () => {
   const [avatarButtonTrigger, setAvatarButtonTrigger] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [showMobileAvatarModal, setShowMobileAvatarModal] = useState(false);
+  const [showEmailInput, setShowEmailInput] = useState(false);
 
   const { t } = useTranslation('profile');
 
@@ -55,6 +56,7 @@ const useProfile = () => {
       username: '',
       password: '',
       password_confirmation: '',
+      email: '',
     },
     mode: 'onChange',
   });
@@ -116,12 +118,23 @@ const useProfile = () => {
       });
       setShowPasswordInputs(false);
       setShowUsernameInput(false);
+      setShowEmailInput(false);
+      reset();
     } catch (error: any) {
       console.log(error);
+      if (
+        error?.response?.data?.message === 'The email has already been taken.'
+      ) {
+        setError('email', {
+          type: 'manual',
+          message: `${t('The email has already been taken')}`,
+        });
+        return;
+      }
       if (error?.response?.data?.message) {
         setError('username', {
           type: 'manual',
-          message: error.response.data.message,
+          message: `${t('The username has already been taken')}`,
         });
       }
     }
@@ -159,6 +172,7 @@ const useProfile = () => {
   const handleCancelLg = () => {
     setShowPasswordInputs(false);
     setShowUsernameInput(false);
+    setShowEmailInput(false);
     reset();
   };
 
@@ -210,6 +224,8 @@ const useProfile = () => {
     handleBack,
     showUpdateEmail,
     showEditEmail,
+    setShowEmailInput,
+    showEmailInput,
     t,
   };
 };
