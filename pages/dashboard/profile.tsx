@@ -40,6 +40,7 @@ const Profile = () => {
     setHidePasswordConfirmation,
     errors,
     pass,
+    passStateForConditionsBox,
     handleUpload,
     selectedAvatar,
     setSelectedAvatar,
@@ -480,7 +481,16 @@ const Profile = () => {
                               <div className='flex flex-col mt-9 w-[100%]'>
                                 <div className='flex justify-center items-center'>
                                   <div className='flex-grow'>
-                                    <PasswordConditionsBox />
+                                    <PasswordConditionsBox
+                                      isValidMinCharacters={
+                                        passStateForConditionsBox > 7 &&
+                                        passStateForConditionsBox !== 0
+                                      }
+                                      isValidMaxCharacters={
+                                        passStateForConditionsBox < 16 &&
+                                        passStateForConditionsBox !== 0
+                                      }
+                                    />
                                   </div>
                                   <div className='w-2 ml-8 pt-6'></div>
                                 </div>

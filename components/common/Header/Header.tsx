@@ -5,7 +5,7 @@ import { LangSwitch } from '@/components';
 import { Notification } from '@/types';
 import { Heart } from '@/components';
 import { getTimeAgo } from '@/helpers';
-import { Home, Camera, ViewQuote } from '@/components';
+import { Home, Camera, ViewQuote, EditQuote } from '@/components';
 
 const Header: React.FC<PropsType> = ({
   hideSearch,
@@ -30,6 +30,11 @@ const Header: React.FC<PropsType> = ({
     whichQuoteToView,
     setWhichQuoteToView,
     handleNotificationClicked,
+    whichQuoteToEdit,
+    setWhichQuoteToEdit,
+    editQuoteData,
+    setEditQuoteData,
+    handleOutsideClick,
   } = useHeader(authUserId);
 
   return (
@@ -41,9 +46,22 @@ const Header: React.FC<PropsType> = ({
           authUserName={userName}
           whichQuoteToView={whichQuoteToView}
           setWhichQuoteToView={setWhichQuoteToView}
+          setWhichQuoteToEdit={setWhichQuoteToEdit}
+          setEditQuoteData={setEditQuoteData}
         />
       )}
-      <div className='fixed w-full z-[40]'>
+
+      {whichQuoteToEdit && (
+        <EditQuote
+          authUserAvatar={avatar}
+          authUserName={userName}
+          whichQuote={whichQuoteToEdit}
+          setWhichQuote={setWhichQuoteToEdit}
+          quoteData={editQuoteData}
+        />
+      )}
+
+      <div onClick={handleOutsideClick} className='fixed w-full z-[40]'>
         {!showSearchMobile && (
           <div className='flex relative lg:hidden justify-between items-center py-6 text-xs lg:text-base lg:px-16 bg-violet'>
             <Image
@@ -156,7 +174,8 @@ const Header: React.FC<PropsType> = ({
                   width={96}
                   height={96}
                   className='lg:hidden inline ml-4 h-6 w-auto hover:cursor-pointer'
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     toggleNotifications(true);
                   }}
                 />
@@ -178,7 +197,11 @@ const Header: React.FC<PropsType> = ({
         )}
 
         {showNotifications && (
-          <div>
+          <div
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
             <div className='inline absolute z-40 w-0 h-0 lg:top-[4.2rem] top-[3.5rem] lg:right-[17.8rem] right-[1.28rem] border-l-[1rem] border-l-transparent border-b-[1.5625rem] border-b-black border-r-[1rem] border-r-transparent'></div>
             <div className='container absolute z-50 lg:top-[5.5rem] lg:right-[4rem] lg:w-[48rem] lg:max-h-[37rem] max-h-[35rem] lg:min-h-[13rem] min-h-[calc(100vh-4.1rem)] shadow-lg overflow-y-scroll bg-black lg:rounded-lg lg:py-9 lg:px-7 px-6'>
               <div className='flex flex-column justify-between text-white lg:my-0 my-6'>

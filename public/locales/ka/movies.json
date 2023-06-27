@@ -7,5 +7,19 @@
     "Drag & drop your image here or": "ჩააგდე სურათი აქ, ან",
     "Choose file": "აარჩიე ფაილი",
     "Upload image": "ატვირთე სურათი",
-    "Movie description": "ფილმის აღწერა"
+    "Movie description": "ფილმის აღწერა",
+    "Only English text allowed": "დაწერეთ მხოლოდ ინგლისური ტექსტი",
+    "Only Georgian text allowed": "დაწერეთ მხოლოდ ქართული ტექსტი",
+    "This field is required": "ეს ველი აუცილებელია",
+    "Please use only numbers": "გთხოვთ ჩაწერეთ მხოლოდ ციფრები",
+    "Please select at least one": "გთხოვთ აირჩიეთ ერთი მაინც",
+    "Replace photo": "შეცვალე სურათი",
+    "Edit movie": "განაახლე ფილმი",
+    "All quotes": "ყველა ციტატა",
+    "Add quote": "ახალი ციტატა",
+    "Write a comment": "დაწერე კომენტარი",
+    "Edit quote": "განაახლე ციტატა",
+    "Vew quote": "გახსენი ციტატა",
+    "Edit": "განაახლე",
+    "Delete": "წაშალე"
 }

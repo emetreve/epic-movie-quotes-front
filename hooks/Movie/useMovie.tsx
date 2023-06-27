@@ -30,6 +30,10 @@ const useMovie = () => {
     showMovieEdit,
     showBrugerMenu,
     showBurger,
+    setShowLangDropdown,
+    showLangDropdown,
+    showNotifications,
+    setShowNotifications,
   } = useUiContext();
 
   const queryClient = useQueryClient();
@@ -87,6 +91,14 @@ const useMovie = () => {
     }
     if (whichQuoteModalIsOpen) {
       setWhichQuoteModalIsOpen(null);
+    }
+
+    if (showLangDropdown) {
+      setShowLangDropdown(!showLangDropdown);
+    }
+
+    if (showNotifications) {
+      setShowNotifications(!showNotifications);
     }
   };
 

@@ -14,11 +14,19 @@ import { NotificationMessage, Notification } from '@/types';
 
 const useHeader = (authUserId: number) => {
   const [whichQuoteToView, setWhichQuoteToView] = useState<number | null>(null);
+  const [whichQuoteToEdit, setWhichQuoteToEdit] = useState(null);
+  const [editQuoteData, setEditQuoteData] = useState(null);
 
-  const { showBrugerMenu, showBurger, showSearchMobile, showSearchMob } =
-    useUiContext();
-
-  const [showNotifications, setShowNotifications] = useState(false);
+  const {
+    showBrugerMenu,
+    showBurger,
+    showSearchMobile,
+    showSearchMob,
+    setShowLangDropdown,
+    showLangDropdown,
+    showNotifications,
+    setShowNotifications,
+  } = useUiContext();
 
   const { t } = useTranslation(['newsfeed', 'profile']);
 
@@ -75,7 +83,7 @@ const useHeader = (authUserId: number) => {
     } else if (mobile && showNotifications) {
       document.body.classList.remove('hide-scrollbar');
     }
-    setShowNotifications((prev) => !prev);
+    setShowNotifications(!showNotifications);
   };
 
   const fetchNotifications = async () => {
@@ -113,6 +121,15 @@ const useHeader = (authUserId: number) => {
     setWhichQuoteToView(quoteId);
   };
 
+  const handleOutsideClick = () => {
+    if (showLangDropdown) {
+      setShowLangDropdown(!showLangDropdown);
+    }
+    if (showNotifications) {
+      setShowNotifications(!showNotifications);
+    }
+  };
+
   const notificationBellCounter = notifications?.filter(
     (each: Notification) => {
       return each.end_user_id === authUserId && each.read === 0;
@@ -138,6 +155,13 @@ const useHeader = (authUserId: number) => {
     notificationBellCounter,
     whichQuoteToView,
     setWhichQuoteToView,
+    whichQuoteToEdit,
+    setWhichQuoteToEdit,
+    editQuoteData,
+    setEditQuoteData,
+    setShowLangDropdown,
+    showLangDropdown,
+    handleOutsideClick,
   };
 };
 export default useHeader;

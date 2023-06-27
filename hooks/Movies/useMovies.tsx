@@ -12,8 +12,16 @@ const useMovies = () => {
   const [showSearchLg, setShowSearchLg] = useState(false);
   const [focused, setFocused] = useState(false);
   const [searchResult, setSearchResult] = useState<MovieForMoviesPage[]>([]);
-  const { showBrugerMenu, showBurger, showCreateMovie, showAddMovie } =
-    useUiContext();
+  const {
+    showBrugerMenu,
+    showBurger,
+    showCreateMovie,
+    showAddMovie,
+    setShowLangDropdown,
+    showLangDropdown,
+    showNotifications,
+    setShowNotifications,
+  } = useUiContext();
   const { logged, user } = useCheckIfLoggedIn();
   const { locale, push } = useRouter();
   const { t } = useTranslation('movies');
@@ -42,10 +50,19 @@ const useMovies = () => {
     if (showBrugerMenu) {
       showBurger(false);
     }
+
     if (showSearchLg) {
       console.log('sms');
       setShowSearchLg(false);
       reset();
+    }
+
+    if (showLangDropdown) {
+      setShowLangDropdown(!showLangDropdown);
+    }
+
+    if (showNotifications) {
+      setShowNotifications(!showNotifications);
     }
   };
 

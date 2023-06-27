@@ -10,6 +10,8 @@ const ViewQuote: React.FC<PropsType> = ({
   authUserAvatar,
   authUserName,
   authUserId,
+  setWhichQuoteToEdit,
+  setEditQuoteData,
 }) => {
   const {
     register,
@@ -19,7 +21,14 @@ const ViewQuote: React.FC<PropsType> = ({
     handleLike,
     handleDelete,
     handleClose,
-  } = useViewQuote(whichQuoteToView, setWhichQuoteToView);
+    handleEdit,
+    t,
+  } = useViewQuote(
+    whichQuoteToView,
+    setWhichQuoteToView,
+    setWhichQuoteToEdit,
+    setEditQuoteData
+  );
 
   return (
     <div className='z-50 lg:pb-16 bg-profile-dark-blue overflow-auto h-screen w-screen fixed backdrop-blur-sm lg:backdrop-blur-none bg-partly-transparent-dark lg:bg-violet-quote-create-bg lg:bg-opacity-70 text-white flex items-center justify-center top-0 left-0'>
@@ -30,7 +39,7 @@ const ViewQuote: React.FC<PropsType> = ({
               <div className='flex'>
                 <Image
                   onClick={() => {
-                    // TODO: show edut quote modal
+                    handleEdit(quote.id);
                   }}
                   src='/assets/edit.png'
                   alt='edit quote'
@@ -85,7 +94,7 @@ const ViewQuote: React.FC<PropsType> = ({
                   {quote && quote.body.en}
                 </div>
               </div>
-              <p className='absolute top-8 lg:top-4 right-9 text-textarea-gray'>
+              <p className='absolute top-4 lg:top-4 right-9 text-textarea-gray'>
                 Eng
               </p>
             </div>
@@ -97,7 +106,7 @@ const ViewQuote: React.FC<PropsType> = ({
                   {quote && quote.body.ka}
                 </div>
               </div>
-              <p className='absolute top-8 lg:top-4 right-9 text-textarea-gray'>
+              <p className='absolute top-4 lg:top-4 right-9 text-textarea-gray'>
                 ქარ
               </p>
             </div>
@@ -189,7 +198,7 @@ const ViewQuote: React.FC<PropsType> = ({
             <form onSubmit={handleSubmit(onSubmit)} className='w-full lg:pr-5'>
               <input
                 {...register('body', { required: true })}
-                placeholder='Write a comment'
+                placeholder={`${t('Write a comment')}`}
                 className='bg-comment-input-bg py-[0.43rem] pl-3 rounded-lg w-full lg:ml-5'
               />
               <input

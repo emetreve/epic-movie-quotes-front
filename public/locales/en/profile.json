@@ -26,14 +26,16 @@
     "Enter your password": "Enter your password",
     "Confirm password": "Confirm password",
     "8 or more characters": "8 or more characters",
-    "15 lowercase characters": "15 lowercase characters",
+    "Maximum 15 characters": "Maximum 15 characters",
+    "Passwords should contain": "Passwords should contain:",
     "Changes updated succsessfully": "Changes updated succsessfully",
     "Please check your email to confirm new email": "Please check your email to confirm new email",
     "Only English text allowed": "Only English text allowed",
-    "Only Georgian text allowed": "Only English text allowed",
+    "Only Georgian text allowed": "Only Georgian text allowed",
     "Enter your email": "Enter your email",
     "Invalid email address": "Invalid email address",
     "New email": "New email",
     "Enter new email": "Enter new email",
-    "The email has already been taken": "The email has already been taken"
+    "The email has already been taken": "The email has already been taken",
+    "Edit quote": "Edit quote"
 }

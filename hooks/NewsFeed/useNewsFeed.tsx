@@ -26,6 +26,10 @@ const useNewsFeed = () => {
     showSearchMob,
     showAddQuote,
     showAddNewQuote,
+    setShowLangDropdown,
+    showLangDropdown,
+    showNotifications,
+    setShowNotifications,
   } = useUiContext();
 
   const { searchedQuotes, setSearchedQuotes, quotesData, setQuotesData } =
@@ -156,6 +160,13 @@ const useNewsFeed = () => {
     }
     if (showBrugerMenu) {
       showBurger(false);
+    }
+    if (showLangDropdown) {
+      setShowLangDropdown(!showLangDropdown);
+    }
+
+    if (showNotifications) {
+      setShowNotifications(!showNotifications);
     }
     reset();
   };

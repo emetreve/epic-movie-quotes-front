@@ -18,6 +18,7 @@ const EditQuote: React.FC<PropsType> = ({
     handleUpload,
     uploadedImageToDisplay,
     handleDelete,
+    t,
   } = useEditQuote(whichQuote, setWhichQuote, quoteData);
 
   return (
@@ -36,7 +37,7 @@ const EditQuote: React.FC<PropsType> = ({
               className='h-[1.06rem] absolute left-8 w-auto hover:cursor-pointer'
             />
             <div>
-              <p className='block'>Edit quote</p>
+              <p className='block'>{t('Edit quote')}</p>
             </div>
             <Image
               src='/assets/close-thin.png'
@@ -150,7 +151,7 @@ const EditQuote: React.FC<PropsType> = ({
                   className='text-white mb-[4rem] lg:mb-12 w-full lg:mt-8 mt-10 text-lg bg-red py-2 px-4 rounded-md hover:bg-red-hover'
                   type='submit'
                 >
-                  Edit quote
+                  {t('Edit quote')}
                 </button>
               </div>
             </div>

@@ -4,12 +4,17 @@ import { createComment, getLike, deleteQuote } from '@/services';
 import { useQuery, useQueryClient } from 'react-query';
 import { useRouter } from 'next/router';
 import { getQuote } from '@/services';
+import { useTranslation } from 'next-i18next';
 
 const useViewQuote = (
   whichQuoteToView: number,
-  setWhichQuoteToView: Function
+  setWhichQuoteToView: Function,
+  setWhichQuoteToEdit: Function,
+  setEditQuoteData: Function
 ) => {
   const { register, handleSubmit, reset } = useForm<AddCommentData>();
+
+  const { t } = useTranslation(['movies', 'newsfeed', 'profile']);
 
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -50,6 +55,7 @@ const useViewQuote = (
     await deleteQuote(id);
     setWhichQuoteToView(null);
     handleBringScroll();
+    queryClient.invalidateQueries('movie');
   };
 
   const handleClose = () => {
@@ -61,6 +67,16 @@ const useViewQuote = (
     enabled: !!whichQuoteToView,
   });
 
+  const handleEdit = (id: number) => {
+    setWhichQuoteToView(null);
+    setEditQuoteData({
+      bodyEn: quote.body.en,
+      bodyKa: quote.body.ka,
+      image: quote.image,
+    });
+    setWhichQuoteToEdit(id);
+  };
+
   return {
     handleBringScroll,
     register,
@@ -70,6 +86,8 @@ const useViewQuote = (
     handleLike,
     handleDelete,
     handleClose,
+    handleEdit,
+    t,
   };
 };
 export default useViewQuote;

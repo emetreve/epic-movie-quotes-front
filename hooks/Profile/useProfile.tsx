@@ -22,6 +22,8 @@ const useProfile = () => {
 
   const [emailSuccess, setEmailSuccess] = useState(false);
 
+  const [passStateForConditionsBox, setPassStateForConditionsBox] = useState(0);
+
   const { t } = useTranslation('profile');
 
   const router = useRouter();
@@ -39,6 +41,10 @@ const useProfile = () => {
     showBurger,
     showUpdateEmail,
     showEditEmail,
+    setShowLangDropdown,
+    showLangDropdown,
+    showNotifications,
+    setShowNotifications,
   } = useUiContext();
 
   const editEmail = async (email: string) => {
@@ -105,6 +111,10 @@ const useProfile = () => {
     control,
     name: 'password',
   });
+
+  useEffect(() => {
+    setPassStateForConditionsBox(pass.length);
+  }, [pass]);
 
   const onSubmit = async (data: ChangeUserData) => {
     if (selectedFile) {
@@ -209,6 +219,13 @@ const useProfile = () => {
     if (showBrugerMenu) {
       showBurger(false);
     }
+    if (showLangDropdown) {
+      setShowLangDropdown(!showLangDropdown);
+    }
+
+    if (showNotifications) {
+      setShowNotifications(!showNotifications);
+    }
   };
 
   return {
@@ -236,6 +253,7 @@ const useProfile = () => {
     setHidePasswordConfirmation,
     errors,
     pass,
+    passStateForConditionsBox,
     handleUpload,
     selectedAvatar,
     setSelectedAvatar,
@@ -252,6 +270,8 @@ const useProfile = () => {
     showEmailInput,
     emailSuccess,
     setEmailSuccess,
+    setShowLangDropdown,
+    showLangDropdown,
     t,
   };
 };
