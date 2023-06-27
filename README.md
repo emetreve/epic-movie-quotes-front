@@ -33,7 +33,7 @@ Real-time updates keep users informed about the activity on their quotes, includ
 - <img src="public/readme/assets/tailwind.png" height="22" style="position: relative; top: 4px" /> [Tailwind](https://tailwindui.com/) - CSS Framework
 - <img src="public/readme/assets/pusher.png" height="22" style="position: relative; top: 4px" /> [Pusher](https://pusher.com/) - Real-time messaging and event-driven platform
 - <img src="public/readme/assets/react-hook-form.png" height="22" style="position: relative; top: 4px" /> [React Hook Form](https://react-hook-form.com/) - Performant and extensible React forms
-- <img src="public/readme/assets/react-query.png" height="22" style="position: relative; top: 4px" /> [React Query](https://react-hook-form.com/) - Data fetching and caching library
+- <img src="public/readme/assets/react-query.png" height="22" style="position: relative; top: 4px" /> [React Query](https://www.npmjs.com/package/react-query) - Data fetching and caching library
 
 #
 
