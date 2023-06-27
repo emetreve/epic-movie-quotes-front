@@ -14,7 +14,7 @@ const useViewQuote = (
 ) => {
   const { register, handleSubmit, reset } = useForm<AddCommentData>();
 
-  const { t } = useTranslation(['movie', 'newsfeed', 'profile']);
+  const { t } = useTranslation(['movies', 'newsfeed', 'profile']);
 
   const router = useRouter();
   const queryClient = useQueryClient();

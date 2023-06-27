@@ -35,5 +35,7 @@
     "Invalid email address": "არავალიდური იმეილი",
     "New email": "ახალი იმეილი",
     "Enter new email": "შეიყვანეთ ახალი იმეილი",
-    "The email has already been taken": "ეს იმეილი უკვე დაკავებულია"
+    "The email has already been taken": "ეს იმეილი უკვე დაკავებულია",
+    "Write a comment": "დაწერე კომენტარი",
+    "Edit quote": "განაახლე ციტატა"
 }

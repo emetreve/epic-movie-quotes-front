@@ -4,6 +4,7 @@ import { getQuote, updateQuote, deleteQuote } from '@/services';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { editQuote, EditQuoteProperties } from '@/types';
+import { useTranslation } from 'next-i18next';
 
 const useEditQuote = (
   whichQuote: number,
@@ -15,6 +16,7 @@ const useEditQuote = (
 
   const queryClient = useQueryClient();
   const { push } = useRouter();
+  const { t } = useTranslation(['movies', 'newsfeed', 'profile']);
 
   const fetchQuote = async () => {
     try {
@@ -103,6 +105,7 @@ const useEditQuote = (
     handleUpload,
     uploadedImageToDisplay,
     handleDelete,
+    t,
   };
 };
 export default useEditQuote;
