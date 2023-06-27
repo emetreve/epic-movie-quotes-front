@@ -7,5 +7,11 @@
     "Drag & drop your image here or": "Drag & drop your image here or",
     "Choose file": "Choose file",
     "Upload image": "Upload image",
-    "Movie description": "Movie description"
+    "Movie description": "Movie description",
+    "Only English text allowed": "Only English text allowed",
+    "Only Georgian text allowed": "Only Georgian text allowed",
+    "This field is required": "This field is required",
+    "Please use only numbers": "Please use only numbers",
+    "Please select at least one": "Please select at least one"
+
 }

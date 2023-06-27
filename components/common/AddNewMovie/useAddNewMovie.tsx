@@ -60,6 +60,7 @@ const useAddNewMovie = () => {
 
     if (!isAlreadySelected) {
       setSelectedGenres((prev) => [...prev, genre]);
+      setGenreSelectionValid('');
     }
 
     setShowGenresDropdown(false);
@@ -77,16 +78,20 @@ const useAddNewMovie = () => {
     });
 
     if (selectedGenres.length === 1) {
-      setGenreSelectionValid('Please select at least one');
+      setGenreSelectionValid(`${t('Please select at least one')}`);
     }
   };
 
   const handleSubmitCheckForGenres = () => {
     if (selectedGenres.length < 1) {
-      setGenreSelectionValid('Please select at least one');
+      setGenreSelectionValid(`${t('Please select at least one')}`);
+    } else {
+      setGenreSelectionValid('');
     }
     if (!imageName) {
-      setImageError(`${'This field is required'}`);
+      setImageError(`${t('This field is required')}`);
+    } else {
+      setImageError('');
     }
   };
 
@@ -116,13 +121,14 @@ const useAddNewMovie = () => {
 
   const onSubmit = async (data: CreateMovieFormData) => {
     if (selectedGenres.length < 1) {
-      setGenreSelectionValid('Please select at least one');
+      setGenreSelectionValid(`${t('Please select at least one')}`);
       return;
     }
     if (!imageName) {
-      setImageError(`${'This field is required'}`);
+      setImageError(`${t('This field is required')}`);
       return;
     }
+
     if (selectedFile) {
       const formData = new FormData();
       formData.append('image', selectedFile, selectedFile.name);

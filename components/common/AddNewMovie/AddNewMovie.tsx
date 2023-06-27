@@ -77,10 +77,10 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
             <div className='relative'>
               <input
                 {...register('nameEn', {
-                  required: `${'This field is required'}`,
+                  required: `${t('This field is required')}`,
                   pattern: {
                     value: /^[\w,.,()\s$?!#@%:^&*"']+$/,
-                    message: `${'Only English text allowed'}`,
+                    message: `${t('Only English text allowed')}`,
                   },
                 })}
                 className='w-full pr-12 focus:outline-none h-[3.2rem] border border-textarea-gray bg-transparent rounded px-4 placeholder-white'
@@ -96,10 +96,10 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
             <div className='relative'>
               <input
                 {...register('nameGe', {
-                  required: `${'This field is required'}`,
+                  required: `${t('This field is required')}`,
                   pattern: {
                     value: /^[ა-ჰ\d,.()\s$?!#:@%^&*"']+$/,
-                    message: `${'Only Georgian text allowed'}`,
+                    message: `${t('Only Georgian text allowed')}`,
                   },
                 })}
                 className='w-full pr-12 focus:outline-none h-[3.2rem] border border-textarea-gray bg-transparent rounded px-4 placeholder-white'
@@ -193,10 +193,10 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
             <div className='relative'>
               <input
                 {...register('year', {
-                  required: `${'This field is required'}`,
+                  required: `${t('This field is required')}`,
                   pattern: {
                     value: /^\d+$/,
-                    message: 'Please use only numbers',
+                    message: `${t('Please use only numbers')}`,
                   },
                 })}
                 className='w-full pr-12 focus:outline-none h-[3.2rem] border border-textarea-gray bg-transparent rounded px-4 placeholder-white'
@@ -212,10 +212,10 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
             <div className='relative'>
               <input
                 {...register('revenue', {
-                  required: `${'This field is required'}`,
+                  required: `${t('This field is required')}`,
                   pattern: {
                     value: /^\d+$/,
-                    message: 'Please use only numbers',
+                    message: `${t('Please use only numbers')}`,
                   },
                 })}
                 className='w-full pr-12 focus:outline-none h-[3.2rem] border border-textarea-gray bg-transparent rounded px-4 placeholder-white'
@@ -231,10 +231,10 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
             <div className='relative'>
               <input
                 {...register('directorEn', {
-                  required: `${'This field is required'}`,
+                  required: `${t('This field is required')}`,
                   pattern: {
                     value: /^[\w,.,()\s$?!#@%:^&*"']+$/,
-                    message: `${'Only English text allowed'}`,
+                    message: `${t('Only English text allowed')}`,
                   },
                 })}
                 className='w-full pr-12 focus:outline-none h-[3.2rem] border border-textarea-gray bg-transparent rounded px-4 placeholder-white'
@@ -251,10 +251,10 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
             <div className='relative'>
               <input
                 {...register('directorGe', {
-                  required: `${'This field is required'}`,
+                  required: `${t('This field is required')}`,
                   pattern: {
                     value: /^[ა-ჰ\d,.()\s$?!#:@%^&*"']+$/,
-                    message: `${'Only Georgian text allowed'}`,
+                    message: `${t('Only Georgian text allowed')}`,
                   },
                 })}
                 className='w-full pr-12 focus:outline-none h-[3.2rem] border border-textarea-gray bg-transparent rounded px-4 placeholder-white'
@@ -270,10 +270,10 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
             <div className='relative'>
               <textarea
                 {...register('descriptionEn', {
-                  required: `${'This field is required'}`,
+                  required: `${t('This field is required')}`,
                   pattern: {
                     value: /^[\w,.,()\s$?!#@%:^&*"']+$/,
-                    message: `${'Only English text allowed'}`,
+                    message: `${t('Only English text allowed')}`,
                   },
                 })}
                 className='w-full pr-12 focus:outline-none h-[5.2rem] border border-textarea-gray bg-transparent rounded py-2 px-4 placeholder-white'
@@ -289,10 +289,10 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
             <div className='relative -mt-1'>
               <textarea
                 {...register('descriptionGe', {
-                  required: `${'This field is required'}`,
+                  required: `${t('This field is required')}`,
                   pattern: {
                     value: /^[ა-ჰ\d,.()\s$?!#:@%^&*"']+$/,
-                    message: `${'Only Georgian text allowed'}`,
+                    message: `${t('Only Georgian text allowed')}`,
                   },
                 })}
                 className='w-full pr-12 focus:outline-none h-[5.2rem] border border-textarea-gray bg-transparent rounded py-2 px-4 placeholder-white'
