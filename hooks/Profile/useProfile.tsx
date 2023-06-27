@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useCheckIfLoggedIn } from '@/hooks';
 import { useUiContext } from '@/store';
 import { ChangeUserData } from '@/types';
-import { updateAvatar, updateUser } from '@/services';
+import { updateAvatar, updateUser, changeEmailInDatabase } from '@/services';
 import { useTranslation } from 'next-i18next';
 
 const useProfile = () => {
@@ -18,11 +18,15 @@ const useProfile = () => {
   const [avatarButtonTrigger, setAvatarButtonTrigger] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [showMobileAvatarModal, setShowMobileAvatarModal] = useState(false);
+  const [showEmailInput, setShowEmailInput] = useState(false);
+
+  const [emailSuccess, setEmailSuccess] = useState(false);
 
   const { t } = useTranslation('profile');
 
   const router = useRouter();
-  const { status } = router.query;
+  const { status, changeEmail } = router.query;
+  const locale = router.locale;
 
   const { logged, user } = useCheckIfLoggedIn();
 
@@ -33,7 +37,25 @@ const useProfile = () => {
     showEditPassword,
     showBrugerMenu,
     showBurger,
+    showUpdateEmail,
+    showEditEmail,
   } = useUiContext();
+
+  const editEmail = async (email: string) => {
+    try {
+      await changeEmailInDatabase(email);
+      router
+        .push({
+          pathname: router.pathname,
+          query: {},
+        })
+        .then(() => {
+          router.reload();
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (status === 'success') {
@@ -46,13 +68,18 @@ const useProfile = () => {
         query: {},
       });
     }, 4000);
-  }, [status]);
+
+    if (changeEmail && changeEmail?.length > 0) {
+      editEmail(changeEmail as string);
+    }
+  }, [status, changeEmail]);
 
   const methods = useForm({
     defaultValues: {
       username: '',
       password: '',
       password_confirmation: '',
+      email: '',
     },
     mode: 'onChange',
   });
@@ -106,20 +133,32 @@ const useProfile = () => {
       return;
     }
 
+    const payload = { ...data, locale };
     try {
-      await updateUser(data);
+      await updateUser(payload);
       router.push({
         pathname: router.pathname,
         query: { status: 'successful' },
       });
       setShowPasswordInputs(false);
       setShowUsernameInput(false);
+      setShowEmailInput(false);
+      reset();
     } catch (error: any) {
       console.log(error);
+      if (
+        error?.response?.data?.message === 'The email has already been taken.'
+      ) {
+        setError('email', {
+          type: 'manual',
+          message: `${t('The email has already been taken')}`,
+        });
+        return;
+      }
       if (error?.response?.data?.message) {
         setError('username', {
           type: 'manual',
-          message: error.response.data.message,
+          message: `${t('The username has already been taken')}`,
         });
       }
     }
@@ -157,6 +196,7 @@ const useProfile = () => {
   const handleCancelLg = () => {
     setShowPasswordInputs(false);
     setShowUsernameInput(false);
+    setShowEmailInput(false);
     reset();
   };
 
@@ -206,6 +246,12 @@ const useProfile = () => {
     handleCancelLg,
     handleOutsideClick,
     handleBack,
+    showUpdateEmail,
+    showEditEmail,
+    setShowEmailInput,
+    showEmailInput,
+    emailSuccess,
+    setEmailSuccess,
     t,
   };
 };

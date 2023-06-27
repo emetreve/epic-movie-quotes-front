@@ -18,6 +18,7 @@
     "Enter new username": "ახალი სახელი",
     "This field must have at least 8 characters": "ეს ველი მინიმუმ 8 სიმბოლო უნდა იყოს",
     "Confirm new password": "დაადასტურეთ ახალი პაროლი",
+    "The username has already been taken": "სახელი უკვე დაკავებულია",
     "Passwords do not match": "პაროლები არ ემთხვევა",
     "Save changes": "შეინახე ცვლილებები",
     "Enter your username": "შეიყვანეთ სახელი",
@@ -27,7 +28,12 @@
     "8 or more characters": "8 ან მეტი სიმბოლო",
     "15 lowercase characters": "15 დაბალი რეგისტრის სიმბოლო",
     "Changes updated succsessfully": "ცვლილებები წარმატებით შეინახა",
+    "Please check your email to confirm new email": "გთხოვთ შეამოწმოთ იმეილი რათა დაადასტუროთ ახალი იმეილი",
     "Only English text allowed": "დაწერეთ მხოლოდ ინგლისური ტექსტი",
-    "Only Georgian text allowed": "დაწერეთ მხოლოდ ქართული ტექსტი"
-
+    "Only Georgian text allowed": "დაწერეთ მხოლოდ ქართული ტექსტი",
+    "Enter your email": "შეიყვანეთ იმეილი",
+    "Invalid email address": "არავალიდური იმეილი",
+    "New email": "ახალი იმეილი",
+    "Enter new email": "შეიყვანეთ ახალი იმეილი",
+    "The email has already been taken": "ეს იმეილი უკვე დაკავებულია"
 }

@@ -8,6 +8,7 @@ import {
   ChangePassword,
   ValidationIcons,
   PasswordConditionsBox,
+  ChangeEmail,
 } from '@/components';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -49,6 +50,12 @@ const Profile = () => {
     handleCancelLg,
     handleOutsideClick,
     handleBack,
+    showUpdateEmail,
+    showEditEmail,
+    setShowEmailInput,
+    showEmailInput,
+    emailSuccess,
+    setEmailSuccess,
     t,
   } = useProfile();
 
@@ -57,6 +64,14 @@ const Profile = () => {
       <>
         {showEditName && (
           <ChangeName userName={user.name} authUserId={user.id} />
+        )}
+
+        {showEditEmail && (
+          <ChangeEmail
+            setEmailSuccess={setEmailSuccess}
+            userName={user.name}
+            authUserId={user.id}
+          />
         )}
 
         {showEditPassword && (
@@ -76,7 +91,12 @@ const Profile = () => {
             />
           </div>
 
-          {showSuccess && <SuccessNotification show={setShowSuccess} />}
+          {showSuccess && (
+            <SuccessNotification
+              show={setShowSuccess}
+              isEmailSuccess={emailSuccess}
+            />
+          )}
 
           <SideProfilePanel avatar={user.avatar} name={user.name} />
 
@@ -147,17 +167,31 @@ const Profile = () => {
                       </p>
                     </div>
                   </div>
+
                   <div className='flex flex-col mt-8'>
-                    <label htmlFor='email_read' className='mb-1 text-xs'>
+                    <label htmlFor='username_read' className='mb-1 text-xs'>
                       {t('Email')}
                     </label>
-                    <input
-                      id='email_read'
-                      readOnly
-                      placeholder={user.email}
-                      className={`bg-transparent w-full text-sm border-b pb-[1rem]  border-input-gray placeholder-white`}
-                    />
+                    <div className='relative'>
+                      <input
+                        id='email_read'
+                        placeholder={user.email}
+                        readOnly
+                        className={`bg-transparent w-full text-sm border-b pb-[1rem]  border-input-gray placeholder-white`}
+                      />
+                      <p
+                        onClick={() => {
+                          showUpdateEmail(true);
+                        }}
+                        className={`absolute ${
+                          user.is_google_user && 'hidden'
+                        } bottom-[1.2rem] text-sm text-input-gray w-5 h-5 hover:cursor-pointer block right-4`}
+                      >
+                        {t('Edit')}
+                      </p>
+                    </div>
                   </div>
+
                   {!user.is_google_user && (
                     <div className='flex flex-col mt-8'>
                       <label htmlFor='password_read' className='mb-1 text-xs'>
@@ -337,7 +371,7 @@ const Profile = () => {
                         </div>
                       )}
 
-                      <div className='flex flex-col mt-9 w-full'>
+                      <div className='flex flex-col mt-9 w-[100%]'>
                         <div className='flex justify-center items-center'>
                           <div className='flex-grow'>
                             <label
@@ -353,9 +387,60 @@ const Profile = () => {
                               className='bg-input-gray mt-1 w-full py-2 rounded-md px-4 border-input-gray placeholder-txt-black'
                             />
                           </div>
-                          <div className='w-2 ml-8 pt-6'></div>
+                          <div
+                            onClick={() => {
+                              setShowEmailInput(true);
+                            }}
+                            className={`${
+                              user.is_google_user && 'invisible'
+                            } text-input-gray hover:cursor-pointer ml-8 pt-6 w-2`}
+                          >
+                            {t('Edit')}
+                          </div>
                         </div>
                       </div>
+
+                      {showEmailInput && (
+                        <div className=' flex flex-col mt-9 w-full'>
+                          <div className='flex justify-center items-center'>
+                            <div className='flex-grow'>
+                              <label htmlFor='email' className='mb-1 text-xs'>
+                                {t('New email')}
+                              </label>
+                              <div className='relative'>
+                                <input
+                                  {...register('email', {
+                                    pattern: {
+                                      value:
+                                        /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                      message: `${t('Invalid email address')}`,
+                                    },
+                                  })}
+                                  placeholder={`${t('Enter new email')}`}
+                                  id='email'
+                                  className={`${
+                                    applyInputStyle('email')
+                                      ? 'border-red'
+                                      : formState.dirtyFields['email']
+                                      ? 'border-green'
+                                      : ''
+                                  } bg-input-gray border-2 text-txt-black mt-1 w-full py-2 rounded-md px-4 placeholder-gray`}
+                                />
+                                <div className='-mt-[0.15rem]'>
+                                  <ValidationIcons name='email' />
+                                </div>
+                              </div>
+                              <div className='h-2 pt-[0.3rem]'>
+                                <p className='text-red text-xs'>
+                                  {errors['email']?.message}
+                                </p>
+                              </div>
+                            </div>
+                            <div className='w-2 ml-8 pt-6'></div>
+                          </div>
+                        </div>
+                      )}
+
                       {!user.is_google_user && (
                         <>
                           <div className='flex flex-col mt-9 w-[100%]'>
@@ -543,7 +628,8 @@ const Profile = () => {
                   </div>
                   {(showUsernameInput ||
                     showPasswordInputs ||
-                    avatarButtonTrigger) && (
+                    avatarButtonTrigger ||
+                    showEmailInput) && (
                     <div className='container flex justify-end'>
                       <div className='flex flex-row w-fit'>
                         <p

@@ -18,6 +18,7 @@
     "Enter new username": "Enter new username",
     "This field must have at least 8 characters": "This field must have at least 8 characters",
     "Confirm new password": "Confirm new password",
+    "The username has already been taken": "The username has already been taken",
     "Passwords do not match": "Passwords do not match",
     "Save changes": "Save changes",
     "Enter your username": "Enter your username",
@@ -27,6 +28,12 @@
     "8 or more characters": "8 or more characters",
     "15 lowercase characters": "15 lowercase characters",
     "Changes updated succsessfully": "Changes updated succsessfully",
+    "Please check your email to confirm new email": "Please check your email to confirm new email",
     "Only English text allowed": "Only English text allowed",
-    "Only Georgian text allowed": "Only English text allowed"
+    "Only Georgian text allowed": "Only English text allowed",
+    "Enter your email": "Enter your email",
+    "Invalid email address": "Invalid email address",
+    "New email": "New email",
+    "Enter new email": "Enter new email",
+    "The email has already been taken": "The email has already been taken"
 }
