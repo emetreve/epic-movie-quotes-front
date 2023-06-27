@@ -15,7 +15,7 @@ const useQuoteListing = (
 
   const { showNotifications, setShowNotifications } = useUiContext();
 
-  const handleWrapperClick = (e: MouseEvent) => {
+  const handleWrapperClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     if (showNotifications) {
       setShowNotifications(!showNotifications);
