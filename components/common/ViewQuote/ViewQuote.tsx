@@ -94,7 +94,7 @@ const ViewQuote: React.FC<PropsType> = ({
                   {quote && quote.body.en}
                 </div>
               </div>
-              <p className='absolute top-8 lg:top-4 right-9 text-textarea-gray'>
+              <p className='absolute top-4 lg:top-4 right-9 text-textarea-gray'>
                 Eng
               </p>
             </div>
@@ -106,7 +106,7 @@ const ViewQuote: React.FC<PropsType> = ({
                   {quote && quote.body.ka}
                 </div>
               </div>
-              <p className='absolute top-8 lg:top-4 right-9 text-textarea-gray'>
+              <p className='absolute top-4 lg:top-4 right-9 text-textarea-gray'>
                 ქარ
               </p>
             </div>
