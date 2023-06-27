@@ -37,7 +37,7 @@ Epic Movie Quotes is a full-stack application designed to cater to movie enthusi
 
 ### Getting Started
 
-1\. First of all you need to clone Covid Questionnaire repository from github:
+1\. First of all you need to clone Epic Movie Quotes repository from github:
 
 ```sh
 git clone https://github.com/RedberryInternship/elene-metreveli-epic-movie-quotes-front
