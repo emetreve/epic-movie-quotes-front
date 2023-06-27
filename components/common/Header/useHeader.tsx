@@ -14,6 +14,8 @@ import { NotificationMessage, Notification } from '@/types';
 
 const useHeader = (authUserId: number) => {
   const [whichQuoteToView, setWhichQuoteToView] = useState<number | null>(null);
+  const [whichQuoteToEdit, setWhichQuoteToEdit] = useState(null);
+  const [editQuoteData, setEditQuoteData] = useState(null);
 
   const { showBrugerMenu, showBurger, showSearchMobile, showSearchMob } =
     useUiContext();
@@ -138,6 +140,10 @@ const useHeader = (authUserId: number) => {
     notificationBellCounter,
     whichQuoteToView,
     setWhichQuoteToView,
+    whichQuoteToEdit,
+    setWhichQuoteToEdit,
+    editQuoteData,
+    setEditQuoteData,
   };
 };
 export default useHeader;

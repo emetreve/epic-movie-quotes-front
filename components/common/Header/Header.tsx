@@ -5,7 +5,7 @@ import { LangSwitch } from '@/components';
 import { Notification } from '@/types';
 import { Heart } from '@/components';
 import { getTimeAgo } from '@/helpers';
-import { Home, Camera, ViewQuote } from '@/components';
+import { Home, Camera, ViewQuote, EditQuote } from '@/components';
 
 const Header: React.FC<PropsType> = ({
   hideSearch,
@@ -30,6 +30,10 @@ const Header: React.FC<PropsType> = ({
     whichQuoteToView,
     setWhichQuoteToView,
     handleNotificationClicked,
+    whichQuoteToEdit,
+    setWhichQuoteToEdit,
+    editQuoteData,
+    setEditQuoteData,
   } = useHeader(authUserId);
 
   return (
@@ -41,8 +45,21 @@ const Header: React.FC<PropsType> = ({
           authUserName={userName}
           whichQuoteToView={whichQuoteToView}
           setWhichQuoteToView={setWhichQuoteToView}
+          setWhichQuoteToEdit={setWhichQuoteToEdit}
+          setEditQuoteData={setEditQuoteData}
         />
       )}
+
+      {whichQuoteToEdit && (
+        <EditQuote
+          authUserAvatar={avatar}
+          authUserName={userName}
+          whichQuote={whichQuoteToEdit}
+          setWhichQuote={setWhichQuoteToEdit}
+          quoteData={editQuoteData}
+        />
+      )}
+
       <div className='fixed w-full z-[40]'>
         {!showSearchMobile && (
           <div className='flex relative lg:hidden justify-between items-center py-6 text-xs lg:text-base lg:px-16 bg-violet'>

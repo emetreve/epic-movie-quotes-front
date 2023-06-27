@@ -42,6 +42,8 @@ const UiContext = createContext({
   showMovieEdit: (show: boolean) => {},
   showEditEmail: false,
   showUpdateEmail: (show: boolean) => {},
+  showLangDropdown: false,
+  setShowLangDropdown: (newValue: boolean) => {},
 });
 
 export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
@@ -73,6 +75,7 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
   const [showEditMovie, setShowEditMovie] = useState(false);
 
   const [showEditEmail, setShowEditEmail] = useState(false);
+  const [showLangDropdown, setShowLangDropdown] = useState(false);
 
   const showCreate = (show: boolean) => {
     setShowCreateAccount(show);
@@ -260,6 +263,8 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
         showMovieEdit,
         showUpdateEmail,
         showEditEmail,
+        showLangDropdown,
+        setShowLangDropdown,
       }}
     >
       {children}
