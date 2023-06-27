@@ -24,7 +24,7 @@ const useEditMovie = (movie: MovieForSingleMoviePage) => {
 
   const router = useRouter();
   const locale = router.locale;
-  const { t } = useTranslation('movies');
+  const { t } = useTranslation(['movies', 'movie']);
 
   const queryClient = useQueryClient();
 
@@ -81,13 +81,13 @@ const useEditMovie = (movie: MovieForSingleMoviePage) => {
     });
 
     if (selectedGenres.length === 1) {
-      setGenreSelectionValid('Please select at least one');
+      setGenreSelectionValid(`${t('Please select at least one')}`);
     }
   };
 
   const handleSubmitCheckForGenres = () => {
     if (selectedGenres.length < 1) {
-      setGenreSelectionValid('Please select at least one');
+      setGenreSelectionValid(`${t('Please select at least one')}`);
     }
   };
 
@@ -135,7 +135,7 @@ const useEditMovie = (movie: MovieForSingleMoviePage) => {
 
   const onSubmit = async (data: CreateMovieFormData) => {
     if (selectedGenres.length < 1) {
-      setGenreSelectionValid('Please select at least one');
+      setGenreSelectionValid(`${t('Please select at least one')}`);
       return;
     }
     const formData = new FormData();

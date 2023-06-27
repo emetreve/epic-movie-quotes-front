@@ -76,10 +76,10 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
                 <p className='absolute text-input-gray text-sm'>Movie name:</p>
                 <input
                   {...register('nameEn', {
-                    required: `${'This field is required'}`,
+                    required: `${t('This field is required')}`,
                     pattern: {
                       value: /^[\w,.,()\s$?!#@%:^&*"']+$/,
-                      message: `${'Only English text allowed'}`,
+                      message: `${t('Only English text allowed')}`,
                     },
                   })}
                   className='absolute w-full pl-[5.6rem] pr-[4.1rem] focus:outline-nonebg-transparent bg-transparent'
@@ -99,10 +99,10 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
                 </p>
                 <input
                   {...register('nameGe', {
-                    required: `${'This field is required'}`,
+                    required: `${t('This field is required')}`,
                     pattern: {
                       value: /^[ა-ჰ\d,.()\s$?!#:@%^&*"']+$/,
-                      message: `${'Only Georgian text allowed'}`,
+                      message: `${t('Only Georgian text allowed')}`,
                     },
                   })}
                   className='absolute w-full pl-[7.4rem] pr-[4.1rem] focus:outline-nonebg-transparent bg-transparent'
@@ -199,10 +199,10 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
                 <p className='absolute text-input-gray text-sm'>წელი/Year:</p>
                 <input
                   {...register('year', {
-                    required: `${'This field is required'}`,
+                    required: `${t('This field is required')}`,
                     pattern: {
                       value: /^\d+$/,
-                      message: 'Please use only numbers',
+                      message: `${t('Please use only numbers')}`,
                     },
                   })}
                   className='absolute w-full pr-[3rem] pl-[5rem] focus:outline-nonebg-transparent bg-transparent'
@@ -222,10 +222,10 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
                 </p>
                 <input
                   {...register('revenue', {
-                    required: `${'This field is required'}`,
+                    required: `${t('This field is required')}`,
                     pattern: {
                       value: /^\d+$/,
-                      message: 'Please use only numbers',
+                      message: `${t('Please use only numbers')}`,
                     },
                   })}
                   className='absolute w-full pr-[3rem] pl-[9.7rem] focus:outline-nonebg-transparent bg-transparent'
@@ -243,10 +243,10 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
                 <p className='absolute text-input-gray text-sm'>Director:</p>
                 <input
                   {...register('directorEn', {
-                    required: `${'This field is required'}`,
+                    required: `${t('This field is required')}`,
                     pattern: {
                       value: /^[\w,.,()\s$?!#@%:^&*"']+$/,
-                      message: `${'Only English text allowed'}`,
+                      message: `${t('Only English text allowed')}`,
                     },
                   })}
                   className='absolute w-full pr-[4.2rem] pl-[4rem] focus:outline-nonebg-transparent bg-transparent'
@@ -265,10 +265,10 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
                 <p className='absolute text-input-gray text-sm'>რეჟისორი:</p>
                 <input
                   {...register('directorGe', {
-                    required: `${'This field is required'}`,
+                    required: `${t('This field is required')}`,
                     pattern: {
                       value: /^[ა-ჰ\d,.()\s$?!#:@%^&*"']+$/,
-                      message: `${'Only Georgian text allowed'}`,
+                      message: `${t('Only Georgian text allowed')}`,
                     },
                   })}
                   className='absolute w-full pr-[4.2rem] pl-[5rem] focus:outline-nonebg-transparent bg-transparent'
@@ -289,10 +289,10 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
                 </p>
                 <textarea
                   {...register('descriptionEn', {
-                    required: `${'This field is required'}`,
+                    required: `${t('This field is required')}`,
                     pattern: {
                       value: /^[\w,.,()\s$?!#@%:^&*"']+$/,
-                      message: `${'Only English text allowed'}`,
+                      message: `${t('Only English text allowed')}`,
                     },
                   })}
                   className='w-full absolute mt-8 ml-8 pr-11 focus:outline-none bg-transparent py-2 px-4 placeholder-white'
@@ -314,10 +314,10 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
                 </p>
                 <textarea
                   {...register('descriptionGe', {
-                    required: `${'This field is required'}`,
+                    required: `${t('This field is required')}`,
                     pattern: {
                       value: /^[ა-ჰ\d,.()\s$?!#:@%^&*"']+$/,
-                      message: `${'Only Georgian text allowed'}`,
+                      message: `${t('Only Georgian text allowed')}`,
                     },
                   })}
                   className='w-full absolute mt-8 ml-8 pr-11 focus:outline-none bg-transparent py-2 px-4 placeholder-white'
