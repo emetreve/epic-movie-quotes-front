@@ -7,7 +7,9 @@ import { getQuote } from '@/services';
 
 const useViewQuote = (
   whichQuoteToView: number,
-  setWhichQuoteToView: Function
+  setWhichQuoteToView: Function,
+  setWhichQuoteToEdit: Function,
+  setEditQuoteData: Function
 ) => {
   const { register, handleSubmit, reset } = useForm<AddCommentData>();
 
@@ -50,6 +52,7 @@ const useViewQuote = (
     await deleteQuote(id);
     setWhichQuoteToView(null);
     handleBringScroll();
+    queryClient.invalidateQueries('movie');
   };
 
   const handleClose = () => {
@@ -61,6 +64,16 @@ const useViewQuote = (
     enabled: !!whichQuoteToView,
   });
 
+  const handleEdit = (id: number) => {
+    setWhichQuoteToView(null);
+    setEditQuoteData({
+      bodyEn: quote.body.en,
+      bodyKa: quote.body.ka,
+      image: quote.image,
+    });
+    setWhichQuoteToEdit(id);
+  };
+
   return {
     handleBringScroll,
     register,
@@ -70,6 +83,7 @@ const useViewQuote = (
     handleLike,
     handleDelete,
     handleClose,
+    handleEdit,
   };
 };
 export default useViewQuote;

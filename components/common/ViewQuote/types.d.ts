@@ -4,4 +4,6 @@ export type PropsType = {
   authUserAvatar?: string;
   authUserName: string;
   authUserId: number;
+  setWhichQuoteToEdit: Function;
+  setEditQuoteData: Function;
 };

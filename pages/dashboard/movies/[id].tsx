@@ -60,6 +60,8 @@ const Movie = () => {
               authUserName={user.name}
               whichQuoteToView={whichQuoteToView}
               setWhichQuoteToView={setWhichQuoteToView}
+              setWhichQuoteToEdit={setWhichQuoteToEdit}
+              setEditQuoteData={setEditQuoteData}
             />
           )}
 
