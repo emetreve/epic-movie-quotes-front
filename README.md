@@ -71,11 +71,20 @@ npm run dev
 │   │   │   │   ├── index.ts
 │   │   │   │   ├── types.d.ts
 │   │   │   │   └── useAddQuoteFromMovies.tsx
+│   │   ├── newsfeed
+│   │   │   ├── NewsItem
+│   │   │   │   ├── NewsItem.tsx
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── types.d.ts
+│   │   │   │   └── useNewsItem.tsx
 │   │   └── index.ts
 │   ├── helpers
 │   ├── hooks
 │   │   ├── Newsfeed
 │   │   │   ├── useNewsFeed.tsx
+│   │   │   └── index.tsx
+│   │   ├── Profile
+│   │   │   ├── useProfile.tsx
 │   │   │   └── index.tsx
 │   │   └── index.ts
 │   ├── pages
