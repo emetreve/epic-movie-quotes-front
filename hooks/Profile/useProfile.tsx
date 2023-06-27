@@ -41,6 +41,8 @@ const useProfile = () => {
     showEditEmail,
     setShowLangDropdown,
     showLangDropdown,
+    showNotifications,
+    setShowNotifications,
   } = useUiContext();
 
   const editEmail = async (email: string) => {
@@ -213,6 +215,10 @@ const useProfile = () => {
     }
     if (showLangDropdown) {
       setShowLangDropdown(!showLangDropdown);
+    }
+
+    if (showNotifications) {
+      setShowNotifications(!showNotifications);
     }
   };
 

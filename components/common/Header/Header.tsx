@@ -34,8 +34,7 @@ const Header: React.FC<PropsType> = ({
     setWhichQuoteToEdit,
     editQuoteData,
     setEditQuoteData,
-    setShowLangDropdown,
-    showLangDropdown,
+    handleOutsideClick,
   } = useHeader(authUserId);
 
   return (
@@ -62,14 +61,7 @@ const Header: React.FC<PropsType> = ({
         />
       )}
 
-      <div
-        onClick={() => {
-          if (showLangDropdown) {
-            setShowLangDropdown(!showLangDropdown);
-          }
-        }}
-        className='fixed w-full z-[40]'
-      >
+      <div onClick={handleOutsideClick} className='fixed w-full z-[40]'>
         {!showSearchMobile && (
           <div className='flex relative lg:hidden justify-between items-center py-6 text-xs lg:text-base lg:px-16 bg-violet'>
             <Image
@@ -182,7 +174,8 @@ const Header: React.FC<PropsType> = ({
                   width={96}
                   height={96}
                   className='lg:hidden inline ml-4 h-6 w-auto hover:cursor-pointer'
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     toggleNotifications(true);
                   }}
                 />

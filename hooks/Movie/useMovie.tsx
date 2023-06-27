@@ -32,6 +32,8 @@ const useMovie = () => {
     showBurger,
     setShowLangDropdown,
     showLangDropdown,
+    showNotifications,
+    setShowNotifications,
   } = useUiContext();
 
   const queryClient = useQueryClient();
@@ -93,6 +95,10 @@ const useMovie = () => {
 
     if (showLangDropdown) {
       setShowLangDropdown(!showLangDropdown);
+    }
+
+    if (showNotifications) {
+      setShowNotifications(!showNotifications);
     }
   };
 

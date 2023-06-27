@@ -28,6 +28,8 @@ const useNewsFeed = () => {
     showAddNewQuote,
     setShowLangDropdown,
     showLangDropdown,
+    showNotifications,
+    setShowNotifications,
   } = useUiContext();
 
   const { searchedQuotes, setSearchedQuotes, quotesData, setQuotesData } =
@@ -161,6 +163,10 @@ const useNewsFeed = () => {
     }
     if (showLangDropdown) {
       setShowLangDropdown(!showLangDropdown);
+    }
+
+    if (showNotifications) {
+      setShowNotifications(!showNotifications);
     }
     reset();
   };

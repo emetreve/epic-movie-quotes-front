@@ -23,13 +23,14 @@ const QuoteListing: React.FC<PropsType> = ({
     handleDelete,
     handleViewOptions,
     handleRemoveBackgroundScroll,
+    handleWrapperClick,
     t,
   } = useQuoteListing(quoteId, setWhichModalOpen, whichModalOpen);
 
   return (
     <div
       onClick={(e) => {
-        e.stopPropagation();
+        handleWrapperClick(e);
       }}
       className='text-white relative shadow-lg w-full lg:w-[43rem] lg:rounded-xl pt-5 pb-0 bg-profile-dark-blue bg-opacity-95'
     >

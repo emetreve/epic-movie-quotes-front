@@ -19,6 +19,8 @@ const useMovies = () => {
     showAddMovie,
     setShowLangDropdown,
     showLangDropdown,
+    showNotifications,
+    setShowNotifications,
   } = useUiContext();
   const { logged, user } = useCheckIfLoggedIn();
   const { locale, push } = useRouter();
@@ -48,6 +50,7 @@ const useMovies = () => {
     if (showBrugerMenu) {
       showBurger(false);
     }
+
     if (showSearchLg) {
       console.log('sms');
       setShowSearchLg(false);
@@ -56,6 +59,10 @@ const useMovies = () => {
 
     if (showLangDropdown) {
       setShowLangDropdown(!showLangDropdown);
+    }
+
+    if (showNotifications) {
+      setShowNotifications(!showNotifications);
     }
   };
 

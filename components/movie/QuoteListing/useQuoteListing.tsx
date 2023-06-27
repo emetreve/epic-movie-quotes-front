@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { deleteQuote } from '@/services';
 import { useQueryClient } from 'react-query';
 import { useTranslation } from 'next-i18next';
+import { useUiContext } from '@/store';
 
 const useQuoteListing = (
   quoteId: number,
@@ -11,6 +12,15 @@ const useQuoteListing = (
   const { locale } = useRouter();
   const queryClient = useQueryClient();
   const { t } = useTranslation(['movies']);
+
+  const { showNotifications, setShowNotifications } = useUiContext();
+
+  const handleWrapperClick = (e: Event) => {
+    e.stopPropagation();
+    if (showNotifications) {
+      setShowNotifications(!showNotifications);
+    }
+  };
 
   const handleViewOptions = () => {
     if (whichModalOpen === quoteId) {
@@ -38,6 +48,7 @@ const useQuoteListing = (
     handleDelete,
     handleViewOptions,
     handleRemoveBackgroundScroll,
+    handleWrapperClick,
     t,
   };
 };

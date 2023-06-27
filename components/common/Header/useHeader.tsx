@@ -24,9 +24,9 @@ const useHeader = (authUserId: number) => {
     showSearchMob,
     setShowLangDropdown,
     showLangDropdown,
+    showNotifications,
+    setShowNotifications,
   } = useUiContext();
-
-  const [showNotifications, setShowNotifications] = useState(false);
 
   const { t } = useTranslation(['newsfeed', 'profile']);
 
@@ -83,7 +83,7 @@ const useHeader = (authUserId: number) => {
     } else if (mobile && showNotifications) {
       document.body.classList.remove('hide-scrollbar');
     }
-    setShowNotifications((prev) => !prev);
+    setShowNotifications(!showNotifications);
   };
 
   const fetchNotifications = async () => {
@@ -121,6 +121,15 @@ const useHeader = (authUserId: number) => {
     setWhichQuoteToView(quoteId);
   };
 
+  const handleOutsideClick = () => {
+    if (showLangDropdown) {
+      setShowLangDropdown(!showLangDropdown);
+    }
+    if (showNotifications) {
+      setShowNotifications(!showNotifications);
+    }
+  };
+
   const notificationBellCounter = notifications?.filter(
     (each: Notification) => {
       return each.end_user_id === authUserId && each.read === 0;
@@ -152,6 +161,7 @@ const useHeader = (authUserId: number) => {
     setEditQuoteData,
     setShowLangDropdown,
     showLangDropdown,
+    handleOutsideClick,
   };
 };
 export default useHeader;
