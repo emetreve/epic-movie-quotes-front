@@ -22,6 +22,8 @@ const useProfile = () => {
 
   const [emailSuccess, setEmailSuccess] = useState(false);
 
+  const [passStateForConditionsBox, setPassStateForConditionsBox] = useState(0);
+
   const { t } = useTranslation('profile');
 
   const router = useRouter();
@@ -109,6 +111,12 @@ const useProfile = () => {
     control,
     name: 'password',
   });
+
+  useEffect(() => {
+    setPassStateForConditionsBox(pass.length);
+  }, [pass]);
+
+  console.log(passStateForConditionsBox);
 
   const onSubmit = async (data: ChangeUserData) => {
     if (selectedFile) {
@@ -247,6 +255,7 @@ const useProfile = () => {
     setHidePasswordConfirmation,
     errors,
     pass,
+    passStateForConditionsBox,
     handleUpload,
     selectedAvatar,
     setSelectedAvatar,
