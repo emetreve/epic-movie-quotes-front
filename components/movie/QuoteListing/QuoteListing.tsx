@@ -23,6 +23,7 @@ const QuoteListing: React.FC<PropsType> = ({
     handleDelete,
     handleViewOptions,
     handleRemoveBackgroundScroll,
+    t,
   } = useQuoteListing(quoteId, setWhichModalOpen, whichModalOpen);
 
   return (
@@ -58,7 +59,7 @@ const QuoteListing: React.FC<PropsType> = ({
                 }}
                 className='hover:cursor-pointer'
               >
-                Vew quote
+                {t('Vew quote')}
               </p>
             </div>
             <div className='flex flex-row items-center'>
@@ -80,7 +81,7 @@ const QuoteListing: React.FC<PropsType> = ({
                 }}
                 className='hover:cursor-pointer'
               >
-                Edit
+                {t('Edit')}
               </p>
             </div>
             <div className='flex flex-row items-center'>
@@ -92,7 +93,7 @@ const QuoteListing: React.FC<PropsType> = ({
                 className='h-[0.97rem] w-auto mr-[1.15rem]'
               />
               <p onClick={handleDelete} className='hover:cursor-pointer'>
-                Delete
+                {t('Delete')}
               </p>
             </div>
           </div>

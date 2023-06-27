@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { deleteQuote } from '@/services';
 import { useQueryClient } from 'react-query';
+import { useTranslation } from 'next-i18next';
 
 const useQuoteListing = (
   quoteId: number,
@@ -9,6 +10,7 @@ const useQuoteListing = (
 ) => {
   const { locale } = useRouter();
   const queryClient = useQueryClient();
+  const { t } = useTranslation(['movies']);
 
   const handleViewOptions = () => {
     if (whichModalOpen === quoteId) {
@@ -36,6 +38,7 @@ const useQuoteListing = (
     handleDelete,
     handleViewOptions,
     handleRemoveBackgroundScroll,
+    t,
   };
 };
 export default useQuoteListing;
