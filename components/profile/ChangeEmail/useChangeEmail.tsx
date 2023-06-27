@@ -8,6 +8,7 @@ const useChangeEmail = () => {
   const { showBurger, showBrugerMenu, showUpdateEmail } = useUiContext();
 
   const router = useRouter();
+  const locale = router.locale;
   const { t } = useTranslation('profile');
 
   const methods = useForm({
@@ -44,7 +45,7 @@ const useChangeEmail = () => {
 
   const onSubmit = async () => {
     try {
-      await updateUser({ email: email });
+      await updateUser({ email: email, locale: locale });
       showUpdateEmail(false);
       router.push({
         pathname: router.pathname,

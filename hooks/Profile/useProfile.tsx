@@ -24,6 +24,7 @@ const useProfile = () => {
 
   const router = useRouter();
   const { status } = router.query;
+  const locale = router.locale;
 
   const { logged, user } = useCheckIfLoggedIn();
 
@@ -110,8 +111,9 @@ const useProfile = () => {
       return;
     }
 
+    const payload = { ...data, locale };
     try {
-      await updateUser(data);
+      await updateUser(payload);
       router.push({
         pathname: router.pathname,
         query: { status: 'successful' },
