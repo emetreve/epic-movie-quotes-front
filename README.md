@@ -21,7 +21,7 @@ Epic Movie Quotes is a full-stack application designed to cater to movie enthusi
 
 - <img src="public/readme/assets/npm.png" width="35" style="position: relative; top: 4px" /> npm@8.19 and up
 - <img src="public/readme/assets/node.png" width="35" style="position: relative; top: 6px" /> node@16.18 and up
-- <img src="public/readme/assets/typescript.png" width="35" style="position: relative; top: 6px" /> typescript@16.18 and up
+- <img src="public/readme/assets/typescript.png" width="25" style="position: relative; top: 6px" /> typescript@16.18 and up
 
 #
 
