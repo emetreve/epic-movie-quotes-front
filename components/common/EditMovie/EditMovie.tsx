@@ -353,7 +353,7 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
                 </div>
                 <div className='flex flex-col text-center justify-center gap-y-3 lg:gap-y-2 align-middle h-full items-center'>
                   <p className='text-cream uppercase block text-sm w-32 overflow-hidden whitespace-nowrap overflow-ellipsis'>
-                    Replace photo
+                    {t('Replace photo')}
                   </p>
                   <div className='flex flex-row'>
                     <Image
@@ -390,7 +390,7 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
             className='text-white mb-[4rem] lg:mb-12 w-full lg:mt-8 mt-10 text-lg bg-red py-2 px-4 rounded-md hover:bg-red-hover'
             type='submit'
           >
-            Edit movie
+            {t('Edit movie')}
           </button>
         </form>
       </div>

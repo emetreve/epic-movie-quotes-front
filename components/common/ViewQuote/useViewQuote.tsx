@@ -4,6 +4,7 @@ import { createComment, getLike, deleteQuote } from '@/services';
 import { useQuery, useQueryClient } from 'react-query';
 import { useRouter } from 'next/router';
 import { getQuote } from '@/services';
+import { useTranslation } from 'next-i18next';
 
 const useViewQuote = (
   whichQuoteToView: number,
@@ -12,6 +13,8 @@ const useViewQuote = (
   setEditQuoteData: Function
 ) => {
   const { register, handleSubmit, reset } = useForm<AddCommentData>();
+
+  const { t } = useTranslation(['movie', 'newsfeed', 'profile']);
 
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -84,6 +87,7 @@ const useViewQuote = (
     handleDelete,
     handleClose,
     handleEdit,
+    t,
   };
 };
 export default useViewQuote;
