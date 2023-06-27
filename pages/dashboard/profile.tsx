@@ -54,6 +54,8 @@ const Profile = () => {
     showEditEmail,
     setShowEmailInput,
     showEmailInput,
+    emailSuccess,
+    setEmailSuccess,
     t,
   } = useProfile();
 
@@ -65,7 +67,11 @@ const Profile = () => {
         )}
 
         {showEditEmail && (
-          <ChangeEmail userName={user.name} authUserId={user.id} />
+          <ChangeEmail
+            setEmailSuccess={setEmailSuccess}
+            userName={user.name}
+            authUserId={user.id}
+          />
         )}
 
         {showEditPassword && (
@@ -85,7 +91,12 @@ const Profile = () => {
             />
           </div>
 
-          {showSuccess && <SuccessNotification show={setShowSuccess} />}
+          {showSuccess && (
+            <SuccessNotification
+              show={setShowSuccess}
+              isEmailSuccess={emailSuccess}
+            />
+          )}
 
           <SideProfilePanel avatar={user.avatar} name={user.name} />
 

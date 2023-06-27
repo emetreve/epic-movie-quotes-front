@@ -28,7 +28,6 @@ export type ChangeUserData = {
   password?: string;
   password_confirmation?: string;
   email?: string;
-  locale?: string;
 };
 
 export type AddCommentData = {
@@ -67,4 +66,12 @@ export type editQuote = {
   bodyEn: string | undefined;
   bodyKa: string | undefined;
   image: string | undefined;
+};
+
+export type ChangeUserDataWithLocale = {
+  username?: string;
+  password?: string;
+  password_confirmation?: string;
+  email?: string;
+  locale?: string;
 };

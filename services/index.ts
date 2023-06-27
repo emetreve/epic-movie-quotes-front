@@ -5,7 +5,7 @@ export { default as checkIfLoggedIn } from './checkifloggedin';
 export { default as googleInstance } from './googleInstance';
 export { signUp, logOut, googleAuth, verifyEmail } from './userauth';
 export { forgotPassword, resetPassword } from './password';
-export { updateUser, updateAvatar } from './updateuser';
+export { updateUser, updateAvatar, changeEmailInDatabase } from './updateuser';
 export {
   getQuotes,
   getMovies,

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useCheckIfLoggedIn } from '@/hooks';
 import { useUiContext } from '@/store';
 import { ChangeUserData } from '@/types';
-import { updateAvatar, updateUser } from '@/services';
+import { updateAvatar, updateUser, changeEmailInDatabase } from '@/services';
 import { useTranslation } from 'next-i18next';
 
 const useProfile = () => {
@@ -20,10 +20,12 @@ const useProfile = () => {
   const [showMobileAvatarModal, setShowMobileAvatarModal] = useState(false);
   const [showEmailInput, setShowEmailInput] = useState(false);
 
+  const [emailSuccess, setEmailSuccess] = useState(false);
+
   const { t } = useTranslation('profile');
 
   const router = useRouter();
-  const { status } = router.query;
+  const { status, changeEmail } = router.query;
   const locale = router.locale;
 
   const { logged, user } = useCheckIfLoggedIn();
@@ -39,6 +41,22 @@ const useProfile = () => {
     showEditEmail,
   } = useUiContext();
 
+  const editEmail = async (email: string) => {
+    try {
+      await changeEmailInDatabase(email);
+      router
+        .push({
+          pathname: router.pathname,
+          query: {},
+        })
+        .then(() => {
+          router.reload();
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     if (status === 'success') {
       setShowSuccess(true);
@@ -50,7 +68,11 @@ const useProfile = () => {
         query: {},
       });
     }, 4000);
-  }, [status]);
+
+    if (changeEmail && changeEmail?.length > 0) {
+      editEmail(changeEmail as string);
+    }
+  }, [status, changeEmail]);
 
   const methods = useForm({
     defaultValues: {
@@ -228,6 +250,8 @@ const useProfile = () => {
     showEditEmail,
     setShowEmailInput,
     showEmailInput,
+    emailSuccess,
+    setEmailSuccess,
     t,
   };
 };

@@ -4,7 +4,7 @@ import { useForm, useWatch } from 'react-hook-form';
 import { updateUser } from '@/services';
 import { useRouter } from 'next/router';
 
-const useChangeEmail = () => {
+const useChangeEmail = (setEmailSuccess: Function) => {
   const { showBurger, showBrugerMenu, showUpdateEmail } = useUiContext();
 
   const router = useRouter();
@@ -47,6 +47,7 @@ const useChangeEmail = () => {
     try {
       await updateUser({ email: email, locale: locale });
       showUpdateEmail(false);
+      setEmailSuccess(true);
       router.push({
         pathname: router.pathname,
         query: { status: 'success' },

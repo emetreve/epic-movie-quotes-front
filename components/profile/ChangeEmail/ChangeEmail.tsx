@@ -5,7 +5,11 @@ import useChangeEmail from './useChangeEmail';
 import { PropsType } from './types';
 import { FormProvider } from 'react-hook-form';
 
-const ChangeEmail: React.FC<PropsType> = ({ userName, authUserId }) => {
+const ChangeEmail: React.FC<PropsType> = ({
+  userName,
+  authUserId,
+  setEmailSuccess,
+}) => {
   const {
     handleOutsideClick,
     showUpdateEmail,
@@ -17,7 +21,7 @@ const ChangeEmail: React.FC<PropsType> = ({ userName, authUserId }) => {
     methods,
     applyInputStyle,
     formState,
-  } = useChangeEmail();
+  } = useChangeEmail(setEmailSuccess);
 
   return (
     <div
