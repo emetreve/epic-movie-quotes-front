@@ -118,7 +118,7 @@ const Movie = () => {
                 alt='poster'
                 width={96}
                 height={96}
-                className='w-full lg:w-[43rem] lg:max-h-[24rem] mt-7 h-full hover:cursor-pointer mr-2 rounded-xl'
+                className='w-full lg:w-[43rem] max-h-[18rem] lg:max-h-[24rem] mt-7 h-full hover:cursor-pointer mr-2 rounded-xl'
               />
               <div className='lg:mt-2 mt-3 lg:py-5 lg:relative ml-2 break-all lg:w-[36.5rem]'>
                 <h1 className='text-cream inline text-xl mt-5 lg:w-[29rem]'>
@@ -193,7 +193,7 @@ const Movie = () => {
                         height={96}
                         className='w-4 h-auto hover:cursor-pointer mr-2'
                       />
-                      Add quote
+                      {t('Add quote')}
                     </div>
                   </button>
                 </div>
@@ -203,8 +203,10 @@ const Movie = () => {
           <div className='lg:px-[4rem] lg:ml-[25%] lg:w-[75%]'>
             <div className='text-white mb-6 px-1 lg:flex lg:flex-row lg:items-center'>
               <div className='lg:border-r border-gray-600 w-fit lg:flex lg:flex-row lg:pr-3 px-7 lg:px-0'>
-                <p className='text-2xl'>All quotes</p>
-                <p className='lg:text-2xl lg:ml-2'>{`(Total: ${movie?.quotes_count})`}</p>
+                <p className='text-2xl'>{t('All quotes')}</p>
+                <p className='lg:text-2xl lg:ml-2'>{`(${t('Total')}: ${
+                  movie?.quotes_count
+                })`}</p>
               </div>
               <div className='hidden lg:block ml-3'>
                 <button
@@ -223,7 +225,7 @@ const Movie = () => {
                       height={96}
                       className='w-4 h-auto hover:cursor-pointer mr-2'
                     />
-                    Add quote
+                    {t('Add quote')}
                   </div>
                 </button>
               </div>
