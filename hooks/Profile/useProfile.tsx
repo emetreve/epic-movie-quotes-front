@@ -116,8 +116,6 @@ const useProfile = () => {
     setPassStateForConditionsBox(pass.length);
   }, [pass]);
 
-  console.log(passStateForConditionsBox);
-
   const onSubmit = async (data: ChangeUserData) => {
     if (selectedFile) {
       const formData = new FormData();
