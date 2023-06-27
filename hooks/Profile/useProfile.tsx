@@ -39,6 +39,8 @@ const useProfile = () => {
     showBurger,
     showUpdateEmail,
     showEditEmail,
+    setShowLangDropdown,
+    showLangDropdown,
   } = useUiContext();
 
   const editEmail = async (email: string) => {
@@ -209,6 +211,9 @@ const useProfile = () => {
     if (showBrugerMenu) {
       showBurger(false);
     }
+    if (showLangDropdown) {
+      setShowLangDropdown(!showLangDropdown);
+    }
   };
 
   return {
@@ -252,6 +257,8 @@ const useProfile = () => {
     showEmailInput,
     emailSuccess,
     setEmailSuccess,
+    setShowLangDropdown,
+    showLangDropdown,
     t,
   };
 };

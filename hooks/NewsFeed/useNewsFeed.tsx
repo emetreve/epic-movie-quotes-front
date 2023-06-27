@@ -26,6 +26,8 @@ const useNewsFeed = () => {
     showSearchMob,
     showAddQuote,
     showAddNewQuote,
+    setShowLangDropdown,
+    showLangDropdown,
   } = useUiContext();
 
   const { searchedQuotes, setSearchedQuotes, quotesData, setQuotesData } =
@@ -156,6 +158,9 @@ const useNewsFeed = () => {
     }
     if (showBrugerMenu) {
       showBurger(false);
+    }
+    if (showLangDropdown) {
+      setShowLangDropdown(!showLangDropdown);
     }
     reset();
   };

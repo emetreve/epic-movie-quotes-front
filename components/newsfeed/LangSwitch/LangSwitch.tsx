@@ -14,7 +14,7 @@ const LangSwitch: React.FC<PropsType> = ({ fromBurgerMenu }) => {
   return (
     <span
       onClick={() => {
-        setShowLangDropdown((prev) => !prev);
+        setShowLangDropdown(!showLangDropdown);
       }}
       id='dropdown-toggle'
       className='cursor-pointer flex items-center w-14 text-white'

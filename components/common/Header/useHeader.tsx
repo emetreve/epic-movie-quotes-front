@@ -17,8 +17,14 @@ const useHeader = (authUserId: number) => {
   const [whichQuoteToEdit, setWhichQuoteToEdit] = useState(null);
   const [editQuoteData, setEditQuoteData] = useState(null);
 
-  const { showBrugerMenu, showBurger, showSearchMobile, showSearchMob } =
-    useUiContext();
+  const {
+    showBrugerMenu,
+    showBurger,
+    showSearchMobile,
+    showSearchMob,
+    setShowLangDropdown,
+    showLangDropdown,
+  } = useUiContext();
 
   const [showNotifications, setShowNotifications] = useState(false);
 
@@ -144,6 +150,8 @@ const useHeader = (authUserId: number) => {
     setWhichQuoteToEdit,
     editQuoteData,
     setEditQuoteData,
+    setShowLangDropdown,
+    showLangDropdown,
   };
 };
 export default useHeader;

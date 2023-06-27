@@ -34,6 +34,8 @@ const Header: React.FC<PropsType> = ({
     setWhichQuoteToEdit,
     editQuoteData,
     setEditQuoteData,
+    setShowLangDropdown,
+    showLangDropdown,
   } = useHeader(authUserId);
 
   return (
@@ -60,7 +62,14 @@ const Header: React.FC<PropsType> = ({
         />
       )}
 
-      <div className='fixed w-full z-[40]'>
+      <div
+        onClick={() => {
+          if (showLangDropdown) {
+            setShowLangDropdown(!showLangDropdown);
+          }
+        }}
+        className='fixed w-full z-[40]'
+      >
         {!showSearchMobile && (
           <div className='flex relative lg:hidden justify-between items-center py-6 text-xs lg:text-base lg:px-16 bg-violet'>
             <Image
