@@ -1,38 +1,120 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div style="display:flex; align-items: center">
+  <img src="public/readme/assets/logo-redberry.png" alt="logo" width="220" style="margin-right: 20px" />
+  <h1 style="position:relative; top: -6px" >Epic Movie Quotes</h1>
+</div>
 
-## Getting Started
+Epic Movie Quotes is a full-stack application designed to cater to movie enthusiasts. It provides a user-friendly platform where users can register, log in, and dive into a vast collection of movies and their quotes. With Epic Movie Quotes, users can also register or login using Google OAuth. Once logged in, users are greeted with their personalized dashboards, where they can explore a variety of features.
 
-First, run the development server:
+Real-time updates keep users informed about the activity on their quotes, including likes and comments. Users have the flexibility to personalize their profiles and contribute their own quotes and movies to enrich the collection. CRUD features are supported for both movies and quotes. Features, such as multilinguality and data searching are also supported.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+#
+
+### Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Resources](#resources)
+
+#
+
+### Prerequisites
+
+- <img src="public/readme/assets/npm.png" width="35" style="position: relative; top: 4px" /> npm@8.19 and up
+- <img src="public/readme/assets/node.png" width="35" style="position: relative; top: 6px" /> node@16.18 and up
+- <img src="public/readme/assets/typescript.png" width="22" style="position: relative; top: 6px" /> typescript@16.18 and up
+
+#
+
+### Tech Stack
+
+- <img src="public/readme/assets/next.png" height="22" style="position: relative; top: 4px" /> [Next](https://nextjs.org/) - The React Framework for the Web
+- <img src="public/readme/assets/tailwind.png" height="22" style="position: relative; top: 4px" /> [Tailwind](https://tailwindui.com/) - CSS Framework
+- <img src="public/readme/assets/pusher.png" height="22" style="position: relative; top: 4px" /> [Pusher](https://pusher.com/) - Real-time messaging and event-driven platform
+- <img src="public/readme/assets/react-hook-form.png" height="22" style="position: relative; top: 4px" /> [React Hook Form](https://react-hook-form.com/) - Performant and extensible React forms
+- <img src="public/readme/assets/react-query.png" height="22" style="position: relative; top: 4px" /> [React Query](https://www.npmjs.com/package/react-query) - Data fetching and caching library
+
+#
+
+### Getting Started
+
+1\. First of all you need to clone Epic Movie Quotes repository from github:
+
+```sh
+git clone https://github.com/RedberryInternship/elene-metreveli-epic-movie-quotes-front
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2\. Next step requires you to run _npm install_ in order to install all the dependencies.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```sh
+npm install
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+3\. after you have installed all the dependencies, it's time to run the project.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```sh
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+#
 
-## Learn More
+### Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+├── public
+├── src
+│   ├── components
+│   │   ├── movie
+│   │   │   ├── AddQuoteFromMovies
+│   │   │   │   ├── AddQuoteFromMovies.tsx
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── types.d.ts
+│   │   │   │   └── useAddQuoteFromMovies.tsx
+│   │   ├── newsfeed
+│   │   │   ├── NewsItem
+│   │   │   │   ├── NewsItem.tsx
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── types.d.ts
+│   │   │   │   └── useNewsItem.tsx
+│   │   └── index.ts
+│   ├── helpers
+│   ├── hooks
+│   │   ├── Newsfeed
+│   │   │   ├── useNewsFeed.tsx
+│   │   │   └── index.tsx
+│   │   ├── Profile
+│   │   │   ├── useProfile.tsx
+│   │   │   └── index.tsx
+│   │   └── index.ts
+│   ├── pages
+│   │   └──dashboard
+│   │   │   ├── movies
+│   │   │   │   ├── [id].tsx
+│   │   │   │   └── index.tsx
+│   │   │   ├── newsfeed.tsx
+│   │   │   └── profile.tsx
+│   │   └── index.ts
+│   ├── store
+│   ├── types
+│   └── services
+├── .eslintrc.json
+├── .gitignore
+├── .prettierrc.json
+├── postcss.config.js
+├── tailwind.config.js
+├── next.config.js
+├── next-env.d.ts
+└── next-i18next.config.js
+└── tsconfig.json
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+For more information about project standards, take a look at these docs:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- [Next](https://nextjs.org/docs)
 
-## Deploy on Vercel
+#
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Resources
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[Figma Design](https://www.figma.com/file/5uMXCg3itJwpzh9cVIK3hA/Movie-Quotes-Bootcamp-assignment?type=design&node-id=0-1&mode=design&t=c5A843fLo1dWnBRi-0)
