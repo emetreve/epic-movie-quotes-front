@@ -176,7 +176,7 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
                     }}
                     className='container absolute z-50 bottom-24 lg:bottom-[6rem] left-0 w-full max-h-72 shadow-lg overflow-y-scroll bg-violet bg-opacity-[95%] rounded py-4'
                   >
-                    {movies &&
+                    {movies.length > 0 ? (
                       movies.map((movie: Movie, index: number) => {
                         return (
                           <p
@@ -195,7 +195,12 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
                             {movie.name[locale]}
                           </p>
                         );
-                      })}
+                      })
+                    ) : (
+                      <p className='text-gray-500 italic py-2 px-5'>
+                        You do not have any movies yet...
+                      </p>
+                    )}
                   </div>
                 )}
                 <div className='w-52 overflow-hidden'>
