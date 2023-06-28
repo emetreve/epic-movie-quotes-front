@@ -169,19 +169,25 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
                     selectedGenres.length < 4
                       ? 'bottom-[4rem]'
                       : 'bottom-[6.7rem]'
-                  } left-0 w-full max-h-72 shadow-lg overflow-y-scroll bg-violet bg-opacity-[95%] rounded py-4`}
+                  } ${
+                    selectedGenres.length !== genres.length && 'pb-4'
+                  } left-0 w-full max-h-72 shadow-lg overflow-y-scroll bg-violet bg-opacity-[95%] rounded`}
                 >
                   {genres &&
                     genres.map((genre: Genre, index: number) => {
+                      const isGenreSelected = selectedGenres.some(
+                        (selectedGenre) => selectedGenre.id === genre.id
+                      );
+                      if (isGenreSelected) {
+                        return null;
+                      }
                       return (
                         <p
                           onClick={() => {
                             handleGenreSelection(genre);
                           }}
                           key={genre.id}
-                          className={`${
-                            index !== 0 && 'pt-4'
-                          } leading-tight block px-6 hover:cursor-pointer`}
+                          className='leading-tight block px-6 hover:cursor-pointer pt-4'
                         >
                           {genre.name[locale as keyof typeof genre.name]}
                         </p>
