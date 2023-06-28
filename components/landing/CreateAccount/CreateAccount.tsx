@@ -138,7 +138,9 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
                     required: `${t('This field is required')}`,
                     minLength: {
                       value: 8,
-                      message: `${'This field must have at least 8 characters'}`,
+                      message: `${t(
+                        'This field must have at least 8 characters'
+                      )}`,
                     },
                     maxLength: {
                       value: 15,
