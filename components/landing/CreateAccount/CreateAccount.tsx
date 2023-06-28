@@ -23,8 +23,14 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
   } = useCreateAccount();
 
   return (
-    <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
-      <div className='bg-gradient-violet lg:bg-gradient-plain-violet h-full w-full lg:h-[45rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative'>
+    <div
+      onClick={() => show(false)}
+      className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className='bg-gradient-violet lg:bg-gradient-plain-violet h-full w-full lg:h-[45rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative'
+      >
         <Image
           onClick={() => show(false)}
           src='/assets/close-btn.png'
