@@ -162,7 +162,7 @@ const Profile = () => {
                         onClick={() => {
                           showUpdateName(true);
                         }}
-                        className='absolute bottom-[1.2rem] text-sm text-input-gray w-5 h-5 hover:cursor-pointer block right-4'
+                        className='absolute w-fit bottom-[1.2rem] text-sm text-input-gray h-5 hover:cursor-pointer block right-0'
                       >
                         {t('Edit')}
                       </p>
@@ -186,7 +186,7 @@ const Profile = () => {
                         }}
                         className={`absolute ${
                           user.is_google_user && 'hidden'
-                        } bottom-[1.2rem] text-sm text-input-gray w-5 h-5 hover:cursor-pointer block right-4`}
+                        } bottom-[1.2rem] w-fit text-sm text-input-gray h-5 hover:cursor-pointer block right-0`}
                       >
                         {t('Edit')}
                       </p>
@@ -215,7 +215,7 @@ const Profile = () => {
                           onClick={() => {
                             showUpdatePassword(true);
                           }}
-                          className='absolute bottom-[1.2rem] text-sm text-input-gray w-5 h-5 hover:cursor-pointer block right-4'
+                          className='absolute w-fit bottom-[1.2rem] text-sm text-input-gray h-5 hover:cursor-pointer block right-0'
                         >
                           {t('Edit')}
                         </p>

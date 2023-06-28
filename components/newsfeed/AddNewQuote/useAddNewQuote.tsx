@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useUiContext } from '@/store';
-import { getMovies } from '@/services';
+import { getUserMovies } from '@/services';
 import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
@@ -33,7 +33,7 @@ const useAddNewQuote = () => {
   const { quotesData, setQuotesData } = useQuotesContext();
 
   const fetchMovies = async () => {
-    const response = await getMovies();
+    const response = await getUserMovies();
     return response.data;
   };
 

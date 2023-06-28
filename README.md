@@ -1,5 +1,5 @@
 <div style="display:flex; align-items: center">
-  <img src="public/readme/assets/logo-redberry.png" alt="logo" width="220" style="margin-right: 20px" />
+  <img src="readme/assets/logo-redberry.png" alt="logo" width="220" style="margin-right: 20px" />
   <h1 style="position:relative; top: -6px" >Epic Movie Quotes</h1>
 </div>
 
@@ -21,19 +21,19 @@ Real-time updates keep users informed about the activity on their quotes, includ
 
 ### Prerequisites
 
-- <img src="public/readme/assets/npm.png" width="35" style="position: relative; top: 4px" /> npm@8.19 and up
-- <img src="public/readme/assets/node.png" width="35" style="position: relative; top: 6px" /> node@16.18 and up
-- <img src="public/readme/assets/typescript.png" width="22" style="position: relative; top: 6px" /> typescript@16.18 and up
+- <img src="readme/assets/npm.png" width="35" style="position: relative; top: 4px" /> npm@8.19 and up
+- <img src="readme/assets/node.png" width="35" style="position: relative; top: 6px" /> node@16.18 and up
+- <img src="readme/assets/typescript.png" width="22" style="position: relative; top: 6px" /> typescript@16.18 and up
 
 #
 
 ### Tech Stack
 
-- <img src="public/readme/assets/next.png" height="22" style="position: relative; top: 4px" /> [Next](https://nextjs.org/) - The React Framework for the Web
-- <img src="public/readme/assets/tailwind.png" height="22" style="position: relative; top: 4px" /> [Tailwind](https://tailwindui.com/) - CSS Framework
-- <img src="public/readme/assets/pusher.png" height="22" style="position: relative; top: 4px" /> [Pusher](https://pusher.com/) - Real-time messaging and event-driven platform
-- <img src="public/readme/assets/react-hook-form.png" height="22" style="position: relative; top: 4px" /> [React Hook Form](https://react-hook-form.com/) - Performant and extensible React forms
-- <img src="public/readme/assets/react-query.png" height="22" style="position: relative; top: 4px" /> [React Query](https://www.npmjs.com/package/react-query) - Data fetching and caching library
+- <img src="readme/assets/next.png" height="22" style="position: relative; top: 4px" /> [Next](https://nextjs.org/) - The React Framework for the Web
+- <img src="readme/assets/tailwind.png" height="22" style="position: relative; top: 4px" /> [Tailwind](https://tailwindui.com/) - CSS Framework
+- <img src="readme/assets/pusher.png" height="22" style="position: relative; top: 4px" /> [Pusher](https://pusher.com/) - Real-time messaging and event-driven platform
+- <img src="readme/assets/react-hook-form.png" height="22" style="position: relative; top: 4px" /> [React Hook Form](https://react-hook-form.com/) - Performant and extensible React forms
+- <img src="readme/assets/react-query.png" height="22" style="position: relative; top: 4px" /> [React Query](https://www.npmjs.com/package/react-query) - Data fetching and caching library
 
 #
 
