@@ -114,7 +114,11 @@ const ViewQuote: React.FC<PropsType> = ({
 
           <div className='text-sm mt-3 lg:text-xl break-all px-6'>
             <Image
-              src='/assets/quote-sample.png'
+              src={
+                quote?.image
+                  ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${quote.image}`
+                  : '/assets/quote-sample.png'
+              }
               alt='quote image'
               width={916}
               height={512}
