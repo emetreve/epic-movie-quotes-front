@@ -109,17 +109,19 @@ const Movie = () => {
               <p>{t('Movie description')}</p>
             </div>
             <div className='lg:flex flex-row'>
-              <Image
-                src={
-                  movie?.poster
-                    ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${movie.poster}`
-                    : '/assets/movie-sample.png'
-                }
-                alt='poster'
-                width={96}
-                height={96}
-                className='w-full lg:w-[43rem] max-h-[18rem] lg:max-h-[24rem] mt-7 h-full hover:cursor-pointer mr-2 rounded-xl'
-              />
+              <div className='w-full lg:w-[43rem] max-h-[18rem] lg:max-h-[24rem] mt-7 h-full hover:cursor-pointer mr-2 rounded-xl overflow-hidden'>
+                <Image
+                  src={
+                    movie?.poster
+                      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${movie.poster}`
+                      : '/assets/movie-sample.png'
+                  }
+                  alt='poster'
+                  width={192}
+                  height={96}
+                  className='w-full h-full object-cover'
+                />
+              </div>
               <div className='lg:mt-2 mt-3 lg:py-5 lg:relative ml-2 break-all lg:w-[36.5rem]'>
                 <h1 className='text-cream inline text-xl mt-5 lg:w-[29rem]'>
                   {`${movie?.name[locale as keyof typeof movie.name]} (${
