@@ -146,7 +146,7 @@ const Movies = () => {
                   </button>
                 </div>
               </div>
-              <p className='block lg:hidden'>{`(Total ${
+              <p className='block lg:hidden'>{`(${t('Total')} ${
                 movies ? movies.length : 0
               })`}</p>
             </div>
