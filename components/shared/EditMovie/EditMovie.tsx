@@ -134,7 +134,7 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
                         >
                           <div className='flex flex-row items-center'>
                             <p className='text-center block'>
-                              {genre.name[locale as keyof typeof genre.name]}
+                              {genre.name[locale]}
                             </p>
                             <Image
                               src='/assets/genre-remove.png'
@@ -189,7 +189,7 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
                           key={genre.id}
                           className='leading-tight block px-6 hover:cursor-pointer pt-4'
                         >
-                          {genre.name[locale as keyof typeof genre.name]}
+                          {genre.name[locale]}
                         </p>
                       );
                     })}

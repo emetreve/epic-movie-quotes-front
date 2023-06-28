@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter, NextRouter } from 'next/router';
 import { useInfiniteQuery } from 'react-query';
 import { useCheckIfLoggedIn } from '@/hooks';
 import { useTranslation } from 'next-i18next';
@@ -37,7 +37,7 @@ const useNewsFeed = () => {
 
   const { t } = useTranslation('newsfeed');
 
-  const { locale } = useRouter();
+  const { locale } = useRouter() as NextRouter & { locale: 'en' | 'ka' };
 
   const { logged, user } = useCheckIfLoggedIn();
 

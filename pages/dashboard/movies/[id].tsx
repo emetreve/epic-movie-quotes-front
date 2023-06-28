@@ -90,11 +90,9 @@ const Movie = () => {
               avatar={user.avatar}
               userId={user.id}
               moviePoster={movie.poster}
-              movieName={movie.name[locale as keyof typeof movie.name]}
+              movieName={movie.name[locale]}
               movieYear={movie.year}
-              movieDirector={
-                movie.director[locale as keyof typeof movie.director]
-              }
+              movieDirector={movie.director[locale]}
               movieGenres={movie.genres}
               movieId={movie.id}
             />
@@ -124,9 +122,7 @@ const Movie = () => {
               </div>
               <div className='lg:mt-2 mt-3 lg:py-5 lg:relative ml-2 break-all lg:w-[36.5rem]'>
                 <h1 className='text-cream inline text-xl mt-5 lg:w-[29rem]'>
-                  {`${movie?.name[locale as keyof typeof movie.name]} (${
-                    movie?.year
-                  })`}
+                  {`${movie?.name[locale]} (${movie?.year})`}
                 </h1>
                 <div className='lg:inline-block lg:absolute lg:right-0 lg:ml-6 lg:mt-0 mt-3 bg-violet py-[0.5rem] lg:w-[6.5rem] w-[6.3rem] px-3 rounded'>
                   <div className='flex flex-row gap-x-5 items-center justify-end'>
@@ -163,9 +159,7 @@ const Movie = () => {
                       key={genre.id}
                       className={`px-3 text-xs lg:text-base py-[0.3rem] text-white text-center bg-textarea-gray rounded mr-2 mb-2`}
                     >
-                      <p className='text-center block'>
-                        {genre.name[locale as keyof typeof genre.name]}
-                      </p>
+                      <p className='text-center block'>{genre.name[locale]}</p>
                     </div>
                   ))}
                 </div>
@@ -173,10 +167,10 @@ const Movie = () => {
                   <span className='text-input-gray mr-2 font-semibold'>
                     Director:
                   </span>
-                  {movie?.director[locale as keyof typeof movie.director]}
+                  {movie?.director[locale]}
                 </p>
                 <p className='text-input-gray mt-3'>
-                  {movie?.description[locale as keyof typeof movie.description]}
+                  {movie?.description[locale]}
                 </p>
                 <div className='lg:hidden py-8 border-b border-gray-600 border-opacity-80'>
                   <button

@@ -3,7 +3,7 @@ import { useCheckIfLoggedIn } from '@/hooks';
 import { useUiContext } from '@/store';
 import { getUserMovies } from '@/services';
 import { useQuery, useQueryClient } from 'react-query';
-import { useRouter } from 'next/router';
+import { useRouter, NextRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { useForm, useWatch } from 'react-hook-form';
 import { SearchMoviesData, MovieForMoviesPage } from '@/types';
@@ -23,7 +23,9 @@ const useMovies = () => {
     setShowNotifications,
   } = useUiContext();
   const { logged, user } = useCheckIfLoggedIn();
-  const { locale, push } = useRouter();
+  const { push } = useRouter();
+
+  const { locale } = useRouter() as NextRouter & { locale: 'en' | 'ka' };
   const { t } = useTranslation('movies');
 
   const queryClient = useQueryClient();
