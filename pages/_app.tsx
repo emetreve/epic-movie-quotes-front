@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app';
 import { UiContextProvider, QuotesContextProvider } from '@/store';
 import { appWithTranslation } from 'next-i18next';
 import Head from 'next/head';
+import { Layout } from '@/components';
 
 function App({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient();
@@ -15,7 +16,9 @@ function App({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <UiContextProvider>
           <QuotesContextProvider>
-            <Component {...pageProps} />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
           </QuotesContextProvider>
         </UiContextProvider>
       </QueryClientProvider>

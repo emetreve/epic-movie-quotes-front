@@ -5,3 +5,4 @@ export * from './ViewOptions';
 export * from './EditMovie';
 export * from './ViewQuote';
 export * from './EditQuote';
+export * from './Layout';
