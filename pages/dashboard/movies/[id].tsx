@@ -115,8 +115,8 @@ const Movie = () => {
                       : '/assets/movie-sample.png'
                   }
                   alt='poster'
-                  width={192}
-                  height={96}
+                  width={1920}
+                  height={960}
                   className='w-full h-full object-cover'
                 />
               </div>
