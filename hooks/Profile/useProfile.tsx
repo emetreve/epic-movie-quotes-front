@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useCheckIfLoggedIn } from '@/hooks';
-import { useUiContext } from '@/store';
+import { useUiContext, useQuotesContext } from '@/store';
 import { ChangeUserData } from '@/types';
 import { updateAvatar, updateUser, changeEmailInDatabase } from '@/services';
 import { useTranslation } from 'next-i18next';
@@ -46,6 +46,8 @@ const useProfile = () => {
     showNotifications,
     setShowNotifications,
   } = useUiContext();
+
+  const { setQuotesData } = useQuotesContext();
 
   const editEmail = async (email: string) => {
     try {
@@ -211,8 +213,8 @@ const useProfile = () => {
   };
 
   const handleBack = async (path: string) => {
-    await router.push(`/dashboard/${path}`);
-    router.reload();
+    setQuotesData([]);
+    router.push(`/dashboard/${path}`);
   };
 
   const handleOutsideClick = () => {
