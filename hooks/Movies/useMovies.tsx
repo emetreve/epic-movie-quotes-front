@@ -35,7 +35,10 @@ const useMovies = () => {
     return response.data;
   };
 
-  const { data: movies } = useQuery('usermovies', fetchUserMovies);
+  const { data: movies, refetch: refetchMovies } = useQuery(
+    'usermovies',
+    fetchUserMovies
+  );
 
   const { register, handleSubmit, reset, control } = useForm({
     defaultValues: {
@@ -107,6 +110,7 @@ const useMovies = () => {
     reset,
     handleBlur,
     handleMovieListingClick,
+    refetchMovies,
     t,
   };
 };

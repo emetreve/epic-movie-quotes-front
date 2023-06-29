@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { useUiContext } from '@/store';
 import { useForm } from 'react-hook-form';
 import { getGenres } from '@/services';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import { Genre } from '@/types';
 import { useRouter, NextRouter } from 'next/router';
 import { CreateMovieFormData } from '@/types';
 import { createMovie } from '@/services';
 import { useTranslation } from 'next-i18next';
 
-const useAddNewMovie = () => {
+const useAddNewMovie = (refetchMovies: Function) => {
   const [selectedGenres, setSelectedGenres] = useState<Genre[]>([]);
   const [showGenresDropdown, setShowGenresDropdown] = useState(false);
   const [genreSelectionValid, setGenreSelectionValid] = useState('');
@@ -19,7 +19,6 @@ const useAddNewMovie = () => {
 
   const { showCreateMovie, showAddMovie } = useUiContext();
   const { locale } = useRouter() as NextRouter & { locale: 'en' | 'ka' };
-  const queryClient = useQueryClient();
 
   const { t } = useTranslation('movies');
 
@@ -161,9 +160,9 @@ const useAddNewMovie = () => {
 
       try {
         createMovie(formData);
-        queryClient.invalidateQueries('usermovies').then(() => {
-          reset();
+        refetchMovies().then(() => {
           showAddMovie(false);
+          reset();
         });
       } catch (error: any) {
         console.log(error);

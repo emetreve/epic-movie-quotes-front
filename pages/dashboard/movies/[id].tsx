@@ -33,6 +33,7 @@ const Movie = () => {
     setWhichQuoteToEdit,
     editQuoteData,
     setEditQuoteData,
+    refetchMovie,
     t,
   } = useMovie();
 
@@ -81,6 +82,7 @@ const Movie = () => {
               userId={user.id}
               avatar={user.avatar}
               movie={movie}
+              refetchMovie={refetchMovie}
             />
           )}
 
@@ -179,7 +181,7 @@ const Movie = () => {
                     }}
                     className={`text-white z-10 bg-red py-[0.5rem] px-3 ${
                       locale === 'ka' ? 'px-0 text-sm' : 'px-3'
-                    }  hover:bg-red-hover rounded-md font-thin lg:text-lg text-[1.1rem]`}
+                    }  hover:bg-red-hover rounded-md lg:text-lg text-[1.1rem]`}
                   >
                     <div className='flex flex-row items-center'>
                       <Image
@@ -211,7 +213,7 @@ const Movie = () => {
                   }}
                   className={`text-white z-10 bg-red py-[0.5rem] px-3 ${
                     locale === 'ka' ? 'px-0 text-sm' : 'px-3'
-                  } hover:bg-red-hover rounded-md font-thin lg:text-lg text-[1.1rem]`}
+                  } hover:bg-red-hover rounded-md lg:text-lg text-[1.1rem]`}
                 >
                   <div className='flex flex-row items-center'>
                     <Image

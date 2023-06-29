@@ -74,7 +74,7 @@ const useMovie = () => {
     }
   };
 
-  const { data: movie } = useQuery('movie', fetchMovie, {
+  const { data: movie, refetch: refetchMovie } = useQuery('movie', fetchMovie, {
     enabled: !!id,
   });
 
@@ -124,6 +124,7 @@ const useMovie = () => {
     setWhichQuoteToEdit,
     editQuoteData,
     setEditQuoteData,
+    refetchMovie,
     t,
   };
 };

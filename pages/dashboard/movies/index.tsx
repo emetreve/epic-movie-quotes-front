@@ -24,6 +24,7 @@ const Movies = () => {
     searchResult,
     handleBlur,
     handleMovieListingClick,
+    refetchMovies,
     t,
   } = useMovies();
 
@@ -35,6 +36,7 @@ const Movies = () => {
             userName={user.name}
             userId={user.id}
             avatar={user.avatar}
+            refetchMovies={refetchMovies}
           />
         )}
         <div
@@ -131,7 +133,7 @@ const Movies = () => {
                     }}
                     className={`text-white z-10 bg-red py-[0.5rem] px-3 ml-5 ${
                       locale === 'ka' ? 'px-0 text-sm' : 'px-3'
-                    }  hover:bg-red-hover rounded-md font-thin lg:text-lg text-[1.1rem]`}
+                    }  hover:bg-red-hover rounded-md font lg:text-lg text-[1.1rem]`}
                   >
                     <div className='flex flex-row items-center'>
                       <Image
