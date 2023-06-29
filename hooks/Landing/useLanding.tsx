@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
 import { verifyEmail as verify, authenticateApp } from '@/services';
@@ -22,21 +21,24 @@ const useLanding = () => {
 
   const { t } = useTranslation('landing');
 
-  useEffect(() => {
-    const authenticate = async () => {
-      if (scope) {
-        const googleAuthPath = router.asPath;
-
-        try {
-          await googleAuth(googleAuthPath);
-          setLogged(true);
-        } catch (error) {
-          router.push('/403');
-        }
+  const authenticate = async (googleAuthPath: string) => {
+    if (scope) {
+      try {
+        await googleAuth(googleAuthPath);
+        setLogged(true);
+      } catch (error) {
+        console.log(error);
       }
-    };
-    authenticate();
-  }, [scope]);
+    }
+    return false;
+  };
+
+  useQuery(['authenticate', router.asPath], () => authenticate(router.asPath), {
+    enabled: !!scope,
+    onError: () => {
+      router.push('/403');
+    },
+  });
 
   const fetchCsrfCookie = async () => {
     const response = await authenticateApp();

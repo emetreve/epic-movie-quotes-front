@@ -58,8 +58,6 @@ const useLogIn = () => {
   const { mutate } = useMutation(handleLogIn);
 
   const onSubmit = (data: FormData): void => {
-    console.log(data);
-
     mutate(data);
   };
 
