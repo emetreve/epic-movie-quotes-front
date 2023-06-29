@@ -70,8 +70,9 @@ const useHeader = (authUserId: number) => {
   };
 
   const handleNavigation = (address: string) => {
+    const path = router.asPath;
     showBurger(false);
-    if (router.asPath.includes(address)) {
+    if (path.includes(address) && !path.includes(`${address}/`)) {
       return;
     }
     if (address === 'newsfeed') {
