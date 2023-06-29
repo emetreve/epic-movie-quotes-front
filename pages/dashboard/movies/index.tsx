@@ -24,6 +24,7 @@ const Movies = () => {
     searchResult,
     handleBlur,
     handleMovieListingClick,
+    refetchMovies,
     t,
   } = useMovies();
 
@@ -35,6 +36,7 @@ const Movies = () => {
             userName={user.name}
             userId={user.id}
             avatar={user.avatar}
+            refetchMovies={refetchMovies}
           />
         )}
         <div
@@ -131,7 +133,7 @@ const Movies = () => {
                     }}
                     className={`text-white z-10 bg-red py-[0.5rem] px-3 ml-5 ${
                       locale === 'ka' ? 'px-0 text-sm' : 'px-3'
-                    }  hover:bg-red-hover rounded-md font-thin lg:text-lg text-[1.1rem]`}
+                    }  hover:bg-red-hover rounded-md font lg:text-lg text-[1.1rem]`}
                   >
                     <div className='flex flex-row items-center'>
                       <Image
@@ -168,17 +170,20 @@ const Movies = () => {
                         index === 0 ? 'mt-6 lg:mt-12' : 'mt-12'
                       } hover:cursor-pointer`}
                     >
-                      <Image
-                        src={
-                          movie.poster
-                            ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${movie.poster}`
-                            : '/assets/movie-sample.png'
-                        }
-                        alt='create new'
-                        width={96}
-                        height={96}
-                        className='w-full lg:w-[25rem] lg:h-[20rem] h-full max-h-[17rem] lg:max-h-[20rem] hover:cursor-pointer mr-2 rounded-2xl'
-                      />
+                      <div className='w-full lg:w-[25rem] lg:h-[20rem] h-full max-h-[17rem] lg:max-h-[20rem] mt-7 hover:cursor-pointer mr-2 rounded-xl overflow-hidden relative'>
+                        <Image
+                          src={
+                            movie?.poster
+                              ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${movie.poster}`
+                              : '/assets/movie-sample.png'
+                          }
+                          alt='poster'
+                          layout='fill'
+                          objectFit='cover'
+                          objectPosition='center'
+                          className='rounded-xl'
+                        />
+                      </div>
                       <p className='text-white text-lg mt-4'>
                         {`${movie.name[locale]} (${movie.year})`}
                       </p>
@@ -208,17 +213,20 @@ const Movies = () => {
                         index === 0 ? 'mt-6 lg:mt-12' : 'mt-12'
                       } hover:cursor-pointer`}
                     >
-                      <Image
-                        src={
-                          movie.poster
-                            ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${movie.poster}`
-                            : '/assets/movie-sample.png'
-                        }
-                        alt='create new'
-                        width={96}
-                        height={96}
-                        className='w-full lg:w-[25rem] lg:h-[20rem] h-full max-h-[17rem] lg:max-h-[20rem] hover:cursor-pointer mr-2 rounded-2xl'
-                      />
+                      <div className='w-full lg:w-[25rem] lg:h-[20rem] h-full max-h-[17rem] lg:max-h-[20rem] mt-7 hover:cursor-pointer mr-2 rounded-xl overflow-hidden relative'>
+                        <Image
+                          src={
+                            movie?.poster
+                              ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${movie.poster}`
+                              : '/assets/movie-sample.png'
+                          }
+                          alt='poster'
+                          layout='fill'
+                          objectFit='cover'
+                          objectPosition='center'
+                          className='rounded-xl'
+                        />
+                      </div>
                       <p className='text-white text-lg mt-4'>
                         {`${movie.name[locale]} (${movie.year})`}
                       </p>

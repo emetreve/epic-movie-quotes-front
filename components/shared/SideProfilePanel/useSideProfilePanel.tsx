@@ -1,5 +1,6 @@
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { useQuotesContext } from '@/store';
 
 const useSideProfilePanel = () => {
   const { t } = useTranslation(['newsfeed', 'profile']);
@@ -8,11 +9,14 @@ const useSideProfilePanel = () => {
 
   const asPath = router.asPath;
 
+  const { setQuotesData } = useQuotesContext();
+
   const handleNavigation = async (route: string) => {
-    if (route === 'newsfeed') {
-      await router.push(`/dashboard/${route}`);
-      router.reload();
+    if (asPath.includes(route)) {
       return;
+    }
+    if (route === 'newsfeed') {
+      setQuotesData([]);
     }
     router.push(`/dashboard/${route}`);
   };

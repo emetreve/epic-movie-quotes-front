@@ -3,7 +3,12 @@ import useEditMovie from './useEditMovie';
 import { PropsType } from './types';
 import { Genre } from '@/types';
 
-const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
+const EditMovie: React.FC<PropsType> = ({
+  avatar,
+  userName,
+  movie,
+  refetchMovie,
+}) => {
   const {
     showMovieEdit,
     handleSubmit,
@@ -24,7 +29,7 @@ const EditMovie: React.FC<PropsType> = ({ avatar, userName, movie }) => {
     handleDragOver,
     uploadedImageToDisplay,
     t,
-  } = useEditMovie(movie);
+  } = useEditMovie(movie, refetchMovie);
 
   return (
     <div

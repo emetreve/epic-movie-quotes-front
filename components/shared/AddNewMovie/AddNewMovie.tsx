@@ -3,7 +3,11 @@ import { PropsType } from './types';
 import useAddNewMovie from './useAddNewMovie';
 import { Genre } from '@/types';
 
-const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
+const AddNewMovie: React.FC<PropsType> = ({
+  avatar,
+  userName,
+  refetchMovies,
+}) => {
   const {
     showAddMovie,
     handleSubmit,
@@ -26,7 +30,7 @@ const AddNewMovie: React.FC<PropsType> = ({ avatar, userName }) => {
     imageError,
     setImageError,
     t,
-  } = useAddNewMovie();
+  } = useAddNewMovie(refetchMovies);
 
   return (
     <div

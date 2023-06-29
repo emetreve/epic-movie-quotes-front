@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
-import { verifyEmail as verify, authenticateAppInstance } from '@/services';
+import { verifyEmail as verify, authenticateApp } from '@/services';
 import { useCheckIfLoggedIn } from '@/hooks';
 import { googleAuth } from '@/services';
 import { useTranslation } from 'next-i18next';
+import { useQuery } from 'react-query';
 
 const useLanding = () => {
   const router = useRouter();
@@ -21,35 +21,30 @@ const useLanding = () => {
 
   const { t } = useTranslation('landing');
 
-  useEffect(() => {
-    const authenticate = async () => {
-      if (scope) {
-        const googleAuthPath = router.asPath;
-
-        try {
-          await googleAuth(googleAuthPath);
-          setLogged(true);
-        } catch (error) {
-          router.push('/403');
-        }
-      }
-    };
-    authenticate();
-  }, [scope]);
-
-  useEffect(() => {
-    const authenticateApp = async () => {
+  const authenticate = async (googleAuthPath: string) => {
+    if (scope) {
       try {
-        const response = await authenticateAppInstance.get(
-          '/sanctum/csrf-cookie'
-        );
-        console.log(response);
+        await googleAuth(googleAuthPath);
+        setLogged(true);
       } catch (error) {
         console.log(error);
       }
-    };
-    authenticateApp();
-  }, []);
+    }
+    return false;
+  };
+
+  useQuery(['authenticate', router.asPath], () => authenticate(router.asPath), {
+    enabled: !!scope,
+    onError: () => {
+      router.push('/403');
+    },
+  });
+
+  const fetchCsrfCookie = async () => {
+    const response = await authenticateApp();
+    return response;
+  };
+  useQuery('csrfCookie', fetchCsrfCookie);
 
   const showNotice = async () => {
     if (id && token && expires && signature) {

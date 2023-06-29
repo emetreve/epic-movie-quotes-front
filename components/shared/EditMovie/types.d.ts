@@ -5,4 +5,5 @@ export type PropsType = {
   avatar?: string;
   userId: number;
   movie: Movie;
+  refetchMovie: Function;
 };

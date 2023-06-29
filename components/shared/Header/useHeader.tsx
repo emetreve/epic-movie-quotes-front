@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { logOut } from '@/services';
 import { useTranslation } from 'next-i18next';
-import { useUiContext } from '@/store';
+import { useUiContext, useQuotesContext } from '@/store';
 import {
   getNotifications,
   markNotifications,
@@ -27,6 +27,8 @@ const useHeader = (authUserId: number) => {
     showNotifications,
     setShowNotifications,
   } = useUiContext();
+
+  const { setQuotesData } = useQuotesContext();
 
   const { t } = useTranslation(['newsfeed', 'profile']);
 
@@ -69,12 +71,13 @@ const useHeader = (authUserId: number) => {
 
   const handleNavigation = (address: string) => {
     showBurger(false);
-    router.push(`/dashboard/${address}`);
-    if (address === 'newsfeed') {
-      setTimeout(() => {
-        router.reload();
-      }, 500);
+    if (router.asPath.includes(address)) {
+      return;
     }
+    if (address === 'newsfeed') {
+      setQuotesData([]);
+    }
+    router.push(`/dashboard/${address}`);
   };
 
   const toggleNotifications = async (mobile?: boolean) => {

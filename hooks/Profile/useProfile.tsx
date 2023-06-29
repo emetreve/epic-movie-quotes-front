@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useCheckIfLoggedIn } from '@/hooks';
-import { useUiContext } from '@/store';
+import { useUiContext, useQuotesContext } from '@/store';
 import { ChangeUserData } from '@/types';
 import { updateAvatar, updateUser, changeEmailInDatabase } from '@/services';
 import { useTranslation } from 'next-i18next';
@@ -47,6 +47,8 @@ const useProfile = () => {
     setShowNotifications,
   } = useUiContext();
 
+  const { setQuotesData } = useQuotesContext();
+
   const editEmail = async (email: string) => {
     try {
       await changeEmailInDatabase(email);
@@ -64,20 +66,26 @@ const useProfile = () => {
   };
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
     if (status === 'success') {
       setShowSuccess(true);
+      timeoutId = setTimeout(() => {
+        setShowSuccess(false);
+        router.push({
+          pathname: router.pathname,
+          query: {},
+        });
+      }, 4000);
     }
-    setTimeout(() => {
-      setShowSuccess(false);
-      router.push({
-        pathname: router.pathname,
-        query: {},
-      });
-    }, 4000);
 
-    if (changeEmail && changeEmail?.length > 0) {
+    if (changeEmail && changeEmail.length > 0) {
       editEmail(changeEmail as string);
     }
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [status, changeEmail]);
 
   const methods = useForm({
@@ -211,8 +219,8 @@ const useProfile = () => {
   };
 
   const handleBack = async (path: string) => {
-    await router.push(`/dashboard/${path}`);
-    router.reload();
+    setQuotesData([]);
+    router.push(`/dashboard/${path}`);
   };
 
   const handleOutsideClick = () => {

@@ -4,11 +4,14 @@ import { useForm } from 'react-hook-form';
 import { CreateMovieFormData, Genre } from '@/types';
 import { MovieForSingleMoviePage } from '@/types';
 import { getGenres, updateMovie } from '@/services';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import { useRouter, NextRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
-const useEditMovie = (movie: MovieForSingleMoviePage) => {
+const useEditMovie = (
+  movie: MovieForSingleMoviePage,
+  refetchMovie: Function
+) => {
   const existingGenres = movie.genres ? [...movie.genres] : [];
 
   const [selectedGenres, setSelectedGenres] = useState<Genre[]>([
@@ -24,8 +27,6 @@ const useEditMovie = (movie: MovieForSingleMoviePage) => {
 
   const { locale } = useRouter() as NextRouter & { locale: 'en' | 'ka' };
   const { t } = useTranslation(['movies', 'movie']);
-
-  const queryClient = useQueryClient();
 
   const fetchGenres = async () => {
     const response = await getGenres();
@@ -170,9 +171,10 @@ const useEditMovie = (movie: MovieForSingleMoviePage) => {
     );
 
     try {
-      updateMovie(formData, movie.id);
-      queryClient.invalidateQueries('movie').then(() => {
-        showMovieEdit(false);
+      updateMovie(formData, movie.id).then(() => {
+        refetchMovie().then(() => {
+          showMovieEdit(false);
+        });
       });
     } catch (error: any) {
       console.log(error);
