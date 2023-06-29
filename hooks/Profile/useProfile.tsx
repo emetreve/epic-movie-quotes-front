@@ -65,23 +65,6 @@ const useProfile = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (status === 'success') {
-  //     setShowSuccess(true);
-  //   }
-  //   setTimeout(() => {
-  //     setShowSuccess(false);
-  //     router.push({
-  //       pathname: router.pathname,
-  //       query: {},
-  //     });
-  //   }, 4000);
-
-  //   if (changeEmail && changeEmail?.length > 0) {
-  //     editEmail(changeEmail as string);
-  //   }
-  // }, [status, changeEmail]);
-
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
 
