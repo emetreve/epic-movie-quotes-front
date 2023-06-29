@@ -159,10 +159,11 @@ const useAddNewMovie = (refetchMovies: Function) => {
       );
 
       try {
-        createMovie(formData);
-        refetchMovies().then(() => {
-          showAddMovie(false);
-          reset();
+        createMovie(formData).then(() => {
+          refetchMovies().then(() => {
+            showAddMovie(false);
+            reset();
+          });
         });
       } catch (error: any) {
         console.log(error);

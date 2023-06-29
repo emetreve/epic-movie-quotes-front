@@ -171,9 +171,11 @@ const useEditMovie = (
     );
 
     try {
-      updateMovie(formData, movie.id);
-      showMovieEdit(false);
-      refetchMovie();
+      updateMovie(formData, movie.id).then(() => {
+        refetchMovie().then(() => {
+          showMovieEdit(false);
+        });
+      });
     } catch (error: any) {
       console.log(error);
     }
