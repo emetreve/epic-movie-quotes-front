@@ -153,7 +153,7 @@ const Movies = () => {
               })`}</p>
             </div>
             <div
-              className={`lg:grid lg:grid-cols-3 gap-x-20 lg:w-full ${
+              className={`lg:grid lg:grid-cols-3 gap-x-18 lg:w-full ${
                 locale === 'en' ? 'uppercase' : 'font-helvetica-caps-ka'
               }`}
             >
