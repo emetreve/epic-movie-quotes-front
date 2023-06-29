@@ -170,7 +170,7 @@ const Movies = () => {
                         index === 0 ? 'mt-6 lg:mt-12' : 'mt-12'
                       } hover:cursor-pointer`}
                     >
-                      <div className='w-full lg:w-[25rem] lg:h-[20rem] h-full max-h-[17rem] lg:max-h-[20rem] mt-7 hover:cursor-pointer mr-2 rounded-xl overflow-hidden'>
+                      <div className='w-full lg:w-[25rem] lg:h-[20rem] h-full max-h-[17rem] lg:max-h-[20rem] mt-7 hover:cursor-pointer mr-2 rounded-xl overflow-hidden relative'>
                         <Image
                           src={
                             movie?.poster
@@ -178,9 +178,10 @@ const Movies = () => {
                               : '/assets/movie-sample.png'
                           }
                           alt='poster'
-                          width={2000}
-                          height={2000}
-                          className='w-full h-full object-cover'
+                          layout='fill'
+                          objectFit='cover'
+                          objectPosition='center'
+                          className='rounded-xl'
                         />
                       </div>
                       <p className='text-white text-lg mt-4'>
@@ -212,7 +213,7 @@ const Movies = () => {
                         index === 0 ? 'mt-6 lg:mt-12' : 'mt-12'
                       } hover:cursor-pointer`}
                     >
-                      <div className='w-full lg:w-[25rem] lg:h-[20rem] h-full max-h-[17rem] lg:max-h-[20rem] mt-7 hover:cursor-pointer mr-2 rounded-xl overflow-hidden'>
+                      <div className='w-full lg:w-[25rem] lg:h-[20rem] h-full max-h-[17rem] lg:max-h-[20rem] mt-7 hover:cursor-pointer mr-2 rounded-xl overflow-hidden relative'>
                         <Image
                           src={
                             movie?.poster
@@ -220,9 +221,10 @@ const Movies = () => {
                               : '/assets/movie-sample.png'
                           }
                           alt='poster'
-                          width={2000}
-                          height={2000}
-                          className='w-full h-full object-cover'
+                          layout='fill'
+                          objectFit='cover'
+                          objectPosition='center'
+                          className='rounded-xl'
                         />
                       </div>
                       <p className='text-white text-lg mt-4'>
