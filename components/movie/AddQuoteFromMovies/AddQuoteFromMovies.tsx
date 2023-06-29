@@ -101,7 +101,7 @@ const AddQuoteFromMovies: React.FC<PropsType> = ({
                           className={`px-1 text-[0.56rem] lg:text-sm lg:px-2 py-[0.2rem] text-white text-center bg-textarea-gray rounded mr-2 mb-2`}
                         >
                           <p className='text-center block'>
-                            {genre.name[locale as keyof typeof genre.name]}
+                            {genre.name[locale]}
                           </p>
                         </div>
                       );

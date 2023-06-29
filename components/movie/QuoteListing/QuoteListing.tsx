@@ -113,9 +113,7 @@ const QuoteListing: React.FC<PropsType> = ({
           className='w-full h-[8.5rem] lg:w-[16rem] lg:h-[8.5rem] px-7 hover:cursor-pointer mr-2'
         />
         <div className='px-7 lg:-ml-[2.5rem] break-all'>
-          <p className='italic my-6 text-input-gray text-lg leading-7'>{`"${
-            body[locale as keyof typeof body]
-          }"`}</p>
+          <p className='italic my-6 text-input-gray text-lg leading-7'>{`"${body[locale]}"`}</p>
         </div>
       </div>
       <div className='px-7'>

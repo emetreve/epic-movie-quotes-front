@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter, NextRouter } from 'next/router';
 import { useCheckIfLoggedIn } from '@/hooks';
 import { useQuery, useQueryClient } from 'react-query';
 import { getMovie, deleteMovie } from '@/services';
@@ -18,9 +18,11 @@ const useMovie = () => {
   const router = useRouter();
   const { logged, user } = useCheckIfLoggedIn();
 
-  const { locale, push } = useRouter();
-  const { id } = router.query;
+  const { push } = useRouter();
 
+  const { locale } = useRouter() as NextRouter & { locale: 'en' | 'ka' };
+
+  const { id } = router.query;
   const { t } = useTranslation('movies');
 
   const {

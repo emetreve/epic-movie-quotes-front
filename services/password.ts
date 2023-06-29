@@ -6,13 +6,10 @@ const forgotPassword = async (
   data: ForgotPasswordFormData,
   locale?: string
 ) => {
-  let path;
-  if (locale) {
-    path = `/forgot-password/?locale=${locale}`;
-  } else {
-    path = 'forgot-password';
-  }
-  const response = await axiosInstance.post(path, data);
+  const response = await axiosInstance.post('/forgot-password', data, {
+    params: { locale },
+  });
+
   return response;
 };
 

@@ -5,7 +5,7 @@ import { CreateMovieFormData, Genre } from '@/types';
 import { MovieForSingleMoviePage } from '@/types';
 import { getGenres, updateMovie } from '@/services';
 import { useQuery, useQueryClient } from 'react-query';
-import { useRouter } from 'next/router';
+import { useRouter, NextRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
 const useEditMovie = (movie: MovieForSingleMoviePage) => {
@@ -22,8 +22,7 @@ const useEditMovie = (movie: MovieForSingleMoviePage) => {
 
   const { showMovieEdit } = useUiContext();
 
-  const router = useRouter();
-  const locale = router.locale;
+  const { locale } = useRouter() as NextRouter & { locale: 'en' | 'ka' };
   const { t } = useTranslation(['movies', 'movie']);
 
   const queryClient = useQueryClient();

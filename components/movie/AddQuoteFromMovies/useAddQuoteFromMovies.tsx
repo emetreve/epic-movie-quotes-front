@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useUiContext } from '@/store';
-import { useRouter } from 'next/router';
+import { useRouter, NextRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'next-i18next';
 import { CreateQuoteFormData } from '@/types';
@@ -18,8 +18,9 @@ const useAddQuoteFromMovies = (movieId: string) => {
     showMovieDropdown,
     setShowMovieDropdown,
   } = useUiContext();
-  const router = useRouter();
-  const locale = router.locale;
+
+  const { locale } = useRouter() as NextRouter & { locale: 'en' | 'ka' };
+
   const { t } = useTranslation('profile');
   const { t: translate } = useTranslation('newsfeed');
   const queryClient = useQueryClient();

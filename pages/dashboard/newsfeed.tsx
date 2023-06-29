@@ -213,10 +213,8 @@ const Newsfeed = () => {
                       userId={user.id}
                       userAvatar={quote.user.avatar || ''}
                       userName={quote.user.name}
-                      quote={quote.body[locale as keyof typeof quote.body]}
-                      movie={
-                        quote.movie.name[locale as keyof typeof quote.body]
-                      }
+                      quote={quote.body[locale]}
+                      movie={quote.movie.name[locale]}
                       year={quote.movie.year}
                       quoteImage={
                         quote.image
@@ -251,10 +249,8 @@ const Newsfeed = () => {
                       userId={user.id}
                       userAvatar={quote.user.avatar || ''}
                       userName={quote.user.name}
-                      quote={quote.body[locale as keyof typeof quote.body]}
-                      movie={
-                        quote.movie.name[locale as keyof typeof quote.body]
-                      }
+                      quote={quote.body[locale]}
+                      movie={quote.movie.name[locale]}
                       year={quote.movie.year}
                       quoteImage={
                         quote.image

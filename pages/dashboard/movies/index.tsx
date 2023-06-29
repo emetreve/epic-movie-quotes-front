@@ -180,9 +180,7 @@ const Movies = () => {
                         className='w-full lg:w-[25rem] lg:h-[20rem] h-full max-h-[17rem] lg:max-h-[20rem] hover:cursor-pointer mr-2 rounded-2xl'
                       />
                       <p className='text-white text-lg mt-4'>
-                        {`${movie.name[locale as keyof typeof movie.name]} (${
-                          movie.year
-                        })`}
+                        {`${movie.name[locale]} (${movie.year})`}
                       </p>
                       <div className='flex flex-row items-center text-white mt-4'>
                         <p className='text-lg'>{movie.quotes_count}</p>
@@ -222,9 +220,7 @@ const Movies = () => {
                         className='w-full lg:w-[25rem] lg:h-[20rem] h-full max-h-[17rem] lg:max-h-[20rem] hover:cursor-pointer mr-2 rounded-2xl'
                       />
                       <p className='text-white text-lg mt-4'>
-                        {`${movie.name[locale as keyof typeof movie.name]} (${
-                          movie.year
-                        })`}
+                        {`${movie.name[locale]} (${movie.year})`}
                       </p>
                       <div className='flex flex-row items-center text-white mt-4'>
                         <p className='text-lg'>{movie.quotes_count}</p>

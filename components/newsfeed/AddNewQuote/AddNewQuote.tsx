@@ -166,9 +166,7 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
                     className='h-6 w-6 mr-3'
                   />
                   <p className='w-56 lg:w-[37rem] whitespace-nowrap overflow-hidden overflow-ellipsis'>
-                    {selectedMovie.name[
-                      locale as keyof typeof selectedMovie.name
-                    ] || translate('Select movie')}
+                    {selectedMovie.name[locale] || translate('Select movie')}
                   </p>
                 </div>
                 {showMovieDropdown && (
@@ -178,7 +176,7 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
                     }}
                     className='container absolute z-50 bottom-24 lg:bottom-[6rem] left-0 w-full max-h-72 shadow-lg overflow-y-scroll bg-violet bg-opacity-[95%] rounded py-4'
                   >
-                    {movies &&
+                    {movies.length > 0 ? (
                       movies.map((movie: Movie, index: number) => {
                         return (
                           <p
@@ -194,10 +192,15 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
                               index !== 0 && 'pt-5'
                             } leading-tight block px-5`}
                           >
-                            {movie.name[locale as keyof typeof movie.name]}
+                            {movie.name[locale]}
                           </p>
                         );
-                      })}
+                      })
+                    ) : (
+                      <p className='text-gray-500 italic py-2 px-5'>
+                        You do not have any movies yet...
+                      </p>
+                    )}
                   </div>
                 )}
                 <div className='w-52 overflow-hidden'>

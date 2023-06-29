@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { getGenres } from '@/services';
 import { useQuery, useQueryClient } from 'react-query';
 import { Genre } from '@/types';
-import { useRouter } from 'next/router';
+import { useRouter, NextRouter } from 'next/router';
 import { CreateMovieFormData } from '@/types';
 import { createMovie } from '@/services';
 import { useTranslation } from 'next-i18next';
@@ -18,8 +18,7 @@ const useAddNewMovie = () => {
   const [imageError, setImageError] = useState('');
 
   const { showCreateMovie, showAddMovie } = useUiContext();
-  const router = useRouter();
-  const locale = router.locale;
+  const { locale } = useRouter() as NextRouter & { locale: 'en' | 'ka' };
   const queryClient = useQueryClient();
 
   const { t } = useTranslation('movies');
