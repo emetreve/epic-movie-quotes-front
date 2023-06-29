@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
-import { verifyEmail as verify, authenticateAppInstance } from '@/services';
+import { verifyEmail as verify, authenticateApp } from '@/services';
 import { useCheckIfLoggedIn } from '@/hooks';
 import { googleAuth } from '@/services';
 import { useTranslation } from 'next-i18next';
+import { useQuery } from 'react-query';
 
 const useLanding = () => {
   const router = useRouter();
@@ -37,19 +38,11 @@ const useLanding = () => {
     authenticate();
   }, [scope]);
 
-  useEffect(() => {
-    const authenticateApp = async () => {
-      try {
-        const response = await authenticateAppInstance.get(
-          '/sanctum/csrf-cookie'
-        );
-        console.log(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    authenticateApp();
-  }, []);
+  const fetchCsrfCookie = async () => {
+    const response = await authenticateApp();
+    return response;
+  };
+  useQuery('csrfCookie', fetchCsrfCookie);
 
   const showNotice = async () => {
     if (id && token && expires && signature) {

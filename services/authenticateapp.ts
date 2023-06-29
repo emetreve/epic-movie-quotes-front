@@ -8,4 +8,8 @@ const authenticateAppInstance = axios.create({
   withCredentials: true,
 });
 
-export default authenticateAppInstance;
+const authenticateApp = async () => {
+  await authenticateAppInstance.get('/sanctum/csrf-cookie');
+};
+
+export default authenticateApp;
