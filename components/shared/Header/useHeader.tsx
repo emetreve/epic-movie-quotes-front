@@ -9,8 +9,7 @@ import {
   markNotification,
 } from '@/services';
 import { useQuery, useQueryClient } from 'react-query';
-import { usePusher } from '@/hooks';
-import { NotificationMessage, Notification } from '@/types';
+import { Notification } from '@/types';
 
 const useHeader = (authUserId: number) => {
   const [whichQuoteToView, setWhichQuoteToView] = useState<number | null>(null);
@@ -37,26 +36,6 @@ const useHeader = (authUserId: number) => {
   useEffect(() => {
     queryClient.invalidateQueries('notifications');
   }, [whichQuoteToView]);
-
-  usePusher();
-  useEffect(() => {
-    const channelLike = window.Echo.private(
-      `notification-updated.${authUserId}`
-    );
-    channelLike.listen(
-      'NotificationUpdated',
-      function (data: NotificationMessage) {
-        console.log(
-          `private channel notification for the user with id ${authUserId} `,
-          data
-        );
-        queryClient.invalidateQueries('notifications');
-      }
-    );
-    return () => {
-      channelLike.stopListening(`.NotificationUpdated.${authUserId}`);
-    };
-  }, [authUserId]);
 
   const router = useRouter();
 
