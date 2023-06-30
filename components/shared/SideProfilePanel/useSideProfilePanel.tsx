@@ -12,7 +12,7 @@ const useSideProfilePanel = () => {
   const { setQuotesData } = useQuotesContext();
 
   const handleNavigation = async (route: string) => {
-    if (asPath.includes(route)) {
+    if (asPath.includes(route) && !asPath.includes(`${route}/`)) {
       return;
     }
     if (route === 'newsfeed') {

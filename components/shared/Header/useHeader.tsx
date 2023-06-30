@@ -9,8 +9,7 @@ import {
   markNotification,
 } from '@/services';
 import { useQuery, useQueryClient } from 'react-query';
-import { usePusher } from '@/hooks';
-import { NotificationMessage, Notification } from '@/types';
+import { Notification } from '@/types';
 
 const useHeader = (authUserId: number) => {
   const [whichQuoteToView, setWhichQuoteToView] = useState<number | null>(null);
@@ -38,26 +37,6 @@ const useHeader = (authUserId: number) => {
     queryClient.invalidateQueries('notifications');
   }, [whichQuoteToView]);
 
-  usePusher();
-  useEffect(() => {
-    const channelLike = window.Echo.private(
-      `notification-updated.${authUserId}`
-    );
-    channelLike.listen(
-      'NotificationUpdated',
-      function (data: NotificationMessage) {
-        console.log(
-          `private channel notification for the user with id ${authUserId} `,
-          data
-        );
-        queryClient.invalidateQueries('notifications');
-      }
-    );
-    return () => {
-      channelLike.stopListening(`.NotificationUpdated.${authUserId}`);
-    };
-  }, [authUserId]);
-
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -70,8 +49,9 @@ const useHeader = (authUserId: number) => {
   };
 
   const handleNavigation = (address: string) => {
+    const path = router.asPath;
     showBurger(false);
-    if (router.asPath.includes(address)) {
+    if (path.includes(address) && !path.includes(`${address}/`)) {
       return;
     }
     if (address === 'newsfeed') {

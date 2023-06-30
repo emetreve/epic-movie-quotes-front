@@ -153,7 +153,7 @@ const Movies = () => {
               })`}</p>
             </div>
             <div
-              className={`lg:grid lg:grid-cols-3 gap-x-20 lg:w-full ${
+              className={`lg:grid lg:grid-cols-3 gap-x-18 lg:w-full ${
                 locale === 'en' ? 'uppercase' : 'font-helvetica-caps-ka'
               }`}
             >
@@ -170,19 +170,21 @@ const Movies = () => {
                         index === 0 ? 'mt-6 lg:mt-12' : 'mt-12'
                       } hover:cursor-pointer`}
                     >
-                      <div className='w-full lg:w-[25rem] lg:h-[20rem] h-full max-h-[17rem] lg:max-h-[20rem] mt-7 hover:cursor-pointer mr-2 rounded-xl overflow-hidden relative'>
-                        <Image
-                          src={
-                            movie?.poster
-                              ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${movie.poster}`
-                              : '/assets/movie-sample.png'
-                          }
-                          alt='poster'
-                          layout='fill'
-                          objectFit='cover'
-                          objectPosition='center'
-                          className='rounded-xl'
-                        />
+                      <div className='w-full lg:w-[23rem] lg:h-[18rem] max-h-[16rem] lg:max-h-[18rem] mt-7 hover:cursor-pointer mr-2 rounded-xl overflow-hidden'>
+                        <div className='relative h-0 pb-[80%]'>
+                          <Image
+                            src={
+                              movie?.poster
+                                ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${movie.poster}`
+                                : '/assets/movie-sample.png'
+                            }
+                            alt='poster'
+                            layout='fill'
+                            objectFit='cover'
+                            objectPosition='center'
+                            className='rounded-xl'
+                          />
+                        </div>
                       </div>
                       <p className='text-white text-lg mt-4'>
                         {`${movie.name[locale]} (${movie.year})`}
@@ -213,19 +215,21 @@ const Movies = () => {
                         index === 0 ? 'mt-6 lg:mt-12' : 'mt-12'
                       } hover:cursor-pointer`}
                     >
-                      <div className='w-full lg:w-[25rem] lg:h-[20rem] h-full max-h-[17rem] lg:max-h-[20rem] mt-7 hover:cursor-pointer mr-2 rounded-xl overflow-hidden relative'>
-                        <Image
-                          src={
-                            movie?.poster
-                              ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${movie.poster}`
-                              : '/assets/movie-sample.png'
-                          }
-                          alt='poster'
-                          layout='fill'
-                          objectFit='cover'
-                          objectPosition='center'
-                          className='rounded-xl'
-                        />
+                      <div className='w-full lg:w-[23rem] lg:h-[18rem] max-h-[16rem] lg:max-h-[18rem] mt-7 hover:cursor-pointer mr-2 rounded-xl overflow-hidden'>
+                        <div className='relative h-0 pb-[80%]'>
+                          <Image
+                            src={
+                              movie?.poster
+                                ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${movie.poster}`
+                                : '/assets/movie-sample.png'
+                            }
+                            alt='poster'
+                            layout='fill'
+                            objectFit='cover'
+                            objectPosition='center'
+                            className='rounded-xl'
+                          />
+                        </div>
                       </div>
                       <p className='text-white text-lg mt-4'>
                         {`${movie.name[locale]} (${movie.year})`}

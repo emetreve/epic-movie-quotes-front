@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { checkIfLoggedIn } from '@/services';
 import { User } from '@/types';
+import Cookies from 'js-cookie';
 
 const useCheckIfLoggedIn = () => {
   const [logged, setLogged] = useState(false);
@@ -24,9 +25,11 @@ const useCheckIfLoggedIn = () => {
       const response = await checkIfLoggedIn();
       setLogged(true);
       setUser(response.data.user);
+      Cookies.set('userId', JSON.stringify(response.data.user.id));
     } catch (error) {
       console.log(error);
       setLogged(false);
+      Cookies.remove('userId');
 
       const query = router.asPath.includes('?')
         ? `?${router.asPath.split('?')[1]}`
