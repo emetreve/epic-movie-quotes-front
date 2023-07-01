@@ -15,12 +15,12 @@ import {
 } from '@/components';
 import { useLanding } from '@/hooks';
 import { useUiContext } from '@/store';
-import { useRouter } from 'next/router';
-import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { checkIfLoggedIn } from '@/services';
+import { GetServerSideProps } from 'next';
 
 const Landing: React.FC = () => {
-  const { showNotice, logged, t } = useLanding();
+  const { showNotice, t } = useLanding();
   const {
     showLogIn,
     showLog,
@@ -37,13 +37,8 @@ const Landing: React.FC = () => {
     showExpiredWarningEmailVerification,
   } = useUiContext();
 
-  const router = useRouter();
-
   showNotice();
 
-  if (logged) {
-    router.push('/dashboard/newsfeed');
-  }
   return (
     <>
       {showCreateAccount && <CreateAccount show={showCreate} swap={showLog} />}
@@ -122,7 +117,26 @@ const Landing: React.FC = () => {
 };
 export default Landing;
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  locale,
+  req,
+}) => {
+  const asPath = req.url;
+
+  try {
+    const response = await checkIfLoggedIn();
+    const data = response.data;
+
+    if (!data && asPath && !asPath.includes('scope')) {
+      return {
+        redirect: {
+          destination: '/dashboard/newsfeed',
+          permanent: false,
+        },
+      };
+    }
+  } catch (error) {}
+
   return {
     props: {
       ...(await serverSideTranslations(locale as string, ['landing'])),
