@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
 import { verifyEmail as verify, authenticateApp } from '@/services';
-import { useCheckIfLoggedIn } from '@/hooks';
 import { googleAuth } from '@/services';
 import { useTranslation } from 'next-i18next';
 import { useQuery } from 'react-query';
@@ -17,15 +16,12 @@ const useLanding = () => {
     showExpiredEmailVerification,
   } = useUiContext();
 
-  const { logged, setLogged } = useCheckIfLoggedIn();
-
   const { t } = useTranslation('landing');
 
   const authenticate = async (googleAuthPath: string) => {
     if (scope) {
       try {
         await googleAuth(googleAuthPath);
-        setLogged(true);
       } catch (error) {
         console.log(error);
       }
@@ -33,18 +29,21 @@ const useLanding = () => {
     return false;
   };
 
-  useQuery(['authenticate', router.asPath], () => authenticate(router.asPath), {
-    enabled: !!scope,
-    onError: () => {
-      router.push('/403');
-    },
-  });
-
   const fetchCsrfCookie = async () => {
     const response = await authenticateApp();
     return response;
   };
   useQuery('csrfCookie', fetchCsrfCookie);
+
+  useQuery(['authenticate', router.asPath], () => authenticate(router.asPath), {
+    enabled: !!scope,
+    onError: () => {
+      router.push('/403');
+    },
+    onSuccess: () => {
+      router.push('/dashboard/newsfeed');
+    },
+  });
 
   const showNotice = async () => {
     if (id && token && expires && signature) {
@@ -55,7 +54,7 @@ const useLanding = () => {
         showVerified(true);
       } catch (error: any) {
         console.log(error);
-        if (error.response.data?.token_expired) {
+        if (error.response?.data?.token_expired) {
           showExpiredEmailVerification(true);
           console.log('expired');
         }
@@ -72,7 +71,6 @@ const useLanding = () => {
 
   return {
     showNotice,
-    logged,
     t,
   };
 };
