@@ -1,10 +1,9 @@
 import { FormProvider } from 'react-hook-form';
-import { PropsType } from './types';
 import Image from 'next/image';
 import useCreateAccount from './useCreateAccount';
 import { Error, ValidationIcons } from '@/components';
 
-const CreateAccount: React.FC<PropsType> = ({ modalSwitchSetter }) => {
+const CreateAccount = () => {
   const {
     handleSubmit,
     onSubmit,
@@ -19,6 +18,7 @@ const CreateAccount: React.FC<PropsType> = ({ modalSwitchSetter }) => {
     formState,
     methods,
     handleGoogle,
+    modalSwitchSetter,
     t,
   } = useCreateAccount();
 

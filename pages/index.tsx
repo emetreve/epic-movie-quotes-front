@@ -27,9 +27,7 @@ const Landing: React.FC = () => {
 
   return (
     <>
-      {showModal === 'showCreateAccount' && (
-        <CreateAccount modalSwitchSetter={modalSwitchSetter} />
-      )}
+      {showModal === 'showCreateAccount' && <CreateAccount />}
 
       {showModal === 'showLogIn' && (
         <LogIn modalSwitchSetter={modalSwitchSetter} />

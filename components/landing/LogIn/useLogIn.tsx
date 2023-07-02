@@ -88,6 +88,7 @@ const useLogIn = () => {
     methods,
     handleForgot,
     handleGoogle,
+    modalSwitchSetter,
     t,
   };
 };

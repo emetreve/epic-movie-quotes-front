@@ -1,10 +1,9 @@
 import { FormProvider } from 'react-hook-form';
-import { PropsType } from './types';
 import Image from 'next/image';
 import useLogIn from './useLogIn';
 import { Error, ValidationIcons } from '@/components';
 
-const LogIn: React.FC<PropsType> = ({ modalSwitchSetter }) => {
+const LogIn = () => {
   const {
     register,
     errors,
@@ -17,6 +16,7 @@ const LogIn: React.FC<PropsType> = ({ modalSwitchSetter }) => {
     methods,
     handleForgot,
     handleGoogle,
+    modalSwitchSetter,
     t,
   } = useLogIn();
 

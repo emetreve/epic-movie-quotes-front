@@ -101,6 +101,7 @@ const useCreateAccount = () => {
     formState,
     methods,
     handleGoogle,
+    modalSwitchSetter,
     t,
   };
 };

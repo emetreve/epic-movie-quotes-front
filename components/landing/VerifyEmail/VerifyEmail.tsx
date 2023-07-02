@@ -1,9 +1,8 @@
 import Image from 'next/image';
-import { PropsType } from './types';
 import useVerifyEmail from './useVerifyEmail';
 
-const VerifyEmail: React.FC<PropsType> = ({ modalSwitchSetter }) => {
-  const { locale, t } = useVerifyEmail();
+const VerifyEmail = () => {
+  const { locale, modalSwitchSetter, t } = useVerifyEmail();
 
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>

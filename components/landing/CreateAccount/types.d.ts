@@ -1,7 +1,3 @@
-export type PropsType = {
-  modalSwitchSetter: Function;
-};
-
 export type FormData = {
   name: string;
   email: string;

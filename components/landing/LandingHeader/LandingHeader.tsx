@@ -1,9 +1,10 @@
-import { PropsType } from './types';
 import { LangSwitch } from '@/components';
 import { useTranslation } from 'next-i18next';
+import { useUiContext } from '@/store';
 
-const LandingHeader: React.FC<PropsType> = ({ modalSwitchSetter }) => {
+const LandingHeader = () => {
   const { t } = useTranslation('landing');
+  const { modalSwitchSetter } = useUiContext();
 
   return (
     <div className='flex justify-between items-center text-xs lg:text-base px-5 lg:px-16 '>
