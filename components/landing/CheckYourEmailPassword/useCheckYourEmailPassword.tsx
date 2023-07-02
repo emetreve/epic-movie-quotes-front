@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next';
 const useCheckYourEmailPassword = () => {
   const router = useRouter();
 
-  const { showCheckEmailPassword } = useUiContext();
+  const { modalSwitchSetter } = useUiContext();
 
   const { t } = useTranslation('landing');
 
@@ -17,7 +17,7 @@ const useCheckYourEmailPassword = () => {
       query: {},
     });
     setTimeout(() => {
-      showCheckEmailPassword(false);
+      modalSwitchSetter(false, 'showCheckYourEmailPassword');
     }, 500);
   };
   return { handleClose, t, locale };

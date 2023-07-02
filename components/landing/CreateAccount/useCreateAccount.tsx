@@ -10,7 +10,7 @@ import { useTranslation } from 'next-i18next';
 const useCreateAccount = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [hidePasswordConfirm, setHidePasswordConfirm] = useState(true);
-  const { showCheck, showCreate } = useUiContext();
+  const { modalSwitchSetter } = useUiContext();
   const router = useRouter();
   const { t } = useTranslation('landing');
 
@@ -54,8 +54,8 @@ const useCreateAccount = () => {
       } else {
         await signUp(incomingData);
       }
-      showCreate(false);
-      showCheck(true);
+      modalSwitchSetter(false, 'showCreateAccount');
+      modalSwitchSetter(true, 'showCheckEmail');
     } catch (error: any) {
       if (error.response.data.errors.name) {
         setError('name', {

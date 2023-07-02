@@ -1,6 +1,5 @@
 export type PropsType = {
-  show: MouseEventHandler<HTMLButtonElement>;
-  swap: MouseEventHandler<HTMLButtonElement>;
+  modalSwitchSetter: Function;
 };
 
 export type FormData = {

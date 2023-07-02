@@ -9,12 +9,7 @@ const useLanding = () => {
   const router = useRouter();
   const { id, token, expires, signature, email, scope } = router.query;
 
-  const {
-    showVerified,
-    showSetNewPassword,
-    showLog,
-    showExpiredEmailVerification,
-  } = useUiContext();
+  const { modalSwitchSetter } = useUiContext();
 
   const { t } = useTranslation('landing');
 
@@ -49,18 +44,18 @@ const useLanding = () => {
 
       try {
         await verify(path);
-        showVerified(true);
+        modalSwitchSetter(true, 'showVerifiedEmail');
       } catch (error: any) {
         if (error.response?.data?.token_expired) {
-          showExpiredEmailVerification(true);
+          modalSwitchSetter(true, 'showExpiredWarningEmailVerification');
         }
       }
     }
 
     if (token && email) {
       setTimeout(() => {
-        showLog(false);
-        showSetNewPassword(true);
+        modalSwitchSetter(false, 'showLogIn');
+        modalSwitchSetter(true, 'showCreateNewPassword');
       }, 500);
     }
   };

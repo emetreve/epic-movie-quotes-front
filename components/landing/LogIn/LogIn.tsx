@@ -4,7 +4,7 @@ import Image from 'next/image';
 import useLogIn from './useLogIn';
 import { Error, ValidationIcons } from '@/components';
 
-const LogIn: React.FC<PropsType> = ({ show, swap }) => {
+const LogIn: React.FC<PropsType> = ({ modalSwitchSetter }) => {
   const {
     register,
     errors,
@@ -22,7 +22,7 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
 
   return (
     <div
-      onClick={() => show(false)}
+      onClick={() => modalSwitchSetter(false, 'showLogIn')}
       className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'
     >
       <div
@@ -30,7 +30,7 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
         className='bg-gradient-violet lg:bg-gradient-plain-violet h-full w-full lg:h-[40rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative lg:scale-105'
       >
         <Image
-          onClick={() => show(false)}
+          onClick={() => modalSwitchSetter(false, 'showLogIn')}
           src='/assets/close-btn.png'
           alt='close button'
           width={200}
@@ -175,8 +175,8 @@ const LogIn: React.FC<PropsType> = ({ show, swap }) => {
           </p>
           <p
             onClick={() => {
-              show(false);
-              swap(true);
+              modalSwitchSetter(false, 'showLogIn');
+              modalSwitchSetter(true, 'showCreateAccount');
             }}
             className='inline-block ml-2 text-sm text-blue-400 underline hover:cursor-pointer'
           >

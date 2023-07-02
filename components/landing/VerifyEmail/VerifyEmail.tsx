@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { PropsType } from './types';
 import useVerifyEmail from './useVerifyEmail';
 
-const VerifyEmail: React.FC<PropsType> = ({ show, showCreateAccount }) => {
+const VerifyEmail: React.FC<PropsType> = ({ modalSwitchSetter }) => {
   const { locale, t } = useVerifyEmail();
 
   return (
@@ -10,7 +10,7 @@ const VerifyEmail: React.FC<PropsType> = ({ show, showCreateAccount }) => {
       <div className='bg-gradient-violet lg:bg-gradient-plain-violet h-full w-full lg:h-[30rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative lg:scale-105'>
         <Image
           onClick={() => {
-            show(false);
+            modalSwitchSetter(false, 'showCheckEmail');
           }}
           src='/assets/close-btn.png'
           alt='close button'
@@ -36,7 +36,7 @@ const VerifyEmail: React.FC<PropsType> = ({ show, showCreateAccount }) => {
           </p>
           <button
             onClick={() => {
-              show(false);
+              modalSwitchSetter(false, 'showCheckEmail');
             }}
             className={`mt-10 text-white bg-red py-2 lg:py-3 lg:text-xl px-6 ${
               locale === 'en' ? 'lg:px-24' : 'lg:px-7'
