@@ -29,13 +29,9 @@ const Landing: React.FC = () => {
     <>
       {showModal === 'showCreateAccount' && <CreateAccount />}
 
-      {showModal === 'showLogIn' && (
-        <LogIn modalSwitchSetter={modalSwitchSetter} />
-      )}
+      {showModal === 'showLogIn' && <LogIn />}
 
-      {showModal === 'showCheckEmail' && (
-        <VerifyEmail modalSwitchSetter={modalSwitchSetter} />
-      )}
+      {showModal === 'showCheckEmail' && <VerifyEmail />}
 
       {showModal === 'showVerifiedEmail' && <VerifiedEmail />}
 
@@ -54,7 +50,7 @@ const Landing: React.FC = () => {
       )}
 
       <div className='bg-background h-[40rem] pt-6 lg:h-[52rem]'>
-        <LandingHeader modalSwitchSetter={modalSwitchSetter} />
+        <LandingHeader />
 
         <div className='flex flex-col items-center h-[25rem] lg:h-[43rem]'>
           <div className='text-cream lg:leading-[1.4] flex flex-col items-center text-2xl mt-36 font-montserrat lg:text-6xl lg:mt-60'>
