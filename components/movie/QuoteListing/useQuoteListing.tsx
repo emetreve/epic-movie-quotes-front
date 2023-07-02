@@ -34,9 +34,7 @@ const useQuoteListing = (
     try {
       await deleteQuote(quoteId);
       queryClient.invalidateQueries('movie');
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleRemoveBackgroundScroll = () => {

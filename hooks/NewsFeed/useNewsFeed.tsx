@@ -179,9 +179,7 @@ const useNewsFeed = () => {
       setCurrentSearchPage(response.data.pagination.current_page);
       setLastSearchPage(response.data.pagination.last_page);
       return response.data;
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleFetchNewSearchQuotes = async (search: string, page: number) => {
@@ -196,9 +194,7 @@ const useNewsFeed = () => {
       } else {
         setSearchedQuotes([...searchedQuotes, ...newQuotesData.quotes]);
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleObserverSearch = useCallback(

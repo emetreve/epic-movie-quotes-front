@@ -125,9 +125,7 @@ const useAddNewQuote = () => {
       try {
         const response = await createQuote(formData);
         setQuotesData([response.data, ...quotesData]);
-      } catch (error: any) {
-        console.log(error);
-      }
+      } catch (error) {}
     }
     reset();
     showAddQuote(false);

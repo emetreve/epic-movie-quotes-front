@@ -65,9 +65,7 @@ const useChangePassword = () => {
         pathname: router.pathname,
         query: { status: 'success' },
       });
-    } catch (error: any) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleOutsideClick = () => {

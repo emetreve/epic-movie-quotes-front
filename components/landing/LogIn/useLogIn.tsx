@@ -71,9 +71,7 @@ const useLogIn = () => {
       const response = await googleInstance.get('');
       const url = response.data.url;
       router.push(url);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return {

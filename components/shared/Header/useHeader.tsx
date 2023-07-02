@@ -42,9 +42,7 @@ const useHeader = (authUserId: number) => {
     try {
       await logOut();
       router.push('/');
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleNavigation = (address: string) => {
@@ -78,9 +76,7 @@ const useHeader = (authUserId: number) => {
   const handleMarkNotificationsRead = () => {
     try {
       markNotifications(authUserId);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
     queryClient.invalidateQueries('notifications');
   };
 
@@ -88,9 +84,7 @@ const useHeader = (authUserId: number) => {
     try {
       markNotification(notificationId);
       queryClient.invalidateQueries('notifications');
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleNotificationClicked = (

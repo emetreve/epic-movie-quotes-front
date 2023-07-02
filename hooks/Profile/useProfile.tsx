@@ -57,9 +57,7 @@ const useProfile = () => {
         .then(() => {
           router.reload();
         });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -132,9 +130,7 @@ const useProfile = () => {
           query: { status: 'successful' },
         });
         setAvatarButtonTrigger(false);
-      } catch (error: any) {
-        console.log(error);
-      }
+      } catch (error: any) {}
     }
 
     for (const key in data) {
@@ -160,7 +156,6 @@ const useProfile = () => {
       setShowEmailInput(false);
       reset();
     } catch (error: any) {
-      console.log(error);
       if (
         error?.response?.data?.message === 'The email has already been taken.'
       ) {
@@ -202,9 +197,7 @@ const useProfile = () => {
           query: { status: 'success' },
         });
         setAvatarButtonTrigger(false);
-      } catch (error: any) {
-        console.log(error);
-      }
+      } catch (error) {}
     }
   };
 

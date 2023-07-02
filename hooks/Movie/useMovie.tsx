@@ -82,9 +82,7 @@ const useMovie = () => {
     try {
       await deleteMovie(id);
       push('/dashboard/movies');
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleOutsideClick = () => {

@@ -57,8 +57,6 @@ const useCreateAccount = () => {
       showCreate(false);
       showCheck(true);
     } catch (error: any) {
-      console.log(error);
-
       if (error.response.data.errors.name) {
         setError('name', {
           type: 'manual',
@@ -84,9 +82,7 @@ const useCreateAccount = () => {
       const response = await googleInstance.get('');
       const url = response.data.url;
       router.push(url);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return {

@@ -57,7 +57,6 @@ const useMovies = () => {
     }
 
     if (showSearchLg) {
-      console.log('sms');
       setShowSearchLg(false);
       reset();
     }

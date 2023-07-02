@@ -22,9 +22,7 @@ const useLanding = () => {
     if (scope) {
       try {
         await googleAuth(googleAuthPath);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     }
     return false;
   };
@@ -53,10 +51,8 @@ const useLanding = () => {
         await verify(path);
         showVerified(true);
       } catch (error: any) {
-        console.log(error);
         if (error.response?.data?.token_expired) {
           showExpiredEmailVerification(true);
-          console.log('expired');
         }
       }
     }

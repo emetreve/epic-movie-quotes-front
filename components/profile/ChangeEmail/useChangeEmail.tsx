@@ -53,7 +53,6 @@ const useChangeEmail = (setEmailSuccess: Function) => {
         query: { status: 'success' },
       });
     } catch (error: any) {
-      console.log(error);
       if (error?.response?.data?.message) {
         setError('email', {
           type: 'manual',

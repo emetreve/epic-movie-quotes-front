@@ -27,7 +27,6 @@ const useCheckIfLoggedIn = () => {
       setUser(response.data.user);
       Cookies.set('userId', JSON.stringify(response.data.user.id));
     } catch (error) {
-      console.log(error);
       setLogged(false);
       Cookies.remove('userId');
 

@@ -55,7 +55,6 @@ const useChangeName = () => {
         query: { status: 'success' },
       });
     } catch (error: any) {
-      console.log(error);
       if (error?.response?.data?.message) {
         setError('username', {
           type: 'manual',
