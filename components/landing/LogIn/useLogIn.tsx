@@ -9,7 +9,7 @@ import { useTranslation } from 'next-i18next';
 
 const useLogIn = () => {
   const [hidePassword, setHidePassword] = useState(true);
-  const { showLog, showForgot } = useUiContext();
+  const { modalSwitchSetter } = useUiContext();
   const router = useRouter();
   const { t } = useTranslation('landing');
 
@@ -42,7 +42,7 @@ const useLogIn = () => {
   const handleLogIn = async (incomingData: FormData) => {
     try {
       await axiosInstance.post('/login', incomingData);
-      showLog(false);
+      modalSwitchSetter(false, 'showLogIn');
       router.push('/dashboard/newsfeed');
     } catch (error: any) {
       if (error.response.data.errors.user) {
@@ -62,8 +62,8 @@ const useLogIn = () => {
   };
 
   const handleForgot = () => {
-    showLog(false);
-    showForgot(true);
+    modalSwitchSetter(false, 'showLogIn');
+    modalSwitchSetter(true, 'showForgotPassword');
   };
 
   const handleGoogle = async () => {
@@ -71,9 +71,7 @@ const useLogIn = () => {
       const response = await googleInstance.get('');
       const url = response.data.url;
       router.push(url);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return {
@@ -90,6 +88,7 @@ const useLogIn = () => {
     methods,
     handleForgot,
     handleGoogle,
+    modalSwitchSetter,
     t,
   };
 };

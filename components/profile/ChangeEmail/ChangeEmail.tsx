@@ -12,7 +12,7 @@ const ChangeEmail: React.FC<PropsType> = ({
 }) => {
   const {
     handleOutsideClick,
-    showUpdateEmail,
+    modalSwitchSetter,
     t,
     register,
     handleSubmit,
@@ -40,7 +40,7 @@ const ChangeEmail: React.FC<PropsType> = ({
             height={512}
             className='w-[0.9rem] h-auto ml-[2rem] my-5'
             onClick={() => {
-              showUpdateEmail(false);
+              modalSwitchSetter(false, 'showEditEmail');
             }}
           />
         </Link>
@@ -83,7 +83,7 @@ const ChangeEmail: React.FC<PropsType> = ({
           <div className='flex justify-between mt-9'>
             <p
               onClick={() => {
-                showUpdateEmail(false);
+                modalSwitchSetter(false, 'showEditEmail');
               }}
               className='ml-10 py-[0.4rem] text-input-gray hover:cursor-pointer'
             >

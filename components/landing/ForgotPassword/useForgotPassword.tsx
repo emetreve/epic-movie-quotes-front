@@ -7,7 +7,7 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 
 const useForgotPassword = () => {
-  const { showLog, showForgot, showCheckEmailPassword } = useUiContext();
+  const { modalSwitchSetter } = useUiContext();
   const { t } = useTranslation('landing');
 
   const router = useRouter();
@@ -43,8 +43,8 @@ const useForgotPassword = () => {
       } else {
         await forgotPassword(incomingData);
       }
-      showForgot(false);
-      showCheckEmailPassword(true);
+      modalSwitchSetter(false, 'showForgotPassword');
+      modalSwitchSetter(true, 'showCheckYourEmailPassword');
     } catch (error: any) {
       if (error.response.data.errors.email) {
         setError('email', {
@@ -62,8 +62,8 @@ const useForgotPassword = () => {
   };
 
   const handleClick = () => {
-    showForgot(false);
-    showLog(true);
+    modalSwitchSetter(false, 'showForgotPassword');
+    modalSwitchSetter(true, 'showLogIn');
   };
 
   return {
@@ -77,7 +77,7 @@ const useForgotPassword = () => {
     formState,
     methods,
     handleClick,
-    showForgot,
+    modalSwitchSetter,
     t,
   };
 };

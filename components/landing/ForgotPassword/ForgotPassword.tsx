@@ -13,7 +13,7 @@ const ForgotPassword: React.FC = () => {
     formState,
     methods,
     handleClick,
-    showForgot,
+    modalSwitchSetter,
     t,
   } = useForgotPassword();
 
@@ -21,7 +21,7 @@ const ForgotPassword: React.FC = () => {
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
       <div className='bg-gradient-violet lg:bg-gradient-plain-violet h-full w-full lg:h-[29rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative lg:scale-105'>
         <Image
-          onClick={() => showForgot(false)}
+          onClick={() => modalSwitchSetter(false, 'showForgotPassword')}
           src='/assets/close-btn.png'
           alt='close button'
           width={200}

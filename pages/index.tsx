@@ -21,59 +21,44 @@ import { GetServerSideProps } from 'next';
 
 const Landing: React.FC = () => {
   const { showNotice, t } = useLanding();
-  const {
-    showLogIn,
-    showLog,
-    showCheck,
-    showCreate,
-    showCheckEmail,
-    showCreateAccount,
-    showVerifiedEmail,
-    showForgotPassword,
-    showCheckYourEmailPassword,
-    showCreateNewPassword,
-    showPasswordChangeSuccess,
-    showExpiredWarning,
-    showExpiredWarningEmailVerification,
-  } = useUiContext();
+  const { showModal, modalSwitchSetter } = useUiContext();
 
   showNotice();
 
   return (
     <>
-      {showCreateAccount && <CreateAccount show={showCreate} swap={showLog} />}
+      {showModal === 'showCreateAccount' && <CreateAccount />}
 
-      {showLogIn && <LogIn show={showLog} swap={showCreate} />}
+      {showModal === 'showLogIn' && <LogIn />}
 
-      {showCheckEmail && (
-        <VerifyEmail show={showCheck} showCreateAccount={showCreate} />
-      )}
+      {showModal === 'showCheckEmail' && <VerifyEmail />}
 
-      {showVerifiedEmail && <VerifiedEmail />}
+      {showModal === 'showVerifiedEmail' && <VerifiedEmail />}
 
-      {showForgotPassword && <ForgotPassword />}
+      {showModal === 'showForgotPassword' && <ForgotPassword />}
 
-      {showCheckYourEmailPassword && <CheckYourEmailPassword />}
+      {showModal === 'showCheckYourEmailPassword' && <CheckYourEmailPassword />}
 
-      {showCreateNewPassword && <CreateNewPassword />}
+      {showModal === 'showCreateNewPassword' && <CreateNewPassword />}
 
-      {showPasswordChangeSuccess && <PasswordChangeSuccess />}
+      {showModal === 'showPasswordChangeSuccess' && <PasswordChangeSuccess />}
 
-      {showExpiredWarning && <ExpiredWarning />}
+      {showModal === 'showExpiredWarning' && <ExpiredWarning />}
 
-      {showExpiredWarningEmailVerification && (
+      {showModal === 'showExpiredWarningEmailVerification' && (
         <ExpiredWarningEmailVerification />
       )}
 
       <div className='bg-background h-[40rem] pt-6 lg:h-[52rem]'>
-        <LandingHeader showCreateAccount={showCreate} showLogIn={showLog} />
+        <LandingHeader />
+
         <div className='flex flex-col items-center h-[25rem] lg:h-[43rem]'>
           <div className='text-cream lg:leading-[1.4] flex flex-col items-center text-2xl mt-36 font-montserrat lg:text-6xl lg:mt-60'>
             <h1>{t('Find any quote in')}</h1>
             <h1>{t('millions of movie lines')}</h1>
           </div>
           <button
-            onClick={() => showCreate(true)}
+            onClick={() => modalSwitchSetter(true, 'showCreateAccount')}
             className='mt-10 text-white bg-red py-2 lg:py-3 lg:text-xl px-4 lg:px-5 rounded-md hover:cursor-pointer hover:bg-red-hover'
           >
             {t('Get started')}

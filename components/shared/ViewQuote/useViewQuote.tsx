@@ -32,9 +32,7 @@ const useViewQuote = (
     try {
       createComment(data);
       queryClient.invalidateQueries('quote');
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
     reset();
   };
 
@@ -42,9 +40,7 @@ const useViewQuote = (
     try {
       await getLike(authUserId, quote_id);
       queryClient.invalidateQueries('quote');
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleBringScroll = () => {

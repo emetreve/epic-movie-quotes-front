@@ -9,12 +9,7 @@ const useLanding = () => {
   const router = useRouter();
   const { id, token, expires, signature, email, scope } = router.query;
 
-  const {
-    showVerified,
-    showSetNewPassword,
-    showLog,
-    showExpiredEmailVerification,
-  } = useUiContext();
+  const { modalSwitchSetter } = useUiContext();
 
   const { t } = useTranslation('landing');
 
@@ -22,9 +17,7 @@ const useLanding = () => {
     if (scope) {
       try {
         await googleAuth(googleAuthPath);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     }
     return false;
   };
@@ -51,20 +44,18 @@ const useLanding = () => {
 
       try {
         await verify(path);
-        showVerified(true);
+        modalSwitchSetter(true, 'showVerifiedEmail');
       } catch (error: any) {
-        console.log(error);
         if (error.response?.data?.token_expired) {
-          showExpiredEmailVerification(true);
-          console.log('expired');
+          modalSwitchSetter(true, 'showExpiredWarningEmailVerification');
         }
       }
     }
 
     if (token && email) {
       setTimeout(() => {
-        showLog(false);
-        showSetNewPassword(true);
+        modalSwitchSetter(false, 'showLogIn');
+        modalSwitchSetter(true, 'showCreateNewPassword');
       }, 500);
     }
   };

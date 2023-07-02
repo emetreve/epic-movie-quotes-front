@@ -8,7 +8,7 @@ import { PropsType } from './types';
 
 const ChangePassword: React.FC<PropsType> = ({ userName, authUserId }) => {
   const {
-    showUpdatePassword,
+    modalSwitchSetter,
     applyStylePass,
     applyStyleConfirm,
     pass,
@@ -48,7 +48,7 @@ const ChangePassword: React.FC<PropsType> = ({ userName, authUserId }) => {
             height={512}
             className='w-[0.9rem] h-auto ml-[2rem] my-5'
             onClick={() => {
-              showUpdatePassword(false);
+              modalSwitchSetter(false, 'showEditPassword');
             }}
           />
         </Link>
@@ -164,7 +164,7 @@ const ChangePassword: React.FC<PropsType> = ({ userName, authUserId }) => {
             <div className='flex justify-between mt-9'>
               <p
                 onClick={() => {
-                  showUpdatePassword(false);
+                  modalSwitchSetter(false, 'showEditPassword');
                 }}
                 className='ml-10 py-[0.4rem] text-input-gray hover:cursor-pointer'
               >

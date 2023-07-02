@@ -89,9 +89,7 @@ const useAddQuoteFromMovies = (movieId: string) => {
       try {
         await createQuote(formData);
         queryClient.invalidateQueries('movie');
-      } catch (error: any) {
-        console.log(error);
-      }
+      } catch (error) {}
     }
     reset();
     showAddQuoteFromMoviesPage(false);

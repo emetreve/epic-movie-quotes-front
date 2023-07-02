@@ -86,14 +86,11 @@ const useEditQuote = (
     );
 
     try {
-      const response = await updateQuote(formData, quote.id);
-      console.log(4444, response);
+      await updateQuote(formData, quote.id);
       queryClient.invalidateQueries('movie').then(() => {
         setWhichQuote(null);
       });
-    } catch (error: any) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return {

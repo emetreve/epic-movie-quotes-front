@@ -18,12 +18,9 @@ const Profile = () => {
   const {
     logged,
     user,
-    showEditName,
-    showUpdateName,
+    modalSwitchSetter,
     showSuccess,
     setShowSuccess,
-    showUpdatePassword,
-    showEditPassword,
     showUsernameInput,
     setShowUsernameInput,
     methods,
@@ -51,23 +48,22 @@ const Profile = () => {
     handleCancelLg,
     handleOutsideClick,
     handleBack,
-    showUpdateEmail,
-    showEditEmail,
     setShowEmailInput,
     showEmailInput,
     emailSuccess,
     setEmailSuccess,
+    showModal,
     t,
   } = useProfile();
 
   if (logged) {
     return (
       <>
-        {showEditName && (
+        {showModal === 'showEditName' && (
           <ChangeName userName={user.name} authUserId={user.id} />
         )}
 
-        {showEditEmail && (
+        {showModal === 'showEditEmail' && (
           <ChangeEmail
             setEmailSuccess={setEmailSuccess}
             userName={user.name}
@@ -75,7 +71,7 @@ const Profile = () => {
           />
         )}
 
-        {showEditPassword && (
+        {showModal === 'showEditPassword' && (
           <ChangePassword userName={user.name} authUserId={user.id} />
         )}
 
@@ -160,7 +156,7 @@ const Profile = () => {
                       />
                       <p
                         onClick={() => {
-                          showUpdateName(true);
+                          modalSwitchSetter(true, 'showEditName');
                         }}
                         className='absolute w-fit bottom-[1.2rem] text-sm text-input-gray h-5 hover:cursor-pointer block right-0'
                       >
@@ -182,7 +178,7 @@ const Profile = () => {
                       />
                       <p
                         onClick={() => {
-                          showUpdateEmail(true);
+                          modalSwitchSetter(true, 'showEditEmail');
                         }}
                         className={`absolute ${
                           user.is_google_user && 'hidden'
@@ -213,7 +209,7 @@ const Profile = () => {
                         />
                         <p
                           onClick={() => {
-                            showUpdatePassword(true);
+                            modalSwitchSetter(true, 'showEditPassword');
                           }}
                           className='absolute w-fit bottom-[1.2rem] text-sm text-input-gray h-5 hover:cursor-pointer block right-0'
                         >

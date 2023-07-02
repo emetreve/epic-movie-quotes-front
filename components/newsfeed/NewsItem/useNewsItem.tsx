@@ -31,18 +31,14 @@ const useNewsItem = () => {
         );
         setQuotesData(updatedQuotes);
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
     reset();
   };
 
   const handleLike = async (authUserId: number, quote_id: number) => {
     try {
       await getLike(authUserId, quote_id);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return { register, handleSubmit, onSubmit, handleLike, t };

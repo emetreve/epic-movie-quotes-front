@@ -16,12 +16,10 @@ const Header: React.FC<PropsType> = ({
   const {
     handleLogout,
     t,
-    showBrugerMenu,
-    showBurger,
+    modalSwitchSetter,
     handleNavigation,
     router,
-    showSearchMobile,
-    showSearchMob,
+    showModal,
     toggleNotifications,
     showNotifications,
     notifications,
@@ -62,7 +60,7 @@ const Header: React.FC<PropsType> = ({
       )}
 
       <div onClick={handleOutsideClick} className='fixed w-full z-[40]'>
-        {!showSearchMobile && (
+        {showModal !== 'showSearchMobile' && (
           <div className='flex relative lg:hidden justify-between items-center py-6 text-xs lg:text-base lg:px-16 bg-violet'>
             <Image
               src='/assets/burger-menu.png'
@@ -71,7 +69,7 @@ const Header: React.FC<PropsType> = ({
               height={96}
               className='lg:hidden inline h-5 w-auto hover:cursor-pointer px-7'
               onClick={() => {
-                showBurger(true);
+                modalSwitchSetter(true, 'showBrugerMenu');
               }}
             />
             <div
@@ -79,7 +77,7 @@ const Header: React.FC<PropsType> = ({
                 event.stopPropagation();
               }}
               className={`${
-                !showBrugerMenu && 'hidden'
+                showModal !== 'showBrugerMenu' && 'hidden'
               } w-[20rem] absolute top-0 h-[37rem] z-50 bg-profile-dark-blue rounded-lg shadow-lg px-7 pb-8 pt-6`}
             >
               <div className='flex flex-row mt-8 items-center'>
@@ -163,7 +161,7 @@ const Header: React.FC<PropsType> = ({
                   height={96}
                   className='lg:hidden inline ml-2 h-5 w-auto hover:cursor-pointer'
                   onClick={() => {
-                    showSearchMob(true);
+                    modalSwitchSetter(true, 'showSearchMobile');
                   }}
                 />
               )}

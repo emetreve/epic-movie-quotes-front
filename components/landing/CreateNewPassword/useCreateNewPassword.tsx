@@ -10,8 +10,7 @@ import { useTranslation } from 'next-i18next';
 const useCreateNewPassword = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [hidePasswordConfirm, setHidePasswordConfirm] = useState(true);
-  const { showSetNewPassword, showLog, showPasswordSuccess, showExpired } =
-    useUiContext();
+  const { modalSwitchSetter } = useUiContext();
   const router = useRouter();
   const { t } = useTranslation('landing');
 
@@ -59,7 +58,7 @@ const useCreateNewPassword = () => {
         query: {},
       });
       setTimeout(() => {
-        showPasswordSuccess(true);
+        modalSwitchSetter(true, 'showPasswordChangeSuccess');
       }, 500);
     } catch (error: any) {
       router.push({
@@ -67,8 +66,8 @@ const useCreateNewPassword = () => {
         query: {},
       });
       setTimeout(() => {
-        showSetNewPassword(false);
-        showExpired(true);
+        modalSwitchSetter(false, 'showCreateNewPassword');
+        modalSwitchSetter(true, 'showExpiredWarning');
       }, 500);
     }
   };
@@ -85,7 +84,7 @@ const useCreateNewPassword = () => {
       query: {},
     });
     setTimeout(() => {
-      showSetNewPassword(false);
+      modalSwitchSetter(false, 'showCreateNewPassword');
     }, 500);
   };
 
@@ -95,8 +94,8 @@ const useCreateNewPassword = () => {
       query: {},
     });
     setTimeout(() => {
-      showSetNewPassword(false);
-      showLog(true);
+      modalSwitchSetter(false, 'showCreateNewPassword');
+      modalSwitchSetter(true, 'showLogIn');
     }, 500);
   };
 

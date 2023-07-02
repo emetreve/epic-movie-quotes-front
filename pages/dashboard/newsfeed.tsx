@@ -22,18 +22,16 @@ const Newsfeed = () => {
     handleSubmit,
     onSubmit,
     searchedQuotes,
-    showSearchMobile,
-    showSearchMob,
-    showAddQuote,
-    showAddNewQuote,
+    modalSwitchSetter,
     observerRef,
+    showModal,
     observerRefSearch,
   } = useNewsFeed();
 
   if (logged) {
     return (
       <>
-        {showSearchMobile && (
+        {showModal === 'showSearchMobile' && (
           <div className='lg:hidden bg-gradient-violet fixed h-screen w-screen z-[50]'>
             <div className='pt-6 px-4 flex flex-row items-center border-b border-gray-700 pb-6'>
               <Image
@@ -43,7 +41,7 @@ const Newsfeed = () => {
                 height={96}
                 className='inline ml-4 w-4 h-auto hover:cursor-pointer'
                 onClick={() => {
-                  showSearchMob(false);
+                  modalSwitchSetter(false, 'showSearchMobile');
                 }}
               />
               <form onSubmit={handleSubmit(onSubmit)} className='w-full'>
@@ -78,7 +76,7 @@ const Newsfeed = () => {
             />
           </div>
 
-          {showAddNewQuote && (
+          {showModal === 'showAddNewQuote' && (
             <AddNewQuote
               userName={user.name}
               avatar={user.avatar}
@@ -87,7 +85,7 @@ const Newsfeed = () => {
           )}
           <div
             onClick={() => {
-              showAddQuote(true);
+              modalSwitchSetter(true, 'showAddNewQuote');
             }}
             className='lg:hidden hover:cursor-pointer flex px-7 py-8 items-center'
           >
@@ -115,7 +113,7 @@ const Newsfeed = () => {
                   >
                     <div
                       onClick={() => {
-                        showAddQuote(true);
+                        modalSwitchSetter(true, 'showAddNewQuote');
                       }}
                       className={`${
                         showSearchLg ? 'w-fit pr-3' : 'w-[82%]'

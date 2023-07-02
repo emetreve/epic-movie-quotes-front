@@ -17,10 +17,8 @@ const useHeader = (authUserId: number) => {
   const [editQuoteData, setEditQuoteData] = useState(null);
 
   const {
-    showBrugerMenu,
-    showBurger,
-    showSearchMobile,
-    showSearchMob,
+    showModal,
+    modalSwitchSetter,
     setShowLangDropdown,
     showLangDropdown,
     showNotifications,
@@ -43,14 +41,12 @@ const useHeader = (authUserId: number) => {
     try {
       await logOut();
       router.push('/');
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleNavigation = (address: string) => {
     const path = router.asPath;
-    showBurger(false);
+    modalSwitchSetter(false, 'showBrugerMenu');
     if (path.includes(address) && !path.includes(`${address}/`)) {
       return;
     }
@@ -79,9 +75,7 @@ const useHeader = (authUserId: number) => {
   const handleMarkNotificationsRead = () => {
     try {
       markNotifications(authUserId);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
     queryClient.invalidateQueries('notifications');
   };
 
@@ -89,9 +83,7 @@ const useHeader = (authUserId: number) => {
     try {
       markNotification(notificationId);
       queryClient.invalidateQueries('notifications');
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleNotificationClicked = (
@@ -122,12 +114,10 @@ const useHeader = (authUserId: number) => {
   return {
     handleLogout,
     t,
-    showBrugerMenu,
-    showBurger,
     handleNavigation,
     router,
-    showSearchMobile,
-    showSearchMob,
+    showModal,
+    modalSwitchSetter,
     toggleNotifications,
     showNotifications,
     setShowNotifications,

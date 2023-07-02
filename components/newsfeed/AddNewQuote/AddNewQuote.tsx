@@ -5,7 +5,6 @@ import { Movie } from '@/types';
 
 const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
   const {
-    showAddQuote,
     movies,
     locale,
     selectedMovie,
@@ -24,6 +23,7 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
     handleDrop,
     handleDragOver,
     imageError,
+    modalSwitchSetter,
     t,
     translate,
   } = useAddNewQuote();
@@ -47,7 +47,7 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
             height={512}
             className='w-[0.9rem] h-[0.9rem] hover:cursor-pointer absolute right-8'
             onClick={() => {
-              showAddQuote(false);
+              modalSwitchSetter(false, 'showAddNewQuote');
             }}
           />
         </div>

@@ -3,7 +3,7 @@ import { useUiContext } from '@/store';
 import { useTranslation } from 'next-i18next';
 
 const useVerifiedEmail = () => {
-  const { showVerified, showLog } = useUiContext();
+  const { modalSwitchSetter } = useUiContext();
 
   const router = useRouter();
 
@@ -16,7 +16,7 @@ const useVerifiedEmail = () => {
       query: {},
     });
     setTimeout(() => {
-      showVerified(false);
+      modalSwitchSetter(false, 'showVerifiedEmail');
     }, 500);
   };
 
@@ -26,8 +26,8 @@ const useVerifiedEmail = () => {
       query: {},
     });
     setTimeout(() => {
-      showVerified(false);
-      showLog(true);
+      modalSwitchSetter(false, 'showVerifiedEmail');
+      modalSwitchSetter(true, 'showLogIn');
     }, 1000);
   };
 

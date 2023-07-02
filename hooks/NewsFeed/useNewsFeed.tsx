@@ -20,12 +20,8 @@ const useNewsFeed = () => {
   const [likeReceived, setLikeReveiced] = useState<Quote>();
 
   const {
-    showBrugerMenu,
-    showBurger,
-    showSearchMobile,
-    showSearchMob,
-    showAddQuote,
-    showAddNewQuote,
+    modalSwitchSetter,
+    showModal,
     setShowLangDropdown,
     showLangDropdown,
     showNotifications,
@@ -158,8 +154,8 @@ const useNewsFeed = () => {
     if (showSearchLg) {
       setShowSearchLg(false);
     }
-    if (showBrugerMenu) {
-      showBurger(false);
+    if (showModal === 'showBrugerMenu') {
+      modalSwitchSetter(false, 'showBrugerMenu');
     }
     if (showLangDropdown) {
       setShowLangDropdown(!showLangDropdown);
@@ -181,9 +177,7 @@ const useNewsFeed = () => {
       setCurrentSearchPage(response.data.pagination.current_page);
       setLastSearchPage(response.data.pagination.last_page);
       return response.data;
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleFetchNewSearchQuotes = async (search: string, page: number) => {
@@ -198,9 +192,7 @@ const useNewsFeed = () => {
       } else {
         setSearchedQuotes([...searchedQuotes, ...newQuotesData.quotes]);
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleObserverSearch = useCallback(
@@ -254,8 +246,8 @@ const useNewsFeed = () => {
       handleFetchNewSearchQuotes(data.search, 1);
     }, 500);
     reset();
-    if (showSearchMobile) {
-      showSearchMob(false);
+    if (showModal === 'showSearchMobile') {
+      modalSwitchSetter(false, 'showSearchMobile');
     }
   };
 
@@ -274,10 +266,8 @@ const useNewsFeed = () => {
     handleSubmit,
     onSubmit,
     searchedQuotes,
-    showSearchMobile,
-    showSearchMob,
-    showAddQuote,
-    showAddNewQuote,
+    modalSwitchSetter,
+    showModal,
     observerRef,
     observerRefSearch,
   };

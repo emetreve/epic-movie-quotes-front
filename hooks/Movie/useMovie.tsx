@@ -30,8 +30,8 @@ const useMovie = () => {
     showAddQuoteFromMovies,
     showEditMovie,
     showMovieEdit,
-    showBrugerMenu,
-    showBurger,
+    showModal,
+    modalSwitchSetter,
     setShowLangDropdown,
     showLangDropdown,
     showNotifications,
@@ -82,14 +82,12 @@ const useMovie = () => {
     try {
       await deleteMovie(id);
       push('/dashboard/movies');
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleOutsideClick = () => {
-    if (showBrugerMenu) {
-      showBurger(false);
+    if (showModal === 'showBrugerMenu') {
+      modalSwitchSetter(false, 'showBrugerMenu');
     }
     if (whichQuoteModalIsOpen) {
       setWhichQuoteModalIsOpen(null);

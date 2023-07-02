@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next';
 
 const useExpiredWarningEmailVerification = () => {
   const router = useRouter();
-  const { showExpiredEmailVerification, showCheck } = useUiContext();
+  const { modalSwitchSetter } = useUiContext();
   const { id } = router.query;
   const { t } = useTranslation('landing');
   const { locale } = router;
@@ -16,7 +16,7 @@ const useExpiredWarningEmailVerification = () => {
       query: {},
     });
     setTimeout(() => {
-      showExpiredEmailVerification(false);
+      modalSwitchSetter(false, 'showExpiredWarningEmailVerification');
     }, 500);
   };
 
@@ -28,8 +28,8 @@ const useExpiredWarningEmailVerification = () => {
         query: {},
       });
       setTimeout(() => {
-        showExpiredEmailVerification(false);
-        showCheck(true);
+        modalSwitchSetter(false, 'showExpiredWarningEmailVerification');
+        modalSwitchSetter(true, 'showCheckEmail');
       }, 500);
     }
   };

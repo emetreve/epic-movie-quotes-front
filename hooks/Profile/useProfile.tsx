@@ -33,14 +33,8 @@ const useProfile = () => {
   const { logged, user } = useCheckIfLoggedIn();
 
   const {
-    showEditName,
-    showUpdateName,
-    showUpdatePassword,
-    showEditPassword,
-    showBrugerMenu,
-    showBurger,
-    showUpdateEmail,
-    showEditEmail,
+    modalSwitchSetter,
+    showModal,
     setShowLangDropdown,
     showLangDropdown,
     showNotifications,
@@ -60,9 +54,7 @@ const useProfile = () => {
         .then(() => {
           router.reload();
         });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -135,9 +127,7 @@ const useProfile = () => {
           query: { status: 'successful' },
         });
         setAvatarButtonTrigger(false);
-      } catch (error: any) {
-        console.log(error);
-      }
+      } catch (error: any) {}
     }
 
     for (const key in data) {
@@ -163,7 +153,6 @@ const useProfile = () => {
       setShowEmailInput(false);
       reset();
     } catch (error: any) {
-      console.log(error);
       if (
         error?.response?.data?.message === 'The email has already been taken.'
       ) {
@@ -205,9 +194,7 @@ const useProfile = () => {
           query: { status: 'success' },
         });
         setAvatarButtonTrigger(false);
-      } catch (error: any) {
-        console.log(error);
-      }
+      } catch (error) {}
     }
   };
 
@@ -224,8 +211,8 @@ const useProfile = () => {
   };
 
   const handleOutsideClick = () => {
-    if (showBrugerMenu) {
-      showBurger(false);
+    if (showModal === 'showBrugerMenu') {
+      modalSwitchSetter(false, 'showBrugerMenu');
     }
     if (showLangDropdown) {
       setShowLangDropdown(!showLangDropdown);
@@ -239,12 +226,9 @@ const useProfile = () => {
   return {
     logged,
     user,
-    showEditName,
-    showUpdateName,
+    modalSwitchSetter,
     showSuccess,
     setShowSuccess,
-    showUpdatePassword,
-    showEditPassword,
     showUsernameInput,
     setShowUsernameInput,
     methods,
@@ -272,14 +256,13 @@ const useProfile = () => {
     handleCancelLg,
     handleOutsideClick,
     handleBack,
-    showUpdateEmail,
-    showEditEmail,
     setShowEmailInput,
     showEmailInput,
     emailSuccess,
     setEmailSuccess,
     setShowLangDropdown,
     showLangDropdown,
+    showModal,
     t,
   };
 };

@@ -176,9 +176,7 @@ const useEditMovie = (
           showMovieEdit(false);
         });
       });
-    } catch (error: any) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return {

@@ -3,7 +3,7 @@ import { useUiContext } from '@/store';
 import { useTranslation } from 'next-i18next';
 
 const usePasswordChangeSuccess = () => {
-  const { showPasswordSuccess, showLog, showSetNewPassword } = useUiContext();
+  const { modalSwitchSetter } = useUiContext();
 
   const router = useRouter();
   const { t } = useTranslation('landing');
@@ -14,8 +14,8 @@ const usePasswordChangeSuccess = () => {
       query: {},
     });
     setTimeout(() => {
-      showSetNewPassword(false);
-      showPasswordSuccess(false);
+      modalSwitchSetter(false, 'showCreateNewPassword');
+      modalSwitchSetter(false, 'showPasswordChangeSuccess');
     }, 500);
   };
 
@@ -25,9 +25,9 @@ const usePasswordChangeSuccess = () => {
       query: {},
     });
     setTimeout(() => {
-      showPasswordSuccess(false);
-      showSetNewPassword(false);
-      showLog(true);
+      modalSwitchSetter(false, 'showPasswordChangeSuccess');
+      modalSwitchSetter(false, 'showCreateNewPassword');
+      modalSwitchSetter(true, 'showLogIn');
     }, 500);
   };
 

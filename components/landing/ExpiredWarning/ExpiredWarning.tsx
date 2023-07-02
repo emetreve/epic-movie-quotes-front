@@ -2,14 +2,14 @@ import Image from 'next/image';
 import useExpiredWarning from './useExpiredWarning';
 
 const ExpiredWarning = () => {
-  const { showExpired, showForgot, locale, t } = useExpiredWarning();
+  const { modalSwitchSetter, locale, t } = useExpiredWarning();
 
   return (
     <div className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'>
       <div className='bg-gradient-violet lg:bg-gradient-plain-violet h-full w-full lg:h-[26rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative lg:scale-105'>
         <Image
           onClick={() => {
-            showExpired(false);
+            modalSwitchSetter(false, 'showExpiredWarning');
           }}
           src='/assets/close-btn.png'
           alt='close button'
@@ -33,8 +33,8 @@ const ExpiredWarning = () => {
           </p>
           <button
             onClick={() => {
-              showExpired(false);
-              showForgot(true);
+              modalSwitchSetter(false, 'showExpiredWarning');
+              modalSwitchSetter(true, 'showForgotPassword');
             }}
             className={`${
               locale === 'en' ? 'px-16 lg:px-[7.4rem] ' : 'px-7 lg:px-[3.5rem] '

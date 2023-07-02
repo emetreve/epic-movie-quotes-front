@@ -165,9 +165,7 @@ const useAddNewMovie = (refetchMovies: Function) => {
             reset();
           });
         });
-      } catch (error: any) {
-        console.log(error);
-      }
+      } catch (error) {}
     }
   };
 

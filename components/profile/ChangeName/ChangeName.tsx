@@ -8,7 +8,7 @@ import { PropsType } from './types';
 
 const ChangeName: React.FC<PropsType> = ({ userName, authUserId }) => {
   const {
-    showUpdateName,
+    modalSwitchSetter,
     applyInputStyle,
     register,
     formState,
@@ -43,7 +43,7 @@ const ChangeName: React.FC<PropsType> = ({ userName, authUserId }) => {
             height={512}
             className='w-[0.9rem] h-auto ml-[2rem] my-5'
             onClick={() => {
-              showUpdateName(false);
+              modalSwitchSetter(false, 'showEditName');
             }}
           />
         </Link>
@@ -103,7 +103,7 @@ const ChangeName: React.FC<PropsType> = ({ userName, authUserId }) => {
             <div className='flex justify-between mt-9'>
               <p
                 onClick={() => {
-                  showUpdateName(false);
+                  modalSwitchSetter(false, 'showEditName');
                 }}
                 className='ml-10 py-[0.4rem] text-input-gray hover:cursor-pointer'
               >

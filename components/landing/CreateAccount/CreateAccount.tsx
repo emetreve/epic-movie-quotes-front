@@ -1,10 +1,9 @@
 import { FormProvider } from 'react-hook-form';
-import { PropsType } from './types';
 import Image from 'next/image';
 import useCreateAccount from './useCreateAccount';
 import { Error, ValidationIcons } from '@/components';
 
-const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
+const CreateAccount = () => {
   const {
     handleSubmit,
     onSubmit,
@@ -19,12 +18,13 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
     formState,
     methods,
     handleGoogle,
+    modalSwitchSetter,
     t,
   } = useCreateAccount();
 
   return (
     <div
-      onClick={() => show(false)}
+      onClick={() => modalSwitchSetter(false, 'showCreateAccount')}
       className='scrollbar-hide h-screen w-screen fixed backdrop-blur-sm bg-partly-transparent-dark text-white flex items-center justify-center top-0 left-0 z-50'
     >
       <div
@@ -32,7 +32,7 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
         className='bg-gradient-violet lg:bg-gradient-plain-violet h-full w-full lg:h-[45rem] lg:w-[38rem] lg:rounded-2xl lg:px-[5rem] relative'
       >
         <Image
-          onClick={() => show(false)}
+          onClick={() => modalSwitchSetter(false, 'showCreateAccount')}
           src='/assets/close-btn.png'
           alt='close button'
           width={200}
@@ -257,8 +257,8 @@ const CreateAccount: React.FC<PropsType> = ({ show, swap }) => {
           </p>
           <p
             onClick={() => {
-              show(false);
-              swap(true);
+              modalSwitchSetter(false, 'showCreateAccount');
+              modalSwitchSetter(true, 'showLogIn');
             }}
             className='inline-block ml-2 text-sm text-blue-400 underline hover:cursor-pointer'
           >
