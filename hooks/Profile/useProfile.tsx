@@ -33,10 +33,7 @@ const useProfile = () => {
   const { logged, user } = useCheckIfLoggedIn();
 
   const {
-    showUpdateName,
-    showUpdatePassword,
-    showBurger,
-    showUpdateEmail,
+    modalSwitchSetter,
     showModal,
     setShowLangDropdown,
     showLangDropdown,
@@ -215,7 +212,7 @@ const useProfile = () => {
 
   const handleOutsideClick = () => {
     if (showModal === 'showBrugerMenu') {
-      showBurger(false);
+      modalSwitchSetter(false, 'showBrugerMenu');
     }
     if (showLangDropdown) {
       setShowLangDropdown(!showLangDropdown);
@@ -229,10 +226,9 @@ const useProfile = () => {
   return {
     logged,
     user,
-    showUpdateName,
+    modalSwitchSetter,
     showSuccess,
     setShowSuccess,
-    showUpdatePassword,
     showUsernameInput,
     setShowUsernameInput,
     methods,
@@ -260,7 +256,6 @@ const useProfile = () => {
     handleCancelLg,
     handleOutsideClick,
     handleBack,
-    showUpdateEmail,
     setShowEmailInput,
     showEmailInput,
     emailSuccess,

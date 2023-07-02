@@ -12,7 +12,7 @@ const useChangePassword = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [hidePasswordConfirm, setHidePasswordConfirm] = useState(true);
   const router = useRouter();
-  const { showUpdatePassword, showBurger, showModal } = useUiContext();
+  const { modalSwitchSetter, showModal } = useUiContext();
 
   const { t } = useTranslation('profile');
 
@@ -60,7 +60,7 @@ const useChangePassword = () => {
         password_confirmation: pass_confirmation,
       });
       setShowConfirmModal(false);
-      showUpdatePassword(false);
+      modalSwitchSetter(false, 'showEditPassword');
       router.push({
         pathname: router.pathname,
         query: { status: 'success' },
@@ -70,12 +70,12 @@ const useChangePassword = () => {
 
   const handleOutsideClick = () => {
     if (showModal === 'showBrugerMenu') {
-      showBurger(false);
+      modalSwitchSetter(false, 'showBrugerMenu');
     }
   };
 
   return {
-    showUpdatePassword,
+    modalSwitchSetter,
     applyStylePass,
     applyStyleConfirm,
     methods,

@@ -9,10 +9,9 @@ const useChangeName = () => {
   const [showNameForm, setShowNameForm] = useState(true);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const router = useRouter();
-  const { showUpdateName } = useUiContext();
   const { t } = useTranslation('profile');
 
-  const { showBurger, showModal } = useUiContext();
+  const { modalSwitchSetter, showModal } = useUiContext();
 
   const methods = useForm({
     defaultValues: {
@@ -49,7 +48,7 @@ const useChangeName = () => {
     try {
       await updateUser({ username: username });
       setShowConfirmModal(false);
-      showUpdateName(false);
+      modalSwitchSetter(false, 'showEditName');
       router.push({
         pathname: router.pathname,
         query: { status: 'success' },
@@ -68,12 +67,12 @@ const useChangeName = () => {
 
   const handleOutsideClick = () => {
     if (showModal === 'showBrugerMenu') {
-      showBurger(false);
+      modalSwitchSetter(false, 'showBrugerMenu');
     }
   };
 
   return {
-    showUpdateName,
+    modalSwitchSetter,
     applyInputStyle,
     methods,
     register,

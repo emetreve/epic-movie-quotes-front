@@ -23,7 +23,7 @@ const useAddNewQuote = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [userId, setUserId] = useState('');
 
-  const { showAddQuote, showMovieDropdown, setShowMovieDropdown } =
+  const { modalSwitchSetter, showMovieDropdown, setShowMovieDropdown } =
     useUiContext();
   const { locale } = useRouter() as NextRouter & { locale: 'en' | 'ka' };
   const { t } = useTranslation('profile');
@@ -128,11 +128,11 @@ const useAddNewQuote = () => {
       } catch (error) {}
     }
     reset();
-    showAddQuote(false);
+    modalSwitchSetter(false, 'showAddNewQuote');
   };
 
   return {
-    showAddQuote,
+    modalSwitchSetter,
     movies,
     locale,
     selectedMovie,

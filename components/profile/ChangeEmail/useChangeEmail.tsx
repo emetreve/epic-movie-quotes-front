@@ -5,7 +5,7 @@ import { updateUser } from '@/services';
 import { useRouter } from 'next/router';
 
 const useChangeEmail = (setEmailSuccess: Function) => {
-  const { showBurger, showModal, showUpdateEmail } = useUiContext();
+  const { modalSwitchSetter, showModal } = useUiContext();
 
   const router = useRouter();
   const locale = router.locale;
@@ -29,7 +29,7 @@ const useChangeEmail = (setEmailSuccess: Function) => {
 
   const handleOutsideClick = () => {
     if (showModal === 'showBrugerMenu') {
-      showBurger(false);
+      modalSwitchSetter(false, 'showBrugerMenu');
     }
   };
 
@@ -46,7 +46,7 @@ const useChangeEmail = (setEmailSuccess: Function) => {
   const onSubmit = async () => {
     try {
       await updateUser({ email: email, locale: locale });
-      showUpdateEmail(false);
+      modalSwitchSetter(false, 'showEditEmail');
       setEmailSuccess(true);
       router.push({
         pathname: router.pathname,
@@ -64,7 +64,7 @@ const useChangeEmail = (setEmailSuccess: Function) => {
 
   return {
     handleOutsideClick,
-    showUpdateEmail,
+    modalSwitchSetter,
     t,
     register,
     handleSubmit,

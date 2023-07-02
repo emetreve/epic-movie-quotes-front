@@ -18,10 +18,9 @@ const Profile = () => {
   const {
     logged,
     user,
-    showUpdateName,
+    modalSwitchSetter,
     showSuccess,
     setShowSuccess,
-    showUpdatePassword,
     showUsernameInput,
     setShowUsernameInput,
     methods,
@@ -49,7 +48,6 @@ const Profile = () => {
     handleCancelLg,
     handleOutsideClick,
     handleBack,
-    showUpdateEmail,
     setShowEmailInput,
     showEmailInput,
     emailSuccess,
@@ -158,7 +156,7 @@ const Profile = () => {
                       />
                       <p
                         onClick={() => {
-                          showUpdateName(true);
+                          modalSwitchSetter(true, 'showEditName');
                         }}
                         className='absolute w-fit bottom-[1.2rem] text-sm text-input-gray h-5 hover:cursor-pointer block right-0'
                       >
@@ -180,7 +178,7 @@ const Profile = () => {
                       />
                       <p
                         onClick={() => {
-                          showUpdateEmail(true);
+                          modalSwitchSetter(true, 'showEditEmail');
                         }}
                         className={`absolute ${
                           user.is_google_user && 'hidden'
@@ -211,7 +209,7 @@ const Profile = () => {
                         />
                         <p
                           onClick={() => {
-                            showUpdatePassword(true);
+                            modalSwitchSetter(true, 'showEditPassword');
                           }}
                           className='absolute w-fit bottom-[1.2rem] text-sm text-input-gray h-5 hover:cursor-pointer block right-0'
                         >

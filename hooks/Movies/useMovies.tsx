@@ -14,7 +14,7 @@ const useMovies = () => {
   const [searchResult, setSearchResult] = useState<MovieForMoviesPage[]>([]);
   const {
     showModal,
-    showBurger,
+    modalSwitchSetter,
     showCreateMovie,
     showAddMovie,
     setShowLangDropdown,
@@ -53,7 +53,7 @@ const useMovies = () => {
 
   const handleOutsideClick = () => {
     if (showModal === 'showBrugerMenu') {
-      showBurger(false);
+      modalSwitchSetter(false, 'showBrugerMenu');
     }
 
     if (showSearchLg) {

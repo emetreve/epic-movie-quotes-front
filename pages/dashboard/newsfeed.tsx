@@ -22,8 +22,7 @@ const Newsfeed = () => {
     handleSubmit,
     onSubmit,
     searchedQuotes,
-    showSearchMob,
-    showAddQuote,
+    modalSwitchSetter,
     observerRef,
     showModal,
     observerRefSearch,
@@ -42,7 +41,7 @@ const Newsfeed = () => {
                 height={96}
                 className='inline ml-4 w-4 h-auto hover:cursor-pointer'
                 onClick={() => {
-                  showSearchMob(false);
+                  modalSwitchSetter(false, 'showSearchMobile');
                 }}
               />
               <form onSubmit={handleSubmit(onSubmit)} className='w-full'>
@@ -86,7 +85,7 @@ const Newsfeed = () => {
           )}
           <div
             onClick={() => {
-              showAddQuote(true);
+              modalSwitchSetter(true, 'showAddNewQuote');
             }}
             className='lg:hidden hover:cursor-pointer flex px-7 py-8 items-center'
           >
@@ -114,7 +113,7 @@ const Newsfeed = () => {
                   >
                     <div
                       onClick={() => {
-                        showAddQuote(true);
+                        modalSwitchSetter(true, 'showAddNewQuote');
                       }}
                       className={`${
                         showSearchLg ? 'w-fit pr-3' : 'w-[82%]'

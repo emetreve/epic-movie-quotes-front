@@ -17,9 +17,8 @@ const useHeader = (authUserId: number) => {
   const [editQuoteData, setEditQuoteData] = useState(null);
 
   const {
-    showBurger,
     showModal,
-    showSearchMob,
+    modalSwitchSetter,
     setShowLangDropdown,
     showLangDropdown,
     showNotifications,
@@ -47,7 +46,7 @@ const useHeader = (authUserId: number) => {
 
   const handleNavigation = (address: string) => {
     const path = router.asPath;
-    showBurger(false);
+    modalSwitchSetter(false, 'showBrugerMenu');
     if (path.includes(address) && !path.includes(`${address}/`)) {
       return;
     }
@@ -115,11 +114,10 @@ const useHeader = (authUserId: number) => {
   return {
     handleLogout,
     t,
-    showBurger,
     handleNavigation,
     router,
     showModal,
-    showSearchMob,
+    modalSwitchSetter,
     toggleNotifications,
     showNotifications,
     setShowNotifications,

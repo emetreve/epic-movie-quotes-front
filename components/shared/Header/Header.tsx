@@ -16,11 +16,10 @@ const Header: React.FC<PropsType> = ({
   const {
     handleLogout,
     t,
-    showBurger,
+    modalSwitchSetter,
     handleNavigation,
     router,
     showModal,
-    showSearchMob,
     toggleNotifications,
     showNotifications,
     notifications,
@@ -70,7 +69,7 @@ const Header: React.FC<PropsType> = ({
               height={96}
               className='lg:hidden inline h-5 w-auto hover:cursor-pointer px-7'
               onClick={() => {
-                showBurger(true);
+                modalSwitchSetter(true, 'showBrugerMenu');
               }}
             />
             <div
@@ -162,7 +161,7 @@ const Header: React.FC<PropsType> = ({
                   height={96}
                   className='lg:hidden inline ml-2 h-5 w-auto hover:cursor-pointer'
                   onClick={() => {
-                    showSearchMob(true);
+                    modalSwitchSetter(true, 'showSearchMobile');
                   }}
                 />
               )}

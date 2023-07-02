@@ -20,9 +20,7 @@ const useNewsFeed = () => {
   const [likeReceived, setLikeReveiced] = useState<Quote>();
 
   const {
-    showBurger,
-    showSearchMob,
-    showAddQuote,
+    modalSwitchSetter,
     showModal,
     setShowLangDropdown,
     showLangDropdown,
@@ -157,7 +155,7 @@ const useNewsFeed = () => {
       setShowSearchLg(false);
     }
     if (showModal === 'showBrugerMenu') {
-      showBurger(false);
+      modalSwitchSetter(false, 'showBrugerMenu');
     }
     if (showLangDropdown) {
       setShowLangDropdown(!showLangDropdown);
@@ -249,7 +247,7 @@ const useNewsFeed = () => {
     }, 500);
     reset();
     if (showModal === 'showSearchMobile') {
-      showSearchMob(false);
+      modalSwitchSetter(false, 'showSearchMobile');
     }
   };
 
@@ -268,8 +266,7 @@ const useNewsFeed = () => {
     handleSubmit,
     onSubmit,
     searchedQuotes,
-    showSearchMob,
-    showAddQuote,
+    modalSwitchSetter,
     showModal,
     observerRef,
     observerRefSearch,
