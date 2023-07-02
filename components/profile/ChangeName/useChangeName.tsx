@@ -12,7 +12,7 @@ const useChangeName = () => {
   const { showUpdateName } = useUiContext();
   const { t } = useTranslation('profile');
 
-  const { showBurger, showBrugerMenu } = useUiContext();
+  const { showBurger, showModal } = useUiContext();
 
   const methods = useForm({
     defaultValues: {
@@ -68,7 +68,7 @@ const useChangeName = () => {
   };
 
   const handleOutsideClick = () => {
-    if (showBrugerMenu) {
+    if (showModal === 'showBrugerMenu') {
       showBurger(false);
     }
   };

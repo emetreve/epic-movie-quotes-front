@@ -12,7 +12,7 @@ const useChangePassword = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [hidePasswordConfirm, setHidePasswordConfirm] = useState(true);
   const router = useRouter();
-  const { showUpdatePassword, showBurger, showBrugerMenu } = useUiContext();
+  const { showUpdatePassword, showBurger, showModal } = useUiContext();
 
   const { t } = useTranslation('profile');
 
@@ -71,7 +71,7 @@ const useChangePassword = () => {
   };
 
   const handleOutsideClick = () => {
-    if (showBrugerMenu) {
+    if (showModal === 'showBrugerMenu') {
       showBurger(false);
     }
   };

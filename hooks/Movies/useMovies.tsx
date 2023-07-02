@@ -13,7 +13,7 @@ const useMovies = () => {
   const [focused, setFocused] = useState(false);
   const [searchResult, setSearchResult] = useState<MovieForMoviesPage[]>([]);
   const {
-    showBrugerMenu,
+    showModal,
     showBurger,
     showCreateMovie,
     showAddMovie,
@@ -52,7 +52,7 @@ const useMovies = () => {
   });
 
   const handleOutsideClick = () => {
-    if (showBrugerMenu) {
+    if (showModal === 'showBrugerMenu') {
       showBurger(false);
     }
 

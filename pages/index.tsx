@@ -21,47 +21,35 @@ import { GetServerSideProps } from 'next';
 
 const Landing: React.FC = () => {
   const { showNotice, t } = useLanding();
-  const {
-    showLogIn,
-    showLog,
-    showCheck,
-    showCreate,
-    showCheckEmail,
-    showCreateAccount,
-    showVerifiedEmail,
-    showForgotPassword,
-    showCheckYourEmailPassword,
-    showCreateNewPassword,
-    showPasswordChangeSuccess,
-    showExpiredWarning,
-    showExpiredWarningEmailVerification,
-  } = useUiContext();
+  const { showModal, showLog, showCheck, showCreate } = useUiContext();
 
   showNotice();
 
   return (
     <>
-      {showCreateAccount && <CreateAccount show={showCreate} swap={showLog} />}
+      {showModal === 'showCreateAccount' && (
+        <CreateAccount show={showCreate} swap={showLog} />
+      )}
 
-      {showLogIn && <LogIn show={showLog} swap={showCreate} />}
+      {showModal === 'showLogIn' && <LogIn show={showLog} swap={showCreate} />}
 
-      {showCheckEmail && (
+      {showModal === 'showCheckEmail' && (
         <VerifyEmail show={showCheck} showCreateAccount={showCreate} />
       )}
 
-      {showVerifiedEmail && <VerifiedEmail />}
+      {showModal === 'showVerifiedEmail' && <VerifiedEmail />}
 
-      {showForgotPassword && <ForgotPassword />}
+      {showModal === 'showForgotPassword' && <ForgotPassword />}
 
-      {showCheckYourEmailPassword && <CheckYourEmailPassword />}
+      {showModal === 'showCheckYourEmailPassword' && <CheckYourEmailPassword />}
 
-      {showCreateNewPassword && <CreateNewPassword />}
+      {showModal === 'showCreateNewPassword' && <CreateNewPassword />}
 
-      {showPasswordChangeSuccess && <PasswordChangeSuccess />}
+      {showModal === 'showPasswordChangeSuccess' && <PasswordChangeSuccess />}
 
-      {showExpiredWarning && <ExpiredWarning />}
+      {showModal === 'showExpiredWarning' && <ExpiredWarning />}
 
-      {showExpiredWarningEmailVerification && (
+      {showModal === 'showExpiredWarningEmailVerification' && (
         <ExpiredWarningEmailVerification />
       )}
 

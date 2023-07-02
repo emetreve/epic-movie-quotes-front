@@ -3,34 +3,19 @@ import { PropsType } from './types';
 
 const UiContext = createContext({
   showCheck: (show: boolean) => {},
-  showCheckEmail: false,
   showCreate: (show: boolean) => {},
-  showCreateAccount: false,
   showVerified: (show: boolean) => {},
-  showVerifiedEmail: false,
   showLog: (show: boolean) => {},
-  showLogIn: false,
   showForgot: (show: boolean) => {},
-  showForgotPassword: false,
   showCheckEmailPassword: (show: boolean) => {},
-  showCheckYourEmailPassword: false,
   showSetNewPassword: (show: boolean) => {},
-  showCreateNewPassword: false,
   showPasswordSuccess: (show: boolean) => {},
-  showPasswordChangeSuccess: false,
   showExpired: (show: boolean) => {},
-  showExpiredWarning: false,
   showExpiredEmailVerification: (show: boolean) => {},
-  showExpiredWarningEmailVerification: false,
-  showEditName: false,
   showUpdateName: (show: boolean) => {},
-  showEditPassword: false,
   showUpdatePassword: (show: boolean) => {},
-  showBrugerMenu: false,
   showBurger: (show: boolean) => {},
-  showSearchMobile: false,
   showSearchMob: (show: boolean) => {},
-  showAddNewQuote: false,
   showAddQuote: (show: boolean) => {},
   showMovieDropdown: false,
   setShowMovieDropdown: (newValue: boolean) => {},
@@ -40,150 +25,182 @@ const UiContext = createContext({
   showAddQuoteFromMoviesPage: (show: boolean) => {},
   showEditMovie: false,
   showMovieEdit: (show: boolean) => {},
-  showEditEmail: false,
   showUpdateEmail: (show: boolean) => {},
   showLangDropdown: false,
   setShowLangDropdown: (newValue: boolean) => {},
   showNotifications: false,
   setShowNotifications: (newValue: boolean) => {},
+  showModal: '',
 });
 
 export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
-  const [showCreateAccount, setShowCreateAccount] = useState(false);
-  const [showLogIn, setShowLogIg] = useState(false);
-  const [showCheckEmail, setShowCheckEmail] = useState(false);
-  const [showVerifiedEmail, setShowVerifiedEmail] = useState(false);
-  const [showForgotPassword, setShowForgotPassword] = useState(false);
-  const [showCheckYourEmailPassword, setShowCheckYourEmailPassword] =
-    useState(false);
-  const [showCreateNewPassword, setCreateNewPassword] = useState(false);
-  const [showPasswordChangeSuccess, setShowPasswordChangeSuccess] =
-    useState(false);
-  const [showExpiredWarning, setShowExpiredWarning] = useState(false);
-  const [
-    showExpiredWarningEmailVerification,
-    setShowExpiredWarningEmailVerification,
-  ] = useState(false);
-
-  const [showEditName, setShowEditName] = useState(false);
-  const [showEditPassword, setShowEditPassword] = useState(false);
-  const [showBrugerMenu, setShowBurgerMenu] = useState(false);
-  const [showSearchMobile, setShowSearchMobile] = useState(false);
-  const [showAddNewQuote, setShowAddNewQuote] = useState(false);
-  const [showMovieDropdown, setShowMovieDropdown] = useState(false);
+  const [showModal, setShowModal] = useState('');
 
   const [showCreateMovie, setShowCreateMovie] = useState(false);
   const [showAddQuoteFromMovies, setShowAddQuoteFromMovies] = useState(false);
   const [showEditMovie, setShowEditMovie] = useState(false);
-
-  const [showEditEmail, setShowEditEmail] = useState(false);
+  const [showMovieDropdown, setShowMovieDropdown] = useState(false);
   const [showLangDropdown, setShowLangDropdown] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
 
   const showCreate = (show: boolean) => {
-    setShowCreateAccount(show);
-    show
-      ? document.body.classList.add('hide-scrollbar')
-      : document.body.classList.remove('hide-scrollbar');
+    if (show) {
+      setShowModal('showCreateAccount');
+      document.body.classList.add('hide-scrollbar');
+    } else {
+      setShowModal('');
+      document.body.classList.remove('hide-scrollbar');
+    }
   };
 
   const showLog = (show: boolean) => {
-    setShowLogIg(show);
-    show
-      ? document.body.classList.add('hide-scrollbar')
-      : document.body.classList.remove('hide-scrollbar');
+    if (show) {
+      setShowModal('showLogIn');
+      document.body.classList.add('hide-scrollbar');
+    } else {
+      setShowModal('');
+      document.body.classList.remove('hide-scrollbar');
+    }
   };
 
   const showCheck = (show: boolean) => {
-    setShowCheckEmail(show);
-    show
-      ? document.body.classList.add('hide-scrollbar')
-      : document.body.classList.remove('hide-scrollbar');
+    if (show) {
+      setShowModal('showCheckEmail');
+      document.body.classList.add('hide-scrollbar');
+    } else {
+      setShowModal('');
+      document.body.classList.remove('hide-scrollbar');
+    }
   };
 
   const showVerified = (show: boolean) => {
-    setShowVerifiedEmail(show);
-    show
-      ? document.body.classList.add('hide-scrollbar')
-      : document.body.classList.remove('hide-scrollbar');
+    if (show) {
+      setShowModal('showVerifiedEmail');
+      document.body.classList.add('hide-scrollbar');
+    } else {
+      setShowModal('');
+      document.body.classList.remove('hide-scrollbar');
+    }
   };
 
   const showForgot = (show: boolean) => {
-    setShowForgotPassword(show);
-    show
-      ? document.body.classList.add('hide-scrollbar')
-      : document.body.classList.remove('hide-scrollbar');
+    if (show) {
+      setShowModal('showForgotPassword');
+      document.body.classList.add('hide-scrollbar');
+    } else {
+      setShowModal('');
+      document.body.classList.remove('hide-scrollbar');
+    }
   };
 
   const showCheckEmailPassword = (show: boolean) => {
-    setShowCheckYourEmailPassword(show);
-    show
-      ? document.body.classList.add('hide-scrollbar')
-      : document.body.classList.remove('hide-scrollbar');
+    if (show) {
+      setShowModal('showCheckYourEmailPassword');
+      document.body.classList.add('hide-scrollbar');
+    } else {
+      setShowModal('');
+      document.body.classList.remove('hide-scrollbar');
+    }
   };
 
   const showSetNewPassword = (show: boolean) => {
-    setCreateNewPassword(show);
-    show
-      ? document.body.classList.add('hide-scrollbar')
-      : document.body.classList.remove('hide-scrollbar');
-  };
-
-  const showPasswordSuccess = (show: boolean) => {
-    showSetNewPassword(false);
-    setShowPasswordChangeSuccess(show);
-    show
-      ? document.body.classList.add('hide-scrollbar')
-      : document.body.classList.remove('hide-scrollbar');
+    if (show) {
+      setShowModal('showCreateNewPassword');
+      document.body.classList.add('hide-scrollbar');
+    } else {
+      setShowModal('');
+      document.body.classList.remove('hide-scrollbar');
+    }
   };
 
   const showExpired = (show: boolean) => {
-    setShowExpiredWarning(show);
-    show
-      ? document.body.classList.add('hide-scrollbar')
-      : document.body.classList.remove('hide-scrollbar');
+    if (show) {
+      setShowModal('showExpiredWarning');
+      document.body.classList.add('hide-scrollbar');
+    } else {
+      setShowModal('');
+      document.body.classList.remove('hide-scrollbar');
+    }
   };
 
   const showExpiredEmailVerification = (show: boolean) => {
-    setShowExpiredWarningEmailVerification(show);
-    show
-      ? document.body.classList.add('hide-scrollbar')
-      : document.body.classList.remove('hide-scrollbar');
+    if (show) {
+      setShowModal('showExpiredWarningEmailVerification');
+      document.body.classList.add('hide-scrollbar');
+    } else {
+      setShowModal('');
+      document.body.classList.remove('hide-scrollbar');
+    }
   };
 
   const showUpdateName = (show: boolean) => {
-    setShowEditName(show);
-    show
-      ? document.body.classList.add('hide-scrollbar')
-      : document.body.classList.remove('hide-scrollbar');
+    if (show) {
+      setShowModal('showEditName');
+      document.body.classList.add('hide-scrollbar');
+    } else {
+      setShowModal('');
+      document.body.classList.remove('hide-scrollbar');
+    }
   };
 
   const showUpdatePassword = (show: boolean) => {
-    setShowEditPassword(show);
-    show
-      ? document.body.classList.add('hide-scrollbar')
-      : document.body.classList.remove('hide-scrollbar');
+    if (show) {
+      setShowModal('showEditPassword');
+      document.body.classList.add('hide-scrollbar');
+    } else {
+      setShowModal('');
+      document.body.classList.remove('hide-scrollbar');
+    }
   };
 
   const showBurger = (show: boolean) => {
-    setShowBurgerMenu(show);
-    show
-      ? document.body.classList.add('hide-scrollbar')
-      : document.body.classList.remove('hide-scrollbar');
+    if (show) {
+      setShowModal('showBrugerMenu');
+      document.body.classList.add('hide-scrollbar');
+    } else {
+      setShowModal('');
+      document.body.classList.remove('hide-scrollbar');
+    }
   };
 
   const showSearchMob = (show: boolean) => {
-    setShowSearchMobile(show);
-    show
-      ? document.body.classList.add('hide-scrollbar')
-      : document.body.classList.remove('hide-scrollbar');
+    if (show) {
+      setShowModal('showSearchMobile');
+      document.body.classList.add('hide-scrollbar');
+    } else {
+      setShowModal('');
+      document.body.classList.remove('hide-scrollbar');
+    }
   };
 
   const showAddQuote = (show: boolean) => {
-    setShowAddNewQuote(show);
-    show
-      ? document.body.classList.add('hide-scrollbar')
-      : document.body.classList.remove('hide-scrollbar');
+    if (show) {
+      setShowModal('showAddNewQuote');
+      document.body.classList.add('hide-scrollbar');
+    } else {
+      setShowModal('');
+      document.body.classList.remove('hide-scrollbar');
+    }
+  };
+
+  const showUpdateEmail = (show: boolean) => {
+    if (show) {
+      setShowModal('showEditEmail');
+      document.body.classList.add('hide-scrollbar');
+    } else {
+      setShowModal('');
+      document.body.classList.remove('hide-scrollbar');
+    }
+  };
+
+  const showPasswordSuccess = (show: boolean) => {
+    if (show) {
+      setShowModal('showPasswordChangeSuccess');
+      document.body.classList.add('hide-scrollbar');
+    } else {
+      setShowModal('');
+      document.body.classList.remove('hide-scrollbar');
+    }
   };
 
   const showAddMovie = (show: boolean) => {
@@ -216,13 +233,6 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
     }
   };
 
-  const showUpdateEmail = (show: boolean) => {
-    setShowEditEmail(show);
-    show
-      ? document.body.classList.add('hide-scrollbar')
-      : document.body.classList.remove('hide-scrollbar');
-  };
-
   return (
     <UiContext.Provider
       value={{
@@ -230,32 +240,17 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
         showCreate,
         showLog,
         showVerified,
-        showForgotPassword,
-        showCheckEmail,
-        showCreateAccount,
-        showVerifiedEmail,
-        showLogIn,
         showForgot,
         showCheckEmailPassword,
-        showCheckYourEmailPassword,
         showSetNewPassword,
-        showCreateNewPassword,
         showPasswordSuccess,
-        showPasswordChangeSuccess,
-        showExpiredWarning,
         showExpired,
-        showExpiredWarningEmailVerification,
         showExpiredEmailVerification,
-        showEditName,
         showUpdateName,
         showUpdatePassword,
-        showEditPassword,
-        showBrugerMenu,
         showBurger,
-        showSearchMobile,
         showSearchMob,
         showAddQuote,
-        showAddNewQuote,
         showMovieDropdown,
         setShowMovieDropdown,
         showCreateMovie,
@@ -265,11 +260,11 @@ export const UiContextProvider: React.FC<PropsType> = ({ children }) => {
         showEditMovie,
         showMovieEdit,
         showUpdateEmail,
-        showEditEmail,
         showLangDropdown,
         setShowLangDropdown,
         showNotifications,
         setShowNotifications,
+        showModal,
       }}
     >
       {children}

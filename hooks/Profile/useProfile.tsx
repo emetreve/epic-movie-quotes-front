@@ -33,14 +33,11 @@ const useProfile = () => {
   const { logged, user } = useCheckIfLoggedIn();
 
   const {
-    showEditName,
     showUpdateName,
     showUpdatePassword,
-    showEditPassword,
-    showBrugerMenu,
     showBurger,
     showUpdateEmail,
-    showEditEmail,
+    showModal,
     setShowLangDropdown,
     showLangDropdown,
     showNotifications,
@@ -224,7 +221,7 @@ const useProfile = () => {
   };
 
   const handleOutsideClick = () => {
-    if (showBrugerMenu) {
+    if (showModal === 'showBrugerMenu') {
       showBurger(false);
     }
     if (showLangDropdown) {
@@ -239,12 +236,10 @@ const useProfile = () => {
   return {
     logged,
     user,
-    showEditName,
     showUpdateName,
     showSuccess,
     setShowSuccess,
     showUpdatePassword,
-    showEditPassword,
     showUsernameInput,
     setShowUsernameInput,
     methods,
@@ -273,13 +268,13 @@ const useProfile = () => {
     handleOutsideClick,
     handleBack,
     showUpdateEmail,
-    showEditEmail,
     setShowEmailInput,
     showEmailInput,
     emailSuccess,
     setEmailSuccess,
     setShowLangDropdown,
     showLangDropdown,
+    showModal,
     t,
   };
 };

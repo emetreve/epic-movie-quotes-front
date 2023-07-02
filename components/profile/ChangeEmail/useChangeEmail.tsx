@@ -5,7 +5,7 @@ import { updateUser } from '@/services';
 import { useRouter } from 'next/router';
 
 const useChangeEmail = (setEmailSuccess: Function) => {
-  const { showBurger, showBrugerMenu, showUpdateEmail } = useUiContext();
+  const { showBurger, showModal, showUpdateEmail } = useUiContext();
 
   const router = useRouter();
   const locale = router.locale;
@@ -28,7 +28,7 @@ const useChangeEmail = (setEmailSuccess: Function) => {
   } = methods;
 
   const handleOutsideClick = () => {
-    if (showBrugerMenu) {
+    if (showModal === 'showBrugerMenu') {
       showBurger(false);
     }
   };

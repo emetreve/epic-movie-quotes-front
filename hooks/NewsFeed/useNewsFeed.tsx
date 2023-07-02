@@ -20,12 +20,10 @@ const useNewsFeed = () => {
   const [likeReceived, setLikeReveiced] = useState<Quote>();
 
   const {
-    showBrugerMenu,
     showBurger,
-    showSearchMobile,
     showSearchMob,
     showAddQuote,
-    showAddNewQuote,
+    showModal,
     setShowLangDropdown,
     showLangDropdown,
     showNotifications,
@@ -158,7 +156,7 @@ const useNewsFeed = () => {
     if (showSearchLg) {
       setShowSearchLg(false);
     }
-    if (showBrugerMenu) {
+    if (showModal === 'showBrugerMenu') {
       showBurger(false);
     }
     if (showLangDropdown) {
@@ -254,7 +252,7 @@ const useNewsFeed = () => {
       handleFetchNewSearchQuotes(data.search, 1);
     }, 500);
     reset();
-    if (showSearchMobile) {
+    if (showModal === 'showSearchMobile') {
       showSearchMob(false);
     }
   };
@@ -274,10 +272,9 @@ const useNewsFeed = () => {
     handleSubmit,
     onSubmit,
     searchedQuotes,
-    showSearchMobile,
     showSearchMob,
     showAddQuote,
-    showAddNewQuote,
+    showModal,
     observerRef,
     observerRefSearch,
   };

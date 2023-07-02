@@ -22,18 +22,17 @@ const Newsfeed = () => {
     handleSubmit,
     onSubmit,
     searchedQuotes,
-    showSearchMobile,
     showSearchMob,
     showAddQuote,
-    showAddNewQuote,
     observerRef,
+    showModal,
     observerRefSearch,
   } = useNewsFeed();
 
   if (logged) {
     return (
       <>
-        {showSearchMobile && (
+        {showModal === 'showSearchMobile' && (
           <div className='lg:hidden bg-gradient-violet fixed h-screen w-screen z-[50]'>
             <div className='pt-6 px-4 flex flex-row items-center border-b border-gray-700 pb-6'>
               <Image
@@ -78,7 +77,7 @@ const Newsfeed = () => {
             />
           </div>
 
-          {showAddNewQuote && (
+          {showModal === 'showAddNewQuote' && (
             <AddNewQuote
               userName={user.name}
               avatar={user.avatar}

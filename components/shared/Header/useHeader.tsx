@@ -17,9 +17,8 @@ const useHeader = (authUserId: number) => {
   const [editQuoteData, setEditQuoteData] = useState(null);
 
   const {
-    showBrugerMenu,
     showBurger,
-    showSearchMobile,
+    showModal,
     showSearchMob,
     setShowLangDropdown,
     showLangDropdown,
@@ -122,11 +121,10 @@ const useHeader = (authUserId: number) => {
   return {
     handleLogout,
     t,
-    showBrugerMenu,
     showBurger,
     handleNavigation,
     router,
-    showSearchMobile,
+    showModal,
     showSearchMob,
     toggleNotifications,
     showNotifications,

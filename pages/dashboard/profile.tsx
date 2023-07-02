@@ -18,12 +18,10 @@ const Profile = () => {
   const {
     logged,
     user,
-    showEditName,
     showUpdateName,
     showSuccess,
     setShowSuccess,
     showUpdatePassword,
-    showEditPassword,
     showUsernameInput,
     setShowUsernameInput,
     methods,
@@ -52,22 +50,22 @@ const Profile = () => {
     handleOutsideClick,
     handleBack,
     showUpdateEmail,
-    showEditEmail,
     setShowEmailInput,
     showEmailInput,
     emailSuccess,
     setEmailSuccess,
+    showModal,
     t,
   } = useProfile();
 
   if (logged) {
     return (
       <>
-        {showEditName && (
+        {showModal === 'showEditName' && (
           <ChangeName userName={user.name} authUserId={user.id} />
         )}
 
-        {showEditEmail && (
+        {showModal === 'showEditEmail' && (
           <ChangeEmail
             setEmailSuccess={setEmailSuccess}
             userName={user.name}
@@ -75,7 +73,7 @@ const Profile = () => {
           />
         )}
 
-        {showEditPassword && (
+        {showModal === 'showEditPassword' && (
           <ChangePassword userName={user.name} authUserId={user.id} />
         )}
 

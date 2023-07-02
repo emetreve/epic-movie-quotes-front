@@ -30,7 +30,7 @@ const useMovie = () => {
     showAddQuoteFromMovies,
     showEditMovie,
     showMovieEdit,
-    showBrugerMenu,
+    showModal,
     showBurger,
     setShowLangDropdown,
     showLangDropdown,
@@ -88,7 +88,7 @@ const useMovie = () => {
   };
 
   const handleOutsideClick = () => {
-    if (showBrugerMenu) {
+    if (showModal === 'showBrugerMenu') {
       showBurger(false);
     }
     if (whichQuoteModalIsOpen) {
