@@ -19,7 +19,6 @@ const useAddNewQuote = () => {
   });
   const [movieError, setMovieError] = useState('');
   const [imageName, setImageName] = useState('');
-  // const [imageError, setImageError] = useState('');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [userId, setUserId] = useState('');
 
