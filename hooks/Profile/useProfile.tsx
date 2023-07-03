@@ -24,8 +24,6 @@ const useProfile = () => {
 
   const [passStateForConditionsBox, setPassStateForConditionsBox] = useState(0);
 
-  const [imageError, setImageError] = useState('');
-
   const { t } = useTranslation('profile');
 
   const router = useRouter();
@@ -88,6 +86,7 @@ const useProfile = () => {
       password: '',
       password_confirmation: '',
       email: '',
+      avatar: null,
     },
     mode: 'onChange',
   });
@@ -100,6 +99,7 @@ const useProfile = () => {
     control,
     reset,
     setError,
+    clearErrors,
   } = methods;
 
   const applyInputStyle = (val: string): boolean => {
@@ -129,11 +129,18 @@ const useProfile = () => {
           query: { status: 'successful' },
         });
         setAvatarButtonTrigger(false);
-        setImageError('');
+        clearErrors('avatar');
       } catch (error: any) {
-        if (error?.response?.data?.errors?.avatar) {
-          setImageError(`${t('image format error')}`);
+        const errors = error.response?.data?.errors;
+        for (const field in errors) {
+          if (field === 'avatar') {
+            setError('avatar', {
+              type: 'manual',
+              message: `${t('image format error')}`,
+            });
+          }
         }
+        setSelectedAvatar('');
         return;
       }
     }
@@ -202,11 +209,18 @@ const useProfile = () => {
           query: { status: 'success' },
         });
         setAvatarButtonTrigger(false);
-        setImageError('');
+        clearErrors('avatar');
       } catch (error: any) {
-        if (error?.response?.data?.errors?.avatar) {
-          setImageError(`${t('image format error')}`);
+        const errors = error.response?.data?.errors;
+        for (const field in errors) {
+          if (field === 'avatar') {
+            setError('avatar', {
+              type: 'manual',
+              message: `${t('image format error')}`,
+            });
+          }
         }
+        setSelectedAvatar('');
       }
     }
   };
@@ -276,7 +290,6 @@ const useProfile = () => {
     setShowLangDropdown,
     showLangDropdown,
     showModal,
-    imageError,
     t,
   };
 };

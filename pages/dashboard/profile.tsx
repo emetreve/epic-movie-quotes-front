@@ -53,7 +53,6 @@ const Profile = () => {
     emailSuccess,
     setEmailSuccess,
     showModal,
-    imageError,
     t,
   } = useProfile();
 
@@ -131,6 +130,7 @@ const Profile = () => {
                   <label htmlFor='fileInputMobile' className='cursor-pointer'>
                     {t('Upload new photo')}
                     <input
+                      {...register('avatar')}
                       id='fileInputMobile'
                       type='file'
                       accept='image/*'
@@ -141,7 +141,9 @@ const Profile = () => {
                       }}
                     />
                   </label>
-                  <p className='text-red h-2 text-sm'>{imageError}</p>
+                  <p className='text-red h-2 text-sm'>
+                    {errors.avatar?.message && errors.avatar.message}
+                  </p>
                 </div>
 
                 <div className='mt-9 w-full px-6'>
@@ -276,6 +278,7 @@ const Profile = () => {
                     <label htmlFor='fileInput' className='cursor-pointer'>
                       {t('Upload new photo')}
                       <input
+                        {...register('avatar')}
                         id='fileInput'
                         type='file'
                         accept='image/*'
@@ -283,7 +286,9 @@ const Profile = () => {
                         onChange={handleUpload}
                       />
                     </label>
-                    <p className='text-red h-2 text-sm'>{imageError}</p>
+                    <p className='text-red h-2 text-sm'>
+                      {errors.avatar?.message && errors.avatar.message}
+                    </p>
                   </div>
                   <div className='-mt-[7.6rem] pr-10 bg-profile-dark-blue backdrop-blur-25 rounded-xl pt-6 pb-36 flex flex-col items-center'>
                     <div className='mt-32 w-full px-40'>
