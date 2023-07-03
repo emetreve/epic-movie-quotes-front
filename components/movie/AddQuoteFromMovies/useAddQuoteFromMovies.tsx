@@ -96,6 +96,16 @@ const useAddQuoteFromMovies = (movieId: string) => {
               type: 'manual',
               message: `${t('image format error')}`,
             });
+          } else if (field === 'bodyEn') {
+            setError('bodyEn', {
+              type: 'manual',
+              message: `${t('This field is required')}`,
+            });
+          } else if (field === 'bodyKa') {
+            setError('bodyGe', {
+              type: 'manual',
+              message: `${t('This field is required')}`,
+            });
           }
         }
 

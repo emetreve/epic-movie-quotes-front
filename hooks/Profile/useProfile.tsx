@@ -138,6 +138,16 @@ const useProfile = () => {
               type: 'manual',
               message: `${t('image format error')}`,
             });
+          } else if (field === 'username') {
+            setError('username', {
+              type: 'manual',
+              message: `${t('This field must have at least 3 characters')}`,
+            });
+          } else if (field === 'password') {
+            setError('password', {
+              type: 'manual',
+              message: `${t('This field must have at least 8 characters')}`,
+            });
           }
         }
         setSelectedAvatar('');
