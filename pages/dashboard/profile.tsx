@@ -141,6 +141,7 @@ const Profile = () => {
                       }}
                     />
                   </label>
+                  <p className='text-red h-2 text-sm'>{imageError}</p>
                 </div>
 
                 <div className='mt-9 w-full px-6'>

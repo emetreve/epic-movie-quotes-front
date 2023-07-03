@@ -129,8 +129,8 @@ const useProfile = () => {
           query: { status: 'successful' },
         });
         setAvatarButtonTrigger(false);
+        setImageError('');
       } catch (error: any) {
-        console.log(222, error);
         if (error?.response?.data?.errors?.avatar) {
           setImageError(`${t('image format error')}`);
         }
@@ -202,7 +202,12 @@ const useProfile = () => {
           query: { status: 'success' },
         });
         setAvatarButtonTrigger(false);
-      } catch (error) {}
+        setImageError('');
+      } catch (error: any) {
+        if (error?.response?.data?.errors?.avatar) {
+          setImageError(`${t('image format error')}`);
+        }
+      }
     }
   };
 
