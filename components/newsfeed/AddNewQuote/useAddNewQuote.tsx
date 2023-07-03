@@ -129,6 +129,7 @@ const useAddNewQuote = () => {
         if (error?.response?.data?.errors?.image) {
           setImageError(`${t('image format error')}`);
         }
+        return;
       }
     }
     reset();
