@@ -24,6 +24,8 @@ const useProfile = () => {
 
   const [passStateForConditionsBox, setPassStateForConditionsBox] = useState(0);
 
+  const [imageError, setImageError] = useState('');
+
   const { t } = useTranslation('profile');
 
   const router = useRouter();
@@ -127,7 +129,13 @@ const useProfile = () => {
           query: { status: 'successful' },
         });
         setAvatarButtonTrigger(false);
-      } catch (error: any) {}
+      } catch (error: any) {
+        console.log(222, error);
+        if (error?.response?.data?.errors?.avatar) {
+          setImageError(`${t('image format error')}`);
+        }
+        return;
+      }
     }
 
     for (const key in data) {
@@ -263,6 +271,7 @@ const useProfile = () => {
     setShowLangDropdown,
     showLangDropdown,
     showModal,
+    imageError,
     t,
   };
 };

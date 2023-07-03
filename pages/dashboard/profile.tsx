@@ -53,6 +53,7 @@ const Profile = () => {
     emailSuccess,
     setEmailSuccess,
     showModal,
+    imageError,
     t,
   } = useProfile();
 
@@ -281,6 +282,7 @@ const Profile = () => {
                         onChange={handleUpload}
                       />
                     </label>
+                    <p className='text-red h-2 text-sm'>{imageError}</p>
                   </div>
                   <div className='-mt-[7.6rem] pr-10 bg-profile-dark-blue backdrop-blur-25 rounded-xl pt-6 pb-36 flex flex-col items-center'>
                     <div className='mt-32 w-full px-40'>
