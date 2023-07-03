@@ -70,7 +70,7 @@ const AddQuoteFromMovies: React.FC<PropsType> = ({
               alt='user headshot'
               width={512}
               height={512}
-              className='h-11 w-auto mr-3 lg:h-14 rounded-[50%]'
+              className='h-11 w-11 mr-3 lg:h-[3.8rem] lg:w-[3.8rem] lg:ml-2 ml-1 rounded-[50%]'
             />
             <p className='lg:text-xl lg:block lg:ml-1'>{userName}</p>
           </div>

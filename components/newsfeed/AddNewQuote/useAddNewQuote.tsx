@@ -125,7 +125,11 @@ const useAddNewQuote = () => {
       try {
         const response = await createQuote(formData);
         setQuotesData([response.data, ...quotesData]);
-      } catch (error) {}
+      } catch (error: any) {
+        if (error?.response?.data?.errors?.image) {
+          setImageError(`${t('image format error')}`);
+        }
+      }
     }
     reset();
     modalSwitchSetter(false, 'showAddNewQuote');
