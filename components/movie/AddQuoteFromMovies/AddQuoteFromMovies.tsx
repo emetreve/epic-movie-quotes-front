@@ -27,7 +27,6 @@ const AddQuoteFromMovies: React.FC<PropsType> = ({
     handleMovieExistence,
     handleDrop,
     handleDragOver,
-    imageError,
     t,
     translate,
   } = useAddNewQuote(movieId);
@@ -145,7 +144,9 @@ const AddQuoteFromMovies: React.FC<PropsType> = ({
                       {translate('Choose file')}
                     </span>
                     <input
-                      {...register('image')}
+                      {...register('image', {
+                        required: `${t('This field is required')}`,
+                      })}
                       name='image'
                       onChange={(e) => {
                         handleUpload(e);
@@ -157,7 +158,9 @@ const AddQuoteFromMovies: React.FC<PropsType> = ({
                 </div>
               </div>
               <div className='h-2 mt-1'>
-                <p className='text-red text-xs'>{imageError && imageError}</p>
+                <p className='text-red text-xs'>
+                  {errors.image?.message && errors.image.message}
+                </p>
               </div>
             </div>
             <div className='relative mt-4'>
