@@ -89,7 +89,12 @@ const useAddQuoteFromMovies = (movieId: string) => {
       try {
         await createQuote(formData);
         queryClient.invalidateQueries('movie');
-      } catch (error) {}
+      } catch (error: any) {
+        if (error?.response?.data?.errors?.image) {
+          setImageError(`${t('image format error')}`);
+        }
+        return;
+      }
     }
     reset();
     showAddQuoteFromMoviesPage(false);
