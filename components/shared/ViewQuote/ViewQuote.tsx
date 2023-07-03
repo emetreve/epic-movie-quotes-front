@@ -181,7 +181,7 @@ const ViewQuote: React.FC<PropsType> = ({
                       alt='user headshot'
                       width={512}
                       height={512}
-                      className='h-11 w-auto mr-2 lg:h-14 rounded-[50%]'
+                      className='h-11 w-11 mr-2 lg:h-14 lg:w-14 rounded-[50%]'
                     />
                     <p className='ml-3 lg:text-xl'>{comment.user.name}</p>
                   </div>
@@ -203,7 +203,7 @@ const ViewQuote: React.FC<PropsType> = ({
               alt='user headshot'
               width={512}
               height={512}
-              className='h-14 w-auto mr-2 rounded-[50%]'
+              className='h-14 w-14 mr-2 rounded-[50%]'
             />
             <form onSubmit={handleSubmit(onSubmit)} className='w-full lg:pr-5'>
               <input
