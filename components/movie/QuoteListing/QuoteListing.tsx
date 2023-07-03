@@ -131,7 +131,7 @@ const QuoteListing: React.FC<PropsType> = ({
             </div>
             <div className='flex flex-row items-center ml-6'>
               <p className='text-lg block w-2'>{likesCount}</p>
-              <div className='hover:cursor-pointer z-[30]'>
+              <div className='z-[30]'>
                 <Heart
                   classes={`h-5 w-auto ml-2 lg:h-7 ${
                     likes?.some((like: Like) => like.user_id === authUserId)
