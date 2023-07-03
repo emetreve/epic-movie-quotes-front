@@ -19,7 +19,7 @@ const useAddNewQuote = () => {
   });
   const [movieError, setMovieError] = useState('');
   const [imageName, setImageName] = useState('');
-  const [imageError, setImageError] = useState('');
+  // const [imageError, setImageError] = useState('');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [userId, setUserId] = useState('');
 
@@ -66,6 +66,8 @@ const useAddNewQuote = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    setError,
+    clearErrors,
   } = methods;
 
   const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,7 +78,7 @@ const useAddNewQuote = () => {
     setSelectedFile(selectedFile);
     if (selectedFile) {
       setImageName(selectedFile.name);
-      setImageError('');
+      clearErrors('image');
     }
   };
 
@@ -86,7 +88,10 @@ const useAddNewQuote = () => {
       setMovieError(`${t('This field is required')}`);
     }
     if (!imageName) {
-      setImageError(`${t('This field is required')}`);
+      setError('image', {
+        type: 'manual',
+        message: `${t('This field is required')}`,
+      });
     }
   };
 
@@ -95,7 +100,7 @@ const useAddNewQuote = () => {
     const selectedFile = e.dataTransfer.files[0];
     setSelectedFile(selectedFile);
     setImageName(selectedFile.name);
-    setImageError('');
+    clearErrors('image');
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -107,11 +112,6 @@ const useAddNewQuote = () => {
       return;
     } else {
       setMovieError('');
-    }
-
-    if (!imageName) {
-      setImageError(`${t('This field is required')}`);
-      return;
     }
 
     if (selectedFile) {
@@ -127,7 +127,15 @@ const useAddNewQuote = () => {
         setQuotesData([response.data, ...quotesData]);
       } catch (error: any) {
         if (error?.response?.data?.errors?.image) {
-          setImageError(`${t('image format error')}`);
+          const errors = error.response?.data?.errors;
+          for (const field in errors) {
+            if (field === 'image') {
+              setError('image', {
+                type: 'manual',
+                message: `${t('image format error')}`,
+              });
+            }
+          }
         }
         return;
       }
@@ -156,7 +164,6 @@ const useAddNewQuote = () => {
     handleMovieExistence,
     handleDrop,
     handleDragOver,
-    imageError,
     t,
     translate,
   };

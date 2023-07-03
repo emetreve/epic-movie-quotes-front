@@ -22,7 +22,6 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
     handleMovieExistence,
     handleDrop,
     handleDragOver,
-    imageError,
     modalSwitchSetter,
     t,
     translate,
@@ -139,7 +138,9 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
                     {translate('Choose file')}
                   </span>
                   <input
-                    {...register('image')}
+                    {...register('image', {
+                      required: `${t('This field is required')}`,
+                    })}
                     name='image'
                     onChange={(e) => {
                       handleUpload(e);
@@ -151,7 +152,9 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
               </div>
             </div>
             <div className='h-2 mt-1'>
-              <p className='text-red text-xs'>{imageError && imageError}</p>
+              <p className='text-red text-xs'>
+                {errors.image?.message && errors.image.message}
+              </p>
             </div>
             <div>
               <div
