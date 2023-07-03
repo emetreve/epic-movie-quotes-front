@@ -9,7 +9,6 @@ import { useQueryClient } from 'react-query';
 
 const useAddQuoteFromMovies = (movieId: string) => {
   const [imageName, setImageName] = useState('');
-  // const [imageError, setImageError] = useState('');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [userId, setUserId] = useState('');
 
