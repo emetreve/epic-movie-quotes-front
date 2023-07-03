@@ -88,7 +88,7 @@ const ViewQuote: React.FC<PropsType> = ({
             alt='user headshot'
             width={512}
             height={512}
-            className='h-11 w-auto mr-3 lg:h-14 rounded-[50%]'
+            className='h-12 w-12 mr-3 lg:h-[3.8rem] lg:w-[3.8rem] rounded-[50%]'
           />
           <p className='lg:text-xl lg:block lg:ml-1'>{authUserName}</p>
         </div>
@@ -123,7 +123,7 @@ const ViewQuote: React.FC<PropsType> = ({
               src={
                 quote?.image
                   ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${quote.image}`
-                  : '/assets/quote-sample.png'
+                  : '/assets/loader.gif'
               }
               alt='quote image'
               width={916}
