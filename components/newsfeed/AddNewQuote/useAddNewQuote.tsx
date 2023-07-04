@@ -120,6 +120,7 @@ const useAddNewQuote = () => {
       formData.append('bodyEn', data.bodyEn);
       formData.append('movie_id', selectedMovie.id);
       formData.append('user_id', userId);
+      formData.append('locale', locale);
 
       try {
         const response = await createQuote(formData);
@@ -131,17 +132,17 @@ const useAddNewQuote = () => {
             if (field === 'image') {
               setError('image', {
                 type: 'manual',
-                message: `${t('image format error')}`,
+                message: errors[field][0],
               });
             } else if (field === 'bodyEn') {
               setError('bodyEn', {
                 type: 'manual',
-                message: `${t('This field is required')}`,
+                message: errors[field][0],
               });
             } else if (field === 'bodyKa') {
               setError('bodyGe', {
                 type: 'manual',
-                message: `${t('This field is required')}`,
+                message: errors[field][0],
               });
             }
           }
