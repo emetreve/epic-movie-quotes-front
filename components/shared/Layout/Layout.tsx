@@ -17,7 +17,7 @@ const Layout: React.FC<PropsType> = ({ children }) => {
               hideSearch={hideSearch}
             />
           </div>
-          <div className='w-[25%] fixed z-[200]'>
+          <div className='w-[25%] fixed z-[2]'>
             <SideProfilePanel avatar={user.avatar} name={user.name} />
           </div>
         </>
