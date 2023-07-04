@@ -33,6 +33,6 @@ const useLayout = () => {
   const renderHeader = asPath.includes('dashboard');
   const hideSearch = !asPath.includes('newsfeed');
 
-  return { renderHeader, user, hideSearch };
+  return { renderHeader, user, hideSearch, asPath };
 };
 export default useLayout;

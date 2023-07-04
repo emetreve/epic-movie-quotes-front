@@ -11,7 +11,6 @@ import {
 } from '@/components';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { SideProfilePanel } from '@/components';
 
 const Profile = () => {
   const {
@@ -84,8 +83,6 @@ const Profile = () => {
               isEmailSuccess={emailSuccess}
             />
           )}
-
-          <SideProfilePanel avatar={user.avatar} name={user.name} />
 
           {!showMobileAvatarModal && (
             <div className='lg:hidden text-white lg:ml-[26.7%] lg:w-[46.2%] w-full static top-[9.5rem] lg:top-[8rem] lg:-mt-[12rem]'>

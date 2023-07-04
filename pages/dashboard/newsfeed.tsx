@@ -4,7 +4,7 @@ import { NewsItem } from '@/components';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Quote } from '@/types';
-import { AddNewQuote, SideProfilePanel } from '@/components';
+import { AddNewQuote } from '@/components';
 
 const Newsfeed = () => {
   const {
@@ -92,10 +92,6 @@ const Newsfeed = () => {
           </div>
           <div>
             <div className='hidden lg:flex text-white'>
-              <div className='w-[25%] fixed'>
-                <SideProfilePanel avatar={user.avatar} name={user.name} />
-              </div>
-
               <div className='h-[13rem] ml-[25.2%] w-full'>
                 <div className='w-[66%] px-8 pt-10'>
                   <div
