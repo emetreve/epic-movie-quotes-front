@@ -34,7 +34,7 @@ const NewsItem: React.FC<PropsType> = ({
           alt='user headshot'
           width={512}
           height={512}
-          className='h-11 w-auto mr-3 lg:h-14 rounded-[50%]'
+          className='h-11 w-11 lg:w-[3.6rem] mr-3 lg:h-[3.6rem] rounded-[50%]'
         />
         <p className='lg:text-xl lg:block lg:ml-1'>{userName}</p>
       </div>
@@ -95,7 +95,7 @@ const NewsItem: React.FC<PropsType> = ({
                   alt='user headshot'
                   width={512}
                   height={512}
-                  className='h-11 w-auto mr-2 lg:h-14 rounded-[50%]'
+                  className='h-12 w-12 mr-2 lg:h-[3.8rem] lg:w-[3.8rem] rounded-[50%]'
                 />
                 <p className='ml-3 lg:text-xl'>{comment.user.name}</p>
               </div>
@@ -116,7 +116,7 @@ const NewsItem: React.FC<PropsType> = ({
           alt='user headshot'
           width={512}
           height={512}
-          className='h-14 w-auto mr-2 rounded-[50%]'
+          className='lg:h-14 lg:w-14 h-12 w-12 mr-2 rounded-[50%]'
         />
         <form onSubmit={handleSubmit(onSubmit)} className='w-full lg:pr-5'>
           <input

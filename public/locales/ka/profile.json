@@ -38,5 +38,7 @@
     "Enter new email": "შეიყვანეთ ახალი იმეილი",
     "The email has already been taken": "ეს იმეილი უკვე დაკავებულია",
     "Write a comment": "დაწერე კომენტარი",
-    "Edit quote": "განაახლე ციტატა"
+    "Edit quote": "განაახლე ციტატა",
+    "image format error": "სურათი უნდა იყოს შემდეგი ფორმატის jpeg, png, jpg"
+
 }

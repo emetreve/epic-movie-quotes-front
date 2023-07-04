@@ -9,7 +9,6 @@ import { useQueryClient } from 'react-query';
 
 const useAddQuoteFromMovies = (movieId: string) => {
   const [imageName, setImageName] = useState('');
-  const [imageError, setImageError] = useState('');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [userId, setUserId] = useState('');
 
@@ -39,6 +38,8 @@ const useAddQuoteFromMovies = (movieId: string) => {
     handleSubmit,
     formState: { errors },
     reset,
+    setError,
+    clearErrors,
   } = methods;
 
   const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,14 +50,17 @@ const useAddQuoteFromMovies = (movieId: string) => {
     setSelectedFile(selectedFile);
     if (selectedFile) {
       setImageName(selectedFile.name);
-      setImageError('');
+      clearErrors('image');
     }
   };
 
   const handleMovieExistence = (userId: string) => {
     setUserId(userId);
     if (!imageName) {
-      setImageError(`${t('This field is required')}`);
+      setError('image', {
+        type: 'manual',
+        message: `${t('This field is required')}`,
+      });
     }
   };
 
@@ -65,7 +69,7 @@ const useAddQuoteFromMovies = (movieId: string) => {
     const selectedFile = e.dataTransfer.files[0];
     setSelectedFile(selectedFile);
     setImageName(selectedFile.name);
-    setImageError('');
+    clearErrors('image');
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -73,11 +77,6 @@ const useAddQuoteFromMovies = (movieId: string) => {
   };
 
   const onSubmit = async (data: CreateQuoteFormData) => {
-    if (!imageName) {
-      setImageError(`${t('This field is required')}`);
-      return;
-    }
-
     if (selectedFile) {
       const formData = new FormData();
       formData.append('image', selectedFile, selectedFile.name);
@@ -85,11 +84,34 @@ const useAddQuoteFromMovies = (movieId: string) => {
       formData.append('bodyEn', data.bodyEn);
       formData.append('user_id', userId);
       formData.append('movie_id', movieId);
+      formData.append('locale', locale);
 
       try {
         await createQuote(formData);
         queryClient.invalidateQueries('movie');
-      } catch (error) {}
+      } catch (error: any) {
+        const errors = error.response?.data?.errors;
+        for (const field in errors) {
+          if (field === 'image') {
+            setError('image', {
+              type: 'manual',
+              message: errors[field][0],
+            });
+          } else if (field === 'bodyEn') {
+            setError('bodyEn', {
+              type: 'manual',
+              message: errors[field][0],
+            });
+          } else if (field === 'bodyKa') {
+            setError('bodyGe', {
+              type: 'manual',
+              message: errors[field][0],
+            });
+          }
+        }
+
+        return;
+      }
     }
     reset();
     showAddQuoteFromMoviesPage(false);
@@ -110,7 +132,6 @@ const useAddQuoteFromMovies = (movieId: string) => {
     handleMovieExistence,
     handleDrop,
     handleDragOver,
-    imageError,
     t,
     translate,
   };

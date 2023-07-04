@@ -37,5 +37,6 @@
     "New email": "New email",
     "Enter new email": "Enter new email",
     "The email has already been taken": "The email has already been taken",
-    "Edit quote": "Edit quote"
+    "Edit quote": "Edit quote",
+    "image format error": "Image must be of type jpeg, png, jpg"
 }

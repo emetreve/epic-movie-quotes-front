@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
-import { useRouter } from 'next/router';
+import { useRouter, NextRouter } from 'next/router';
 import { useCheckIfLoggedIn } from '@/hooks';
 import { useUiContext, useQuotesContext } from '@/store';
 import { ChangeUserData } from '@/types';
@@ -28,7 +28,7 @@ const useProfile = () => {
 
   const router = useRouter();
   const { status, changeEmail } = router.query;
-  const locale = router.locale;
+  const { locale } = useRouter() as NextRouter & { locale: 'en' | 'ka' };
 
   const { logged, user } = useCheckIfLoggedIn();
 
@@ -86,6 +86,7 @@ const useProfile = () => {
       password: '',
       password_confirmation: '',
       email: '',
+      avatar: null,
     },
     mode: 'onChange',
   });
@@ -98,6 +99,7 @@ const useProfile = () => {
     control,
     reset,
     setError,
+    clearErrors,
   } = methods;
 
   const applyInputStyle = (val: string): boolean => {
@@ -120,6 +122,7 @@ const useProfile = () => {
     if (selectedFile) {
       const formData = new FormData();
       formData.append('avatar', selectedFile, selectedFile.name);
+      formData.append('locale', locale);
       try {
         await updateAvatar(formData);
         router.push({
@@ -127,7 +130,20 @@ const useProfile = () => {
           query: { status: 'successful' },
         });
         setAvatarButtonTrigger(false);
-      } catch (error: any) {}
+        clearErrors('avatar');
+      } catch (error: any) {
+        const errors = error.response?.data?.errors;
+        for (const field in errors) {
+          if (field === 'avatar') {
+            setError('avatar', {
+              type: 'manual',
+              message: errors[field][0],
+            });
+          }
+        }
+        setSelectedAvatar('');
+        return;
+      }
     }
 
     for (const key in data) {
@@ -153,21 +169,21 @@ const useProfile = () => {
       setShowEmailInput(false);
       reset();
     } catch (error: any) {
-      if (
-        error?.response?.data?.message === 'The email has already been taken.'
-      ) {
-        setError('email', {
-          type: 'manual',
-          message: `${t('The email has already been taken')}`,
-        });
-        return;
+      const errors = error.response?.data?.errors;
+      for (const field in errors) {
+        if (field === 'email') {
+          setError('email', {
+            type: 'manual',
+            message: errors[field][0],
+          });
+        } else if (field === 'username') {
+          setError('username', {
+            type: 'manual',
+            message: errors[field][0],
+          });
+        }
       }
-      if (error?.response?.data?.message) {
-        setError('username', {
-          type: 'manual',
-          message: `${t('The username has already been taken')}`,
-        });
-      }
+      return;
     }
   };
 
@@ -187,6 +203,7 @@ const useProfile = () => {
     if (selectedFile) {
       const formData = new FormData();
       formData.append('avatar', selectedFile, selectedFile.name);
+      formData.append('locale', locale);
       try {
         await updateAvatar(formData);
         router.push({
@@ -194,7 +211,19 @@ const useProfile = () => {
           query: { status: 'success' },
         });
         setAvatarButtonTrigger(false);
-      } catch (error) {}
+        clearErrors('avatar');
+      } catch (error: any) {
+        const errors = error.response?.data?.errors;
+        for (const field in errors) {
+          if (field === 'avatar') {
+            setError('avatar', {
+              type: 'manual',
+              message: errors[field][0],
+            });
+          }
+        }
+        setSelectedAvatar('');
+      }
     }
   };
 

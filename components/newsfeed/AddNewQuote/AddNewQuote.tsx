@@ -22,7 +22,6 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
     handleMovieExistence,
     handleDrop,
     handleDragOver,
-    imageError,
     modalSwitchSetter,
     t,
     translate,
@@ -34,10 +33,14 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
       onDragOver={handleDragOver}
       onClick={() => {
         setShowMovieDropdown(false);
+        modalSwitchSetter(false, 'showAddNewQuote');
       }}
       className='z-50 lg:pb-16 scrollbar-hide h-screen w-screen fixed backdrop-blur-sm lg:backdrop-blur-none bg-partly-transparent-dark lg:bg-violet-quote-create-bg lg:bg-opacity-70 text-white flex items-center justify-center top-0 left-0'
     >
-      <div className='bg-profile-dark-blue h-full w-full lg:h-[47.5rem] lg:w-[54rem] lg:rounded-2xl relative lg:scale-105'>
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className='bg-profile-dark-blue h-full w-full lg:h-[47.5rem] lg:w-[54rem] lg:rounded-2xl relative lg:scale-105'
+      >
         <div className='relative pt-7 px-4 flex flex-row justify-center items-center border-b border-gray-700 pb-7'>
           <h1 className='text-xl'>{translate('Write new quote')}</h1>
           <Image
@@ -62,7 +65,7 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
               alt='user headshot'
               width={512}
               height={512}
-              className='h-11 w-auto mr-3 lg:h-14 rounded-[50%]'
+              className='h-11 w-11 lg:ml-1 mr-3 lg:h-[3.8rem] lg:w-[3.8rem] rounded-[50%]'
             />
             <p className='lg:text-xl lg:block lg:ml-1'>{userName}</p>
           </div>
@@ -135,7 +138,9 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
                     {translate('Choose file')}
                   </span>
                   <input
-                    {...register('image')}
+                    {...register('image', {
+                      required: `${t('This field is required')}`,
+                    })}
                     name='image'
                     onChange={(e) => {
                       handleUpload(e);
@@ -147,7 +152,9 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
               </div>
             </div>
             <div className='h-2 mt-1'>
-              <p className='text-red text-xs'>{imageError && imageError}</p>
+              <p className='text-red text-xs'>
+                {errors.image?.message && errors.image.message}
+              </p>
             </div>
             <div>
               <div

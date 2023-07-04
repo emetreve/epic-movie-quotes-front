@@ -22,9 +22,15 @@ const EditQuote: React.FC<PropsType> = ({
   } = useEditQuote(whichQuote, setWhichQuote, quoteData);
 
   return (
-    <div className='z-50 lg:pb-16 bg-profile-dark-blue overflow-auto h-screen w-screen fixed backdrop-blur-sm lg:backdrop-blur-none bg-partly-transparent-dark lg:bg-violet-quote-create-bg lg:bg-opacity-70 text-white flex items-center justify-center top-0 left-0'>
+    <div
+      onClick={() => setWhichQuote(null)}
+      className='z-50 lg:pb-16 bg-profile-dark-blue overflow-auto h-screen w-screen fixed backdrop-blur-sm lg:backdrop-blur-none bg-partly-transparent-dark lg:bg-violet-quote-create-bg lg:bg-opacity-70 text-white flex items-center justify-center top-0 left-0'
+    >
       {quote?.body && (
-        <div className='h-full fixed lg:top-[5rem] lg:bg-profile-dark-blue w-full lg:h-fit lg:pb-10 lg:w-[50rem] lg:rounded-2xl lg:scale-105'>
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className='h-full fixed lg:top-[5rem] lg:bg-profile-dark-blue w-full lg:h-fit lg:pb-10 lg:w-[50rem] lg:rounded-2xl lg:scale-105'
+        >
           <div className='pt-6 px-4 flex flex-row items-center justify-center border-b border-gray-700 pb-6'>
             <Image
               onClick={() => {

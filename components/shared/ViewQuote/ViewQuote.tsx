@@ -31,8 +31,14 @@ const ViewQuote: React.FC<PropsType> = ({
   );
 
   return (
-    <div className='z-50 lg:pb-16 bg-profile-dark-blue overflow-auto h-screen w-screen fixed backdrop-blur-sm lg:backdrop-blur-none bg-partly-transparent-dark lg:bg-violet-quote-create-bg lg:bg-opacity-70 text-white flex items-center justify-center top-0 left-0'>
-      <div className='h-full fixed lg:top-[5rem] lg:bg-profile-dark-blue w-full lg:h-fit lg:pb-10 lg:w-[50rem] lg:rounded-2xl lg:scale-105'>
+    <div
+      onClick={handleClose}
+      className='z-50 lg:pb-16 bg-profile-dark-blue overflow-auto h-screen w-screen fixed backdrop-blur-sm lg:backdrop-blur-none bg-partly-transparent-dark lg:bg-violet-quote-create-bg lg:bg-opacity-70 text-white flex items-center justify-center top-0 left-0'
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className='h-full fixed lg:top-[5rem] lg:bg-profile-dark-blue w-full lg:h-fit lg:pb-10 lg:w-[50rem] lg:rounded-2xl lg:scale-105'
+      >
         <div className='relative pt-6 px-4 flex flex-row items-center border-b border-gray-700 pb-6'>
           <div className='lg:inline-block lg:absolute lg:left-0 lg:ml-6 lg:mt-0 mt-3 py-[0.5rem] lg:w-[6.5rem] w-[6.3rem] px-3 rounded'>
             <div className='flex flex-row gap-x-5 items-center justify-end'>
@@ -82,7 +88,7 @@ const ViewQuote: React.FC<PropsType> = ({
             alt='user headshot'
             width={512}
             height={512}
-            className='h-11 w-auto mr-3 lg:h-14 rounded-[50%]'
+            className='h-12 w-12 mr-3 lg:h-[3.8rem] lg:w-[3.8rem] rounded-[50%]'
           />
           <p className='lg:text-xl lg:block lg:ml-1'>{authUserName}</p>
         </div>
@@ -117,7 +123,7 @@ const ViewQuote: React.FC<PropsType> = ({
               src={
                 quote?.image
                   ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${quote.image}`
-                  : '/assets/quote-sample.png'
+                  : '/assets/loader.gif'
               }
               alt='quote image'
               width={916}
@@ -175,7 +181,7 @@ const ViewQuote: React.FC<PropsType> = ({
                       alt='user headshot'
                       width={512}
                       height={512}
-                      className='h-11 w-auto mr-2 lg:h-14 rounded-[50%]'
+                      className='h-11 w-11 mr-2 lg:h-14 lg:w-14 rounded-[50%]'
                     />
                     <p className='ml-3 lg:text-xl'>{comment.user.name}</p>
                   </div>
@@ -197,7 +203,7 @@ const ViewQuote: React.FC<PropsType> = ({
               alt='user headshot'
               width={512}
               height={512}
-              className='h-14 w-auto mr-2 rounded-[50%]'
+              className='h-14 w-14 mr-2 rounded-[50%]'
             />
             <form onSubmit={handleSubmit(onSubmit)} className='w-full lg:pr-5'>
               <input

@@ -19,7 +19,6 @@ const useAddNewQuote = () => {
   });
   const [movieError, setMovieError] = useState('');
   const [imageName, setImageName] = useState('');
-  const [imageError, setImageError] = useState('');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [userId, setUserId] = useState('');
 
@@ -66,6 +65,8 @@ const useAddNewQuote = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    setError,
+    clearErrors,
   } = methods;
 
   const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,7 +77,7 @@ const useAddNewQuote = () => {
     setSelectedFile(selectedFile);
     if (selectedFile) {
       setImageName(selectedFile.name);
-      setImageError('');
+      clearErrors('image');
     }
   };
 
@@ -86,7 +87,10 @@ const useAddNewQuote = () => {
       setMovieError(`${t('This field is required')}`);
     }
     if (!imageName) {
-      setImageError(`${t('This field is required')}`);
+      setError('image', {
+        type: 'manual',
+        message: `${t('This field is required')}`,
+      });
     }
   };
 
@@ -95,7 +99,7 @@ const useAddNewQuote = () => {
     const selectedFile = e.dataTransfer.files[0];
     setSelectedFile(selectedFile);
     setImageName(selectedFile.name);
-    setImageError('');
+    clearErrors('image');
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -109,11 +113,6 @@ const useAddNewQuote = () => {
       setMovieError('');
     }
 
-    if (!imageName) {
-      setImageError(`${t('This field is required')}`);
-      return;
-    }
-
     if (selectedFile) {
       const formData = new FormData();
       formData.append('image', selectedFile, selectedFile.name);
@@ -121,11 +120,35 @@ const useAddNewQuote = () => {
       formData.append('bodyEn', data.bodyEn);
       formData.append('movie_id', selectedMovie.id);
       formData.append('user_id', userId);
+      formData.append('locale', locale);
 
       try {
         const response = await createQuote(formData);
         setQuotesData([response.data, ...quotesData]);
-      } catch (error) {}
+      } catch (error: any) {
+        if (error?.response?.data?.errors?.image) {
+          const errors = error.response?.data?.errors;
+          for (const field in errors) {
+            if (field === 'image') {
+              setError('image', {
+                type: 'manual',
+                message: errors[field][0],
+              });
+            } else if (field === 'bodyEn') {
+              setError('bodyEn', {
+                type: 'manual',
+                message: errors[field][0],
+              });
+            } else if (field === 'bodyKa') {
+              setError('bodyGe', {
+                type: 'manual',
+                message: errors[field][0],
+              });
+            }
+          }
+        }
+        return;
+      }
     }
     reset();
     modalSwitchSetter(false, 'showAddNewQuote');
@@ -151,7 +174,6 @@ const useAddNewQuote = () => {
     handleMovieExistence,
     handleDrop,
     handleDragOver,
-    imageError,
     t,
     translate,
   };

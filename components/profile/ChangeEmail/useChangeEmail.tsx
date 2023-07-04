@@ -53,10 +53,11 @@ const useChangeEmail = (setEmailSuccess: Function) => {
         query: { status: 'success' },
       });
     } catch (error: any) {
-      if (error?.response?.data?.message) {
+      const errorMessage = error?.response?.data?.message;
+      if (errorMessage) {
         setError('email', {
           type: 'manual',
-          message: `${t('The username has already been taken')}`,
+          message: errorMessage,
         });
       }
     }
