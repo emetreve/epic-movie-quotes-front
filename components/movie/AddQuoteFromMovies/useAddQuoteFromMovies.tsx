@@ -84,6 +84,7 @@ const useAddQuoteFromMovies = (movieId: string) => {
       formData.append('bodyEn', data.bodyEn);
       formData.append('user_id', userId);
       formData.append('movie_id', movieId);
+      formData.append('locale', locale);
 
       try {
         await createQuote(formData);
@@ -94,17 +95,17 @@ const useAddQuoteFromMovies = (movieId: string) => {
           if (field === 'image') {
             setError('image', {
               type: 'manual',
-              message: `${t('image format error')}`,
+              message: errors[field][0],
             });
           } else if (field === 'bodyEn') {
             setError('bodyEn', {
               type: 'manual',
-              message: `${t('This field is required')}`,
+              message: errors[field][0],
             });
           } else if (field === 'bodyKa') {
             setError('bodyGe', {
               type: 'manual',
-              message: `${t('This field is required')}`,
+              message: errors[field][0],
             });
           }
         }
