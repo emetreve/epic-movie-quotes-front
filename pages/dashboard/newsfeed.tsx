@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import { useNewsFeed } from '@/hooks';
-import { Header, NewsItem } from '@/components';
+import { NewsItem } from '@/components';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Quote } from '@/types';
-import { AddNewQuote, SideProfilePanel } from '@/components';
+import { AddNewQuote } from '@/components';
 
 const Newsfeed = () => {
   const {
@@ -68,14 +68,6 @@ const Newsfeed = () => {
           onClick={handleOutsideClick}
           className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'
         >
-          <div className='h-[5rem]'>
-            <Header
-              userName={user.name}
-              avatar={user.avatar}
-              authUserId={user.id}
-            />
-          </div>
-
           {showModal === 'showAddNewQuote' && (
             <AddNewQuote
               userName={user.name}
@@ -100,10 +92,6 @@ const Newsfeed = () => {
           </div>
           <div>
             <div className='hidden lg:flex text-white'>
-              <div className='w-[25%] fixed'>
-                <SideProfilePanel avatar={user.avatar} name={user.name} />
-              </div>
-
               <div className='h-[13rem] ml-[25.2%] w-full'>
                 <div className='w-[66%] px-8 pt-10'>
                   <div

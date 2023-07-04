@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Header, ValidationIcons } from '@/components';
+import { ValidationIcons } from '@/components';
 import Link from 'next/link';
 import useChangeEmail from './useChangeEmail';
 import { PropsType } from './types';
@@ -28,9 +28,6 @@ const ChangeEmail: React.FC<PropsType> = ({
       onClick={handleOutsideClick}
       className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'
     >
-      <div className='h-[5rem]'>
-        <Header hideSearch={true} userName={userName} authUserId={authUserId} />
-      </div>
       <div>
         <Link href='/dashboard/profile'>
           <Image

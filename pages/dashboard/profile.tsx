@@ -2,7 +2,6 @@ import Image from 'next/image';
 import { FormProvider } from 'react-hook-form';
 import { useProfile } from '@/hooks';
 import {
-  Header,
   ChangeName,
   SuccessNotification,
   ChangePassword,
@@ -12,7 +11,6 @@ import {
 } from '@/components';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { SideProfilePanel } from '@/components';
 
 const Profile = () => {
   const {
@@ -79,23 +77,12 @@ const Profile = () => {
           onClick={handleOutsideClick}
           className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'
         >
-          <div className='h-[5rem]'>
-            <Header
-              hideSearch={true}
-              userName={user.name}
-              avatar={user.avatar}
-              authUserId={user.id}
-            />
-          </div>
-
           {showSuccess && (
             <SuccessNotification
               show={setShowSuccess}
               isEmailSuccess={emailSuccess}
             />
           )}
-
-          <SideProfilePanel avatar={user.avatar} name={user.name} />
 
           {!showMobileAvatarModal && (
             <div className='lg:hidden text-white lg:ml-[26.7%] lg:w-[46.2%] w-full static top-[9.5rem] lg:top-[8rem] lg:-mt-[12rem]'>

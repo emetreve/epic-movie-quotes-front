@@ -53,22 +53,21 @@ const useCreateNewPassword = () => {
 
     try {
       await resetPassword(fullData);
-      router.push({
-        pathname: router.pathname,
-        query: {},
-      });
-      setTimeout(() => {
-        modalSwitchSetter(true, 'showPasswordChangeSuccess');
-      }, 500);
+      router
+        .push({
+          pathname: router.pathname,
+          query: {},
+        })
+        .then(() => modalSwitchSetter(true, 'showPasswordChangeSuccess'));
     } catch (error: any) {
-      router.push({
-        pathname: router.pathname,
-        query: {},
-      });
-      setTimeout(() => {
-        modalSwitchSetter(false, 'showCreateNewPassword');
-        modalSwitchSetter(true, 'showExpiredWarning');
-      }, 500);
+      router
+        .push({
+          pathname: router.pathname,
+          query: {},
+        })
+        .then(() => {
+          modalSwitchSetter(true, 'showExpiredWarning');
+        });
     }
   };
 
@@ -79,24 +78,25 @@ const useCreateNewPassword = () => {
   };
 
   const handleClose = () => {
-    router.push({
-      pathname: router.pathname,
-      query: {},
-    });
-    setTimeout(() => {
-      modalSwitchSetter(false, 'showCreateNewPassword');
-    }, 500);
+    router
+      .push({
+        pathname: router.pathname,
+        query: {},
+      })
+      .then(() => {
+        modalSwitchSetter(false, 'showCreateNewPassword');
+      });
   };
 
   const handleGoToLogIn = () => {
-    router.push({
-      pathname: router.pathname,
-      query: {},
-    });
-    setTimeout(() => {
-      modalSwitchSetter(false, 'showCreateNewPassword');
-      modalSwitchSetter(true, 'showLogIn');
-    }, 500);
+    router
+      .push({
+        pathname: router.pathname,
+        query: {},
+      })
+      .then(() => {
+        modalSwitchSetter(true, 'showLogIn');
+      });
   };
 
   return {

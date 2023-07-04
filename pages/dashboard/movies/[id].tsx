@@ -1,8 +1,6 @@
 import { useMovie } from '@/hooks';
 import Image from 'next/image';
 import {
-  Header,
-  SideProfilePanel,
   QuoteListing,
   AddQuoteFromMovies,
   EditMovie,
@@ -45,15 +43,6 @@ const Movie = () => {
           onClick={handleOutsideClick}
           className='min-h-screen bg-gradient-violet relative'
         >
-          <div className='h-[5rem]'>
-            <Header
-              hideSearch={true}
-              userName={user.name}
-              avatar={user.avatar}
-              authUserId={user.id}
-            />
-          </div>
-
           {whichQuoteToView && (
             <ViewQuote
               authUserId={user.id}
@@ -99,10 +88,6 @@ const Movie = () => {
               movieId={movie.id}
             />
           )}
-
-          <div className='w-[25%] fixed'>
-            <SideProfilePanel avatar={user.avatar} name={user.name} />
-          </div>
 
           <div className='lg:px-[4rem] px-7 pb-8 lg:ml-[25%] lg:w-[75%] w-full lg:mt-[2rem]'>
             <div className='text-xl text-white mt-3 lg:block hidden'>

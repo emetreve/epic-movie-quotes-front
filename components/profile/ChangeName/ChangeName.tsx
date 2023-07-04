@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FormProvider } from 'react-hook-form';
-import { Header } from '@/components';
 import useChangeName from './useChangeName';
 import { ValidationIcons } from '@/components';
 import { PropsType } from './types';
@@ -30,10 +29,6 @@ const ChangeName: React.FC<PropsType> = ({ userName, authUserId }) => {
       onClick={handleOutsideClick}
       className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'
     >
-      <div className='h-[5rem]'>
-        <Header hideSearch={true} userName={userName} authUserId={authUserId} />
-      </div>
-
       <div>
         <Link href='/dashboard/profile'>
           <Image
