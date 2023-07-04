@@ -8,6 +8,10 @@ export type User = {
   name: string;
   updated_at: string;
 };
+export type UserContextType = {
+  user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+};
 
 export type Movie = {
   id: number;

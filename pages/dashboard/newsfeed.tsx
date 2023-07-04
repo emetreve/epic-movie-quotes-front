@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useNewsFeed } from '@/hooks';
-import { Header, NewsItem } from '@/components';
+import { NewsItem } from '@/components';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Quote } from '@/types';
@@ -68,14 +68,6 @@ const Newsfeed = () => {
           onClick={handleOutsideClick}
           className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'
         >
-          <div className='h-[5rem]'>
-            <Header
-              userName={user.name}
-              avatar={user.avatar}
-              authUserId={user.id}
-            />
-          </div>
-
           {showModal === 'showAddNewQuote' && (
             <AddNewQuote
               userName={user.name}

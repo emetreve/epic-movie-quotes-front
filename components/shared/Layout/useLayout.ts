@@ -4,6 +4,7 @@ import { NotificationMessage } from '@/types';
 import { useQueryClient } from 'react-query';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
+import { useUserContext } from '@/store';
 
 const useLayout = () => {
   const queryClient = useQueryClient();
@@ -27,6 +28,11 @@ const useLayout = () => {
     };
   }, [authUserId, asPath]);
 
-  return {};
+  const { user } = useUserContext();
+
+  const renderHeader = asPath.includes('dashboard');
+  const hideSearch = !asPath.includes('newsfeed');
+
+  return { renderHeader, user, hideSearch };
 };
 export default useLayout;

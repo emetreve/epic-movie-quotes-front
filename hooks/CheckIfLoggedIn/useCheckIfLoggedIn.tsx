@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { checkIfLoggedIn } from '@/services';
 import { User } from '@/types';
 import Cookies from 'js-cookie';
+import { useUserContext } from '@/store';
 
 const useCheckIfLoggedIn = () => {
   const [logged, setLogged] = useState(false);
@@ -19,6 +20,7 @@ const useCheckIfLoggedIn = () => {
   const [user, setUser] = useState<User>(initialState);
   const router = useRouter();
   const { status } = router.query;
+  const { setUser: userSetter } = useUserContext();
 
   const fetch = async () => {
     try {
@@ -26,10 +28,11 @@ const useCheckIfLoggedIn = () => {
       setLogged(true);
       setUser(response.data.user);
       Cookies.set('userId', JSON.stringify(response.data.user.id));
+      userSetter(response.data.user);
     } catch (error) {
       setLogged(false);
       Cookies.remove('userId');
-
+      userSetter(null);
       const query = router.asPath.includes('?')
         ? `?${router.asPath.split('?')[1]}`
         : '';

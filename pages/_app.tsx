@@ -1,7 +1,11 @@
 import '@/styles/globals.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import type { AppProps } from 'next/app';
-import { UiContextProvider, QuotesContextProvider } from '@/store';
+import {
+  UiContextProvider,
+  QuotesContextProvider,
+  UserContextProvider,
+} from '@/store';
 import { appWithTranslation } from 'next-i18next';
 import Head from 'next/head';
 import { Layout } from '@/components';
@@ -14,13 +18,15 @@ function App({ Component, pageProps }: AppProps) {
         <title>Epic Movie Quotes</title>
       </Head>
       <QueryClientProvider client={queryClient}>
-        <UiContextProvider>
-          <QuotesContextProvider>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </QuotesContextProvider>
-        </UiContextProvider>
+        <UserContextProvider>
+          <UiContextProvider>
+            <QuotesContextProvider>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </QuotesContextProvider>
+          </UiContextProvider>
+        </UserContextProvider>
       </QueryClientProvider>
     </>
   );

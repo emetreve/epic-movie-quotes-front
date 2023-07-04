@@ -2,7 +2,6 @@ import Image from 'next/image';
 import { FormProvider } from 'react-hook-form';
 import { useProfile } from '@/hooks';
 import {
-  Header,
   ChangeName,
   SuccessNotification,
   ChangePassword,
@@ -79,15 +78,6 @@ const Profile = () => {
           onClick={handleOutsideClick}
           className='bg-gradient-violet min-h-screen relative pb-5 lg:pb-14'
         >
-          <div className='h-[5rem]'>
-            <Header
-              hideSearch={true}
-              userName={user.name}
-              avatar={user.avatar}
-              authUserId={user.id}
-            />
-          </div>
-
           {showSuccess && (
             <SuccessNotification
               show={setShowSuccess}
