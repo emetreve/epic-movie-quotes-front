@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
-import { useRouter } from 'next/router';
+import { useRouter, NextRouter } from 'next/router';
 import { useUiContext } from '@/store';
 import { updateUser } from '@/services';
 import { useTranslation } from 'next-i18next';
@@ -12,6 +12,8 @@ const useChangeName = () => {
   const { t } = useTranslation('profile');
 
   const { modalSwitchSetter, showModal } = useUiContext();
+
+  const { locale } = useRouter() as NextRouter & { locale: 'en' | 'ka' };
 
   const methods = useForm({
     defaultValues: {
@@ -46,7 +48,7 @@ const useChangeName = () => {
 
   const handleConfirm = async () => {
     try {
-      await updateUser({ username: username });
+      await updateUser({ username: username, locale: locale });
       setShowConfirmModal(false);
       modalSwitchSetter(false, 'showEditName');
       router.push({
