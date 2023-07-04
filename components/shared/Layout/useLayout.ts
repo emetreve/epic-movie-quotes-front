@@ -26,7 +26,7 @@ const useLayout = () => {
     return () => {
       channelLike.stopListening(`.NotificationUpdated.${authUserId}`);
     };
-  }, [authUserId, asPath]);
+  }, [authUserId]);
 
   const { user } = useUserContext();
 
