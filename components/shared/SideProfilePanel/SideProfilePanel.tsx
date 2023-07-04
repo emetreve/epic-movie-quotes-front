@@ -8,9 +8,9 @@ const SideProfilePanel: React.FC<PropsType> = ({ avatar, name }) => {
   const { t, handleNavigation, asPath } = useSideProfilePanel();
 
   return (
-    <div className='h-[13rem] w-full hidden lg:flex'>
-      <div className='fixed text-white px-16 pt-10 w-full'>
-        <div className='w-[25%]'>
+    <div className='h-[13rem] w-[30rem] hidden lg:flex fixed'>
+      <div className='text-white px-16 pt-10 flex'>
+        <div className='w-ful'>
           <div className='flex flex-row'>
             <Image
               src={
