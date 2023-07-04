@@ -73,7 +73,7 @@ const AddNewQuote: React.FC<PropsType> = ({ userName, avatar, userId }) => {
             <div className='relative'>
               <textarea
                 {...register('bodyEn', {
-                  // required: `${t('This field is required')}`,
+                  required: `${t('This field is required')}`,
                   pattern: {
                     value: /^[\w,.,()\s$?!#@%:^&*"']+$/,
                     message: `${t('Only English text allowed')}`,
