@@ -1,6 +1,10 @@
 import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
-import { verifyEmail as verify, authenticateApp } from '@/services';
+import {
+  verifyEmail as verify,
+  authenticateApp,
+  checkIfLoggedIn,
+} from '@/services';
 import { googleAuth } from '@/services';
 import { useTranslation } from 'next-i18next';
 import { useQuery } from 'react-query';
@@ -33,8 +37,11 @@ const useLanding = () => {
     onError: () => {
       router.push('/403');
     },
-    onSuccess: () => {
-      router.push('/dashboard/newsfeed');
+    onSuccess: async () => {
+      try {
+        checkIfLoggedIn();
+        router.push('/dashboard/newsfeed');
+      } catch (error) {}
     },
   });
 
