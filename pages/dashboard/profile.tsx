@@ -243,7 +243,7 @@ const Profile = () => {
             </div>
           )}
 
-          <div className='lg:block hidden'>
+          <div className='lg:block hidden mt-[15rem]'>
             <FormProvider {...methods}>
               <form noValidate onSubmit={handleSubmit(onSubmit)}>
                 <div className='text-white ml-[30%] w-[43%] top-[8rem] -mt-[12rem]'>
