@@ -74,6 +74,12 @@ const useLanding = () => {
     }
   };
 
+  const googleCheck = async () => {
+    try {
+      await checkIfLoggedIn();
+    } catch (error) {}
+  };
+
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
 
@@ -86,9 +92,9 @@ const useLanding = () => {
           pathname: router.pathname,
           query: {},
         });
+        googleCheck();
       }, 2000);
     }
-
     return () => {
       clearTimeout(timeoutId);
     };
