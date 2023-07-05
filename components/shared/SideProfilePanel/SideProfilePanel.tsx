@@ -10,7 +10,7 @@ const SideProfilePanel: React.FC<PropsType> = ({ avatar, name }) => {
   return (
     <div className='h-[13rem] w-[30rem] hidden lg:flex fixed'>
       <div className='text-white px-16 pt-10 flex'>
-        <div className='w-ful'>
+        <div>
           <div className='flex flex-row'>
             <Image
               src={
