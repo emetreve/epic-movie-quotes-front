@@ -56,5 +56,6 @@
    "Password reset link has expired, because you havent used it": "Password reset link has expired, because you haven't used it",
    "Request another link": "Request another link",
    "Email verification link has expired, because you havent used it": "Email verification link has expired, because you haven't used it",
-   "Your Password changed successfully": "Your Password changed successfully"
+   "Your Password changed successfully": "Your Password changed successfully",
+   "Please log in using your password": "You don't have Google account, please use password"
 }

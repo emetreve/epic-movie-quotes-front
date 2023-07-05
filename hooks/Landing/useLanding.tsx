@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
 import {
@@ -10,8 +11,12 @@ import { useTranslation } from 'next-i18next';
 import { useQuery } from 'react-query';
 
 const useLanding = () => {
+  const [showGoogleAuthIsForbidden, setShowGoogleAuthIsForbidden] =
+    useState(false);
+
   const router = useRouter();
-  const { id, token, expires, signature, email, scope } = router.query;
+  const { id, token, expires, signature, email, scope, oautherror } =
+    router.query;
 
   const { modalSwitchSetter } = useUiContext();
 
@@ -21,7 +26,9 @@ const useLanding = () => {
     if (scope) {
       try {
         await googleAuth(googleAuthPath);
-      } catch (error) {}
+      } catch (error) {
+        window.location.href = `${process.env.NEXT_PUBLIC_SPA_BASE_URL}?oautherror=regularuser`;
+      }
     }
     return false;
   };
@@ -67,8 +74,29 @@ const useLanding = () => {
     }
   };
 
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
+    if (oautherror === 'regularuser') {
+      setShowGoogleAuthIsForbidden(true);
+
+      timeoutId = setTimeout(() => {
+        setShowGoogleAuthIsForbidden(false);
+        router.push({
+          pathname: router.pathname,
+          query: {},
+        });
+      }, 2000);
+    }
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [oautherror]);
+
   return {
     showNotice,
+    showGoogleAuthIsForbidden,
     t,
   };
 };
