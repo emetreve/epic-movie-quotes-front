@@ -83,10 +83,8 @@ const useMovies = () => {
   const onSubmit = async (data: SearchMoviesData) => {
     setSearchResult([]);
     queryClient.setQueryData('usermovies', []);
-    setShowSearchLg(false);
     const response = await getUserMovies(locale as string, data.search);
     setSearchResult(response.data);
-    reset();
   };
 
   return {
