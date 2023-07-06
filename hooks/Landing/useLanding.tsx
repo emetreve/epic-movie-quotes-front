@@ -27,12 +27,11 @@ const useLanding = () => {
       try {
         await googleAuth(googleAuthPath);
       } catch (error) {
-        if (localStorage.getItem('locale')) {
-          window.location.href = `${
-            window.location.origin
-          }/${localStorage.getItem('locale')}/?oautherror=regularuser`;
+        const locale = localStorage.getItem('locale');
+        if (locale && locale === 'ka') {
+          window.location.href = `${window.location.origin}/ka/?oautherror=regularuser`;
         } else {
-          window.location.href = `${window.location.origin}?oautherror=regularuse`;
+          window.location.href = `${window.location.origin}?oautherror=regularuser`;
         }
       }
     }
@@ -53,7 +52,12 @@ const useLanding = () => {
     onSuccess: async () => {
       try {
         await checkIfLoggedIn();
-        router.push('/dashboard/newsfeed');
+        const locale = localStorage.getItem('locale');
+        if (locale && locale === 'ka') {
+          router.push('ka/dashboard/newsfeed');
+        } else {
+          router.push('/dashboard/newsfeed');
+        }
       } catch (error) {}
     },
   });
