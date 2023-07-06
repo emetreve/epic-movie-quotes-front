@@ -46,7 +46,7 @@ const useLanding = () => {
     },
     onSuccess: async () => {
       try {
-        checkIfLoggedIn();
+        await checkIfLoggedIn();
         router.push('/dashboard/newsfeed');
       } catch (error) {}
     },
