@@ -245,7 +245,6 @@ const useNewsFeed = () => {
     setTimeout(() => {
       handleFetchNewSearchQuotes(data.search, 1);
     }, 500);
-    reset();
     if (showModal === 'showSearchMobile') {
       modalSwitchSetter(false, 'showSearchMobile');
     }
