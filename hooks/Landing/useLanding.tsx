@@ -27,7 +27,13 @@ const useLanding = () => {
       try {
         await googleAuth(googleAuthPath);
       } catch (error) {
-        window.location.href = `${process.env.NEXT_PUBLIC_SPA_BASE_URL}?oautherror=regularuser`;
+        if (localStorage.getItem('locale')) {
+          window.location.href = `${
+            window.location.origin
+          }/${localStorage.getItem('locale')}/?oautherror=regularuser`;
+        } else {
+          window.location.href = `${window.location.origin}?oautherror=regularuse`;
+        }
       }
     }
     return false;
@@ -93,7 +99,7 @@ const useLanding = () => {
           query: {},
         });
         googleCheck();
-      }, 2000);
+      }, 2800);
     }
     return () => {
       clearTimeout(timeoutId);
