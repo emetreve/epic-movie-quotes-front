@@ -231,6 +231,9 @@ const useProfile = () => {
     setShowPasswordInputs(false);
     setShowUsernameInput(false);
     setShowEmailInput(false);
+    setSelectedAvatar('');
+    setSelectedFile(null);
+    setAvatarButtonTrigger(false);
     reset();
   };
 
