@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { PropsType } from './types';
 import useLangSwitch from './useLangSwitch';
-import Cookies from 'js-cookie';
 
 const LangSwitch: React.FC<PropsType> = ({ fromBurgerMenu }) => {
   const {
@@ -43,7 +42,6 @@ const LangSwitch: React.FC<PropsType> = ({ fromBurgerMenu }) => {
                   <p
                     onClick={() => {
                       handleLocaleChange(locale);
-                      Cookies.set('locale', locale);
                     }}
                   >
                     {locale === 'en' ? 'English' : 'ქართული'}
