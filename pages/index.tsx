@@ -16,11 +16,12 @@ import {
 import { useLanding } from '@/hooks';
 import { useUiContext } from '@/store';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { checkIfLoggedIn } from '@/services';
+import { checkIfLoggedIn, authenticateApp } from '@/services';
 import { GetServerSideProps } from 'next';
+import Image from 'next/image';
 
 const Landing: React.FC = () => {
-  const { showNotice, t } = useLanding();
+  const { showNotice, showGoogleAuthIsForbidden, t } = useLanding();
   const { showModal, modalSwitchSetter } = useUiContext();
 
   showNotice();
@@ -53,10 +54,23 @@ const Landing: React.FC = () => {
         <LandingHeader />
 
         <div className='flex flex-col items-center h-[25rem] lg:h-[43rem]'>
+          {showGoogleAuthIsForbidden && (
+            <div className='text-cream flex flex-row border border-red border-opacity-25 items-center px-4 py-2 rounded-lg text-xl top-[5rem] fixed bg-opacity-50 backdrop-blur-2 bg-gradient-violet'>
+              <Image
+                src='/assets/invalid.png'
+                alt='show password'
+                width={200}
+                height={200}
+                className='w-6 h-6 mr-3'
+              />
+              <p>{t('Please log in using your password')}</p>
+            </div>
+          )}
           <div className='text-cream lg:leading-[1.4] flex flex-col items-center text-2xl mt-36 font-montserrat lg:text-6xl lg:mt-60'>
             <h1>{t('Find any quote in')}</h1>
             <h1>{t('millions of movie lines')}</h1>
           </div>
+
           <button
             onClick={() => modalSwitchSetter(true, 'showCreateAccount')}
             className='mt-10 text-white bg-red py-2 lg:py-3 lg:text-xl px-4 lg:px-5 rounded-md hover:cursor-pointer hover:bg-red-hover'
@@ -109,6 +123,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const asPath = req.url;
 
   try {
+    authenticateApp();
     const response = await checkIfLoggedIn();
     const data = response.data;
 

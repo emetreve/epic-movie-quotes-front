@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useUiContext } from '@/store';
 import {
@@ -10,8 +11,12 @@ import { useTranslation } from 'next-i18next';
 import { useQuery } from 'react-query';
 
 const useLanding = () => {
+  const [showGoogleAuthIsForbidden, setShowGoogleAuthIsForbidden] =
+    useState(false);
+
   const router = useRouter();
-  const { id, token, expires, signature, email, scope } = router.query;
+  const { id, token, expires, signature, email, scope, oautherror } =
+    router.query;
 
   const { modalSwitchSetter } = useUiContext();
 
@@ -21,7 +26,14 @@ const useLanding = () => {
     if (scope) {
       try {
         await googleAuth(googleAuthPath);
-      } catch (error) {}
+      } catch (error) {
+        const locale = localStorage.getItem('locale');
+        if (locale && locale === 'ka') {
+          window.location.href = `${window.location.origin}/ka/?oautherror=regularuser`;
+        } else {
+          window.location.href = `${window.location.origin}?oautherror=regularuser`;
+        }
+      }
     }
     return false;
   };
@@ -39,8 +51,13 @@ const useLanding = () => {
     },
     onSuccess: async () => {
       try {
-        checkIfLoggedIn();
-        router.push('/dashboard/newsfeed');
+        await checkIfLoggedIn();
+        const locale = localStorage.getItem('locale');
+        if (locale && locale === 'ka') {
+          router.push('ka/dashboard/newsfeed');
+        } else {
+          router.push('/dashboard/newsfeed');
+        }
       } catch (error) {}
     },
   });
@@ -67,8 +84,35 @@ const useLanding = () => {
     }
   };
 
+  const googleCheck = async () => {
+    try {
+      await checkIfLoggedIn();
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
+    if (oautherror === 'regularuser') {
+      setShowGoogleAuthIsForbidden(true);
+
+      timeoutId = setTimeout(() => {
+        setShowGoogleAuthIsForbidden(false);
+        router.push({
+          pathname: router.pathname,
+          query: {},
+        });
+        googleCheck();
+      }, 2800);
+    }
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [oautherror]);
+
   return {
     showNotice,
+    showGoogleAuthIsForbidden,
     t,
   };
 };

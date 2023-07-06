@@ -56,5 +56,6 @@
     "Password reset link has expired, because you havent used it": "პაროლის შეცვლის ლინკს ვადა გაუვიდა",
     "Request another link": "მოითხოვე ახალი ბმული",
     "Email verification link has expired, because you havent used it": "იმეილის ვერიფიკაციის ბმულს ვადა გაუვიდა",
-    "Your Password changed successfully": "თქვენი პაროლი წარმატებით შეიცვალა"
+    "Your Password changed successfully": "თქვენი პაროლი წარმატებით შეიცვალა",
+    "Please log in using your password": "თქვენი ექაუნთი არ არის გუგლის, გამოიყენეთ პაროლი"
 }

@@ -6,6 +6,7 @@ const useLangSwitch = () => {
   const { showLangDropdown, setShowLangDropdown } = useUiContext();
 
   const handleLocaleChange = (locale: string) => {
+    localStorage.setItem('locale', locale);
     push({ pathname, query }, '', { locale });
   };
 

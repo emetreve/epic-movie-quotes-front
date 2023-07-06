@@ -89,7 +89,7 @@ const Movies = () => {
                             searchTracker?.length > 0 && 'text-transparent'
                           } ml-5`}
                         >
-                          Search movie
+                          {t('Search movie')}
                         </p>
                         <form onSubmit={handleSubmit(onSubmit)}>
                           <input
