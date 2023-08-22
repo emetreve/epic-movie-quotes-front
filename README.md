@@ -1,5 +1,4 @@
 <div style="display:flex; align-items: center">
-  <img src="readme/assets/logo-redberry.png" alt="logo" width="220" style="margin-right: 20px" />
   <h1 style="position:relative; top: -6px" >Epic Movie Quotes</h1>
 </div>
 
