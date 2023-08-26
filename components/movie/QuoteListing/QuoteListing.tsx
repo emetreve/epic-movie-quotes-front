@@ -108,8 +108,8 @@ const QuoteListing: React.FC<PropsType> = ({
               : '/assets/quote-sample.png'
           }
           alt='create new'
-          width={96}
-          height={96}
+          width={812}
+          height={812}
           className='w-full h-[8.5rem] lg:w-[16rem] lg:h-[8.5rem] px-7 hover:cursor-pointer mr-2'
         />
         <div className='px-7 lg:-ml-[2.5rem] break-all'>
