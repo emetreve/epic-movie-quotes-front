@@ -106,7 +106,7 @@ const Landing: React.FC = () => {
             )}
             signature={t('The Lord of the Rings, 2003')}
             mobileTop='pt-[10.625rem]'
-            desktopTop='lg:pt-[38rem]'
+            desktopTop='lg:pt-[36rem]'
           />
         </main>
         <Footer />
