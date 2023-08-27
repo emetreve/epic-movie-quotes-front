@@ -2,21 +2,13 @@
   <h1 style="position:relative; top: -6px" >Epic Movie Quotes</h1>
 </div>
 
-Epic Movie Quotes is a platform where users can register, log in, and dive into a vast collection of movies and quotes. Once logged in, users are greeted with their personalised dashboards, where they can explore a variety of features.
+Epic Movie Quotes is a platform where users can register, log in, and dive into a vast collection of movies and their quotes. Users can register or login using Google OAuth as well. Once logged in, users are greeted with their personalized dashboards, where they can explore a variety of features.
 
-Real-time updates keep users informed about the activity on their content, including likes and comments. Users have the flexibility to personalise their profiles and contribute their own content to enrich the collection.
+Real-time updates keep users informed about the activity on their content, including likes and comments. Users have the flexibility to personalize their profiles and contribute their own content to enrich the collection.
 
-##### Key Features
+Features, such as multilinguality, password reset, email verification and data searching are also supported.
 
-- Authorisation & authentication \*including Google OAuth
-- Email address verification
-- Password reset
-- Profile customisation
-- Interactive newsfeed
-- Real-time notifications
-- Data search
-- CRUD operations
-- Multi-language support 🇬🇪🇬🇧
+#
 
 ### Table of Contents
 
